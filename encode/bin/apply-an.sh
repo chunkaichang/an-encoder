@@ -16,7 +16,8 @@ then
 fi
 LLVM_BIN_DIR=${LLVM_BUILD_DIR}/bin
 
-OPTS="-O0 -g"
+CLANG_OPTS="-O2 -g"
+ENCODE_OPTS=""
 
 INPUT=$1
 
@@ -29,15 +30,15 @@ ENC_BC=${INPUT}".enc.bc"
 ENC_LL=${INPUT}".enc.ll"
 ENC_OUT=${INPUT}".enc"
 
-${LLVM_BIN_DIR}/clang -c -emit-llvm ${OPTS} -O0 -o ${BC} ${INPUT}
+${LLVM_BIN_DIR}/clang -c -emit-llvm ${CLANG_OPTS} -mno-sse -o ${BC} ${INPUT}
 ${LLVM_BIN_DIR}/llvm-dis -o ${LL} ${BC}
 
 export ENCODE_RUNTIME_DIR=${ENCODE_RUNTIME_DIR}
-${ENCODE_BINARY_DIR}/encode -no-opts ${BC} -o ${ENC_BC}
-${ENCODE_BINARY_DIR}/encode -no-opts -count-only ${BC} -o ${CNT_BC}
+${ENCODE_BINARY_DIR}/encode ${ENCODE_OPTS} ${BC} -o ${ENC_BC}
+${ENCODE_BINARY_DIR}/encode ${ENCODE_OPTS} -count-only ${BC} -o ${CNT_BC}
 
 ${LLVM_BIN_DIR}/llvm-dis -o ${ENC_LL} ${ENC_BC}
 ${LLVM_BIN_DIR}/llvm-dis -o ${CNT_LL} ${CNT_BC}
 
-${LLVM_BIN_DIR}/clang ${OPTS} -o ${ENC_OUT} ${ENC_BC}
-${LLVM_BIN_DIR}/clang ${OPTS} -o ${CNT_OUT} ${CNT_BC}
+${LLVM_BIN_DIR}/clang ${CLANG_OPTS} -o ${ENC_OUT} ${ENC_BC}
+${LLVM_BIN_DIR}/clang ${CLANG_OPTS} -o ${CNT_OUT} ${CNT_BC}

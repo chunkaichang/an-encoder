@@ -32,6 +32,7 @@ Pass *createOperationsExpander();
 Pass *createEncodeDecodeRemover();
 Pass *createCycleCounter();
 Pass *createAccumulateRemover();
+Pass *createCallHandler(GlobalVariable *a);
 
 static cl::opt<std::string>
 InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
@@ -44,6 +45,12 @@ CountOnly("count-only", cl::init(false), cl::desc("Only instrument input file fo
 
 static cl::opt<bool>
 NoOpts("no-opts", cl::init(false), cl::desc("Disable all optimizations"));
+
+static cl::opt<bool>
+NoInlining("no-inlining", cl::init(false), cl::desc("Disable inlining"));
+
+static cl::opt<bool>
+NoVerifying("no-verifying", cl::init(false), cl::desc("Disable LLVM verifier"));
 
 static int processModule(char **, LLVMContext &);
 
@@ -108,6 +115,7 @@ static int processModule(char **argv, LLVMContext &Context) {
   std::unique_ptr<Module> M;
   Module *mod, *library, *rdtsc;
   PassManager PM, linkagePM;
+  std::string linkError;
 
   mod = openFileAsModule(InputFilename, Err, Context);
   if (mod == nullptr) {
@@ -125,11 +133,6 @@ static int processModule(char **argv, LLVMContext &Context) {
     Err.print(argv[0], errs());
     return 1;
   }
-  std::string linkError;
-  if (linkModules(mod, rdtsc, &linkError)) {
-    std::cerr << linkError;
-    return 1;
-  }
 
   if (!CountOnly) {
     PassManager codePM, postLinkPM;
@@ -140,7 +143,7 @@ static int processModule(char **argv, LLVMContext &Context) {
       return 1;
     }
 
-    codePM.add(createVerifierPass());
+    if (!NoVerifying) codePM.add(createVerifierPass());
 
     GlobalVariable *globalCode
       = library->getGlobalVariable(globalCodeName,
@@ -153,7 +156,6 @@ static int processModule(char **argv, LLVMContext &Context) {
     codePM.add(createConstantsEncoder(globalCode));
     codePM.add(createOperationsEncoder());
     codePM.add(createGEPHandler(globalCode));
-    codePM.add(createCycleCounter());
     codePM.add(createVerifierPass());
     codePM.run(*mod);
 
@@ -162,12 +164,22 @@ static int processModule(char **argv, LLVMContext &Context) {
       return 1;
     }
 
-    postLinkPM.add(createVerifierPass());
+    if (!NoVerifying) postLinkPM.add(createVerifierPass());
     // To generate an optimized variant of the "AN encoding", remove calls
     // to update the accumulator:
     {
-      //postLinkPM.add(createAccumulateRemover());
+      // postLinkPM.add(createAccumulateRemover());
     }
+
+    // 'CallHandler' must run only after linking the library; otherwise it
+    // would decode arguments to library functions (e.g. 'add_enc',
+    // 'accumulate_enc' etc.):
+    postLinkPM.add(createCallHandler(globalCode));
+    // Calls to external functions may take constants as arguments. After
+    // the 'CallHandler' has run, what used to be a constant previously may
+    // no longer be constant - at least not until we have run the
+    // 'ConstantPropagationPass':
+    postLinkPM.add(createConstantPropagationPass());
 
     postLinkPM.add(createOperationsExpander());
     // Optimization to be run immediately after encoding/decoding operations
@@ -175,10 +187,11 @@ static int processModule(char **argv, LLVMContext &Context) {
     // expanded:
     if (!NoOpts)
     {
-      postLinkPM.add(llvm::createFunctionInliningPass());
+      if (!NoInlining) postLinkPM.add(llvm::createFunctionInliningPass());
       postLinkPM.add(llvm::createDeadCodeEliminationPass());
     }
-    postLinkPM.add(createVerifierPass());
+    postLinkPM.add(createConstantPropagationPass());
+    if (!NoVerifying) postLinkPM.add(createVerifierPass());
     postLinkPM.run(*mod);
 
     // Add optimization passes (roughly the equivalent of "-O2",
@@ -190,7 +203,7 @@ static int processModule(char **argv, LLVMContext &Context) {
       PassManagerBuilder Builder;
       Builder.OptLevel = 2;
       Builder.SizeLevel = 0;
-      Builder.Inliner = createAlwaysInlinerPass();
+      if (!NoInlining) Builder.Inliner = createAlwaysInlinerPass();
       Builder.DisableUnrollLoops = false;
 
       Builder.populateFunctionPassManager(FPM);
@@ -199,13 +212,20 @@ static int processModule(char **argv, LLVMContext &Context) {
       for (auto I = mod->begin(), E = mod->end(); I != E; I++)
         FPM.run(*I);
 
-      PM.add(llvm::createFunctionInliningPass());
+      if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
     }
-  } else /* if (CountOnly) */ {
-    PM.add(createCycleCounter());
   }
 
-  PM.add(createVerifierPass());
+  // The functions for cycle counting are linked in late to avoid
+  // that the encoder operates on them:
+  if (linkModules(mod, rdtsc, &linkError)) {
+    std::cerr << linkError;
+    return 1;
+  }
+
+  PM.add(createCycleCounter());
+  if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
+  if (!NoVerifying) PM.add(createVerifierPass());
   // Add pass for writing output:
   PM.add(createBitcodeWriterPass(Out->os()));
   PM.run(*mod);

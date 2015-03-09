@@ -14,6 +14,7 @@ add_executable(encode encode.cpp
                       OperationsExpander.cpp
                       EncodeDecodeRemover.cpp
                       AccumulateRemover.cpp
+                      CallHandler.cpp
                       CycleCounter.cpp)
 
 # Find the libraries that correspond to the LLVM components

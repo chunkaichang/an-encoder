@@ -12,7 +12,7 @@ uint64_t rdtsc() {
                         ::: "%eax", "%ebx", "%ecx", "%edx" );
 #endif
   __asm__ __volatile__ ("rdtsc" : "=a" (low), "=d" (high));
-  return (uint64_t)high << 32 | low;
+  return (((uint64_t)high) << 32) | (uint64_t)low;
 }
 
 void cycles_msg(uint64_t cs) {

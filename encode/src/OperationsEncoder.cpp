@@ -81,7 +81,13 @@ bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
       break;                                                    \
     }
     HANDLE_BINOP(Add, "add_enc")
+    HANDLE_BINOP(Sub, "sub_enc")
     HANDLE_BINOP(Mul, "mul_enc")
+    HANDLE_BINOP(And, "and_enc")
+    HANDLE_BINOP(Or, "or_enc")
+    HANDLE_BINOP(Shl, "shl_enc")
+    HANDLE_BINOP(AShr, "shr_enc")
+    HANDLE_BINOP(Xor, "xor_enc")
     }
     I = N;
   }
