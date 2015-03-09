@@ -181,6 +181,10 @@ static int processModule(char **argv, LLVMContext &Context) {
     // 'ConstantPropagationPass':
     postLinkPM.add(createConstantPropagationPass());
 
+    // 2015/03/09, NOTE: A simple measurement has demonstrated that the
+    // 'EncodeDecodeRemover' has only a negligible effect on performance:
+    if (!NoOpts) postLinkPM.add(createEncodeDecodeRemover());
+
     postLinkPM.add(createOperationsExpander());
     // Optimization to be run immediately after encoding/decoding operations
     // have been inserted (i.e. after intrinsics for "AN coding" have been

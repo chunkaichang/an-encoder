@@ -41,17 +41,25 @@ bool EncodeDecodeRemover::runOnBasicBlock(BasicBlock &BB) {
     switch (Op) {
     case Instruction::Call: {
       IntrinsicInst *ii = dyn_cast<IntrinsicInst>(&(*I));
-      if (!ii || ii->getIntrinsicID() != Intrinsic::an_decode)
-        break;
+      if (ii && ii->getIntrinsicID() == Intrinsic::an_decode) {
+        Value *Op = ii->getArgOperand(0);
 
-      Value *Op0 = ii->getArgOperand(0);
+        IntrinsicInst *iiarg = dyn_cast<IntrinsicInst>(Op);
+        if (!iiarg || iiarg->getIntrinsicID() != Intrinsic::an_encode)
+          break;
 
-      IntrinsicInst *iiarg = dyn_cast<IntrinsicInst>(Op0);
-      if (!iiarg || iiarg->getIntrinsicID() != Intrinsic::an_encode)
-        break;
+        ii->replaceAllUsesWith(iiarg->getArgOperand(0));
+        ii->eraseFromParent();
+      } else if (ii && ii->getIntrinsicID() == Intrinsic::an_encode) {
+        Value *Op = ii->getArgOperand(0);
 
-      ii->replaceAllUsesWith(iiarg->getArgOperand(0));
-      ii->eraseFromParent();
+        IntrinsicInst *iiarg = dyn_cast<IntrinsicInst>(Op);
+        if (!iiarg || iiarg->getIntrinsicID() != Intrinsic::an_decode)
+          break;
+
+        ii->replaceAllUsesWith(iiarg->getArgOperand(0));
+        ii->eraseFromParent();
+      }
       break;
     }
     default: {
