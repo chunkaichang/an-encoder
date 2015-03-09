@@ -1,7 +1,5 @@
-/* The 'LinkagePass' can be used to set the linkages of all functions in an LLVM module to a
- * given value. Currently the 'encoder' does not run this pass. Nonetheless the 'LinkagePass'
- * is kept in the project since it is a useful utility pass that may come in handy in the
- * future.
+/* The 'LinkagePass' can be used to set the linkages of all functions
+ * in an LLVM module to a given value.
  */
 
 #include "llvm/Pass.h"

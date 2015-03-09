@@ -33,6 +33,7 @@ Pass *createEncodeDecodeRemover();
 Pass *createCycleCounter();
 Pass *createAccumulateRemover();
 Pass *createCallHandler(GlobalVariable *a);
+Pass *createLinkagePass(GlobalValue::LinkageTypes);
 
 static cl::opt<std::string>
 InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
@@ -114,7 +115,7 @@ static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
   std::unique_ptr<Module> M;
   Module *mod, *library, *rdtsc;
-  PassManager PM, linkagePM;
+  PassManager PM, linkagePM, cyclePM;
   std::string linkError;
 
   mod = openFileAsModule(InputFilename, Err, Context);
@@ -133,6 +134,12 @@ static int processModule(char **argv, LLVMContext &Context) {
     Err.print(argv[0], errs());
     return 1;
   }
+
+  // By applying this linkage to library functions (rather than 'ExternalLinkage',
+  // which is the default) we achieve that after linking no further copies of the
+  // original library functions remain in the module 'mod': (Functions are inlined
+  // during linking.)
+  linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
   if (!CountOnly) {
     PassManager codePM, postLinkPM;
@@ -159,6 +166,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     codePM.add(createVerifierPass());
     codePM.run(*mod);
 
+    linkagePM.run(*library);
     if (linkModules(mod, library, &linkError)) {
       std::cerr << linkError;
       return 1;
@@ -220,14 +228,17 @@ static int processModule(char **argv, LLVMContext &Context) {
     }
   }
 
+  cyclePM.add(createCycleCounter());
+  cyclePM.run(*mod);
+
   // The functions for cycle counting are linked in late to avoid
   // that the encoder operates on them:
+  linkagePM.run(*rdtsc);
   if (linkModules(mod, rdtsc, &linkError)) {
     std::cerr << linkError;
     return 1;
   }
 
-  PM.add(createCycleCounter());
   if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
   if (!NoVerifying) PM.add(createVerifierPass());
   // Add pass for writing output:
