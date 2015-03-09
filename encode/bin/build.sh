@@ -39,6 +39,10 @@ done
 # tree (rooted at ${PWD}):
 cp ${ENCODE_DIR}/encode/bin/apply-an.sh ${PWD}/encode/apply-an.sh
 
+# copy the 'stats.py' script from the source tree into the build
+# tree (rooted at ${PWD}):
+cp ${ENCODE_DIR}/encode/bin/stats.py ${PWD}/encode/stats.py
+
 # copy the tests over into the build tree (rooted at ${PWD}):
 mkdir -p encode/tests
 ENCODE_TESTS_DIR=${ENCODE_DIR}/encode/tests
