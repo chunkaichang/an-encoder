@@ -1,0 +1,36 @@
+﻿====== benchmark: linkedlist
+=== encoding: AN
+
+====== benchmark: quicksort
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+~~ 100 repetitions for array of size 100 ~~
+~~ 100 repetitions for array of size 1000 ~~
+~~ 100 repetitions for array of size 10000 ~~
+
+====== benchmark: patricia
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+
+====== benchmark: bubblesort
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+~~ 100 repetitions for array of size 100 ~~
+~~ 100 repetitions for array of size 1000 ~~
+~~ 100 repetitions for array of size 10000 ~~
+
+====== benchmark: crc
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+
+====== benchmark: dijkstra
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+
+====== benchmark: array_sum
+=== encoding: AN
+sizeof: int=4, long=8, long long=8, pointer=8 
+~~ 100 repetitions for array of size 1000 ~~
+~~ 100 repetitions for array of size 100000 ~~
+~~ 100 repetitions for array of size 10000000 ~~
+
