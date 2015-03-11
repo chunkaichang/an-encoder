@@ -83,18 +83,18 @@ int64_t mul_enc(int64_t x_enc, int64_t y_enc)
   accumulate_enc(r_enc);
   return r_enc;
 }
-int64_t udiv_enc(int64_t x_enc, int64_t y_enc)
+int64_t udiv_enc(uint64_t x_enc, uint64_t y_enc)
 {
   int64_t r_enc = 0;
 
-  int64_t x = x_enc/A;
-  int64_t y = y_enc/A;
-  int64_t trunc_correction = x % y;
+  uint64_t x = x_enc/A;
+  uint64_t y = y_enc/A;
+  uint64_t trunc_correction = x % y;
 
   x_enc -= __builtin_an_encode_i64(trunc_correction, A);
 
-  __int128_t tmp = 0;
-  tmp = __builtin_an_encode_i128((__int128_t)x_enc * (__int128_t) A, A) / (__int128_t) y_enc;
+  __uint128_t tmp = 0;
+  tmp = __builtin_an_encode_i128((__uint128_t)x_enc * (__uint128_t) A, A) / (__uint128_t) y_enc;
 
   r_enc = (int64_t) tmp;
   accumulate_enc(r_enc);
@@ -102,17 +102,33 @@ int64_t udiv_enc(int64_t x_enc, int64_t y_enc)
 }
 int64_t sdiv_enc(int64_t x_enc, int64_t y_enc)
 {
-    return udiv_enc(x_enc, y_enc);
+  int64_t r_enc = 0;
+
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t tmp = x / y;
+
+  r_enc = __builtin_an_encode_i64(tmp, A);
+  accumulate_enc(r_enc);
+  return r_enc;
 }
 int64_t umod_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  r_enc = x_enc % y_enc;
+  uint64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  r_enc = __builtin_an_encode_i64(x % y, A);
+  accumulate_enc(r_enc);
   return r_enc;
 }
 int64_t smod_enc(int64_t x_enc, int64_t y_enc)
 {
-  return umod_enc(x_enc, y_enc);
+  int64_t r_enc = 0;
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  r_enc = __builtin_an_encode_i64(x % y, A);
+  accumulate_enc(r_enc);
+  return r_enc;
 }
 int64_t eq_enc(int64_t x_enc, int64_t y_enc)
 {
@@ -205,6 +221,7 @@ int64_t and_enc(int64_t x_enc, int64_t y_enc)
   int64_t x = __builtin_an_decode_i64(x_enc, A);
   int64_t y = __builtin_an_decode_i64(y_enc, A);
   int64_t r_enc = __builtin_an_encode_i64(x & y, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   return r_enc;
 }
 int64_t or_enc(int64_t x_enc, int64_t y_enc)
@@ -212,6 +229,7 @@ int64_t or_enc(int64_t x_enc, int64_t y_enc)
   int64_t x = __builtin_an_decode_i64(x_enc, A);
   int64_t y = __builtin_an_decode_i64(y_enc, A);
   int64_t r_enc = __builtin_an_encode_i64(x | y, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   return r_enc;
 }
 int64_t xor_enc(int64_t x_enc, int64_t y_enc)
@@ -219,6 +237,7 @@ int64_t xor_enc(int64_t x_enc, int64_t y_enc)
   int64_t x = __builtin_an_decode_i64(x_enc, A);
   int64_t y = __builtin_an_decode_i64(y_enc, A);
   int64_t r_enc = __builtin_an_encode_i64(x ^ y, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   return r_enc;
 }
 
@@ -233,15 +252,33 @@ int64_t onesc_enc(int64_t x_enc)
 int64_t shl_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  r_enc = __builtin_an_encode_i64(x << y, A);
   /* TODO: Find out if performance is better or worse with direct en-/decoding: */
-  r_enc = mul_enc(x_enc, pow2_enc(y_enc));
+  //r_enc = mul_enc(x_enc, pow2_enc(y_enc));
   return r_enc;
 }
 int64_t shr_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
+  uint64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  r_enc = __builtin_an_encode_i64(x >> y, A);
   /* TODO: Find out if performance is better or worse with direct en-/decoding: */
-  r_enc = udiv_enc(x_enc, pow2_enc(y_enc));
+  //r_enc = udiv_enc(x_enc, pow2_enc(y_enc));
+  return r_enc;
+}
+int64_t ashr_enc(int64_t x_enc, int64_t y_enc)
+{
+  int64_t r_enc = 0;
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t asr = x >> y;
+  r_enc = __builtin_an_encode_i64(asr, A);
+  /* TODO: Find out if performance is better or worse with direct en-/decoding: */
+  /* FIXME: Using 'pow2_enc' here seems to produce wrong result! */
+  //r_enc = sdiv_enc(x_enc, pow2_enc(y_enc));
   return r_enc;
 }
 /* TODO: Find out what this is good for: */
