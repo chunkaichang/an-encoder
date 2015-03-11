@@ -20,6 +20,7 @@ CLANG_OPTS="-O2 -g"
 ENCODE_OPTS=""
 
 INPUT=$1
+USERLIB=$2
 
 BC=${INPUT}".bc"
 LL=${INPUT}".ll"
@@ -30,7 +31,12 @@ ENC_BC=${INPUT}".enc.bc"
 ENC_LL=${INPUT}".enc.ll"
 ENC_OUT=${INPUT}".enc"
 
-${LLVM_BIN_DIR}/clang -c -emit-llvm ${CLANG_OPTS} -mno-sse -o ${BC} ${INPUT}
+if [ ! -z "$VERBOSE" ]
+then
+  V="-v"
+fi
+
+${LLVM_BIN_DIR}/clang ${V} -c -emit-llvm ${CLANG_OPTS} -mno-sse -o ${BC} ${INPUT}
 ${LLVM_BIN_DIR}/llvm-dis -o ${LL} ${BC}
 
 export ENCODE_RUNTIME_DIR=${ENCODE_RUNTIME_DIR}
@@ -40,5 +46,11 @@ ${ENCODE_BINARY_DIR}/encode ${ENCODE_OPTS} -count-only ${BC} -o ${CNT_BC}
 ${LLVM_BIN_DIR}/llvm-dis -o ${ENC_LL} ${ENC_BC}
 ${LLVM_BIN_DIR}/llvm-dis -o ${CNT_LL} ${CNT_BC}
 
-${LLVM_BIN_DIR}/clang ${CLANG_OPTS} -o ${ENC_OUT} ${ENC_BC}
-${LLVM_BIN_DIR}/clang ${CLANG_OPTS} -o ${CNT_OUT} ${CNT_BC}
+if [ ! -z "$USERLIB" ]
+then
+  USEROBJ=${USERLIB}".o"
+  ${LLVM_BIN_DIR}/clang ${V} -c ${CLANG_OPTS} -o ${USEROBJ} ${USERLIB}
+fi
+
+${LLVM_BIN_DIR}/clang ${V} ${CLANG_OPTS} -o ${ENC_OUT} ${ENC_BC} ${USEROBJ}
+${LLVM_BIN_DIR}/clang ${V} ${CLANG_OPTS} -o ${CNT_OUT} ${CNT_BC} ${USEROBJ}

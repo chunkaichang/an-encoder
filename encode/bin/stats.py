@@ -18,12 +18,16 @@ if __name__=="__main__":
 
   n = int(sys.argv[2])
 
-  subprocess.call(['./apply-an.sh', source])
+  userlib = ''
+  if (len(sys.argv) > 3) and os.path.isfile(sys.argv[3]):
+    userlib = sys.argv[3]
+
+  subprocess.call(['./apply-an.sh', source, userlib])
   execs = {'cnt': source + '.cnt', 'enc': source + '.enc'}
 
   results = [os.path.isfile(x) for x in execs.values()]
   if not reduce(operator.__and__, results):
-    print 'command \'appy-an.sh', source, '\' did not succeeed'
+    print 'command \'appy-an.sh', source, userlib, '\' did not succeeed'
     exit(-1);
 
   """ Run each of the generated executables 'n' times and extract the

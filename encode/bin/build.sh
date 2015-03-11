@@ -26,7 +26,7 @@ do
   LL=${file}".ll"
   BC=${file}".bc"
 
-  ${LLVM_BIN_DIR}/clang -c -emit-llvm -g -O0 \
+  ${LLVM_BIN_DIR}/clang -c -emit-llvm -O0 -g \
       -o ${PWD}/encode/runtime/$BC \
       ${ENCODE_DIR}/encode/runtime/$file
 
@@ -46,9 +46,10 @@ cp ${ENCODE_DIR}/encode/bin/stats.py ${PWD}/encode/stats.py
 # copy the tests over into the build tree (rooted at ${PWD}):
 mkdir -p encode/tests
 ENCODE_TESTS_DIR=${ENCODE_DIR}/encode/tests
-for file in $(ls ${ENCODE_TESTS_DIR})
-do
-  cp ${ENCODE_TESTS_DIR}/$file ${PWD}/encode/tests/$file
+TEST_SOURCES=$(find ${ENCODE_TESTS_DIR} -regex '.*\.\(c\|h\|cpp\|hpp\)')
+for file in ${TEST_SOURCES}
+ do
+  cp $file ${PWD}/encode/tests
 done
-
-# cp -r ${ENCODE_DIR}/encode/tests/*.{c,cpp,h,hpp} ${PWD}/encode/tests
+cp -r ${ENCODE_TESTS_DIR}/inputs ${PWD}/encode/tests
+cp -r ${ENCODE_TESTS_DIR}/mylibs ${PWD}/encode/tests
