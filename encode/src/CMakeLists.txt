@@ -16,7 +16,11 @@ add_executable(encode encode.cpp
                       AccumulateRemover.cpp
                       CallHandler.cpp
                       Linkage.cpp
-                      CycleCounter.cpp)
+                      SExtTrunc.cpp
+                      CycleCounter.cpp
+                      Coder.cpp
+                      UsesVault.cpp)
+
 
 # Find the libraries that correspond to the LLVM components
 # that we wish to use

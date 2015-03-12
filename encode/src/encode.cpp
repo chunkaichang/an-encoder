@@ -22,18 +22,21 @@
 
 #include <iostream>
 
+#include "Coder.h"
+
 using namespace llvm;
 
 Pass *createGlobalsEncoder(const GlobalVariable *a);
 Pass *createConstantsEncoder(const GlobalVariable *a);
-Pass *createGEPHandler(GlobalVariable *a);
-Pass *createOperationsEncoder();
+Pass *createGEPHandler(Coder*);
+Pass *createOperationsEncoder(Coder*);
 Pass *createOperationsExpander();
 Pass *createEncodeDecodeRemover();
 Pass *createCycleCounter();
 Pass *createAccumulateRemover();
-Pass *createCallHandler(GlobalVariable *a);
+Pass *createCallHandler(Coder*);
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
+Pass *createSExtTruncPass();
 
 static cl::opt<std::string>
 InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
@@ -123,6 +126,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     Err.print(argv[0], errs());
     return 1;
   }
+  Coder C(mod, globalCodeValue);
 
   // Figure out where we are going to send the output.
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
@@ -161,9 +165,8 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createGlobalsEncoder(globalCode));
     codePM.add(createConstantsEncoder(globalCode));
-    codePM.add(createOperationsEncoder());
-    codePM.add(createGEPHandler(globalCode));
-    codePM.add(createVerifierPass());
+    codePM.add(createOperationsEncoder(&C));
+    codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 
     linkagePM.run(*library);
@@ -171,8 +174,6 @@ static int processModule(char **argv, LLVMContext &Context) {
       std::cerr << linkError;
       return 1;
     }
-
-    if (!NoVerifying) postLinkPM.add(createVerifierPass());
     // To generate an optimized variant of the "AN encoding", remove calls
     // to update the accumulator:
     {
@@ -182,7 +183,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     // 'CallHandler' must run only after linking the library; otherwise it
     // would decode arguments to library functions (e.g. 'add_enc',
     // 'accumulate_enc' etc.):
-    postLinkPM.add(createCallHandler(globalCode));
+    postLinkPM.add(createCallHandler(&C));
     // Calls to external functions may take constants as arguments. After
     // the 'CallHandler' has run, what used to be a constant previously may
     // no longer be constant - at least not until we have run the
@@ -191,12 +192,25 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     // 2015/03/09, NOTE: A simple measurement has demonstrated that the
     // 'EncodeDecodeRemover' has only a negligible effect on performance:
-    if (!NoOpts) postLinkPM.add(createEncodeDecodeRemover());
+    if (!NoOpts) {
+      //postLinkPM.add(createSExtTruncPass());
+      // 2015./03/12, TODO: Check that this is working properly: (Currently
+      // it seems be non-effective since the functions which implement
+      // encoded operations are not inlined early enough.)
+      postLinkPM.add(createEncodeDecodeRemover());
+    }
 
     postLinkPM.add(createOperationsExpander());
+    // Due to previously inserted encode/decode instructions some values
+    // that used to be constants may no longer appear to be constant. However,
+    // after the decode/encode instructions have been expanded, one should be
+    // able to infer that these values are indeed constant - but this requires
+    // running the 'ConstantPropagationPass':
+    postLinkPM.add(createConstantPropagationPass());
     // Optimization to be run immediately after encoding/decoding operations
     // have been inserted (i.e. after intrinsics for "AN coding" have been
     // expanded:
+    //postLinkPM.add(createSExtTruncPass());
     if (!NoOpts)
     {
       if (!NoInlining) postLinkPM.add(llvm::createFunctionInliningPass());
