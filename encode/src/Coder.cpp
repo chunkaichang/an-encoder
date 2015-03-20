@@ -7,7 +7,8 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
   LLVMContext &ctx = M->getContext();
 
   this->int64Ty = Type::getInt64Ty(ctx);
-  this->A = ConstantInt::get(int64Ty, a);
+  this->int32Ty = Type::getInt32Ty(ctx);
+  this->A = ConstantInt::getSigned(int64Ty, a);
   this->Encode =
     Intrinsic::getDeclaration(M,
                               Intrinsic::an_encode,
@@ -21,6 +22,18 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
 
 Coder::~Coder() {
   delete Builder;
+}
+
+IntegerType *Coder::getInt64Type() {
+  return this->int64Ty;
+}
+
+IntegerType *Coder::getInt32Type() {
+  return this->int32Ty;
+}
+
+int64_t Coder::getA() {
+  return A->getSExtValue();
 }
 
 // The "extend" and "truncate" methods are simple wrappers around

@@ -16,16 +16,21 @@ using namespace llvm;
 struct Coder {
   Coder(Module *m, unsigned a = 1);
   ~Coder();
-private:
+public:
   Value *createSExt(Value *V, Type *DestTy, Instruction *I);
   Value *createZExt(Value *V, Type *DestTy, Instruction *I);
   Value *createTrunc(Value *V, Type *DestTy, Instruction *I);
 
+private:
   Value *createEncode(Value *V, Instruction *I);
   Value *createDecode(Value *V, Instruction *I);
 
   Constant *getEncBinopFunction(StringRef Name);
 public:
+  IntegerType *getInt64Type();
+  IntegerType *getInt32Type();
+  int64_t getA();
+
   Value *createEncRegionEntry(Value *V, Instruction *I);
   Value *createEncRegionExit(Value *V, Type *DestTy, Instruction *I);
 
@@ -34,8 +39,8 @@ public:
   Value *createEncBinop(StringRef Name, ArrayRef<Value*> Args, Instruction *I);
 private:
   Module *M;
-  Constant *A;
-  Type *int64Ty;
+  ConstantInt *A;
+  IntegerType *int64Ty, *int32Ty;
   Function *Encode, *Decode;
   IRBuilder<> *Builder;
 };

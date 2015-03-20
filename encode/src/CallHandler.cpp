@@ -69,6 +69,12 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
           continue;
 
         Op = C->createEncRegionExit(Op, Op->getType(), CI);
+        if (i < F->getFunctionType()->getNumParams()) {
+          Type *paramTy = F->getFunctionType()->getParamType(i);
+          if (paramTy->isIntegerTy() && paramTy != Op->getType())
+            Op = C->createTrunc(Op, paramTy, CI);
+        }
+
         CI->setArgOperand(i, Op);
         modified = true;
       }
@@ -76,16 +82,33 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
       Type *retTy = F->getReturnType();
       if (retTy->isIntegerTy()) {
         Value *ret = CI;
-        // Save all current uses of the return value to the vault. These
-        // are the uses that need to be replaced with the encoded return
-        // value. (The 'createEncRegionEntry' method will give rise to
-        // another use of the return value, which must not be replaced.)
-        UsesVault UV(CI->uses());
+        if (ret->getType() == C->getInt64Type()) {
+          // Save all current uses of the return value to the vault. These
+          // are the uses that need to be replaced with the encoded return
+          // value. (The 'createEncRegionEntry' method will give rise to
+          // another use of the return value, which must not be replaced.)
+          UsesVault UV(CI->uses());
 
-        Type *origTy = ret->getType();
-        ret = C->createEncRegionEntry(ret, N);
-
-        UV.replaceWith(ret);
+          ret = C->createEncRegionEntry(ret, N);
+          UV.replaceWith(ret);
+        } else {
+          for (Value::use_iterator u = CI->use_begin(), e = CI->use_end();
+               u != e; ++u) {
+            User *U = u->getUser();
+            SExtInst *se = dyn_cast<SExtInst>(U);
+            assert(se && "Value returned by external function call is not \
+                          immediately extended to \'i64\'");
+            if (se->getNumUses()) {
+              UsesVault UV(se->uses());
+              Instruction *insertPoint =
+                dyn_cast<Instruction>(se->uses().begin()->getUser());
+              assert(insertPoint && "Sign-extended return value is not used \
+                                     by any instruction");
+              Value *enc = C->createEncRegionEntry(se, insertPoint);
+              UV.replaceWith(enc);
+            }
+          }
+        }
         modified = true;
       }
     }

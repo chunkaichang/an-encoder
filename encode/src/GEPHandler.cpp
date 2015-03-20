@@ -41,6 +41,7 @@ bool GEPHandler::runOnBasicBlock(BasicBlock &BB) {
           continue;
 
         Value *NewOp = C->createEncRegionExit(Op, Op->getType(), I);
+        NewOp = C->createTrunc(NewOp, C->getInt32Type(), I); 
         I->setOperand(i, NewOp);
 
         modified = true;

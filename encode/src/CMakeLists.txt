@@ -18,6 +18,9 @@ add_executable(encode encode.cpp
                       Linkage.cpp
                       SExtTrunc.cpp
                       CycleCounter.cpp
+                      Int64Checker.cpp
+                      MainArgsHandler.cpp
+                      AllocaHandler.cpp
                       Coder.cpp
                       UsesVault.cpp)
 

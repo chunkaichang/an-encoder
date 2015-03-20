@@ -16,11 +16,14 @@ then
 fi
 LLVM_BIN_DIR=${LLVM_BUILD_DIR}/bin
 
-CLANG_OPTS="-O2 -g"
-ENCODE_OPTS=""
+CLANG_OPTS="-O0 -g"
+ENCODE_OPTS="-no-opts -no-inlining"
 
 INPUT=$1
 USERLIB=$2
+
+INPUT_LONG=${INPUT}".long.c"
+INPUT_CALLE=${INPUT_LONG}".calle.c"
 
 BC=${INPUT}".bc"
 LL=${INPUT}".ll"
@@ -35,6 +38,10 @@ if [ ! -z "$VERBOSE" ]
 then
   V="-v"
 fi
+
+${LLVM_BIN_DIR}/int64-convert ${INPUT} -- 1> ${INPUT_LONG}
+${LLVM_BIN_DIR}/callexpr-convert ${INPUT_LONG} -- 1> ${INPUT_CALLE}
+INPUT=${INPUT_CALLE}
 
 ${LLVM_BIN_DIR}/clang ${V} -c -emit-llvm ${CLANG_OPTS} -mno-sse -o ${BC} ${INPUT}
 ${LLVM_BIN_DIR}/llvm-dis -o ${LL} ${BC}

@@ -13,28 +13,29 @@
 
 #include <iostream>
 
+#include "Coder.h"
+
 using namespace llvm;
 
 namespace {
   struct ConstantsEncoder : public BasicBlockPass {
-    ConstantsEncoder(const GlobalVariable *a) : BasicBlockPass(ID), A(a) {}
-    ConstantsEncoder() : ConstantsEncoder(NULL) {}
+    ConstantsEncoder(Coder *c) : BasicBlockPass(ID), C(c) {}
 
     bool runOnBasicBlock(BasicBlock &BB) override;
 
     static char ID;
   private:
-    const GlobalVariable *A;
+    Coder *C;
   };
 }
 
 char ConstantsEncoder::ID = 0;
 
 bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
-  bool modified = false;
+  if (!BB.getParent()->getName().compare("main"))
+    return false;
 
-  if (A == nullptr)
-    return modified;
+  bool modified = false;
 
   for (auto I = BB.begin(), E = BB.end(); I != E; I++) {
     if (isa<AllocaInst>(&(*I)))
@@ -46,15 +47,12 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
       if (!CI)
         continue;
 
-      const ConstantInt *codeValue
-        = dyn_cast<ConstantInt>(A->getInitializer());
-      assert(codeValue);
-
-      const APInt &value = CI->getValue();
-      const APInt &code  = codeValue->getValue();
-      uint64_t res = value.getLimitedValue() * code.getLimitedValue();
-      ConstantInt *C = ConstantInt::get(CI->getType(), res);
-      I->setOperand(i, C);
+      uint64_t value = CI->getZExtValue();
+      int64_t svalue = (int64_t)(value << 32) >> 32;
+      int64_t res = svalue * C->getA();
+      ConstantInt *CodedCI = ConstantInt::getSigned(dyn_cast<IntegerType>(C->getInt64Type()),
+                                                    res);
+      I->setOperand(i, CodedCI);
 
       modified = true;
     }
@@ -63,11 +61,6 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
   return modified;
 }
 
-static RegisterPass<ConstantsEncoder> X("ConstantsEncoder",
-                                         "",
-                                         false,
-                                         false);
-
-Pass *createConstantsEncoder(const GlobalVariable *a) {
-  return new ConstantsEncoder(a);
+Pass *createConstantsEncoder(Coder *c) {
+  return new ConstantsEncoder(c);
 }

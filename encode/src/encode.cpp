@@ -27,7 +27,7 @@
 using namespace llvm;
 
 Pass *createGlobalsEncoder(const GlobalVariable *a);
-Pass *createConstantsEncoder(const GlobalVariable *a);
+Pass *createConstantsEncoder(Coder *c);
 Pass *createGEPHandler(Coder*);
 Pass *createOperationsEncoder(Coder*);
 Pass *createOperationsExpander();
@@ -37,6 +37,9 @@ Pass *createAccumulateRemover();
 Pass *createCallHandler(Coder*);
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
 Pass *createSExtTruncPass();
+Pass *createInt64Checker(Coder*, bool);
+Pass *createMainArgsHandler(Coder*);
+Pass *createAllocaHandler(Coder*);
 
 static cl::opt<std::string>
 InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
@@ -163,9 +166,13 @@ static int processModule(char **argv, LLVMContext &Context) {
     globalCode->setInitializer(ConstantInt::get(globalCodeType,
                                                 globalCodeValue));
 
+    //codePM.add(createInt64Checker(&C, true));
+    //codePM.add(createAllocaHandler(&C));
     codePM.add(createGlobalsEncoder(globalCode));
-    codePM.add(createConstantsEncoder(globalCode));
+    codePM.add(createConstantsEncoder(&C));
     codePM.add(createOperationsEncoder(&C));
+    codePM.add(createMainArgsHandler(&C));
+    //codePM.add(createInt64Checker(&C, false));
     codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 

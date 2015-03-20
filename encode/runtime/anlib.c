@@ -8,7 +8,7 @@
 
 typedef uint64_t ptr_enc_t;
 
-static uint32_t A;
+static uint64_t A;
 static uint64_t accu_enc = 0;
 
 /* NOTE: 'accumulates' have been removed.
