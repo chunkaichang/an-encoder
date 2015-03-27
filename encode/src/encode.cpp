@@ -26,21 +26,27 @@
 
 using namespace llvm;
 
-Pass *createGlobalsEncoder(const GlobalVariable *a);
-Pass *createConstantsEncoder(Coder *c);
-Pass *createGEPHandler(Coder*);
-Pass *createOperationsEncoder(Coder*);
-Pass *createOperationsExpander();
-Pass *createEncodeDecodeRemover();
-Pass *createCycleCounter();
-Pass *createAccumulateRemover();
-Pass *createCallHandler(Coder*);
-Pass *createLinkagePass(GlobalValue::LinkageTypes);
-Pass *createSExtTruncPass();
-Pass *createInt64Checker(Coder*, bool);
-Pass *createMainArgsHandler(Coder*);
-Pass *createAllocaHandler(Coder*);
+// Pass checking the input module's validity:
+Pass *createModuleChecker(Coder*, bool);
 
+// Passes required for correct encoding:
+Pass *createGlobalsEncoder(Coder*);
+Pass *createConstantsEncoder(Coder*);
+Pass *createOperationsEncoder(Coder*);
+Pass *createGEPHandler(Coder*);
+Pass *createCallHandler(Coder*);
+Pass *createOperationsExpander(Coder*);
+Pass *createInterfaceHandler(Coder*);
+
+// Utility passes:
+Pass *createLinkagePass(GlobalValue::LinkageTypes);
+
+// (Simple) optimization passes:
+Pass *createAccumulateRemover();
+Pass *createEncodeDecodeRemover();
+Pass *createSExtTruncPass();
+
+// Command line arguments:
 static cl::opt<std::string>
 InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
 
@@ -48,7 +54,7 @@ static cl::opt<std::string>
 OutputFilename("o", cl::desc("Output filename"), cl::value_desc("filename"));
 
 static cl::opt<bool>
-CountOnly("count-only", cl::init(false), cl::desc("Only instrument input file for counting cycles"));
+ExpandOnly("expand-only", cl::init(false), cl::desc("Only expand en-/decoding instrinsics"));
 
 static cl::opt<bool>
 NoOpts("no-opts", cl::init(false), cl::desc("Disable all optimizations"));
@@ -58,6 +64,7 @@ NoInlining("no-inlining", cl::init(false), cl::desc("Disable inlining"));
 
 static cl::opt<bool>
 NoVerifying("no-verifying", cl::init(false), cl::desc("Disable LLVM verifier"));
+
 
 static int processModule(char **, LLVMContext &);
 
@@ -148,31 +155,37 @@ static int processModule(char **argv, LLVMContext &Context) {
   // during linking.)
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
-  if (!CountOnly) {
-    PassManager codePM, postLinkPM;
 
+  if (!ExpandOnly) {
     library = openFileAsModule(encodeBinaryPath + "/" + "anlib.c.bc", Err, Context);
     if (library == nullptr) {
       Err.print(argv[0], errs());
       return 1;
     }
 
+    PassManager codePM, postLinkPM;
     if (!NoVerifying) codePM.add(createVerifierPass());
 
-    GlobalVariable *globalCode
-      = library->getGlobalVariable(globalCodeName,
-                                  true);
-    Type *globalCodeType = globalCode->getInitializer()->getType();
-    globalCode->setInitializer(ConstantInt::get(globalCodeType,
-                                                globalCodeValue));
+    // Set the global variable "A" from the "anlib.c" source file (which has just been
+    // linked in) to the value used for encoding:
+    {
+      GlobalVariable *globalCode
+        = library->getGlobalVariable(globalCodeName,
+                                     true);
+      Type *globalCodeType = globalCode->getInitializer()->getType();
+      globalCode->setInitializer(ConstantInt::get(globalCodeType,
+                                                  globalCodeValue));
+    }
 
-    //codePM.add(createInt64Checker(&C, true));
-    //codePM.add(createAllocaHandler(&C));
-    codePM.add(createGlobalsEncoder(globalCode));
+    codePM.add(createModuleChecker(&C, true));
+
     codePM.add(createConstantsEncoder(&C));
+    codePM.add(createGlobalsEncoder(&C));
     codePM.add(createOperationsEncoder(&C));
-    codePM.add(createMainArgsHandler(&C));
-    //codePM.add(createInt64Checker(&C, false));
+
+    codePM.add(createModuleChecker(&C, false));
+
+    codePM.add(createInterfaceHandler(&C));
     codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 
@@ -207,7 +220,7 @@ static int processModule(char **argv, LLVMContext &Context) {
       postLinkPM.add(createEncodeDecodeRemover());
     }
 
-    postLinkPM.add(createOperationsExpander());
+    postLinkPM.add(createOperationsExpander(&C));
     // Due to previously inserted encode/decode instructions some values
     // that used to be constants may no longer appear to be constant. However,
     // after the decode/encode instructions have been expanded, one should be
@@ -247,17 +260,8 @@ static int processModule(char **argv, LLVMContext &Context) {
 
       if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
     }
-  }
-
-  cyclePM.add(createCycleCounter());
-  cyclePM.run(*mod);
-
-  // The functions for cycle counting are linked in late to avoid
-  // that the encoder operates on them:
-  linkagePM.run(*rdtsc);
-  if (linkModules(mod, rdtsc, &linkError)) {
-    std::cerr << linkError;
-    return 1;
+  } else {
+    PM.add(createOperationsExpander(&C));
   }
 
   if (!NoInlining) PM.add(llvm::createFunctionInliningPass());

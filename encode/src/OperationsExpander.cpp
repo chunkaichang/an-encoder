@@ -13,15 +13,20 @@
 
 #include <iostream>
 
+#include "Coder.h"
+
 using namespace llvm;
 
 namespace {
   struct OperationsExpander : public FunctionPass {
-    OperationsExpander() : FunctionPass(ID) {}
+    OperationsExpander(Coder *c) : FunctionPass(ID), C(c) {}
 
     bool runOnFunction(Function &F) override;
 
     static char ID;
+
+  private:
+    Coder *C;
   };
 }
 
@@ -66,9 +71,22 @@ bool OperationsExpander::runOnFunction(Function &F) {
             m = modified = true;                            \
             break;                                          \
           }
-
           HANDLE_REPLACE_OPERATION(an_encode, Mul)
           HANDLE_REPLACE_OPERATION(an_decode, SDiv)
+
+#define HANDLE_REPLACE_VALUE_OPERATION(value_intrinsic, coder_operation)  \
+          case Intrinsic::value_intrinsic: {                  \
+            Value *x = ci->getArgOperand(0);                  \
+                                                              \
+            Value *sext = C->createSExt(x, C->getInt64Type(), ci); \
+            Value *res = C->create ## coder_operation(sext, ci);   \
+            ci->replaceAllUsesWith(res);                      \
+            ci->eraseFromParent();                            \
+            m = modified = true;                              \
+            break;                                            \
+          }
+          HANDLE_REPLACE_VALUE_OPERATION(an_encode_value, Encode)
+          HANDLE_REPLACE_VALUE_OPERATION(an_decode_value, Decode)
 
           case Intrinsic::an_check: {
             Value *x = ci->getArgOperand(0);
@@ -200,11 +218,6 @@ bool OperationsExpander::runOnFunction(Function &F) {
   return modified;
 }
 
-static RegisterPass<OperationsExpander> X("OperationsExpander",
-                                          "",
-                                          false,
-                                          false);
-
-Pass *createOperationsExpander() {
-  return new OperationsExpander();
+Pass *createOperationsExpander(Coder *c) {
+  return new OperationsExpander(c);
 }

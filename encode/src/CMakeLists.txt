@@ -17,10 +17,8 @@ add_executable(encode encode.cpp
                       CallHandler.cpp
                       Linkage.cpp
                       SExtTrunc.cpp
-                      CycleCounter.cpp
-                      Int64Checker.cpp
-                      MainArgsHandler.cpp
-                      AllocaHandler.cpp
+                      ModuleChecker.cpp
+                      InterfaceHandler.cpp
                       Coder.cpp
                       UsesVault.cpp)
 

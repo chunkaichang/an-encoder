@@ -1,30 +1,22 @@
 
 #include "llvm/Pass.h"
 #include "llvm/IR/Module.h"
-#include "llvm/IR/Function.h"
-#include "llvm/IR/BasicBlock.h"
 #include "llvm/IR/Instructions.h"
-#include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Constants.h"
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Metadata.h"
 
-#include "llvm/Support/raw_ostream.h"
-
-#include <iostream>
+#include "Coder.h"
 
 using namespace llvm;
 
 namespace {
   struct GlobalsEncoder : public ModulePass {
-    GlobalsEncoder(const GlobalVariable *a) : ModulePass(ID), A(a) {}
-    GlobalsEncoder() : GlobalsEncoder(NULL) {}
+    GlobalsEncoder(Coder *c) : ModulePass(ID), C(c) {}
 
     bool runOnModule(Module &M) override;
 
     static char ID;
   private:
-    const GlobalVariable *A;
+    Coder *C;
   };
 }
 
@@ -33,28 +25,22 @@ char GlobalsEncoder::ID = 0;
 bool GlobalsEncoder::runOnModule(Module &M) {
   bool modified = false;
 
-  if (A == nullptr)
-    return modified;
-
   for (auto I = M.global_begin(), E = M.global_end(); I != E; I++) {
     GlobalVariable *GV = &(*I);
     if (!GV->hasInitializer())
       continue;
 
-    const ConstantInt *variableValue
+    const ConstantInt *init
       = dyn_cast<ConstantInt>(GV->getInitializer());
-    if (!variableValue)
+    if (!init)
       continue;
 
-    const ConstantInt *codeValue
-      = dyn_cast<ConstantInt>(A->getInitializer());
-    assert(codeValue);
-
-    const APInt &value = variableValue->getValue();
-    const APInt &code  = codeValue->getValue();
-    uint64_t res = value.getLimitedValue() * code.getLimitedValue();
-    ConstantInt *C = ConstantInt::get(variableValue->getType(), res);
-    GV->setInitializer(C);
+    const APInt &initInt = init->getValue();
+    uint64_t res = initInt.getLimitedValue() * C->getA();
+    assert(init->getType() == C->getInt64Type() &&
+           "Unexpected non-64bit integer type");
+    ConstantInt *enc = ConstantInt::get(init->getType(), res);
+    GV->setInitializer(enc);
 
     modified = true;
   }
@@ -62,11 +48,6 @@ bool GlobalsEncoder::runOnModule(Module &M) {
   return modified;
 }
 
-static RegisterPass<GlobalsEncoder> X("GlobalsEncoder",
-                                      "",
-                                      false,
-                                      false);
-
-Pass *createGlobalsEncoder(const GlobalVariable *a) {
-  return new GlobalsEncoder(a);
+Pass *createGlobalsEncoder(Coder *c) {
+  return new GlobalsEncoder(c);
 }

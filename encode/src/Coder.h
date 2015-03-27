@@ -21,7 +21,6 @@ public:
   Value *createZExt(Value *V, Type *DestTy, Instruction *I);
   Value *createTrunc(Value *V, Type *DestTy, Instruction *I);
 
-private:
   Value *createEncode(Value *V, Instruction *I);
   Value *createDecode(Value *V, Instruction *I);
 
