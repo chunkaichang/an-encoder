@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
   {
     for (j = 0; j < NUM_NODES; j++)
       if (AdjMatrix[i][j] != AdjMatrix[j][i])
-        return -1
+        return -1;
   }
 
   ADJ_PRINT("Adjacency matrix:\n");
