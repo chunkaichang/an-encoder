@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 
     __cyc_msg(total);
     __cs_msg(); // correct output - 00000000C538EDCF
-    printf("bytes read: %ld\n", AN_DECODE_VALUE(charcnt));// correct output - 1368864
+    printf("bytes read: %lld\n", AN_DECODE_VALUE(charcnt));// correct output - 1368864
 
     return errors;
 }
