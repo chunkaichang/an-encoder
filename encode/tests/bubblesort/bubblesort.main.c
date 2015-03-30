@@ -8,7 +8,7 @@
 #include "../mylibs/mycyc.h"
 #include "../mylibs/mycheck.h"
 
-#define REPETITIONS 1
+#define REPETITIONS 100
 #define LEN         1000
 
 #define MAXRANDINT  LEN
