@@ -1,0 +1,40 @@
+TEST: ./quicksort/quicksort.cfg
+  verified: True
+  slow-down: 1.86659963953
+-----------------------
+TEST: ./ptrarith/ptrarith.cfg
+  verified: True
+  slow-down: 6.50449985022
+-----------------------
+TEST: ./crc/crc.cfg
+  verified: True
+  slow-down: 1.97288951813
+-----------------------
+TEST: ./matmul_while/matmul_while.cfg
+  verified: True
+  slow-down: 23.6136346047
+-----------------------
+TEST: ./array_sum/array_sum.cfg
+  verified: True
+  slow-down: 4.78145814568
+-----------------------
+TEST: ./dijkstra/dijkstra.cfg
+  verified: True
+  slow-down: 2.09887351277
+-----------------------
+TEST: ./bubblesort/bubblesort.cfg
+  verified: True
+  slow-down: 3.48909471104
+-----------------------
+TEST: ./matmul/matmul.cfg
+  verified: True
+  slow-down: 23.8364239413
+-----------------------
+TEST: ./matmul_overflow/matmul_overflow.cfg
+  verified: True
+  slow-down: 24.0621799246
+-----------------------
+
+Notes:
+- Tests cases have been compiled with 'clang'
+  with the debug flag set (i.e. with "-g").

@@ -1,0 +1,40 @@
+TEST: ./quicksort/quicksort.cfg
+  verified: True
+  slow-down: 1.91515805212
+-----------------------
+TEST: ./ptrarith/ptrarith.cfg
+  verified: True
+  slow-down: 6.59948290945
+-----------------------
+TEST: ./crc/crc.cfg
+  verified: True
+  slow-down: 2.0994080272
+-----------------------
+TEST: ./matmul_while/matmul_while.cfg
+  verified: True
+  slow-down: 24.1435339396
+-----------------------
+TEST: ./array_sum/array_sum.cfg
+  verified: True
+  slow-down: 4.60547020609
+-----------------------
+TEST: ./dijkstra/dijkstra.cfg
+  verified: True
+  slow-down: 1.99205901006
+-----------------------
+TEST: ./bubblesort/bubblesort.cfg
+  verified: True
+  slow-down: 3.86664164577
+-----------------------
+TEST: ./matmul/matmul.cfg
+  verified: True
+  slow-down: 25.235858217
+-----------------------
+TEST: ./matmul_overflow/matmul_overflow.cfg
+  verified: True
+  slow-down: 26.5327520048
+-----------------------
+
+Notes:
+- LLVM bitcode files for test cases were generated with
+  'clang', without the debug flag (i.e. no "-g").
