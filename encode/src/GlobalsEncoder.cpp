@@ -30,19 +30,35 @@ bool GlobalsEncoder::runOnModule(Module &M) {
     if (!GV->hasInitializer())
       continue;
 
-    const ConstantInt *init
-      = dyn_cast<ConstantInt>(GV->getInitializer());
-    if (!init)
-      continue;
+    Constant *init = GV->getInitializer();
+    if (const ConstantInt *ci = dyn_cast<ConstantInt>(init)) {
+      uint64_t res = ci->getValue().getLimitedValue() * C->getA();
+      assert(ci->getType() == C->getInt64Type() &&
+             "Unexpected non-64bit integer type");
+      ConstantInt *enc = ConstantInt::get(ci->getType(), res);
+      GV->setInitializer(enc);
 
-    const APInt &initInt = init->getValue();
-    uint64_t res = initInt.getLimitedValue() * C->getA();
-    assert(init->getType() == C->getInt64Type() &&
-           "Unexpected non-64bit integer type");
-    ConstantInt *enc = ConstantInt::get(init->getType(), res);
-    GV->setInitializer(enc);
+      modified = true;
+    } else if (const ConstantDataArray *cda = dyn_cast<ConstantDataArray>(init)) {
+      // We only handle arrays whose elements are 64bit integers: (The main reason
+      // for doing this is that strings, i.e. arrays with element type 'i8', must
+      // not be encoded; yet strings are very common.)
+      if (cda->getElementType() != C->getInt64Type())
+        continue;
 
-    modified = true;
+      assert(cda->getElementType() == C->getInt64Type() &&
+             "Unexpected non-64bit integer type");
+
+      SmallVector<uint64_t, 32> result;
+      for (unsigned i = 0; i < cda->getNumElements(); i++) {
+        uint64_t res = cda->getElementAsInteger(i) * C->getA();
+        result.push_back(res);
+      }
+      LLVMContext &ctx = M.getContext();
+      GV->setInitializer(ConstantDataArray::get(ctx, result));
+
+      modified = true;
+    }
   }
 
   return modified;
