@@ -32,6 +32,7 @@ Pass *createModuleChecker(Coder*, bool);
 // Passes required for correct encoding:
 Pass *createGlobalsEncoder(Coder*);
 Pass *createConstantsEncoder(Coder*);
+Pass *createBoolExtHandler(Coder*);
 Pass *createOperationsEncoder(Coder*);
 Pass *createGEPHandler(Coder*);
 Pass *createCallHandler(Coder*);
@@ -143,7 +144,7 @@ static int processModule(char **argv, LLVMContext &Context) {
   if (!Out) return 1;
 
   std::string encodeBinaryPath(getenv("ENCODE_RUNTIME_DIR"));
-  rdtsc = openFileAsModule(encodeBinaryPath + "/" + "rdtsc.c.bc", Err, Context);
+  rdtsc = openFileAsModule(encodeBinaryPath + "/" + "rdtsc.bc", Err, Context);
   if (rdtsc == nullptr) {
     Err.print(argv[0], errs());
     return 1;
@@ -157,7 +158,7 @@ static int processModule(char **argv, LLVMContext &Context) {
 
 
   if (!ExpandOnly) {
-    library = openFileAsModule(encodeBinaryPath + "/" + "anlib.c.bc", Err, Context);
+    library = openFileAsModule(encodeBinaryPath + "/" + "anlib.bc", Err, Context);
     if (library == nullptr) {
       Err.print(argv[0], errs());
       return 1;
@@ -181,9 +182,14 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
+    // LLVM inserts 'ZExt' and 'SExt' instructions when boolean arguments
+    // (i.e. of type 'i1') appear in bitwise operations. The "BoolExtHandler"
+    // pass encodes values that have originated from boolean values by this
+    // kind of extension:
+    codePM.add(createBoolExtHandler(&C));
     codePM.add(createOperationsEncoder(&C));
 
-    codePM.add(createModuleChecker(&C, false));
+    //codePM.add(createModuleChecker(&C, false));
 
     codePM.add(createInterfaceHandler(&C));
     codePM.add(createGEPHandler(&C));

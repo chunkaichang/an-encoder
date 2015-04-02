@@ -19,8 +19,11 @@ add_executable(encode encode.cpp
                       SExtTrunc.cpp
                       ModuleChecker.cpp
                       InterfaceHandler.cpp
+                      BoolExtHandler.cpp
                       Coder.cpp
                       UsesVault.cpp)
+add_dependencies(encode ${CMAKE_BINARY_SOURCE_DIR}/../runtime/anlib.bc
+                        ${CMAKE_BINARY_SOURCE_DIR}/../runtime/rdtsc.bc)
 
 
 # Find the libraries that correspond to the LLVM components
