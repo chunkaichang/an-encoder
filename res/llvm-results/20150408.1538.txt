@@ -1,0 +1,50 @@
+CMAKE_BUILD_TYPE=Release
+
+TEST: ./encode/tests/bubblesort/bubblesort.cfg
+	verified: True
+	slow-down: 3.22663760692
+-----------------------
+TEST: ./encode/tests/quicksort/quicksort.cfg
+	verified: True
+	slow-down: 1.85714071545
+-----------------------
+TEST: ./encode/tests/dijkstra/dijkstra.cfg
+	verified: True
+	slow-down: 2.07791681849
+-----------------------
+TEST: ./encode/tests/array_sum/array_sum.cfg
+	verified: True
+	slow-down: 4.77388661571
+-----------------------
+TEST: ./encode/tests/ptrarith/ptrarith.cfg
+	verified: True
+	slow-down: 6.33468617149
+-----------------------
+TEST: ./encode/tests/des/des.tiny.cfg
+	verified: True
+	slow-down: 1.00116197924
+-----------------------
+TEST: ./encode/tests/des/des.huge.cfg
+	verified: True
+	slow-down: 0.967525468292
+-----------------------
+TEST: ./encode/tests/crc/crc.cfg
+	verified: True
+	slow-down: 2.00980548181
+-----------------------
+TEST: ./encode/tests/matmul_while/matmul_while.cfg
+	verified: True
+	slow-down: 24.3254607471
+-----------------------
+TEST: ./encode/tests/matmul_overflow/matmul_overflow.cfg
+	verified: True
+	slow-down: 23.530725989
+-----------------------
+TEST: ./encode/tests/des/des.large.cfg
+	verified: True
+	slow-down: 0.99561048307
+-----------------------
+TEST: ./encode/tests/matmul/matmul.cfg
+	verified: True
+	slow-down: 23.9996674884
+-----------------------
