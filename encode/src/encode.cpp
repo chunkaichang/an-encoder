@@ -128,7 +128,7 @@ const uint32_t    globalCodeValue = 12; //1 << 4;
 static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
   std::unique_ptr<Module> M;
-  Module *mod, *library, *rdtsc;
+  Module *mod, *library;
   PassManager PM, linkagePM, cyclePM;
   std::string linkError;
 
@@ -143,12 +143,15 @@ static int processModule(char **argv, LLVMContext &Context) {
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
   if (!Out) return 1;
 
-  std::string encodeBinaryPath(getenv("ENCODE_RUNTIME_DIR"));
-  rdtsc = openFileAsModule(encodeBinaryPath + "/" + "rdtsc.bc", Err, Context);
-  if (rdtsc == nullptr) {
-    Err.print(argv[0], errs());
-    return 1;
-  }
+  std::string libraryPath(""), binaryPath(argv[0]);
+  int pos = binaryPath.rfind('/');
+  if (pos != std::string::npos)
+    libraryPath = binaryPath.substr(0, pos+1);
+  // If no '/' is found in 'argv[0]', then this binary is executed from the directory
+  // it is in, i.e. the current working directory is this binary's directory. Since the
+  // library is expected to reside in the same directory, its relative paths is the same
+  // as its file name:
+  libraryPath += "anlib.bc";
 
   // By applying this linkage to library functions (rather than 'ExternalLinkage',
   // which is the default) we achieve that after linking no further copies of the
@@ -156,9 +159,8 @@ static int processModule(char **argv, LLVMContext &Context) {
   // during linking.)
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
-
   if (!ExpandOnly) {
-    library = openFileAsModule(encodeBinaryPath + "/" + "anlib.bc", Err, Context);
+    library = openFileAsModule(libraryPath, Err, Context);
     if (library == nullptr) {
       Err.print(argv[0], errs());
       return 1;

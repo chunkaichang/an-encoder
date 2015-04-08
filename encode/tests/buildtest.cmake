@@ -60,12 +60,12 @@ function(BUILD_TEST_CASE TEST_NAME)
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_2_BC}
-                     COMMAND ${CMAKE_BINARY_DIR}/encode/src/encode -expand-only
+                     COMMAND ${ENCODE_BIN_DIR}/encode -expand-only
                              -o ${MAIN_MODULE_ENC_2_BC} ${MAIN_MODULE_ENC_BC}
                      DEPENDS encode ${MAIN_MODULE_ENC_BC})
 
   add_custom_command(OUTPUT ${ENC_MODULE_ENC_BC}
-                     COMMAND ${CMAKE_BINARY_DIR}/encode/src/encode ${ENCODE_OPTS}
+                     COMMAND ${ENCODE_BIN_DIR}/encode ${ENCODE_OPTS}
                              -o ${ENC_MODULE_ENC_BC}
                              ${ENC_MODULE_BC}
                      DEPENDS encode ${ENC_MODULE_BC})
