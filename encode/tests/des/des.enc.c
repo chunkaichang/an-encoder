@@ -33,9 +33,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define DBG(desc, num, bits)		dbg_num(desc, num, 32);
+//#define DBG(desc, num, bits)		dbg_num(desc, num, 32);
 //#define DBG(desc, num, bits)		dbg_num(desc, num, bits);
-//#define DBG(desc, num, bits)		//
+#define DBG(desc, num, bits)		//
 
 static const long BIT_1 = 1;
 static const long BIT_2 = 2;
