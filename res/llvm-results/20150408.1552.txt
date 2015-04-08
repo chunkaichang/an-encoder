@@ -1,56 +1,50 @@
-NOTE: The results in this file were obtained with debug
-      output enabled in the DES test case. This may explain
-      why, for the DES test variants, we observe speed-ups
-      or at least insignificant slow-downs of the encoded
-      binary over the plain one.
-
 CMAKE_BUILD_TYPE=Release
 
 TEST: ./encode/tests/bubblesort/bubblesort.cfg
 	verified: True
-	slow-down: 3.22663760692
+	slow-down: 3.4853171098
 -----------------------
 TEST: ./encode/tests/quicksort/quicksort.cfg
 	verified: True
-	slow-down: 1.85714071545
+	slow-down: 1.87804219427
 -----------------------
 TEST: ./encode/tests/dijkstra/dijkstra.cfg
 	verified: True
-	slow-down: 2.07791681849
+	slow-down: 2.09417802613
 -----------------------
 TEST: ./encode/tests/array_sum/array_sum.cfg
 	verified: True
-	slow-down: 4.77388661571
+	slow-down: 4.75617890183
 -----------------------
 TEST: ./encode/tests/ptrarith/ptrarith.cfg
 	verified: True
-	slow-down: 6.33468617149
+	slow-down: 6.75556633806
 -----------------------
 TEST: ./encode/tests/des/des.tiny.cfg
 	verified: True
-	slow-down: 1.00116197924
+	slow-down: 1.36366005227
 -----------------------
 TEST: ./encode/tests/des/des.huge.cfg
 	verified: True
-	slow-down: 0.967525468292
+	slow-down: 1.32687274035
 -----------------------
 TEST: ./encode/tests/crc/crc.cfg
 	verified: True
-	slow-down: 2.00980548181
+	slow-down: 1.94033329014
 -----------------------
 TEST: ./encode/tests/matmul_while/matmul_while.cfg
 	verified: True
-	slow-down: 24.3254607471
+	slow-down: 24.9564000738
 -----------------------
 TEST: ./encode/tests/matmul_overflow/matmul_overflow.cfg
 	verified: True
-	slow-down: 23.530725989
+	slow-down: 23.8159002001
 -----------------------
 TEST: ./encode/tests/des/des.large.cfg
 	verified: True
-	slow-down: 0.99561048307
+	slow-down: 1.29803173648
 -----------------------
 TEST: ./encode/tests/matmul/matmul.cfg
 	verified: True
-	slow-down: 23.9996674884
+	slow-down: 25.590526956
 -----------------------
