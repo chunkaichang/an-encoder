@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 2.8)
 
+if ("${ENCODE_TEST_BUILD_TYPE}" STREQUAL "DEBUG")
+  set(CLANG_EMIT_LLVM_OPTS -O0 -g)
+  set(CLANG_LINK_OPTS -O0 -g)
+  set(ENCODE_OPTS)
+else()
+  set(CLANG_EMIT_LLVM_OPTS -O0)
+  set(CLANG_LINK_OPTS -O2)
+  set(ENCODE_OPTS)
+endif()
 
 macro(SET_BUILD_VARS TEST_NAME)
   set(MAIN_MODULE_SRC  "${TEST_NAME}.main.c")
@@ -22,17 +31,20 @@ function(BUILD_TEST_CASE TEST_NAME)
 
   # Build unencoded reference binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_BC}
-                     COMMAND clang -c -emit-llvm -O0 -g -mno-sse -o ${MAIN_MODULE_BC}
+                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse 
+                             -o ${MAIN_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
   add_custom_command(OUTPUT ${ENC_MODULE_BC}
-                     COMMAND clang -c -emit-llvm -O0 -g -mno-sse -o ${ENC_MODULE_BC}
+                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse
+                             -o ${ENC_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC})
 
   add_custom_target(${MAIN_TARGET} ALL
-                    COMMAND clang -O0 -g -o ${MAIN_TARGET} ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
+                    COMMAND clang ${CLANG_LINK_OPTS}
+                            -o ${MAIN_TARGET} ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c
                     DEPENDS ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
@@ -41,7 +53,8 @@ function(BUILD_TEST_CASE TEST_NAME)
 
   # Build encoded binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_BC}
-                     COMMAND clang -c -emit-llvm -O0 -g -mno-sse -DENCODE -o ${MAIN_MODULE_ENC_BC}
+                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse -DENCODE
+                             -o ${MAIN_MODULE_ENC_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
@@ -51,13 +64,14 @@ function(BUILD_TEST_CASE TEST_NAME)
                      DEPENDS encode ${MAIN_MODULE_ENC_BC})
 
   add_custom_command(OUTPUT ${ENC_MODULE_ENC_BC}
-                     COMMAND ${CMAKE_BINARY_DIR}/encode/src/encode -no-opts -no-inlining
+                     COMMAND ${CMAKE_BINARY_DIR}/encode/src/encode ${ENCODE_OPTS}
                              -o ${ENC_MODULE_ENC_BC}
                              ${ENC_MODULE_BC}
                      DEPENDS encode ${ENC_MODULE_BC})
 
   add_custom_target(${ENC_TARGET} ALL
-                    COMMAND clang -O0 -g -o ${ENC_TARGET}
+                    COMMAND clang ${CLANG_LINK_OPTS}
+                            -o ${ENC_TARGET}
                             ${MAIN_MODULE_ENC_2_BC} ${ENC_MODULE_ENC_BC}
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c
