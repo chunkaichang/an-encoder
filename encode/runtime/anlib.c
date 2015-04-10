@@ -27,8 +27,12 @@ void accumulate_enc(int64_t x_enc)
   int64_t  x_mask = x_enc >> 63;
   uint64_t ux_enc = (x_enc + x_mask) ^ x_mask;
 
-  if (ux_enc > UINT64_MAX - accu_enc) {
+  if (__builtin_an_check_i32(accu_enc, A)) {
+    signal_enc();
     __builtin_an_assert_i32(accu_enc, A);
+  }
+
+  if (ux_enc > UINT64_MAX - accu_enc) {
     accu_enc = 0;
   }
   accu_enc += ux_enc;
