@@ -129,13 +129,15 @@ bool OperationsExpander::runOnFunction(Function &F) {
 
             IRBuilder<> trapBuilder(trapBB);
             if (ID == Intrinsic::an_assert) {
-              // Insert a call to the 'trap' intrinsic: (TODO: Perhaps
-              // calling 'exit' with an error value would be more
-              // appropriate.)
-              Value *trap =
-                Intrinsic::getDeclaration(M, Intrinsic::trap);
+              // If an error is detected, we exit with code 2. This exit code
+              // is used by a Python script to detect that the "AN Encoder" has
+              // successfully identified an error.
+              FunctionType *exitTy = FunctionType::get(Type::getVoidTy(ctx),
+                                                       Type::getInt32Ty(ctx),
+                                                       false);
+              Value *exit = M->getOrInsertFunction("exit", exitTy);
 
-              trapBuilder.CreateCall(trap);
+              trapBuilder.CreateCall(exit, ConstantInt::getSigned(Type::getInt32Ty(ctx), 2));
               trapBuilder.CreateUnreachable();
             } else {
               // Insert a call to 'puts', which prints an error message
