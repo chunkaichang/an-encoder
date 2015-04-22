@@ -82,7 +82,7 @@ function(BUILD_TEST_CASE TEST_NAME)
 endfunction(BUILD_TEST_CASE)
 
 
-function(BUILD_TEST_CONFIG TEST_NAME BINARY_NAME ARGS RUNS)
+function(BUILD_TEST_CONFIG TEST_NAME BINARY_NAME ARGS PRECONFIG)
   SET_BUILD_VARS(${BINARY_NAME})
 
   set(MAIN_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${MAIN_TARGET})
@@ -91,5 +91,6 @@ function(BUILD_TEST_CONFIG TEST_NAME BINARY_NAME ARGS RUNS)
   add_custom_target(${TEST_NAME}.cfg ALL
                     COMMAND echo "plain:   ${MAIN_BINARY} ${ARGS}" > ${TEST_NAME}.cfg &&
                             echo "encoded: ${ENC_BINARY} ${ARGS}" >> ${TEST_NAME}.cfg &&
-                            echo "run: ${RUNS}" >> ${TEST_NAME}.cfg)
+                            cat ${PRECONFIG} >> ${TEST_NAME}.cfg
+                    DEPENDS ${PRECONFIG})
 endfunction(BUILD_TEST_CONFIG)
