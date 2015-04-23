@@ -4,7 +4,7 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES "DEBUG" OR
     "${CMAKE_BUILD_TYPE}" MATCHES "Debug")
   set(CLANG_EMIT_LLVM_OPTS -O0 -g)
   set(CLANG_LINK_OPTS -O0 -g)
-  set(ENCODE_OPTS --no-inline --no-opts)
+  set(ENCODE_OPTS -no-inlining -no-opts)
 else()
   set(CLANG_EMIT_LLVM_OPTS -O0)
   set(CLANG_LINK_OPTS -O2)
@@ -39,19 +39,19 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
 
   # Build unencoded reference binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_BC}
-                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse 
+                     COMMAND ${CLANG} -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse 
                              ${PP_DEFS} -o ${MAIN_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
   add_custom_command(OUTPUT ${ENC_MODULE_BC}
-                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse
+                     COMMAND ${CLANG} -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse
                              ${PP_DEFS} -o ${ENC_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC})
 
   add_custom_target(${MAIN_TARGET} ALL
-                    COMMAND clang ${CLANG_LINK_OPTS}
+                    COMMAND ${CLANG} ${CLANG_LINK_OPTS}
                             -o ${MAIN_TARGET} ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c
@@ -61,7 +61,7 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
 
   # Build encoded binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_BC}
-                     COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse -DENCODE
+                     COMMAND ${CLANG} -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse -DENCODE
                              ${PP_DEFS} -o ${MAIN_MODULE_ENC_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
@@ -78,7 +78,7 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
                      DEPENDS encode ${ENC_MODULE_BC})
 
   add_custom_target(${ENC_TARGET} ALL
-                    COMMAND clang ${CLANG_LINK_OPTS}
+                    COMMAND ${CLANG} ${CLANG_LINK_OPTS}
                             -o ${ENC_TARGET}
                             ${MAIN_MODULE_ENC_2_BC} ${ENC_MODULE_ENC_BC}
                             ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c

@@ -8,9 +8,8 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES "DEBUG" OR
   set(CLANG_OPTS ${CLANG_OPTS} -g)
 endif()
 
-
 add_custom_target(anlib.bc ALL
-                   COMMAND clang ${CLANG_OPTS} -c -emit-llvm -o anlib.bc
-                          ${CMAKE_CURRENT_SOURCE_DIR}/anlib.c
+                   COMMAND ${CLANG} ${CLANG_OPTS} -c -emit-llvm -o anlib.bc
+                           ${CMAKE_CURRENT_SOURCE_DIR}/anlib.c
                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/anlib.c
                    WORKING_DIRECTORY ${ENCODE_BIN_DIR})
