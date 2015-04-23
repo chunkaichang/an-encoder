@@ -8,12 +8,9 @@
 #include "../mylibs/mycyc.h"
 #include "../mylibs/mycheck.h"
 
-#define REPETITIONS 100
-#define LEN         1000
+#define MAXRANDINT  LENGTH
 
-#define MAXRANDINT  LEN
-
-long a[LEN];
+long a[LENGTH];
 
 extern long ___enc_bubblesort(long *array, long size);
 
@@ -25,15 +22,15 @@ int main() {
 
     srand(0);
     for (i = 0; i < REPETITIONS; i++) {
-        for (j = 0; j < LEN; j++)
+        for (j = 0; j < LENGTH; j++)
           a[j] = AN_ENCODE_VALUE(rand() % MAXRANDINT);
 
         t1 = __cyc_rdtsc();
-        ___enc_bubblesort(a, LEN);
+        ___enc_bubblesort(a, LENGTH);
         t2 = __cyc_rdtsc();
         total += t2 - t1;
 
-        for (j = 0; j < LEN; j++)
+        for (j = 0; j < LENGTH; j++)
           __cs_acc(AN_DECODE_VALUE(a[j]));
     }
 

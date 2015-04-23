@@ -8,14 +8,11 @@
 #include "../mylibs/mycyc.h"
 #include "../mylibs/mycheck.h"
 
-#define REPETITIONS 100
-#define LEN 10000     // 10 thousand
-
-#define MAXRANDINT  LEN
+#define MAXRANDINT  LENGTH
 
 void ___enc_quicksort(long*, long, long);
 
-long a[LEN];
+long a[LENGTH];
 
 int main() {
     uint64_t t1, t2, total = 0;
@@ -25,15 +22,15 @@ int main() {
 
     srand(0);
     for (i = 0; i < REPETITIONS; i++) {
-      for (j = 0; j < LEN; j++)
+      for (j = 0; j < LENGTH; j++)
         a[j] = AN_ENCODE_VALUE((rand() % MAXRANDINT));
 
       t1 = __cyc_rdtsc();
-      ___enc_quicksort(a, 0, LEN-1);
+      ___enc_quicksort(a, 0, LENGTH-1);
       t2 = __cyc_rdtsc();
       total += t2 - t1;
 
-      for (j = 0; j < LEN; j++)
+      for (j = 0; j < LENGTH; j++)
         __cs_acc(AN_DECODE_VALUE(a[j]));
     }
 

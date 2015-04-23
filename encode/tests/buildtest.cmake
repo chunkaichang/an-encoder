@@ -11,35 +11,42 @@ else()
   set(ENCODE_OPTS)
 endif()
 
-macro(SET_BUILD_VARS TEST_NAME)
+macro(SET_BUILD_VARS TEST_NAME TARGET_NAME)
   set(MAIN_MODULE_SRC  "${TEST_NAME}.main.c")
   set(ENC_MODULE_SRC   "${TEST_NAME}.enc.c")
 
-  set(MAIN_MODULE_BC  "${TEST_NAME}.main.bc")
-  set(ENC_MODULE_BC   "${TEST_NAME}.enc.bc")
+  set(MAIN_MODULE_BC  "${TARGET_NAME}.main.bc")
+  set(ENC_MODULE_BC   "${TARGET_NAME}.enc.bc")
 
-  set(MAIN_MODULE_ENC_BC  "${TEST_NAME}.main.enc.bc")
-  set(MAIN_MODULE_ENC_2_BC  "${TEST_NAME}.main.enc.2.bc")
-  set(ENC_MODULE_ENC_BC   "${TEST_NAME}.enc.enc.bc")
+  set(MAIN_MODULE_ENC_BC  "${TARGET_NAME}.main.enc.bc")
+  set(MAIN_MODULE_ENC_2_BC  "${TARGET_NAME}.main.enc.2.bc")
+  set(ENC_MODULE_ENC_BC   "${TARGET_NAME}.enc.enc.bc")
 
-  set(MAIN_TARGET "${TEST_NAME}")
-  set(ENC_TARGET  "${TEST_NAME}.enc")
+  set(MAIN_TARGET "${TARGET_NAME}.plain")
+  set(ENC_TARGET  "${TARGET_NAME}.encoded")
 endmacro(SET_BUILD_VARS)
 
 
-function(BUILD_TEST_CASE TEST_NAME)
-  SET_BUILD_VARS(${TEST_NAME})
+function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
+  SET_BUILD_VARS(${TEST_NAME} ${TARGET_NAME})
+
+  if(LENGTH)
+    set(PP_DEFS -DLENGTH=${LENGTH})
+  endif()
+  if(REPETITIONS)
+    set(PP_DEFS ${PP_DEFS} -DREPETITIONS=${REPETITIONS})
+  endif()
 
   # Build unencoded reference binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_BC}
                      COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse 
-                             -o ${MAIN_MODULE_BC}
+                             ${PP_DEFS} -o ${MAIN_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
   add_custom_command(OUTPUT ${ENC_MODULE_BC}
                      COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse
-                             -o ${ENC_MODULE_BC}
+                             ${PP_DEFS} -o ${ENC_MODULE_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${ENC_MODULE_SRC})
 
@@ -55,7 +62,7 @@ function(BUILD_TEST_CASE TEST_NAME)
   # Build encoded binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_BC}
                      COMMAND clang -c -emit-llvm ${CLANG_EMIT_LLVM_OPTS} -mno-sse -DENCODE
-                             -o ${MAIN_MODULE_ENC_BC}
+                             ${PP_DEFS} -o ${MAIN_MODULE_ENC_BC}
                              ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC}
                      DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${MAIN_MODULE_SRC})
 
@@ -82,15 +89,13 @@ function(BUILD_TEST_CASE TEST_NAME)
 endfunction(BUILD_TEST_CASE)
 
 
-function(BUILD_TEST_CONFIG TEST_NAME BINARY_NAME ARGS PRECONFIG)
-  SET_BUILD_VARS(${BINARY_NAME})
+function(BUILD_TEST_CONFIG TEST_NAME TARGET_NAME ARGS PRECONFIG)
+  SET_BUILD_VARS(${TEST_NAME} ${TARGET_NAME})
 
-  set(MAIN_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${MAIN_TARGET})
-  set(ENC_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${ENC_TARGET})
+  set(PLAIN_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${MAIN_TARGET})
+  set(ENCODED_BINARY ${CMAKE_CURRENT_BINARY_DIR}/${ENC_TARGET})
+  configure_file(${PRECONFIG} ${TARGET_NAME}.cfg)
 
-  add_custom_target(${TEST_NAME}.cfg ALL
-                    COMMAND echo "plain:   ${MAIN_BINARY} ${ARGS}" > ${TEST_NAME}.cfg &&
-                            echo "encoded: ${ENC_BINARY} ${ARGS}" >> ${TEST_NAME}.cfg &&
-                            cat ${PRECONFIG} >> ${TEST_NAME}.cfg
-                    DEPENDS ${PRECONFIG})
+  unset(PLAIN_BINARY)
+  unset(ENCODED_BINARY)
 endfunction(BUILD_TEST_CONFIG)

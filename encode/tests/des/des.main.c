@@ -40,9 +40,7 @@
 #define USAGE	"Usage: sdes <-e | -d> <input file> <output file> <key 0-1023>\n"
 
 extern void ___enc_generate_sub_keys(long, long*, long*);
-long ___enc_fk(long, long, long);
-extern long ___enc_ip(long);
-extern long ___enc_ip_inverse(long);
+extern long ___enc_des(long, long, long);
 
 
 void display_bits(long num, long bits) {
@@ -113,15 +111,12 @@ int main(int argc, const char* argv[]) {
         __cs_reset();
 	while (!feof(in)) {
 		ch = (long)fgetc(in);
-		// initial permutation (ip)
+
                 t1 = __cyc_rdtsc();
-		ch = ___enc_ip(ch);
-		// apply function Fk
-		ch = ___enc_fk(ch, sk1, sk2);
-		// ip^-1
-		ch = ___enc_ip_inverse(ch);
+                ch = ___enc_des(ch, sk1, sk2);
                 t2 = __cyc_rdtsc();
                 total += t2 - t1;
+
                 __cs_acc(ch);
 		fputc((char)ch, out);
 	}

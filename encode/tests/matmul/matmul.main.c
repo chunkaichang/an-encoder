@@ -15,7 +15,7 @@ extern void ___enc_kernel(long *, long *, long *, long);
 int main() {
   unsigned long t1, t2, total = 0;
 
-  const unsigned size = 1024;
+  const unsigned size = LENGTH;
   a = (long*)malloc(size * sizeof(long));
   b = (long*)malloc(size * sizeof(long));
   mat = (long*)malloc(size * size * sizeof(long));

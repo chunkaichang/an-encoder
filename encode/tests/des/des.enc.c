@@ -152,7 +152,7 @@ long f(long input, long sk) {
  * @param sk1  first subkey
  * @param sk2  second subkey
  */
-long ___enc_fk(long input, long sk1, long sk2) {
+long fk(long input, long sk1, long sk2) {
 	long l=0,r=0,out=0;
 
 	DBG("Fk sk1: ", sk1, 8);
@@ -176,7 +176,7 @@ long ___enc_fk(long input, long sk1, long sk2) {
  *
  * @param byte  input to apply the permutation
  */
-long ___enc_ip(long byte) {
+long ip(long byte) {
 	long i;
 	long ret;
 	long order[] = { BIT_7, BIT_3, BIT_6, BIT_8, BIT_5, BIT_1, BIT_4, BIT_2 };
@@ -199,7 +199,7 @@ long ___enc_ip(long byte) {
  *
  * @param byte  input to apply the inverted permutation
  */
-long ___enc_ip_inverse(long byte) {
+long ip_inverse(long byte) {
 	long i;
 	long ret;
 	long order[] = { BIT_5, BIT_8, BIT_6, BIT_4, BIT_2, BIT_7, BIT_1, BIT_3 };
@@ -209,4 +209,11 @@ long ___enc_ip_inverse(long byte) {
 		ret = (ret << 1) | !!(order[i] & byte);
 	}
 	return(ret);
+}
+
+long ___enc_des(long byte, long sk1, long sk2) {
+  byte = ip(byte);
+  byte = fk(byte, sk1, sk2);
+  byte = ip_inverse(byte);
+  return byte;
 }
