@@ -7,6 +7,8 @@ import subprocess
 import testcase
 import time
 
+SEPARATOR = "----------------------------------------------\n"
+
 
 class TestRunner:
     def __init__(self, test, runs=None):
@@ -15,13 +17,17 @@ class TestRunner:
         if runs:
             self.runs = runs
         else:
-            self.runs = test.performance_runs
+            self.runs = test.runs
 
     def run(self, logfile=None):
         if not logfile:
             logfile = os.sys.stdout
 
         for k in self.test.commands.keys():
+            logfile.write("key=%s, runs=%d ...\n" % (k, self.runs))
+            logfile.write("command=%s\n" % self.test.commands[k])
+            logfile.write(SEPARATOR)
+
             self.cycles[k], self.checks[k], self.timings[k] = [], [], []
             for i in range(self.runs):
                 p = subprocess.Popen(self.test.commands[k].split(),
@@ -30,20 +36,16 @@ class TestRunner:
                                      stderr=subprocess.PIPE)
 
                 _, stderr = p.communicate()
-                logfile.write(stderr)
 
-                checksum = 0
-                for line in stderr.split('\n'):
-                    if "elapsed cycles" in line:
-                        val = line.split(':')[1].strip()
-                        self.cycles[k].append(int(val, 10))
-                    elif "checksum" in line:
-                        val = int(line.split('=')[1].strip(), 16)
-                        if "hi" in line:
-                            val <<= 64
-                        checksum += val
+                cycles, checksum = testcase.TestCase.extract_info(stderr.split('\n'))
+                self.cycles[k].append(cycles)
                 self.checks[k].append(checksum)
-                logfile.write("checksum=" + hex(checksum) + "\n")
+
+                logfile.write("key=%s, no.=%d, <stderr>:\n" % (k, i))
+                logfile.write(stderr)
+                logfile.write("key=%s, no.=%d, <checksum>:\n" % (k, i))
+                logfile.write("0x%X\n" % checksum)
+                logfile.write(SEPARATOR)
 
     def get_checks(self):
         return self.checks
@@ -125,28 +127,74 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--directory",
                         default=r".",
                         help="directory to be searched for test cases")
+    parser.add_argument("-o", "--outd",
+                        default=r".",
+                        help="directory for output files")
+    parser.add_argument("-s", "--summary",
+                        default=r"",
+                        help="filename for test suite summary")
+    parser.add_argument("--veri", action="store_true",
+                        help="enable verification")
+    parser.set_defaults(veri=False)
+    parser.add_argument("--stats", action="store_true",
+                        help="enable gathering of statistics")
+    parser.set_defaults(veri=False)
+
     args = parser.parse_args()
-    suite = testcase.TestSuite(args.directory)
+    suite = testcase.TestSuite(args.directory, args.outd)
+    if args.summary == "":
+        args.summary = os.path.join(suite.get_outd(), "runner.summary")
 
-    for name in suite.get_names():
-        test = suite.get_test(name)
-        runner = TestRunner(test)
+    verified = dict()
+    ratios = dict()
 
-        print "Opening file for writing", test.outputs["veri"]
-        f_veri = open(test.outputs["veri"], "w")
-        print "Opening file for writing", test.outputs["stat"]
-        f_stat = open(test.outputs["stat"], "w")
+    if args.veri:
+        for test in suite.get_tests_with_profile("veri"):
+            runner = TestRunner(test)
+            name = test.get_base_name()
 
-        runner.run(f_veri)
-        runner.verify(f_veri)
-        runner.statistics(f_stat)
+            runlog = os.path.join(test.get_outputs_dir(), name + ".veri.log")
+            print "Opening file for writing: %s" % runlog
+            runlog_file = open(runlog, "w")
+            runner.run(runlog_file)
+            runlog_file.close()
 
-        f_veri.close()
-        f_stat.close()
+            veri = os.path.join(test.get_outputs_dir(), name + ".veri")
+            print "Opening file for writing: %s" % veri
+            veri_file = open(veri, "w")
+            verified[name] = (test.get_path(), runner.verify(veri_file))
+            veri_file.close()
 
-        timings = runner.get_timings()
-        for k in timings.keys():
-            print "%s: mean=%f stddev=%f" % (k, statistics.mean(timings[k]), statistics.stdev(timings[k]))
+    if args.stats:
+        for test in suite.get_tests_with_profile("perf"):
+            runner = TestRunner(test)
+            name = test.get_base_name()
+
+            runlog = os.path.join(test.get_outputs_dir(), name + ".perf.log")
+            print "Opening file for writing: %s" % runlog
+            runlog_file = open(runlog, "w")
+            runner.run(runlog_file)
+            runlog_file.close()
+
+            stats = os.path.join(test.get_outputs_dir(), name + ".stats")
+            print "Opening file for writing: %s" % stats
+            stats_file = open(stats, "w")
+            runner.statistics(stats_file)
+            stats_file.close()
+            ratios[name] = (test.get_path(), runner.get_ratio())
+
+    summary = open(args.summary, "w")
+    keys = set(verified.keys()).union(ratios.keys())
+    for base_name in list(keys):
+        summary.write("base name for test: %s\n" % base_name)
+        if args.veri:
+            summary.write("\tverification test: %s\n" % verified[base_name][0])
+            summary.write("\tverified: %d\n" % verified[base_name][1])
+        if args.stats:
+            summary.write("\tperformance test: %s\n" % ratios[base_name][0])
+            summary.write("\tslow-down: %f\n" % ratios[base_name][1])
+        summary.write(SEPARATOR)
+    summary.close()
 
 
 

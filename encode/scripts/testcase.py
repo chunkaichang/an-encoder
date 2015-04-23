@@ -3,67 +3,52 @@
 import argparse
 import os
 import sys
-import subprocess
 import time
 
 
 class TestCase:
-    def __init__(self, path):
-        if not os.path.isfile(path):
-            sys.stderr.write("File " + path + "does not exist.\n")
-            raise Exception("TestCase", path)
-        if not path.endswith(".cfg"):
-            sys.stderr.write("Unexpected file format: " + path + "\n")
+    commands = ["plain", "encoded"]
+    profiles = ["veri", "perf", "cover"]
+
+    def __init__(self, cfg_file, outd):
+        if not cfg_file.name.endswith(".cfg"):
+            sys.stderr.write("Unexpected file format: " + cfg_file.name + "\n")
             raise Exception("TestCase", path)
 
-        self.path = path
-        self.name = path
-        # possible commands: "plain", "encode"
-        commands = ["plain", "encoded"]
+        self.path = cfg_file.name
+        test_file = os.path.split(self.path)[1]
+        test_ids  = test_file.rsplit('.', 2)
+        self.name = test_ids[0] + '.' + test_ids[1]
+        self.base_name = test_ids[0]
+        if not test_ids[1] in TestCase.profiles:
+            raise Exception("TestCase", "undefined profile: %s" % test_ids[1])
+        self.profile = test_ids[1]
+
         self.commands = dict()
-        # possible outputs: "veri", "stat", "ref", "cov"
-        outputs = ["veri", "stat", "ref", "cov"]
-        self.outputs = dict()
-        self.performance_runs = 10
-        self.coverage_runs = 100
-
-        cfg_file = open(path, "r")
-        for line in cfg_file.readlines():
+        cfg_file.seek(0)
+        for line in cfg_file:
             id  = line.split(':')[0].strip()
             val = line.split(':')[1].strip()
-            if id in commands:
+            if id in TestCase.commands:
                 self.commands[id] = val
-            elif id in outputs:
-                self.outputs[id] = val
-            elif id == "name":
-                self.name = val
-            elif id in ["run", "performance_runs"]:
-                self.performance_runs = int(val)
-            elif id == "coverage_runs":
-                self.coverage_runs = int(val)
-            elif id == "timing_runs":
-                self.timing_runs = int(val)
-            elif id == "coverage_function":
-                self.coverage_function = val
-            else:
-                sys.stderr.write("Unexpected configuration for test case " + path + "\n")
-                raise Exception("TestCase", path)
-        cfg_file.close()
+            elif id == "runs":
+                self.runs = int(val)
 
-        if not set(commands).issubset(self.commands.keys()):
-            sys.stderr.write("Test case " + self.name + " does not specify \'plain\' *and* \'encoded\' profiles.\n")
-            raise Exception("TestCase", path)
+        if not set(TestCase.commands).issubset(self.commands.keys()):
+            excp_msg = "Test case %s does not specify \'plain\' *and* \'encoded\' profiles." % self.path
+            raise Exception("TestCase", excp_msg)
 
-        directory = os.path.split(path)[0]
-        self.cfg_name = os.path.split(path)[1].rsplit('.', 1)[0]
-        fmt_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime())
-        self.outputs_dir = os.path.join(directory, fmt_time)
+        self.outputs_dir = os.path.join(outd, self.base_name, self.profile)
         os.makedirs(self.outputs_dir)
-        for k in set(outputs).difference(self.outputs.keys()):
-            self.outputs[k] = os.path.join(self.outputs_dir, self.cfg_name + "." + k)
+
+    def get_path(self):
+        return self.path
 
     def get_name(self):
         return self.name
+
+    def get_base_name(self):
+        return self.base_name
 
     def get_command(self, id):
         return self.commands[id]
@@ -71,15 +56,74 @@ class TestCase:
     def get_runs(self):
         return self.runs
 
+    def get_outputs_dir(self):
+        return self.outputs_dir
+
     def __repr__(self):
         return self.name + " @path: " + self.path
 
+    @staticmethod
+    def extract_info(lines):
+        cycles, checksum = 0, 0
+        for l in lines:
+            if "elapsed cycles" in l:
+                val = l.split(':')[1].strip()
+                cycles = int(val, 10)
+            elif "checksum" in l:
+                val = int(l.split('=')[1].strip(), 16)
+                if "hi" in l:
+                    val <<= 64
+                checksum += val
+        return cycles, checksum
+
+
+class VeriTestCase(TestCase):
+    def __init__(self, cfg_file, outd):
+        TestCase.__init__(self, cfg_file, outd)
+
+        if not self.profile == "veri":
+            excp_msg = "Wrong profile (%s) in verification test %s" % (self.profile, self.path)
+            raise Exception("PerfTestCase", excp_msg)
+
+
+class PerfTestCase(TestCase):
+    def __init__(self, cfg_file, outd):
+        TestCase.__init__(self, cfg_file, outd)
+
+        if not self.profile == "perf":
+            excp_msg = "Wrong profile (%s) in performance test %s" % (self.profile, self.path)
+            raise Exception("PerfTestCase", excp_msg)
+
+
+class CoverTestCase(TestCase):
+    def __init__(self, cfg_file, outd):
+        TestCase.__init__(self, cfg_file, outd)
+
+        if not self.profile == "cover":
+            excp_msg = "Wrong profile (%s) in coverage test %s" % (self.profile, self.path)
+            raise Exception("CoverTestCase", excp_msg)
+
+        cfg_file.seek(0)
+        for line in cfg_file:
+            id  = line.split(':')[0].strip()
+            val = line.split(':')[1].strip()
+            if id == "function":
+                self.function = val
+            elif id == "warmups":
+                self.warmups = int(val)
+
+    def get_function(self):
+        return self.function
+
+    def get_warmups(self):
+        return self.warmups
+
 
 class TestSuite:
-    def __init__(self, path):
+    def __init__(self, path, output_dir):
         if not os.path.isdir(path):
-            sys.stderr.write("Directory " + path + "does not exist.")
-            sys.exit(-1)
+            excp_msg = "Directory %s does not exist." % path
+            raise Exception("TestSuite", excp_msg)
 
         self.tests = dict()
 
@@ -87,24 +131,36 @@ class TestSuite:
             for filename in names:
                 if not filename.endswith(".cfg"):
                     continue
-                try:
-                    cfg_filepath = os.path.join(dirname, filename)
-                    test = TestCase(cfg_filepath)
-                    # We use the full path of the cfg-file as key since it is unique:
-                    self.tests[cfg_filepath] = test
-                except:
-                    continue
 
-        os.path.walk(path, _add_test, None)
+                cfg_path = os.path.join(dirname, filename)
+                cfg_file = open(cfg_path, "r")
+                if filename.endswith(".perf.cfg"):
+                    test = PerfTestCase(cfg_file, arg)
+                elif filename.endswith(".cover.cfg"):
+                    test = CoverTestCase(cfg_file, arg)
+                elif filename.endswith(".veri.cfg"):
+                    test = VeriTestCase(cfg_file, arg)
+                else:
+                    excp_msg = "Found configuration file for undefined profile: %s" % cfg_path
+                    raise Exception("TestSuite", excp_msg)
 
-    def get_test(self, name):
-        return self.tests[name]
+                # We use the full path of the cfg-file as key since it is unique:
+                self.tests[cfg_path] = test
+
+        self.outd = os.path.join(output_dir, time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime()))
+        os.path.walk(path, _add_test, self.outd)
 
     def get_tests(self):
         return self.tests
 
+    def get_tests_with_profile(self, profile):
+        return filter(lambda x: x.profile == profile, self.tests.values())
+
     def get_names(self):
         return self.tests.keys()
+
+    def get_outd(self):
+        return self.outd
 
     def __repr__(self):
         result = ""
@@ -118,7 +174,21 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--directory",
                         default=r".",
                         help="directory to be searched for test cases")
+    parser.add_argument("-o", "--outd",
+                        default=r".",
+                        help="directory for output files")
     args = parser.parse_args()
 
-    suite = TestSuite(args.directory)
-    print suite
+    suite = TestSuite(args.directory, args.outd)
+
+    print "Verification tests:"
+    print suite.get_tests_with_profile("veri")
+    print "----------------------------------"
+
+    print "Perfomance tests:"
+    print suite.get_tests_with_profile("perf")
+    print "----------------------------------"
+
+    print "Coverage tests:"
+    print suite.get_tests_with_profile("cover")
+    print "----------------------------------"

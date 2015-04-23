@@ -3,12 +3,12 @@
 """ Based on Dmitry's "bfi.py" """
 
 import argparse
-import subprocess
+import cStringIO
 import os
 import re
 import random
-import runner
 import statistics
+import subprocess
 import testcase
 import time
 import signal
@@ -75,14 +75,7 @@ class Process:
     def extract_checksum(self):
         if self.retcode is None:
             return None
-
-        checksum = 0
-        for line in self.stderr.split('\n'):
-            if "checksum" in line:
-                val = int(line.split('=')[1].strip(), 16)
-                if "hi" in line:
-                    val <<= 64
-                checksum += val
+        _, checksum = testcase.TestCase.extract_info(self.stderr.split('\n'))
         return checksum
 
 
@@ -153,45 +146,75 @@ class FaultInjector:
             self.ansuccess += 1
             return
 
-        def write(self, logfile=None):
+        def diagnose(self, retcode, is_valid, checksum, ref_checksum):
+            self.inc_total()
+
+            if not is_valid:
+                return "INVALID"
+            self.inc_valid()
+
+            if retcode is None:
+                kind = "HANG"
+                self.inc_failure(kind)
+            elif retcode == 0:
+                # Fault did not crash the program.
+                if checksum != ref_checksum:
+                    # Output is not correct: Silent Data Corruption.
+                    kind = "UNEXPECTED"
+                    self.inc_failure(kind)
+                else:
+                    # Output is correct: Fault didn't affect execution.
+                    kind = "CORRECT"
+                    self.inc_correct()
+            elif retcode == 2:
+                kind = "ANCRASH"
+                self.inc_success(kind)
+            elif retcode > 10:
+                kind = "OSCRASH"
+                self.inc_success(kind)
+            else:
+                kind = "NONDIAG"
+            return kind
+
+        def write(self, logfile=None, prefix=""):
             if not logfile:
                 logfile = os.sys.stderr
 
-            logfile.write("Results:\n")
-            # logfile.write(time.strftime('finished: %H:%M:%S\n', time.gmtime()))
-            logfile.write("total   = %d\n" % self.total)
-            logfile.write("valid   = %d\n" % self.valid)
-            logfile.write("correct = %d\n" % self.correct)
-            logfile.write("AN success = %d\n" % self.ansuccess)
-            logfile.write("    OS crashes  = %d\n" % self.oscrash)
-            logfile.write("    AN crashes  = %d\n" % self.ancrash)
-            logfile.write("    undiagnosed = %d\n" % self.nondiag)
-            logfile.write("AN failed = %d\n" % self.anfailure)
-            logfile.write("    unexpected = %d\n" % self.unexp)
-            logfile.write("    hang       = %d\n" % self.hang)
-            logfile.write(SEPARATOR)
+            logfile.write("%stotal   = %d\n" % (prefix, self.total))
+            logfile.write("%svalid   = %d\n" % (prefix, self.valid))
+            logfile.write("%scorrect = %d\n" % (prefix, self.correct))
+            logfile.write("%sAN success = %d\n" % (prefix, self.ansuccess))
+            logfile.write("%s    OS crashes  = %d\n" % (prefix, self.oscrash))
+            logfile.write("%s    AN crashes  = %d\n" % (prefix, self.ancrash))
+            logfile.write("%s    undiagnosed = %d\n" % (prefix, self.nondiag))
+            logfile.write("%sAN failed = %d\n" % (prefix, self.anfailure))
+            logfile.write("%s    unexpected = %d\n" % (prefix, self.unexp))
+            logfile.write("%s    hang       = %d\n" % (prefix, self.hang))
             return
 
     def __init__(self, test, bfi):
         self.test = test
         self.bfi = bfi
 
-        self.result = FaultInjector.Result()
+        self.result = None
 
         print("Changing ptrace_scope to 0...")
         subprocess.call('echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null', shell=True)
         print("Changing randomize_va_space to 0...")
         subprocess.call('echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null', shell=True)
 
+    def get_result(self):
+        return self.result
+
     def _warmup(self, key, logfile=None):
         if not logfile:
             logfile = os.sys.stdout
 
-        bfi_args = " -m %s" % self.test.coverage_function
+        bfi_args = " -m %s" % self.test.get_function()
         test_cmd = self.test.commands[key]
         logfile.write("Warming up ...\n")
         timings = []
-        for i in range(self.test.timing_runs):
+        for i in range(self.test.warmups):
             logfile.write("... timing run no. %d ...\n" % i)
             p = Process(self.bfi + bfi_args + " -- " + test_cmd)
             start = time.time()
@@ -215,15 +238,15 @@ class FaultInjector:
             logfile = os.sys.stdout
 
         # find the range of the "coverage_function":
-        logfile.write("Obtaining ranges of function %s ...\n" % self.test.coverage_function)
-        bfi_args = " -m %s" % self.test.coverage_function
+        logfile.write("Obtaining ranges of function %s ...\n" % self.test.get_function())
+        bfi_args = " -m %s" % self.test.get_function()
         bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key]
         p = Process(bfi_cmd)
         _, _, stderr = p.run(None, logfile)
         logfile.write("... finished running %s ...\n" % bfi_cmd)
 
         # write "stderr" from running "bfi" to file:
-        rngs_name = os.path.join(self.test.outputs_dir, self.test.cfg_name + (".%s.ranges" % key))
+        rngs_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.ranges" % key))
         rngs_file = open(rngs_name, "w")
         logfile.write("... writing <stderr> to %s ...\n" % rngs_name)
         rngs_file.write("<stderr> from running %s:\n" % bfi_cmd)
@@ -233,26 +256,30 @@ class FaultInjector:
 
         func_ranges = []  # list of func ranges: pairs of enter/leave
         func_enters = []
-        lines = stderr.split('\n')
-        i = 0
-        while i < len(lines):
-            s = lines[i]
+        lines = cStringIO.StringIO(stderr)
+        counter = 0
+        while True:
+            s = lines.readline()
+            if s == "":
+                break
             if len(s) > 0 and s[0] == '[':
                 trigger = s.split('i =')[1].split(',')[0]
                 trigger = int(trigger)
                 # get the following line
-                sf = lines[i + 1]
+                sf = lines.readline()
+                assert(sf != "")
                 if re.match(".*enter", sf):
-                    func_enters.append(trigger)
-                    i += 2
+                    func_enters.append((trigger, counter))
+                    func_ranges.append(None)
+                    counter += 1
                     continue
                 if re.match(".*leave", sf):
-                    func_ranges.append((func_enters.pop(), trigger))
-                    i += 2
+                    entry, index = func_enters.pop()
+                    # Make sure that the ranges are sorted by the entry into the range (in ascending order):
+                    func_ranges[index] = (entry, trigger)
                     continue
-            i += 1
 
-        rngs_file.write("ranges of function %s:\n" % self.test.coverage_function)
+        rngs_file.write("ranges of function %s:\n" % self.test.get_function())
         for idx, func_range in enumerate(func_ranges):
             rngs_file.write("[   %10d - %10d ]\n" % (func_range[0], func_range[1]))
             # We always assume "PRECISE=True":
@@ -269,42 +296,9 @@ class FaultInjector:
             rngs_file.write(SEPARATOR)
         """
         rngs_file.close()
-        logfile.write("... done obtaining ranges of function %s\n" % self.test.coverage_function)
+        logfile.write("... done obtaining ranges of function %s\n" % self.test.get_function())
         logfile.write(SEPARATOR)
         return func_ranges
-
-
-    def _diagnose(self, retcode, is_valid, checksum, ref_checksum):
-        self.result.inc_total()
-
-        if not is_valid:
-            return "INVALID"
-        self.result.inc_valid()
-
-        if retcode is None:
-            kind = "HANG"
-            self.result.inc_failure(kind)
-        elif retcode == 0:
-            # Fault did not crash the program.
-            if checksum != ref_checksum:
-                # Output is not correct: Silent Data Corruption.
-                kind = "UNEXPECTED"
-                self.result.inc_failure(kind)
-            else:
-                # Output is correct: Fault didn't affect execution.
-                kind = "CORRECT"
-                self.result.inc_correct()
-        elif retcode == 2:
-            kind = "ANCRASH"
-            self.result.inc_success(kind)
-        elif retcode > 10:
-            kind = "OSCRASH"
-            self.result.inc_success(kind)
-        else:
-            kind = "NONDIAG"
-
-        return kind
-
 
     def run(self, key, masktype, ref_checksum, logfile=None):
         """ masktype is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
@@ -329,32 +323,34 @@ class FaultInjector:
             else:
                 raise NameError('MASKTYPE_NOT_DEFINED')
 
-        def valid_fault(func_ranges, stderr):
+        def valid_fault(func_ranges, retcode, stderr):
+            if retcode is None:
+                # We consider programs that hanged as valid (since we have no output that can be validated):
+                return True
             # --- check if fault was injected inside function ---
             # instruction where fault was actually injected (triggered)
             trig_instr = 0
-            """ We search the lines in "stderr" backwards. Usually the last line that was printed to "stderr" will
-                contain information about the injected fault: """
-            lines = stderr.split('\n')
-            i = 0
-            while i < len(lines):
-                # Lines are in reverse order now, so "pop" the 2nd line first and then the 1st line:
-                s1 = lines[i]
-                s2 = lines[i+1]
+            lines = cStringIO.StringIO(stderr)
+            while True:
+                s1 = lines.readline()
+                if s1 == "":
+                    break
                 if len(s1) > 0 and s1[0] == '[' and len(s1.split('i =')) > 1:
                     trigger = int(s1.split('i =')[1].split(',')[0])
-                    """ Since we are inspecting lines in reverse order, we can break out of the while loop as soon as
-                        we see the first line that does not correspond to entering or leaving a function. In that case
-                        the line is indeed the one specifiying the kind of injected fault: """
+                    s2 = lines.readline()
+                    assert(s2 != "")
                     if (re.match('.*enter', s2) is None and
                         re.match('.*leave', s2) is None):
                         trig_instr = trigger
                         break
-                i += 1
 
             for func_range in func_ranges:
                 if func_range[0] <= trig_instr <= func_range[1]:
                     return True
+                elif trig_instr < func_range[0]:
+                    """ Note that this "elif" statement only makes sense if 'func_range' is sorted in ascending order,
+                        which is indeed achieved by our implementation of '_get_function_ranges'. """
+                    return False
             return False
 
         if not logfile:
@@ -367,7 +363,8 @@ class FaultInjector:
         # do NOT inject CF -- consider them Control Flow errors, not Data Flow
         inject_faults = list(set(FaultInjector.faults) - set(['CF']))
         mask = get_mask(masktype)
-        for i in range(self.test.coverage_runs):
+        self.result = FaultInjector.Result()
+        for i in range(self.test.get_runs()):
             index = random.randint(0, len(func_ranges) - 1)
             instr = random.randint(func_ranges[index][0], func_ranges[index][1])
             fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
@@ -380,7 +377,7 @@ class FaultInjector:
             logfile.write("... no. %d: finished running %s ...\n" % (i, bfi_cmd))
 
             # write "stderr" from running "bfi" to file:
-            fi_name = os.path.join(self.test.outputs_dir, self.test.cfg_name + (".%s.fi.%d" % (key, i)))
+            fi_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.fi.%d" % (key, i)))
             fi_file = open(fi_name, "w")
             logfile.write("... no. %d: writing <stderr> to %s ...\n" % (i, fi_name))
             fi_file.write("<stderr> from running %s:\n" % bfi_cmd)
@@ -390,14 +387,16 @@ class FaultInjector:
             logfile.write("... no. %d: done writing <stderr> to %s ...\n" % (i, fi_name))
 
             checksum = p.extract_checksum()
-            is_valid = valid_fault(func_ranges, stderr)
-            kind = self._diagnose(retcode, is_valid, checksum, ref_checksum)
+            is_valid = valid_fault(func_ranges, retcode, stderr)
+            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum)
             logfile.write("... no. %d: %s (retcode=%s) %s ...\n" % (i, kind, str(retcode), bfi_cmd))
 
         logfile.write("... finished fault injections.\n")
         logfile.write(SEPARATOR)
 
+        logfile.write("Result:\n")
         self.result.write(logfile)
+        logfile.write(SEPARATOR)
         return
 
 
@@ -409,19 +408,28 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--directory",
                         default=r".",
                         help="directory to be searched for test cases")
+    parser.add_argument("-o", "--outd",
+                        default=r".",
+                        help="directory for output files")
     parser.add_argument("--pin",
                         default=r"./pin.sh",
                         help="path to Intel PIN tool")
     parser.add_argument("--bfi",
                         default=r"./bfi.so",
                         help="path to 'bfi' plugin ('bfi.so')")
+    parser.add_argument("-s", "--summary",
+                        default=r"",
+                        help="filename for test suite summary")
+
     args = parser.parse_args()
-    suite = testcase.TestSuite(args.directory)
+    suite = testcase.TestSuite(args.directory, args.outd)
+    if args.summary == "":
+        args.summary = os.path.join(suite.get_outd(), "coverage.summary")
     bfi = "%s -t %s" % (args.pin, args.bfi)
 
-    for name in suite.get_names():
-        test = suite.get_test(name)
-        runner = runner.TestRunner(test)
+    results = dict()
+    for test in suite.get_tests_with_profile("cover"):
+        results[test.get_name()] = []
 
         # Get the reference output from a 'plain' run:
         print "Golden 'plain' run ..."
@@ -430,15 +438,37 @@ if __name__ == "__main__":
         if retcode != 0:
             raise Exception("Coverage", test.commands["plain"])
         print "... finished golden run."
-        print SEPARATOR
         ref_checksum = p.extract_checksum()
 
         fi = FaultInjector(test, bfi)
 
-        logfile = open(test.outputs["ref"], "w")
-        fi.run("plain", "RANDOM_8BITS", ref_checksum, logfile)
-        logfile.close()
+        ref = os.path.join(test.get_outputs_dir(), test.get_name() + ".ref")
+        ref_file = open(ref, "w")
+        ref_file.write("reference checksum=0x%X\n" % ref_checksum)
+        ref_file.write(SEPARATOR)
+        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file)
+        results[test.get_name()].append(("ref", fi.get_result()))
+        ref_file.close()
 
-        logfile = open(test.outputs["cov"], "w")
-        fi.run("encoded", "RANDOM_8BITS", ref_checksum, logfile)
-        logfile.close()
+        cov = os.path.join(test.get_outputs_dir(), test.get_name() + ".cov")
+        cov_file = open(cov, "w")
+        cov_file.write("reference checksum=0x%X\n" % ref_checksum)
+        cov_file.write(SEPARATOR)
+        fi.run("encoded", "RANDOM_8BITS", ref_checksum, cov_file)
+        results[test.get_name()].append(("cov", fi.get_result()))
+        cov_file.close()
+
+    summary = open(args.summary, "w")
+    for name in results.keys():
+        ref_result = [r[1] for r in results[name] if r[0] == "ref"]
+        assert(len(ref_result) == 1)
+        cov_result = [r[1] for r in results[name] if r[0] == "cov"]
+        assert(len(cov_result) == 1)
+
+        summary.write("test name: %s\n" % name)
+        summary.write("reference result:\n")
+        ref_result[0].write(summary, "\t")
+        summary.write("coverage result:\n")
+        cov_result[0].write(summary, "\t")
+        summary.write(SEPARATOR)
+    summary.close()
