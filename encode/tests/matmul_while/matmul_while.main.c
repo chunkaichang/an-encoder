@@ -12,7 +12,7 @@ long *mat;
 extern void ___enc_kernel(long *, long *, long *, long);
 
 
-int main() {
+int main(int argc, char **argv) {
   unsigned long t1, t2, total = 0;
 
   const unsigned size = 1024;
@@ -27,7 +27,7 @@ int main() {
     b[i] = AN_ENCODE_VALUE(1);
     a[i] = AN_ENCODE_VALUE(0);
   }
-
+  __cs_fopen(argc, argv);
   __cs_reset();
 
   t1 = __cyc_rdtsc();
@@ -35,10 +35,13 @@ int main() {
   t2 = __cyc_rdtsc();
   total += t2 - t1;
 
-  for (unsigned i = 0; i < size; i++)
+  for (unsigned i = 0; i < size; i++) {
+    __cs_facc(AN_DECODE_VALUE(a[i]));
     __cs_acc(AN_DECODE_VALUE(a[i]));
+  }
 
   __cyc_msg(total);
+  __cs_fclose();
   __cs_msg();
 
   return 0;

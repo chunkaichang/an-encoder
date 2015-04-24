@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
   }
   ADJ_PRINT("\n");
 
+  __cs_fopen(argc, argv);
   __cs_reset();
   /* find NUM_NODES shortest paths between nodes */
   j = NUM_NODES / 2;
@@ -98,7 +99,9 @@ int main(int argc, char *argv[])
       {
         rgnNodes[k].iDist = AN_DECODE_VALUE(rgnNodes[k].iDist);
         rgnNodes[k].iPrev = AN_DECODE_VALUE(rgnNodes[k].iPrev);
+        __cs_facc(rgnNodes[k].iDist);
         __cs_acc(rgnNodes[k].iDist);
+        __cs_facc(rgnNodes[k].iPrev);
         __cs_acc(rgnNodes[k].iPrev);
       }
       log1("Shortest path is %ld in cost. ", rgnNodes[j].iDist);
@@ -111,6 +114,7 @@ int main(int argc, char *argv[])
   }
 
   __cyc_msg(total);
+  __cs_fclose();
   __cs_msg();
 
   return 0;

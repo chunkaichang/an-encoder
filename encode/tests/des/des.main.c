@@ -61,14 +61,14 @@ void display_bits(long num, long bits) {
 /**
  * Main program entry point
  */
-int main(int argc, const char* argv[]) {
+int main(int argc, char* argv[]) {
         uint64_t        t1, t2, total = 0;
         unsigned        i, j;
 	FILE		*in,*out;
 	short int	key;
 	long		ch = 0, sk1 = 0, sk2 = 0;
 
-	if (argc != 5) {
+	if (argc < 5) {
 		printf(USAGE);
 		return(1);
 	}
@@ -108,6 +108,7 @@ int main(int argc, const char* argv[]) {
 	}
 
 	printf("Processing...\n");
+        __cs_fopen(argc, argv);
         __cs_reset();
 	while (!feof(in)) {
 		ch = (long)fgetc(in);
@@ -117,6 +118,7 @@ int main(int argc, const char* argv[]) {
                 t2 = __cyc_rdtsc();
                 total += t2 - t1;
 
+                __cs_facc(ch);
                 __cs_acc(ch);
 		fputc((char)ch, out);
 	}
@@ -125,6 +127,7 @@ int main(int argc, const char* argv[]) {
 	fclose(out);
 
         __cyc_msg(total);
+        __cs_fclose();
         __cs_msg();
 
 	return 0;

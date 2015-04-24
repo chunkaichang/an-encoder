@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
     unsigned i;
     long crc, charcnt;
 
-    if (argc != 2)
+    if (argc < 2)
         return -1;
 
     int errors = 0;
@@ -143,6 +143,7 @@ int main(int argc, char *argv[])
     for(i = 0; i < crc_tab_size; i++)
       crc_32_tab[i] = AN_ENCODE_VALUE(crc_32_tab[i]);
 
+    __cs_fopen(argc, argv);
     __cs_reset();
 
     t1 = __cyc_rdtsc();
@@ -150,6 +151,7 @@ int main(int argc, char *argv[])
     t2 = __cyc_rdtsc();
     total += t2 - t1;
 
+    __cs_facc(AN_DECODE_VALUE(crc));
     __cs_acc(AN_DECODE_VALUE(crc));
 
     if (ferror(fin))
@@ -158,6 +160,7 @@ int main(int argc, char *argv[])
     fclose(fin);
 
     __cyc_msg(total);
+    __cs_fclose();
     __cs_msg(); // correct output - 00000000C538EDCF
     printf("bytes read: %lld\n", AN_DECODE_VALUE(charcnt));// correct output - 1368864
 
