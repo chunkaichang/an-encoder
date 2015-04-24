@@ -309,7 +309,7 @@ class FaultInjector:
 
     def run(self, key, masktype, ref_checksum, ref_file, logfile=None):
         """ masktype is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
-        def get_mask(type_string):
+        def get_random_mask(type_string):
             if type_string == 'RANDOM_32BITS':
                 # inject a random low-32-bit fault
                 return random.randint(1, 2 ** 32 - 1)
@@ -373,12 +373,12 @@ class FaultInjector:
         logfile.write("Performing fault injections ...\n")
         # do NOT inject CF -- consider them Control Flow errors, not Data Flow
         inject_faults = list(set(FaultInjector.faults) - set(['CF']))
-        mask = get_mask(masktype)
         self.result = FaultInjector.Result()
         for i in range(self.test.get_runs()):
             index = random.randint(0, len(func_ranges) - 1)
             instr = random.randint(func_ranges[index][0], func_ranges[index][1])
             fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
+            mask = get_random_mask(masktype)
 
             bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (instr, fault, mask)
             cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (key, i))
