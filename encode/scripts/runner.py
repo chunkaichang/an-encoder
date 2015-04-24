@@ -13,7 +13,7 @@ SEPARATOR = "----------------------------------------------\n"
 class TestRunner:
     def __init__(self, test, runs=None):
         self.test = test
-        self.cycles, self.checks, self.timings = dict(), dict(), dict()
+        self.cycles, self.checks, self.cs = dict(), dict(), dict()
         if runs:
             self.runs = runs
         else:
@@ -28,9 +28,11 @@ class TestRunner:
             logfile.write("command=%s\n" % self.test.commands[k])
             logfile.write(SEPARATOR)
 
-            self.cycles[k], self.checks[k], self.timings[k] = [], [], []
+            self.cycles[k], self.checks[k], self.cs[k] = [], [], []
             for i in range(self.runs):
-                p = subprocess.Popen(self.test.commands[k].split(),
+                cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (k, i))
+                cmd = self.test.commands[k] + (" --cso %s" % cs)
+                p = subprocess.Popen(cmd.split(),
                                      bufsize=-1,
                                      stdout=open(os.devnull, "w"),
                                      stderr=subprocess.PIPE)
@@ -40,11 +42,14 @@ class TestRunner:
                 cycles, checksum = testcase.TestCase.extract_info(stderr.split('\n'))
                 self.cycles[k].append(cycles)
                 self.checks[k].append(checksum)
+                self.cs[k].append(cs)
 
                 logfile.write("key=%s, no.=%d, <stderr>:\n" % (k, i))
                 logfile.write(stderr)
                 logfile.write("key=%s, no.=%d, <checksum>:\n" % (k, i))
                 logfile.write("0x%X\n" % checksum)
+                logfile.write("key=%s, no.=%d, cso file:\n" % (k, i))
+                logfile.write("%s\n" % cs)
                 logfile.write(SEPARATOR)
 
     def get_checks(self):
@@ -112,11 +117,21 @@ class TestRunner:
             logfile = os.sys.stdout
 
         for i in range(len(self.checks[k0])):
-            if (self.checks[k0][i] != self.checks[k1][i]):
-                logfile.write("index=" + str(i) + ", ")
-                logfile.write(k0 + "=" + str(self.checks[k0][i]) + " ")
-                logfile.write(k1 + "=" + str(self.checks[k1][i]) + "\n")
-                success = False
+            check = (self.checks[k0][i] != self.checks[k1][i])
+            diff = testcase.TestCase.diff_files(self.cs[k0][i], self.cs[k1][i])
+
+            if check or diff:
+                logfile.write("index=" + str(i) + ":\n")
+                if check:
+                    logfile.write("\tchecksums differ:\n")
+                    logfile.write("\t\t" + k0 + "=" + str(self.checks[k0][i]) + "\n")
+                    logfile.write("\t\t" + k1 + "=" + str(self.checks[k1][i]) + "\n")
+                    success = False
+                if diff:
+                    logfile.write("\tfiles differ:\n")
+                    logfile.write("\t\t" + self.cs[k0][i] + "\n")
+                    logfile.write("\t\t" + self.cs[k1][i] + "\n")
+                    success = False
 
         logfile.write("Success: " + str(int(success)) + "\n")
         return success

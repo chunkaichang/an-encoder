@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import subprocess
 import sys
 import time
 
@@ -40,6 +41,8 @@ class TestCase:
 
         self.outputs_dir = os.path.join(outd, self.base_name, self.profile)
         os.makedirs(self.outputs_dir)
+        self.cs_dir = os.path.join(self.outputs_dir, "cs")
+        os.makedirs(self.cs_dir)
 
     def get_path(self):
         return self.path
@@ -59,6 +62,9 @@ class TestCase:
     def get_outputs_dir(self):
         return self.outputs_dir
 
+    def get_cs_dir(self):
+        return self.cs_dir
+
     def __repr__(self):
         return self.name + " @path: " + self.path
 
@@ -75,6 +81,12 @@ class TestCase:
                     val <<= 64
                 checksum += val
         return cycles, checksum
+
+    @staticmethod
+    def diff_files(file1, file2):
+        # Suppress verbose output, we are only interested in the return value of 'diff':
+        cmd = "diff %s %s &> /dev/null" % (file1, file2)
+        return subprocess.call(cmd, shell=True)
 
 
 class VeriTestCase(TestCase):

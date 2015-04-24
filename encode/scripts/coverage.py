@@ -146,7 +146,7 @@ class FaultInjector:
             self.ansuccess += 1
             return
 
-        def diagnose(self, retcode, is_valid, checksum, ref_checksum):
+        def diagnose(self, retcode, is_valid, checksum, ref_checksum, cso_file, ref_cso_file):
             self.inc_total()
 
             if not is_valid:
@@ -157,15 +157,22 @@ class FaultInjector:
                 kind = "HANG"
                 self.inc_failure(kind)
             elif retcode == 0:
+                check = checksum != ref_checksum
+                diff = testcase.TestCase.diff_files(cso_file, ref_cso_file)
                 # Fault did not crash the program.
-                if checksum != ref_checksum:
+                if diff:
                     # Output is not correct: Silent Data Corruption.
                     kind = "UNEXPECTED"
                     self.inc_failure(kind)
+                    kind += " (checksum difference: %d)" % check
                 else:
                     # Output is correct: Fault didn't affect execution.
                     kind = "CORRECT"
                     self.inc_correct()
+                    kind += " (checksum difference: %d)" % check
+            elif retcode == 1:
+                # Something has gone wrong while executing the test case binary.
+                raise Exception("Result", "Unexpected error in execution of test case.")
             elif retcode == 2:
                 kind = "ANCRASH"
                 self.inc_success(kind)
@@ -211,7 +218,7 @@ class FaultInjector:
             logfile = os.sys.stdout
 
         bfi_args = " -m %s" % self.test.get_function()
-        test_cmd = self.test.commands[key]
+        test_cmd = self.test.commands[key] + " --cso /dev/null"
         logfile.write("Warming up ...\n")
         timings = []
         for i in range(self.test.warmups):
@@ -240,7 +247,7 @@ class FaultInjector:
         # find the range of the "coverage_function":
         logfile.write("Obtaining ranges of function %s ...\n" % self.test.get_function())
         bfi_args = " -m %s" % self.test.get_function()
-        bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key]
+        bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + " --cso /dev/null"
         p = Process(bfi_cmd)
         _, _, stderr = p.run(None, logfile)
         logfile.write("... finished running %s ...\n" % bfi_cmd)
@@ -300,7 +307,7 @@ class FaultInjector:
         logfile.write(SEPARATOR)
         return func_ranges
 
-    def run(self, key, masktype, ref_checksum, logfile=None):
+    def run(self, key, masktype, ref_checksum, ref_file, logfile=None):
         """ masktype is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
         def get_mask(type_string):
             if type_string == 'RANDOM_32BITS':
@@ -336,6 +343,10 @@ class FaultInjector:
                 if s1 == "":
                     break
                 if len(s1) > 0 and s1[0] == '[' and len(s1.split('i =')) > 1:
+                    """ Note that if PIN crashes in such a way that no output lines are generated that match the
+                        condition in the previous if clause, then, after the while loop, 'trig_instr' will still be 0.
+                        Since no function range should start at 0, 'valid_fault' will return False. This behaviour is
+                        desired since a test that has crashed the PIN tool should be considered invalid. """
                     trigger = int(s1.split('i =')[1].split(',')[0])
                     s2 = lines.readline()
                     assert(s2 != "")
@@ -370,7 +381,8 @@ class FaultInjector:
             fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
 
             bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (instr, fault, mask)
-            bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key]
+            cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (key, i))
+            bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + (" --cso %s" % cs)
             logfile.write("... no. %d: running %s ...\n" % (i, bfi_cmd))
             p = Process(bfi_cmd)
             retcode, _, stderr = p.run(self.timeout, logfile)
@@ -385,10 +397,11 @@ class FaultInjector:
             fi_file.write(SEPARATOR)
             fi_file.close()
             logfile.write("... no. %d: done writing <stderr> to %s ...\n" % (i, fi_name))
+            logfile.write("... no. %d: cso file: %s ...\n" % (i, cs))
 
             checksum = p.extract_checksum()
             is_valid = valid_fault(func_ranges, retcode, stderr)
-            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum)
+            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum, cs, ref_file)
             logfile.write("... no. %d: %s (retcode=%s) %s ...\n" % (i, kind, str(retcode), bfi_cmd))
 
         logfile.write("... finished fault injections.\n")
@@ -433,7 +446,8 @@ if __name__ == "__main__":
 
         # Get the reference output from a 'plain' run:
         print "Golden 'plain' run ..."
-        p = Process(test.commands["plain"])
+        ref_file = os.path.join(test.get_cs_dir(), "golden.plain")
+        p = Process(test.commands["plain"] + (" --cso %s" % ref_file))
         retcode, _, _ = p.run()
         if retcode != 0:
             raise Exception("Coverage", test.commands["plain"])
@@ -443,20 +457,22 @@ if __name__ == "__main__":
         fi = FaultInjector(test, bfi)
 
         ref = os.path.join(test.get_outputs_dir(), test.get_name() + ".ref")
-        ref_file = open(ref, "w")
-        ref_file.write("reference checksum=0x%X\n" % ref_checksum)
-        ref_file.write(SEPARATOR)
-        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file)
+        ref_logfile = open(ref, "w")
+        ref_logfile.write("reference checksum=0x%X\n" % ref_checksum)
+        ref_logfile.write("reference file: %s\n" % ref_file)
+        ref_logfile.write(SEPARATOR)
+        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file, ref_logfile)
         results[test.get_name()].append(("ref", fi.get_result()))
-        ref_file.close()
+        ref_logfile.close()
 
         cov = os.path.join(test.get_outputs_dir(), test.get_name() + ".cov")
-        cov_file = open(cov, "w")
-        cov_file.write("reference checksum=0x%X\n" % ref_checksum)
-        cov_file.write(SEPARATOR)
-        fi.run("encoded", "RANDOM_8BITS", ref_checksum, cov_file)
+        cov_logfile = open(cov, "w")
+        cov_logfile.write("reference checksum=0x%X\n" % ref_checksum)
+        cov_logfile.write("reference file: %s\n" % ref_file)
+        cov_logfile.write(SEPARATOR)
+        fi.run("encoded", "RANDOM_8BITS", ref_checksum, ref_file, cov_logfile)
         results[test.get_name()].append(("cov", fi.get_result()))
-        cov_file.close()
+        cov_logfile.close()
 
     summary = open(args.summary, "w")
     for name in results.keys():
