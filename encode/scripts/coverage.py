@@ -202,13 +202,7 @@ class FaultInjector:
     def __init__(self, test, bfi):
         self.test = test
         self.bfi = bfi
-
         self.result = None
-
-        print("Changing ptrace_scope to 0...")
-        subprocess.call('echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null', shell=True)
-        print("Changing randomize_va_space to 0...")
-        subprocess.call('echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null', shell=True)
 
     def get_result(self):
         return self.result
@@ -439,6 +433,11 @@ if __name__ == "__main__":
     if args.summary == "":
         args.summary = os.path.join(suite.get_outd(), "coverage.summary")
     bfi = "%s -t %s" % (args.pin, args.bfi)
+
+    print("Changing ptrace_scope to 0...")
+    subprocess.call('echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null', shell=True)
+    print("Changing randomize_va_space to 0...")
+    subprocess.call('echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null', shell=True)
 
     results = dict()
     for test in suite.get_tests_with_profile("cover"):

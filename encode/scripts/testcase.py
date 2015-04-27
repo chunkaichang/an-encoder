@@ -85,8 +85,12 @@ class TestCase:
     @staticmethod
     def diff_files(file1, file2):
         # Suppress verbose output, we are only interested in the return value of 'diff':
-        cmd = "diff %s %s &> /dev/null" % (file1, file2)
-        return subprocess.call(cmd, shell=True)
+        cmd = "diff %s %s" % (file1, file2)
+        p = subprocess.Popen(cmd, shell=True,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        return p.returncode
 
 
 class VeriTestCase(TestCase):
