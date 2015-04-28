@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
   long *a = (long*)malloc(size * sizeof(long));
   long *b = (long*)malloc(size * sizeof(long));
 
+  __cs_log(argc, argv);
   __cs_fopen(argc, argv);
   __cs_reset();
 

@@ -212,7 +212,7 @@ class FaultInjector:
             logfile = os.sys.stdout
 
         bfi_args = " -m %s" % self.test.get_function()
-        test_cmd = self.test.commands[key] + " --cso /dev/null"
+        test_cmd = self.test.commands[key] + " --cso /dev/null --csl /dev/null"
         logfile.write("Warming up ...\n")
         timings = []
         for i in range(self.test.warmups):
@@ -241,7 +241,7 @@ class FaultInjector:
         # find the range of the "coverage_function":
         logfile.write("Obtaining ranges of function %s ...\n" % self.test.get_function())
         bfi_args = " -m %s" % self.test.get_function()
-        bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + " --cso /dev/null"
+        bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + " --cso /dev/null --csl /dev/null"
         p = Process(bfi_cmd)
         _, _, stderr = p.run(None, logfile)
         logfile.write("... finished running %s ...\n" % bfi_cmd)
@@ -376,7 +376,9 @@ class FaultInjector:
 
             bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (instr, fault, mask)
             cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (key, i))
-            bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + (" --cso %s" % cs)
+            cso, csl = cs + ".cso", cs + ".csl"
+            bfi_cmd = self.bfi + bfi_args + " -- " + \
+                      self.test.commands[key] + (" --cso %s --csl %s" % (cso, csl))
             logfile.write("... no. %d: running %s ...\n" % (i, bfi_cmd))
             p = Process(bfi_cmd)
             retcode, _, stderr = p.run(self.timeout, logfile)
@@ -391,11 +393,11 @@ class FaultInjector:
             fi_file.write(SEPARATOR)
             fi_file.close()
             logfile.write("... no. %d: done writing <stderr> to %s ...\n" % (i, fi_name))
-            logfile.write("... no. %d: cso file: %s ...\n" % (i, cs))
+            logfile.write("... no. %d: cso file: %s ...\n" % (i, cso))
 
             checksum = p.extract_checksum()
             is_valid = valid_fault(func_ranges, retcode, stderr)
-            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum, cs, ref_file)
+            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum, cso, ref_file)
             logfile.write("... no. %d: %s (retcode=%s) %s ...\n" % (i, kind, str(retcode), bfi_cmd))
 
         logfile.write("... finished fault injections.\n")
@@ -446,7 +448,8 @@ if __name__ == "__main__":
         # Get the reference output from a 'plain' run:
         print "Golden 'plain' run ..."
         ref_file = os.path.join(test.get_cs_dir(), "golden.plain")
-        p = Process(test.commands["plain"] + (" --cso %s" % ref_file))
+        ref_file_cso, ref_file_csl = ref_file + ".cso", ref_file + ".csl"
+        p = Process(test.commands["plain"] + (" --cso %s --csl %s" % (ref_file_cso, ref_file_csl)))
         retcode, _, _ = p.run()
         if retcode != 0:
             raise Exception("Coverage", test.commands["plain"])
@@ -458,18 +461,18 @@ if __name__ == "__main__":
         ref = os.path.join(test.get_outputs_dir(), test.get_name() + ".ref")
         ref_logfile = open(ref, "w")
         ref_logfile.write("reference checksum=0x%X\n" % ref_checksum)
-        ref_logfile.write("reference file: %s\n" % ref_file)
+        ref_logfile.write("reference file: %s\n" % ref_file_cso)
         ref_logfile.write(SEPARATOR)
-        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file, ref_logfile)
+        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file_cso, ref_logfile)
         results[test.get_name()].append(("ref", fi.get_result()))
         ref_logfile.close()
 
         cov = os.path.join(test.get_outputs_dir(), test.get_name() + ".cov")
         cov_logfile = open(cov, "w")
         cov_logfile.write("reference checksum=0x%X\n" % ref_checksum)
-        cov_logfile.write("reference file: %s\n" % ref_file)
+        cov_logfile.write("reference file: %s\n" % ref_file_cso)
         cov_logfile.write(SEPARATOR)
-        fi.run("encoded", "RANDOM_8BITS", ref_checksum, ref_file, cov_logfile)
+        fi.run("encoded", "RANDOM_8BITS", ref_checksum, ref_file_cso, cov_logfile)
         results[test.get_name()].append(("cov", fi.get_result()))
         cov_logfile.close()
 

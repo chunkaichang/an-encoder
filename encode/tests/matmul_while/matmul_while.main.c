@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     b[i] = AN_ENCODE_VALUE(1);
     a[i] = AN_ENCODE_VALUE(0);
   }
+  __cs_log(argc, argv);
   __cs_fopen(argc, argv);
   __cs_reset();
 

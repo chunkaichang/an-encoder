@@ -108,6 +108,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	printf("Processing...\n");
+        __cs_log(argc, argv);
         __cs_fopen(argc, argv);
         __cs_reset();
 	while (!feof(in)) {

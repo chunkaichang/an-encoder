@@ -12,6 +12,8 @@
 static __uint128_t checksum[VOTES];
 static FILE *fp_checksum[VOTES];
 
+static FILE *csl = NULL; // File for logging output to do with votes.
+
 static void set_votes(void *votes, void *value, size_t sz_val) {
   char *addr = (char*)votes;
   for (unsigned i = 0; i < VOTES; i++)
@@ -68,7 +70,7 @@ __uint128_t vote(void *votes, size_t sz_val) {
   if (blk_index == 0)
     return ui_votes[0];
   // otherwise find the biggest block:
-  fprintf(stderr, "Multiple votes!!\n");
+  fprintf(csl, "Multiple votes!!\n");
   unsigned blk_count = blk_index+1 ;
   unsigned max_index = 0;
   unsigned max = blocks[1];
@@ -81,13 +83,13 @@ __uint128_t vote(void *votes, size_t sz_val) {
     if (size > max)
       max_index = i;
   }
-  fprintf(stderr, "vote (before broadcast) -- ");
-  print_votes(stderr, votes, sz_val);
+  fprintf(csl, "vote (before broadcast) -- ");
+  print_votes(csl, votes, sz_val);
   // broadcast majority value:
   __uint128_t broadcast = ui_votes[blocks[max_index]];
   set_votes(votes, &broadcast, sz_val);
-  fprintf(stderr, "vote (after broadcast) -- ");
-  print_votes(stderr, votes, sz_val);
+  fprintf(csl, "vote (after broadcast) -- ");
+  print_votes(csl, votes, sz_val);
   return broadcast;
 }
 
@@ -102,8 +104,8 @@ __uint128_t __cs_get() {
 }
 
 __uint128_t __cs_acc(__uint128_t x) {
-  fprintf(stderr, "__cs_acc() -- ");
-  print_votes(stderr, &checksum, sizeof(__uint128_t));
+  fprintf(csl, "__cs_acc() -- ");
+  print_votes(csl, &checksum, sizeof(__uint128_t));
 
   __uint128_t cs = __cs_get();
   cs = cs * 37 + x;
@@ -138,8 +140,8 @@ void __cs_fopen(int argc, char** argv) {
 }
 
 size_t __cs_facc(__uint128_t x) {
-  fprintf(stderr, "__cs_facc() -- ");
-  print_votes(stderr, fp_checksum, sizeof(FILE*));
+  fprintf(csl, "__cs_facc() -- ");
+  print_votes(csl, fp_checksum, sizeof(FILE*));
   FILE *fp = (FILE*)vote(fp_checksum, sizeof(FILE*));
 
   uint64_t x64[2];
@@ -152,4 +154,19 @@ size_t __cs_facc(__uint128_t x) {
 void __cs_fclose() {
   FILE *fp = (FILE*)vote(fp_checksum, sizeof(FILE*));
   fclose(fp);
+}
+
+FILE* __cs_log(int argc, char** argv) {
+  csl = stderr;
+  unsigned i = 0;
+
+  while (i < argc) {
+    if (!strcmp("--csl", argv[i])) {
+      if (argc <= i+1) exit(1);
+      csl = fopen(argv[i+1], "w");
+      break;
+    }
+    ++i;
+  }
+  return csl;
 }

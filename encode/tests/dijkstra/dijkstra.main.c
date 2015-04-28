@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
   }
   ADJ_PRINT("\n");
 
+  __cs_log(argc, argv);
   __cs_fopen(argc, argv);
   __cs_reset();
   /* find NUM_NODES shortest paths between nodes */

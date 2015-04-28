@@ -143,6 +143,7 @@ int main(int argc, char *argv[])
     for(i = 0; i < crc_tab_size; i++)
       crc_32_tab[i] = AN_ENCODE_VALUE(crc_32_tab[i]);
 
+    __cs_log(argc, argv);
     __cs_fopen(argc, argv);
     __cs_reset();
 
