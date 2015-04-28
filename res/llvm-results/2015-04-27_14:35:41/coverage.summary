@@ -1,0 +1,192 @@
+test name: quicksort.cover
+reference result:
+	total   = 100
+	valid   = 100
+	correct = 51
+	AN success = 25
+	    OS crashes  = 25
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 24
+	    unexpected = 24
+	    hang       = 0
+coverage result:
+	total   = 100
+	valid   = 100
+	correct = 59
+	AN success = 27
+	    OS crashes  = 16
+	    AN crashes  = 11
+	    undiagnosed = 0
+	AN failed = 14
+	    unexpected = 14
+	    hang       = 0
+----------------------------------------------------------------
+test name: bubblesort.cover
+reference result:
+	total   = 100
+	valid   = 100
+	correct = 36
+	AN success = 12
+	    OS crashes  = 12
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 52
+	    unexpected = 48
+	    hang       = 4
+coverage result:
+	total   = 100
+	valid   = 100
+	correct = 42
+	AN success = 39
+	    OS crashes  = 12
+	    AN crashes  = 27
+	    undiagnosed = 0
+	AN failed = 19
+	    unexpected = 18
+	    hang       = 1
+----------------------------------------------------------------
+test name: dijkstra.cover
+reference result:
+	total   = 10
+	valid   = 10
+	correct = 3
+	AN success = 3
+	    OS crashes  = 3
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 4
+	    unexpected = 1
+	    hang       = 3
+coverage result:
+	total   = 10
+	valid   = 10
+	correct = 4
+	AN success = 4
+	    OS crashes  = 0
+	    AN crashes  = 4
+	    undiagnosed = 0
+	AN failed = 2
+	    unexpected = 0
+	    hang       = 2
+----------------------------------------------------------------
+test name: crc.cover
+reference result:
+	total   = 10
+	valid   = 10
+	correct = 4
+	AN success = 3
+	    OS crashes  = 3
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 3
+	    unexpected = 1
+	    hang       = 2
+coverage result:
+	total   = 10
+	valid   = 10
+	correct = 4
+	AN success = 3
+	    OS crashes  = 2
+	    AN crashes  = 1
+	    undiagnosed = 0
+	AN failed = 3
+	    unexpected = 1
+	    hang       = 2
+----------------------------------------------------------------
+test name: array_sum.cover
+reference result:
+	total   = 100
+	valid   = 100
+	correct = 24
+	AN success = 17
+	    OS crashes  = 17
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 59
+	    unexpected = 59
+	    hang       = 0
+coverage result:
+	total   = 100
+	valid   = 100
+	correct = 49
+	AN success = 36
+	    OS crashes  = 13
+	    AN crashes  = 23
+	    undiagnosed = 0
+	AN failed = 15
+	    unexpected = 15
+	    hang       = 0
+----------------------------------------------------------------
+test name: des.tiny.cover
+reference result:
+	total   = 2
+	valid   = 2
+	correct = 1
+	AN success = 1
+	    OS crashes  = 1
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 0
+	    unexpected = 0
+	    hang       = 0
+coverage result:
+	total   = 2
+	valid   = 2
+	correct = 2
+	AN success = 0
+	    OS crashes  = 0
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 0
+	    unexpected = 0
+	    hang       = 0
+----------------------------------------------------------------
+test name: ptrarith.cover
+reference result:
+	total   = 100
+	valid   = 99
+	correct = 19
+	AN success = 17
+	    OS crashes  = 17
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 63
+	    unexpected = 63
+	    hang       = 0
+coverage result:
+	total   = 100
+	valid   = 100
+	correct = 48
+	AN success = 43
+	    OS crashes  = 25
+	    AN crashes  = 18
+	    undiagnosed = 0
+	AN failed = 9
+	    unexpected = 9
+	    hang       = 0
+----------------------------------------------------------------
+test name: matmul.cover
+reference result:
+	total   = 10
+	valid   = 10
+	correct = 1
+	AN success = 3
+	    OS crashes  = 3
+	    AN crashes  = 0
+	    undiagnosed = 0
+	AN failed = 6
+	    unexpected = 2
+	    hang       = 4
+coverage result:
+	total   = 10
+	valid   = 10
+	correct = 3
+	AN success = 2
+	    OS crashes  = 0
+	    AN crashes  = 2
+	    undiagnosed = 0
+	AN failed = 5
+	    unexpected = 1
+	    hang       = 4
+----------------------------------------------------------------

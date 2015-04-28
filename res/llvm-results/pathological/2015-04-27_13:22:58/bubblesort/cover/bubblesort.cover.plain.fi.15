@@ -1,0 +1,24 @@
+<stderr> from running /media/norman/scratch/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /media/norman/scratch/Projects/bfi/obj-intel64/bfi.so -trigger 166562 -cmd WADDR -seed 1 -mask 33 -- /media/norman/scratch/Projects/build/encode.3/encode/tests/bubblesort/bubblesort.cover.plain --cso ./2015-04-27_13:22:58/bubblesort/cover/cs/plain.15:
+[bubblesort.enc.c:   16, IP = 0x400a7b, i = 166563, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, addr = 0x602130, addr' = 0x602111, op = 0
+__cs_facc() -- &votes=0x6020F0, votes: 0x603010, 0x603010, 0x603010, 0x603010, 0x310, 
+Multiple votes!!
+vote (before broadcast) -- &votes=0x6020F0, votes: 0x603010, 0x603010, 0x603010, 0x603010, 0x310, 
+vote (after broadcast) -- &votes=0x6020F0, votes: 0x310, 0x310, 0x310, 0x310, 0x310, 
+**********************
+INSTR   = 189922
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 166562
+TTYPE   = IN
+COMMAND = WADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0x21
+THREAD  = 0
+ELAPSED = 1.80s
+Segmentation fault (core dumped)
+----------------------------------------------------------------
