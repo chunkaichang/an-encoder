@@ -199,10 +199,11 @@ class FaultInjector:
             logfile.write("%s    hang       = %d\n" % (prefix, self.hang))
             return
 
-    def __init__(self, test, bfi):
+    def __init__(self, test, bfi, cmd_params=None):
         self.test = test
         self.bfi = bfi
         self.result = None
+        self.params = cmd_params
 
     def get_result(self):
         return self.result
@@ -369,10 +370,19 @@ class FaultInjector:
         inject_faults = list(set(FaultInjector.faults) - set(['CF']))
         self.result = FaultInjector.Result()
         for i in range(self.test.get_runs()):
-            index = random.randint(0, len(func_ranges) - 1)
-            instr = random.randint(func_ranges[index][0], func_ranges[index][1])
-            fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
-            mask = get_random_mask(masktype)
+            if self.params and self.params.trigger:
+                instr = int(self.params.trigger)
+            else:
+                index = random.randint(0, len(func_ranges) - 1)
+                instr = random.randint(func_ranges[index][0], func_ranges[index][1])
+            if self.params and self.params.cmd:
+                fault = self.params.cmd
+            else:
+                fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
+            if self.params and self.params.mask:
+                mask = int(self.params.mask)
+            else:
+                mask = get_random_mask(masktype)
 
             bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (instr, fault, mask)
             cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (key, i))
@@ -381,19 +391,27 @@ class FaultInjector:
                       self.test.commands[key] + (" --cso %s --csl %s" % (cso, csl))
             logfile.write("... no. %d: running %s ...\n" % (i, bfi_cmd))
             p = Process(bfi_cmd)
-            retcode, _, stderr = p.run(self.timeout, logfile)
+            retcode, stdout, stderr = p.run(self.timeout, logfile)
             logfile.write("... no. %d: finished running %s ...\n" % (i, bfi_cmd))
 
-            # write "stderr" from running "bfi" to file:
+            # write "stderr" and "stdout" from running "bfi" to file:
+            def write_output(label, source, target_path):
+                file = open(target_path, "w")
+                logfile.write("... no. %d: writing <%s> to %s ...\n" % (i, label, target_path))
+                file.write("<%s> from running %s:\n" % (label, bfi_cmd))
+                file.write(source)
+                file.write(SEPARATOR)
+                file.close()
+                logfile.write("... no. %d: done writing <%s> to %s ...\n" % (i, label, target_path))
+                file.close()
+                return
+
             fi_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.fi.%d" % (key, i)))
-            fi_file = open(fi_name, "w")
-            logfile.write("... no. %d: writing <stderr> to %s ...\n" % (i, fi_name))
-            fi_file.write("<stderr> from running %s:\n" % bfi_cmd)
-            fi_file.write(stderr)
-            fi_file.write(SEPARATOR)
-            fi_file.close()
-            logfile.write("... no. %d: done writing <stderr> to %s ...\n" % (i, fi_name))
+            write_output("stderr", stderr, fi_name + ".stderr")
+            write_output("stdout", stdout, fi_name + ".stdout")
+
             logfile.write("... no. %d: cso file: %s ...\n" % (i, cso))
+            logfile.write("... no. %d: csl file: %s ...\n" % (i, csl))
 
             checksum = p.extract_checksum()
             is_valid = valid_fault(func_ranges, retcode, stderr)
@@ -407,6 +425,16 @@ class FaultInjector:
         self.result.write(logfile)
         logfile.write(SEPARATOR)
         return
+
+
+class CmdParams:
+    def __init__(self, trigger="", cmd="", mask=""):
+        if trigger != "": self.trigger = trigger
+        else: self.trigger = None
+        if cmd != "": self.cmd = cmd
+        else: self.cmd = None
+        if cmd != "": self.mask = mask
+        else: self.mask = None
 
 
 #===============================================================================
@@ -429,12 +457,22 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--summary",
                         default=r"",
                         help="filename for test suite summary")
+    parser.add_argument("--trigger",
+                        default=r"",
+                        help="instruction counter where fault injection is triggered")
+    parser.add_argument("--cmd",
+                        default=r"",
+                        help="kind of fault to be injected")
+    parser.add_argument("--mask",
+                        default=r"",
+                        help="mask for fault injection")
 
     args = parser.parse_args()
     suite = testcase.TestSuite(args.directory, args.outd)
     if args.summary == "":
         args.summary = os.path.join(suite.get_outd(), "coverage.summary")
     bfi = "%s -t %s" % (args.pin, args.bfi)
+    cmd_params = CmdParams(args.trigger, args.cmd, args.mask)
 
     print("Changing ptrace_scope to 0...")
     subprocess.call('echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null', shell=True)
@@ -456,7 +494,7 @@ if __name__ == "__main__":
         print "... finished golden run."
         ref_checksum = p.extract_checksum()
 
-        fi = FaultInjector(test, bfi)
+        fi = FaultInjector(test, bfi, cmd_params)
 
         ref = os.path.join(test.get_outputs_dir(), test.get_name() + ".ref")
         ref_logfile = open(ref, "w")
