@@ -1,0 +1,54 @@
+diff --git a/bfi.cpp b/bfi.cpp
+--- a/bfi.cpp
++++ b/bfi.cpp
+@@ -31,6 +31,10 @@
+ #include <cassert>
+ #include "pin.H"
+ 
++#ifdef DISASM
++  #include <map>
++#endif /* DISASM */
++
+ /* ----------------------------------------------------------------------------
+  * types
+  * ------------------------------------------------------------------------- */
+@@ -214,6 +218,23 @@
+     if (detach) PIN_Detach();
+ }
+ 
++#ifdef DISASM
++std::map<ADDRINT,std::string> assembly;
++
++static VOID
++disasm(THREADID id, CONTEXT* ctx, ADDRINT ip, UINT32 size)
++{
++    if (!right_thread(id)) return;
++
++    ADDRINT reg_ip = (ADDRINT) PIN_GetContextReg(ctx, REG_INST_PTR);
++    fprintf(stderr, "0x%lX (ip=0x%lX): (size=%d) ", ip, reg_ip, size);
++    unsigned char *addr = (unsigned char*)ip;
++    for (unsigned i = 0; i < size; i++)
++      fprintf(stderr, "%02X.", addr[i]);
++    fprintf(stderr, " %s\n", assembly[ip].c_str());
++}
++#endif /* DISASM */
++
+ /* ----------------------------------------------------------------------------
+  * count and find functions
+  * ------------------------------------------------------------------------- */
+@@ -473,6 +494,15 @@
+ static VOID
+ instrument_count(INS ins, VOID* v)
+ {
++#ifdef DISASM
++    assembly[INS_Address(ins)] = INS_Disassemble(ins);
++    INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) disasm,
++                   IARG_THREAD_ID,
++                   IARG_CONTEXT,
++                   IARG_ADDRINT, INS_Address(ins),
++                   IARG_UINT32, INS_Size(ins),
++                   IARG_END);
++#endif /* DISASM */
+     // count instructions
+     INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR) count_instr,
+                    IARG_THREAD_ID,
