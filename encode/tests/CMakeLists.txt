@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+add_subdirectory(mylibs)
+
 add_subdirectory(array_sum)
 add_subdirectory(bubblesort)
 add_subdirectory(crc)

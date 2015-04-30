@@ -7,6 +7,9 @@ include_directories(${LLVM_INCLUDE_DIRS})
 
 set(ENCODE_BIN_DIR ${CMAKE_BINARY_DIR}/bin)
 
+set(MAJORITY_VOTING OFF CACHE BOOL "")
+set(VERBOSE_VOTING OFF CACHE BOOL "")
+
 add_subdirectory(src)
 add_subdirectory(runtime)
 add_subdirectory(tests)

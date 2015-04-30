@@ -53,11 +53,11 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
   add_custom_target(${MAIN_TARGET} ALL
                     COMMAND ${CLANG} ${CLANG_LINK_OPTS}
                             -o ${MAIN_TARGET} ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c
+                            ../mylibs/mycheck.bc
+                            ../mylibs/mycyc.bc
                     DEPENDS ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c)
+                            mycheck.bc
+                            mycyc.bc)
 
   # Build encoded binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_BC}
@@ -81,11 +81,11 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
                     COMMAND ${CLANG} ${CLANG_LINK_OPTS}
                             -o ${ENC_TARGET}
                             ${MAIN_MODULE_ENC_2_BC} ${ENC_MODULE_ENC_BC}
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c
+                            ../mylibs/mycheck.bc
+                            ../mylibs/mycyc.bc
                     DEPENDS ${MAIN_MODULE_ENC_2_BC} ${ENC_MODULE_ENC_BC}
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycheck.c
-                            ${CMAKE_CURRENT_SOURCE_DIR}/../mylibs/mycyc.c)
+                            mycheck.bc
+                            mycyc.bc)
 endfunction(BUILD_TEST_CASE)
 
 
