@@ -4,82 +4,254 @@
 
 import argparse
 import cStringIO
+from multiprocessing import Lock, Manager, Queue
 import os
 import re
 import random
 import statistics
+
+import signal
 import subprocess
 import testcase
 import time
-import signal
+import utilities
 
 
 SEPARATOR = "----------------------------------------------------------------\n"
 
 
-class Process:
-    class Alarm(Exception):
-        pass
+class FiResult:
+    def __init__(self, test, key, func_ranges, checksum, cso):
+        self.test = test
+        self.key = key
+        self.func_ranges = func_ranges
+        self.checksum = checksum  # reference checksum
+        self.cso = cso  # path to reference "cso" file
+        self.hist = utilities.ConcurrentDict()
 
-    @staticmethod
-    def _alarm_handler(signum, frame):
-        raise Process.Alarm
+        self.hist["TOTAL"] = 0  # total number of fault injections
 
-    def __init__(self, args, timeout=None):
-        self.args = args
-        self.timeout = timeout
-        self.retcode, self.stdout, self.stderr = None, "", ""
+        self.hist["VALID"] = 0  # number of valid fault injections (i.e. where error was inserted in the right function)
 
-    def run(self, timeout=None, logfile=None):
-        if not timeout:
-            timeout = self.timeout
-        if not logfile:
-            logfile = os.sys.stdout
+        self.hist["CORRECT"] = 0  # number of programs unaffected by fault injection
 
-        p = subprocess.Popen(self.args, shell=True,
-                             stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE,
-                             preexec_fn=os.setsid)
-        logfile.write("pid=%d: started process %s\n" % (p.pid, self.args))
+        self.hist["ANFAILURE"] = 0  # number of undetected faults (i.e. SDC):
+        self.hist["UNEXPECTED"] = 0  # number of unexpected program results
+        self.hist["HANG"] = 0  # number of hanging programs (more than 10x runtime than without injected faults)
 
-        if timeout:
-            logfile.write("pid=%d: timeout=%d\n" % (p.pid, timeout))
-            signal.signal(signal.SIGALRM, Process._alarm_handler)
-            signal.alarm(timeout)
+        self.hist["ANSUCCESS"] = 0  # number of detected faults:
+        self.hist["OSCRASH"] = 0  # fault detected by OS
+        self.hist["ANCRASH"] = 0  # fault detected by AN encoder
+        self.hist["NONDIAG"] = 0  # undiagnosed, i.e. weird return code
 
-        try:
-            stdout, stderr = p.communicate()
-            if timeout:
-                signal.alarm(0)
-            logfile.write("pid=%d: communicated with process\n" % p.pid)
-            self.retcode, self.stdout, self.stderr = p.returncode, stdout, stderr
-        except Process.Alarm:
-            try:
-                os.killpg(p.pid, signal.SIGKILL)
-                logfile.write("pid=%d: killed process\n" % p.pid)
-            except OSError:
-                pass
-            self.retcode, self.stdout, self.stderr = None, "", ""
+    def _inc_total(self):
+        self.hist["TOTAL"] += 1
 
-        return self.retcode, self.stdout, self.stderr
+    def _inc_valid(self):
+        self.hist["VALID"] += 1
 
-    def get_retcode(self):
-        return self.retcode
+    def _inc_correct(self):
+        self.hist["CORRECT"] += 1
 
-    def get_stdout(self):
-        return self.stdout
+    def _inc_failure(self, kind):
+        if kind == "UNEXPECTED" or kind == "HANG":
+            self.hist[kind] += 1
+        else:
+            raise NameError("Failure kind %s undefined." % kind)
+        self.hist["ANFAILURE"] += 1
+        return
 
-    def get_stderr(self):
-        return self.stderr
+    def _inc_success(self, kind):
+        if kind in ["OSCRASH", "ANCRASH", "NONDIAG"]:
+            self.hist[kind] += 1
+        else:
+            raise NameError("Success kind %s undefined." % kind)
+        self.hist["ANSUCCESS"] += 1
+        return
 
-    def extract_checksum(self):
-        if self.retcode is None:
-            return None
-        _, checksum = testcase.TestCase.extract_info(self.stderr.split('\n'))
-        return checksum
+    def _valid_fault(self, retcode, stderr):
+        if retcode is None:
+            # We consider programs that hanged as valid (since we have no output that can be validated):
+            return True
+        # --- check if fault was injected inside function ---
+        # instruction where fault was actually injected (triggered)
+        trig_instr = 0
+        lines = cStringIO.StringIO(stderr)
+        while True:
+            s1 = lines.readline()
+            if s1 == "":
+                break
+            if len(s1) > 0 and s1[0] == '[' and len(s1.split('i =')) > 1:
+                """ Note that if PIN crashes in such a way that no output lines are generated that match the
+                condition in the previous if clause, then, after the while loop, 'trig_instr' will still be 0.
+                Since no function range should start at 0, 'valid_fault' will return False. This behaviour is
+                desired since a test that has crashed the PIN tool should be considered invalid. """
+                trigger = int(s1.split('i =')[1].split(',')[0])
+                s2 = lines.readline()
+                assert (s2 != "")
+                if (re.match('.*enter', s2) is None and
+                            re.match('.*leave', s2) is None):
+                    trig_instr = trigger
+                    break
+
+        for func_range in self.func_ranges:
+            if func_range[0] <= trig_instr <= func_range[1]:
+                return True
+            elif trig_instr < func_range[0]:
+                """ Note that this "elif" statement only makes sense if 'func_range' is sorted in ascending order,
+                which is indeed achieved by our implementation of '_get_function_ranges'. """
+                return False
+        return False
+
+    def diagnose(self, limitedp, cso_file):
+        self._inc_total()
+
+        retcode, _, stderr = limitedp.get_result()
+        if not self._valid_fault(retcode, stderr):
+            return "INVALID"
+        self._inc_valid()
+
+        _, checksum = testcase.TestCase.extract_info(stderr.split('\n'))
+        if retcode is None:
+            kind = "HANG"
+            self._inc_failure(kind)
+        elif retcode == 0:
+            check = checksum != self.checksum
+            diff = testcase.TestCase.diff_files(cso_file, self.cso)
+            # Fault did not crash the program.
+            if diff:
+                # Output is not correct: Silent Data Corruption.
+                kind = "UNEXPECTED"
+                self._inc_failure(kind)
+                kind += " (checksum difference: %d)" % check
+            else:
+                # Output is correct: Fault didn't affect execution.
+                kind = "CORRECT"
+                self._inc_correct()
+                kind += " (checksum difference: %d)" % check
+        elif retcode == 1:
+            kind = "ERROR"
+        elif retcode == 2:
+            kind = "ANCRASH"
+            self._inc_success(kind)
+        elif retcode > 10:
+            kind = "OSCRASH"
+            self._inc_success(kind)
+        else:
+            kind = "NONDIAG"
+        return kind
+
+    def write(self, logfile, prefix=""):
+        hist = self.hist
+        logfile.write("%stotal   = %d\n" % (prefix, hist["TOTAL"]))
+        logfile.write("%svalid   = %d\n" % (prefix, hist["VALID"]))
+        logfile.write("%scorrect = %d\n" % (prefix, hist["CORRECT"]))
+        logfile.write("%sAN success = %d\n" % (prefix, hist["ANSUCCESS"]))
+        logfile.write("%s    OS crashes  = %d\n" % (prefix, hist["OSCRASH"]))
+        logfile.write("%s    AN crashes  = %d\n" % (prefix, hist["ANCRASH"]))
+        logfile.write("%s    undiagnosed = %d\n" % (prefix, hist["NONDIAG"]))
+        logfile.write("%sAN failed = %d\n" % (prefix, hist["ANFAILURE"]))
+        logfile.write("%s    unexpected = %d\n" % (prefix, hist["UNEXPECTED"]))
+        logfile.write("%s    hang       = %d\n" % (prefix, hist["HANG"]))
+        logfile.flush()
+        return
+
+    def get_test(self):
+        return self.test
+
+    def get_key(self):
+        return self.key
+
+    def get_hist(self):
+        return self.hist
+
+
+class CmdParams:
+    def __init__(self, trigger="", fault="", mask=""):
+        if trigger != "": self.trigger = trigger
+        else: self.trigger = None
+        if fault != "": self.fault = fault
+        else: self.fault = None
+        if mask != "": self.mask = mask
+        else: self.mask = None
+
+    def unpack(self):
+        return self.trigger, self.fault, self.mask
+
+
+def bfi_worker(timeout, command, cso_name, std_prefix, logfile, log_prefix, result=None):
+    def log(output):
+        logfile.write(output, log_prefix, timed=True)
+
+    def flush():
+        logfile.flush()
+
+    log("running %s ...\n" % command)
+    p = utilities.LimitedProcess(command)
+    retcode, stdout, stderr = p.run(timeout, logfile, log_prefix)
+    log("finished running %s ...\n" % command)
+
+    # write "stderr" and "stdout" from running "bfi" to file:
+    def write_output(label, source, target_path):
+        log("writing <%s> to %s ...\n" % (label, target_path))
+        file = open(target_path, "w")
+        file.write("<%s> from running %s:\n" % (label, command))
+        file.write(source)
+        file.write(SEPARATOR)
+        file.close()
+        log("done writing <%s> to %s ...\n" % (label, target_path))
+        return
+
+    write_output("stderr", stderr, std_prefix + ".stderr")
+    write_output("stdout", stdout, std_prefix + ".stdout")
+
+    kind = None
+    if result:
+        kind = result.diagnose(p, cso_name)
+    log("%s (retcode=%s) %s ...\n" % (str(kind), str(retcode), command))
+    flush()
+    return
 
 
 class FaultInjector:
+    class FiCmdFactory():
+        def __init__(self, bfi, binary):
+            self.bfi = bfi
+            self.binary = binary
+
+        @staticmethod
+        def _get_cs_suffix(cso, csl):
+            suffix = ""
+            if cso: suffix += " --cso %s" % cso
+            if csl: suffix += " --csl %s" % csl
+            return suffix
+
+        def get_function_cmd(self, function, cso=None, csl=None):
+            bfi_args = " -m %s" % function
+            bfi_cmd = self.bfi + bfi_args + " -- " + \
+                self.binary + self._get_cs_suffix(cso, csl)
+            return bfi_cmd
+
+        def get_timing_cmd(self, cso=None, csl=None):
+            bfi_cmd = self.bfi + " -- " + \
+                self.binary + self._get_cs_suffix(cso, csl)
+            return bfi_cmd
+
+        def get_fi_cmd(self, trigger, fault, mask, cso=None, csl=None):
+            bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (trigger, fault, mask)
+            bfi_cmd = self.bfi + bfi_args + " -- " + \
+                self.binary + self._get_cs_suffix(cso, csl)
+            return bfi_cmd
+
+    def __init__(self, test, key, bfi, logfile, processes=1, cmd_params=None):
+        self.test = test
+        self.key = key
+        self.bfi_factory = FaultInjector.FiCmdFactory(bfi, test.commands[key])
+        self.logfile = logfile
+        self.processes = processes
+        self.params = cmd_params
+        self.func_ranges = None
+
     """ from Dmitry's "bfi_const.py":
         7 types of faults to inject:
          - WVAL: some address that is written is overwritten with an
@@ -98,132 +270,42 @@ class FaultInjector:
     """
     faults = ['WVAL', 'RVAL', 'WADDR', 'RADDR', 'RREG', 'WREG', 'CF', 'TXT']
 
-    class Result:
-        def __init__(self):
-            self.total = 0  # total number of fault injections
+    def log(self, output):
+        self.logfile.write(output)
+    
+    def flush(self):
+        self.logfile.flush()
 
-            self.valid = 0  # number of valid fault injections (i.e. where error was inserted in the right function)
+    def get_logfile_fd(self):
+        return self.logfile.get_fd()
 
-            self.correct = 0  # number of programs unaffected by fault injection
+    def get_logfile_lock(self):
+        return self.logfile.get_lock()
 
-            self.anfailure = 0  # number of undetected faults (i.e. SDC):
-            self.unexp = 0      #    number of unexpected program results
-            self.hang = 0       #    number of hanging programs (more than 10x runtime than without injected faults)
+    def _warmup(self):
+        self.log("Warming up ...\n")
+        self.flush()
+        cso = "/dev/null"
+        command = self.bfi_factory.get_timing_cmd(cso, "/dev/null")
 
-            self.ansuccess = 0  # number of detected faults:
-            self.oscrash = 0    #   fault detected by OS
-            self.ancrash = 0    #   fault detected by AN encoder
-            self.nondiag = 0    #   undiagnosed, i.e. weird return code
-
-        def inc_total(self):
-            self.total += 1
-
-        def inc_valid(self):
-            self.valid += 1
-
-        def inc_correct(self):
-            self.correct += 1
-
-        def inc_failure(self, kind):
-            if kind == "UNEXPECTED":
-                self.unexp += 1
-            elif kind == "HANG":
-                self.hang += 1
-            else:
-                raise NameError("Failure kind %s undefined." % kind)
-            self.anfailure += 1
-            return
-
-        def inc_success(self, kind):
-            if kind == "OSCRASH":
-                self.oscrash += 1
-            elif kind == "ANCRASH":
-                self.ancrash += 1
-            elif kind == "NONDIAG":
-                self.nondiag += 1
-            else:
-                raise NameError("Success kind %s undefined." % kind)
-            self.ansuccess += 1
-            return
-
-        def diagnose(self, retcode, is_valid, checksum, ref_checksum, cso_file, ref_cso_file):
-            self.inc_total()
-
-            if not is_valid:
-                return "INVALID"
-            self.inc_valid()
-
-            if retcode is None:
-                kind = "HANG"
-                self.inc_failure(kind)
-            elif retcode == 0:
-                check = checksum != ref_checksum
-                diff = testcase.TestCase.diff_files(cso_file, ref_cso_file)
-                # Fault did not crash the program.
-                if diff:
-                    # Output is not correct: Silent Data Corruption.
-                    kind = "UNEXPECTED"
-                    self.inc_failure(kind)
-                    kind += " (checksum difference: %d)" % check
-                else:
-                    # Output is correct: Fault didn't affect execution.
-                    kind = "CORRECT"
-                    self.inc_correct()
-                    kind += " (checksum difference: %d)" % check
-            elif retcode == 1:
-                # Something has gone wrong while executing the test case binary.
-                raise Exception("Result", "Unexpected error in execution of test case.")
-            elif retcode == 2:
-                kind = "ANCRASH"
-                self.inc_success(kind)
-            elif retcode > 10:
-                kind = "OSCRASH"
-                self.inc_success(kind)
-            else:
-                kind = "NONDIAG"
-            return kind
-
-        def write(self, logfile=None, prefix=""):
-            if not logfile:
-                logfile = os.sys.stderr
-
-            logfile.write("%stotal   = %d\n" % (prefix, self.total))
-            logfile.write("%svalid   = %d\n" % (prefix, self.valid))
-            logfile.write("%scorrect = %d\n" % (prefix, self.correct))
-            logfile.write("%sAN success = %d\n" % (prefix, self.ansuccess))
-            logfile.write("%s    OS crashes  = %d\n" % (prefix, self.oscrash))
-            logfile.write("%s    AN crashes  = %d\n" % (prefix, self.ancrash))
-            logfile.write("%s    undiagnosed = %d\n" % (prefix, self.nondiag))
-            logfile.write("%sAN failed = %d\n" % (prefix, self.anfailure))
-            logfile.write("%s    unexpected = %d\n" % (prefix, self.unexp))
-            logfile.write("%s    hang       = %d\n" % (prefix, self.hang))
-            return
-
-    def __init__(self, test, bfi, cmd_params=None):
-        self.test = test
-        self.bfi = bfi
-        self.result = None
-        self.params = cmd_params
-
-    def get_result(self):
-        return self.result
-
-    def _warmup(self, key, logfile=None):
-        if not logfile:
-            logfile = os.sys.stdout
-
-        bfi_args = " -m %s" % self.test.get_function()
-        test_cmd = self.test.commands[key] + " --cso /dev/null --csl /dev/null"
-        logfile.write("Warming up ...\n")
         timings = []
         for i in range(self.test.warmups):
-            logfile.write("... timing run no. %d ...\n" % i)
-            p = Process(self.bfi + bfi_args + " -- " + test_cmd)
+            """ To obtain meaningful timing information (which will later be used to set the timeout for tests), we need
+                to execute as many "timing runs" in parallel as the number of tests we will later run in parallel. That
+                number is 'self.processes'. """
+            args = []
+            for j in range(self.processes):
+                stdlog = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.timing.%d.%d" % (self.key, i, j)))
+                prefix = " ... timing (%d,%d): " % (i, j)
+                args.append((None, command, cso, stdlog, self.logfile, prefix,))
+
+            alp = utilities.ArgListProcessor(self.processes, bfi_worker, args)
             start = time.time()
-            p.run(None, logfile)
+            alp.run()
             end = time.time()
             timings.append(end - start)
-        logfile.write("... done with timing runs ...\n")
+
+        self.log("... done with timing runs ...\n")
         mean = statistics.mean(timings)
         stdev = statistics.stdev(timings)
         """ We set the timeout for faulty runs to 10x the time a sane run takes. The motivation for this is that if a
@@ -231,30 +313,29 @@ class FaultInjector:
             this as an undetected error since the use may not be prepared to wait that long.
             ("+ 1.0" necessary in case "10.0*mean" is still below one second.) """
         self.timeout = int(10.0 * mean + 1.0)
-        logfile.write("timings: mean=%f, stdev=%f, timeout=%d\n" % (mean, stdev, self.timeout))
-        logfile.write("... done warming up\n")
-        logfile.write(SEPARATOR)
+        self.log("timings: mean=%f, stdev=%f, timeout=%d\n" % (mean, stdev, self.timeout))
+        self.log("... done warming up\n")
+        self.log(SEPARATOR)
+        self.flush()
 
-    def _get_function_ranges(self, key, logfile=None):
-        if not logfile:
-            logfile = os.sys.stdout
-
+    def _get_function_ranges(self):
         # find the range of the "coverage_function":
-        logfile.write("Obtaining ranges of function %s ...\n" % self.test.get_function())
-        bfi_args = " -m %s" % self.test.get_function()
-        bfi_cmd = self.bfi + bfi_args + " -- " + self.test.commands[key] + " --cso /dev/null --csl /dev/null"
-        p = Process(bfi_cmd)
-        _, _, stderr = p.run(None, logfile)
-        logfile.write("... finished running %s ...\n" % bfi_cmd)
+        self.log("Obtaining ranges of function %s ...\n" % self.test.get_function())
+        command = self.bfi_factory.get_function_cmd(self.test.get_function(), "/dev/null", "/dev/null")
+
+        p = utilities.LimitedProcess(command)
+        _, _, stderr = p.run(None, self.logfile)
+        self.log("... finished running %s ...\n" % command)
 
         # write "stderr" from running "bfi" to file:
-        rngs_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.ranges" % key))
+        rngs_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.ranges" % self.key))
+        self.log("... writing <stderr> to %s ...\n" % rngs_name)
         rngs_file = open(rngs_name, "w")
-        logfile.write("... writing <stderr> to %s ...\n" % rngs_name)
-        rngs_file.write("<stderr> from running %s:\n" % bfi_cmd)
+        rngs_file.write("<stderr> from running %s:\n" % command)
         rngs_file.write(stderr)
         rngs_file.write(SEPARATOR)
-        logfile.write("... done writing <stderr> to %s ...\n" % rngs_name)
+        self.log("... done writing <stderr> to %s ...\n" % rngs_name)
+        self.flush()
 
         func_ranges = []  # list of func ranges: pairs of enter/leave
         func_enters = []
@@ -269,7 +350,7 @@ class FaultInjector:
                 trigger = int(trigger)
                 # get the following line
                 sf = lines.readline()
-                assert(sf != "")
+                assert (sf != "")
                 if re.match(".*enter", sf):
                     func_enters.append((trigger, counter))
                     func_ranges.append(None)
@@ -284,26 +365,16 @@ class FaultInjector:
         rngs_file.write("ranges of function %s:\n" % self.test.get_function())
         for idx, func_range in enumerate(func_ranges):
             rngs_file.write("[   %10d - %10d ]\n" % (func_range[0], func_range[1]))
-            # We always assume "PRECISE=True":
-            """ if PRECISE == False:
-                func_ranges[idx] = (func_range[0] + 10, func_range[1] - 10)
-            """
         rngs_file.write(SEPARATOR)
-
-        """ This only yields different ranges from the above for loop if "PRECISE" is set to false. We ignore
-            "PRECISE", so we do not need this loop either: """
-        """ rngs_file.write("ranges for fault injection in function %s:\n" % self.test.coverage_function)
-            for func_range in func_ranges:
-                rngs_file.write("[   %10d - %10d ]\n" % (func_range[0], func_range[1]))
-            rngs_file.write(SEPARATOR)
-        """
         rngs_file.close()
-        logfile.write("... done obtaining ranges of function %s\n" % self.test.get_function())
-        logfile.write(SEPARATOR)
+
+        self.log("... done obtaining ranges of function %s\n" % self.test.get_function())
+        self.log(SEPARATOR)
+        self.flush()
         return func_ranges
 
-    def run(self, key, masktype, ref_checksum, ref_file, logfile=None):
-        """ masktype is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
+    def run(self, key, mask_type, ref_checksum, ref_cso_file):
+        """ 'mask_type' is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
         def get_random_mask(type_string):
             if type_string == 'RANDOM_32BITS':
                 # inject a random low-32-bit fault
@@ -325,121 +396,90 @@ class FaultInjector:
             else:
                 raise NameError('MASKTYPE_NOT_DEFINED')
 
-        def valid_fault(func_ranges, retcode, stderr):
-            if retcode is None:
-                # We consider programs that hanged as valid (since we have no output that can be validated):
-                return True
-            # --- check if fault was injected inside function ---
-            # instruction where fault was actually injected (triggered)
-            trig_instr = 0
-            lines = cStringIO.StringIO(stderr)
-            while True:
-                s1 = lines.readline()
-                if s1 == "":
-                    break
-                if len(s1) > 0 and s1[0] == '[' and len(s1.split('i =')) > 1:
-                    """ Note that if PIN crashes in such a way that no output lines are generated that match the
-                        condition in the previous if clause, then, after the while loop, 'trig_instr' will still be 0.
-                        Since no function range should start at 0, 'valid_fault' will return False. This behaviour is
-                        desired since a test that has crashed the PIN tool should be considered invalid. """
-                    trigger = int(s1.split('i =')[1].split(',')[0])
-                    s2 = lines.readline()
-                    assert(s2 != "")
-                    if (re.match('.*enter', s2) is None and
-                        re.match('.*leave', s2) is None):
-                        trig_instr = trigger
-                        break
+        self._warmup()
+        self.func_ranges = self._get_function_ranges()
 
-            for func_range in func_ranges:
-                if func_range[0] <= trig_instr <= func_range[1]:
-                    return True
-                elif trig_instr < func_range[0]:
-                    """ Note that this "elif" statement only makes sense if 'func_range' is sorted in ascending order,
-                        which is indeed achieved by our implementation of '_get_function_ranges'. """
-                    return False
-            return False
-
-        if not logfile:
-            logfile = os.sys.stdout
-
-        self._warmup(key, logfile)
-        func_ranges = self._get_function_ranges(key, logfile)
-
-        logfile.write("Performing fault injections ...\n")
+        self.log("Performing fault injections ...\n")
         # do NOT inject CF -- consider them Control Flow errors, not Data Flow
         inject_faults = list(set(FaultInjector.faults) - set(['CF']))
-        self.result = FaultInjector.Result()
-        for i in range(self.test.get_runs()):
-            if self.params and self.params.trigger:
-                instr = int(self.params.trigger)
-            else:
-                index = random.randint(0, len(func_ranges) - 1)
-                instr = random.randint(func_ranges[index][0], func_ranges[index][1])
-            if self.params and self.params.cmd:
-                fault = self.params.cmd
-            else:
-                fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
-            if self.params and self.params.mask:
-                mask = int(self.params.mask)
-            else:
-                mask = get_random_mask(masktype)
 
-            bfi_args = " -trigger %d -cmd %s -seed 1 -mask %d" % (instr, fault, mask)
+        result = FiResult(self.test, self.key, self.func_ranges, ref_checksum, ref_cso_file)
+        resq = Queue()
+        resq.put(result)
+        args = []
+        for i in range(self.test.get_runs()):
+            trigger, fault, mask = self.params.unpack()
+            if trigger is None:
+                index = random.randint(0, len(self.func_ranges) - 1)
+                trigger = random.randint(self.func_ranges[index][0], self.func_ranges[index][1])
+            if fault is None:
+                fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
+            if mask is None:
+                mask = get_random_mask(mask_type)
+
             cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (key, i))
             cso, csl = cs + ".cso", cs + ".csl"
-            bfi_cmd = self.bfi + bfi_args + " -- " + \
-                      self.test.commands[key] + (" --cso %s --csl %s" % (cso, csl))
-            logfile.write("... no. %d: running %s ...\n" % (i, bfi_cmd))
-            p = Process(bfi_cmd)
-            retcode, stdout, stderr = p.run(self.timeout, logfile)
-            logfile.write("... no. %d: finished running %s ...\n" % (i, bfi_cmd))
+            self.log("... no. %d: cso file: %s ...\n" % (i, cso))
+            self.log("... no. %d: csl file: %s ...\n" % (i, csl))
+            self.flush()
 
-            # write "stderr" and "stdout" from running "bfi" to file:
-            def write_output(label, source, target_path):
-                file = open(target_path, "w")
-                logfile.write("... no. %d: writing <%s> to %s ...\n" % (i, label, target_path))
-                file.write("<%s> from running %s:\n" % (label, bfi_cmd))
-                file.write(source)
-                file.write(SEPARATOR)
-                file.close()
-                logfile.write("... no. %d: done writing <%s> to %s ...\n" % (i, label, target_path))
-                file.close()
-                return
+            command = self.bfi_factory.get_fi_cmd(trigger, fault, mask, cso, csl)
 
-            fi_name = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.fi.%d" % (key, i)))
-            write_output("stderr", stderr, fi_name + ".stderr")
-            write_output("stdout", stdout, fi_name + ".stdout")
+            stdfile_prefix = os.path.join(self.test.outputs_dir, self.test.get_name() + (".%s.fi.%d" % (key, i)))
+            prefix = "... no. %d:" % i
 
-            logfile.write("... no. %d: cso file: %s ...\n" % (i, cso))
-            logfile.write("... no. %d: csl file: %s ...\n" % (i, csl))
+            args.append((self.timeout, command, cso, stdfile_prefix, self.logfile, prefix, result,))
 
-            checksum = p.extract_checksum()
-            is_valid = valid_fault(func_ranges, retcode, stderr)
-            kind = self.result.diagnose(retcode, is_valid, checksum, ref_checksum, cso, ref_file)
-            logfile.write("... no. %d: %s (retcode=%s) %s ...\n" % (i, kind, str(retcode), bfi_cmd))
+        alp = utilities.ArgListProcessor(self.processes, bfi_worker, args)
+        alp.run()
 
-        logfile.write("... finished fault injections.\n")
-        logfile.write(SEPARATOR)
+        self.log("... finished fault injections.\n")
+        self.log(SEPARATOR)
 
-        logfile.write("Result:\n")
-        self.result.write(logfile)
-        logfile.write(SEPARATOR)
-        return
+        self.log("Result:\n")
+        result.write(self.logfile)
+        self.log(SEPARATOR)
+        self.flush()
+        return result
 
 
-class CmdParams:
-    def __init__(self, trigger="", cmd="", mask=""):
-        if trigger != "": self.trigger = trigger
-        else: self.trigger = None
-        if cmd != "": self.cmd = cmd
-        else: self.cmd = None
-        if cmd != "": self.mask = mask
-        else: self.mask = None
+def plain_run(test):
+    logname = os.path.join(test.get_outputs_dir(), test.get_name() + ".golden.plain.log")
+    logfile = utilities.ConcurrentFile(logname)
+
+    logfile.write("Golden 'plain' run ...")
+    ref_cs_file_prefix = os.path.join(test.get_cs_dir(), "golden.plain")
+    ref_cso_file, ref_csl_file = ref_cs_file_prefix + ".cso", ref_cs_file_prefix + ".csl"
+
+    p = utilities.LimitedProcess(test.commands["plain"] + (" --cso %s --csl %s" % (ref_cso_file, ref_csl_file)))
+    retcode, _, stderr = p.run(None, logfile)
+    if retcode != 0:
+        raise Exception("Coverage", test.commands["plain"])
+    logfile.write("... finished golden run.")
+
+    _, checksum = testcase.TestCase.extract_info(stderr.split("\n"))
+    return checksum, ref_cso_file
 
 
-#===============================================================================
-# MAIN
-#===============================================================================
+def fi_run(test, key, ref_checksum, ref_cso_file, processes, summary):
+    logname = os.path.join(test.get_outputs_dir(), test.get_name() + "." + key + ".log")
+    logfile = utilities.ConcurrentFile(logname)
+
+    logfile.write("reference checksum=0x%X\n" % ref_checksum)
+    logfile.write("reference file: %s\n" % ref_cso_file)
+    logfile.write(SEPARATOR)
+    logfile.flush()
+
+    fi = FaultInjector(test, key, bfi, logfile, processes, cmd_params)
+    result = fi.run(key, "RANDOM_8BITS", ref_checksum, ref_cso_file)
+
+    summary.write("test name: %s, key=%s\n" % (test.get_name(), key))
+    result.write(summary, "\t")
+    summary.write(SEPARATOR)
+    summary.flush()
+    return
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--directory",
@@ -466,11 +506,16 @@ if __name__ == "__main__":
     parser.add_argument("--mask",
                         default=r"",
                         help="mask for fault injection")
+    parser.add_argument("-p0", "--processes0",
+                        default=r"1",
+                        help="number of processes across which the test cases should be spread")
+    parser.add_argument("-p1", "--processes1",
+                        default=r"1",
+                        help="number of processes for parallel fualt injection runs")
 
     args = parser.parse_args()
     suite = testcase.TestSuite(args.directory, args.outd)
-    if args.summary == "":
-        args.summary = os.path.join(suite.get_outd(), "coverage.summary")
+    if args.summary == "": args.summary = os.path.join(suite.get_outd(), "coverage.summary")
     bfi = "%s -t %s" % (args.pin, args.bfi)
     cmd_params = CmdParams(args.trigger, args.cmd, args.mask)
 
@@ -479,52 +524,12 @@ if __name__ == "__main__":
     print("Changing randomize_va_space to 0...")
     subprocess.call('echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null', shell=True)
 
-    results = dict()
+    summary = utilities.ConcurrentFile(args.summary)
+    fi_args = []
     for test in suite.get_tests_with_profile("cover"):
-        results[test.get_name()] = []
+        checksum, cso = plain_run(test)
+        for key in ["plain", "encoded"]:
+            fi_args.append((test, key, checksum, cso, int(args.processes1), summary,))
 
-        # Get the reference output from a 'plain' run:
-        print "Golden 'plain' run ..."
-        ref_file = os.path.join(test.get_cs_dir(), "golden.plain")
-        ref_file_cso, ref_file_csl = ref_file + ".cso", ref_file + ".csl"
-        p = Process(test.commands["plain"] + (" --cso %s --csl %s" % (ref_file_cso, ref_file_csl)))
-        retcode, _, _ = p.run()
-        if retcode != 0:
-            raise Exception("Coverage", test.commands["plain"])
-        print "... finished golden run."
-        ref_checksum = p.extract_checksum()
-
-        fi = FaultInjector(test, bfi, cmd_params)
-
-        ref = os.path.join(test.get_outputs_dir(), test.get_name() + ".ref")
-        ref_logfile = open(ref, "w")
-        ref_logfile.write("reference checksum=0x%X\n" % ref_checksum)
-        ref_logfile.write("reference file: %s\n" % ref_file_cso)
-        ref_logfile.write(SEPARATOR)
-        fi.run("plain", "RANDOM_8BITS", ref_checksum, ref_file_cso, ref_logfile)
-        results[test.get_name()].append(("ref", fi.get_result()))
-        ref_logfile.close()
-
-        cov = os.path.join(test.get_outputs_dir(), test.get_name() + ".cov")
-        cov_logfile = open(cov, "w")
-        cov_logfile.write("reference checksum=0x%X\n" % ref_checksum)
-        cov_logfile.write("reference file: %s\n" % ref_file_cso)
-        cov_logfile.write(SEPARATOR)
-        fi.run("encoded", "RANDOM_8BITS", ref_checksum, ref_file_cso, cov_logfile)
-        results[test.get_name()].append(("cov", fi.get_result()))
-        cov_logfile.close()
-
-    summary = open(args.summary, "w")
-    for name in results.keys():
-        ref_result = [r[1] for r in results[name] if r[0] == "ref"]
-        assert(len(ref_result) == 1)
-        cov_result = [r[1] for r in results[name] if r[0] == "cov"]
-        assert(len(cov_result) == 1)
-
-        summary.write("test name: %s\n" % name)
-        summary.write("reference result:\n")
-        ref_result[0].write(summary, "\t")
-        summary.write("coverage result:\n")
-        cov_result[0].write(summary, "\t")
-        summary.write(SEPARATOR)
-    summary.close()
+    alp = utilities.ArgListProcessor(int(args.processes0), fi_run, fi_args)
+    alp.run()
