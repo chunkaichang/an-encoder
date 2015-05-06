@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -- /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.cover.encoded --cso /dev/null --csl /dev/null:
+elapsed cycles: 319633098
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00007CDAE2B040F7
+**********************
+INSTR   = 175964
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 3.09s
+----------------------------------------------------------------

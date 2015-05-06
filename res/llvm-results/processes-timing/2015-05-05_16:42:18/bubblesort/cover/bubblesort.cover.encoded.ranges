@@ -1,0 +1,27 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -m ___enc_bubblesort -- /home/nrink/Projects/build/encode/encode/tests/bubblesort/bubblesort.cover.encoded --cso /dev/null --csl /dev/null:
+[.:    0, IP = 0x400b40, i = 163694, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_bubblesort iteration = 1
+[.:    0, IP = 0x400fdb, i = 168313, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_bubblesort
+elapsed cycles: 34741710
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00007CDAE2B040F7
+**********************
+INSTR   = 178677
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 0.39s
+----------------------------------------------------------------
+ranges of function ___enc_bubblesort:
+[       163694 -     168313 ]
+----------------------------------------------------------------

@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 481496712 -cmd RREG -seed 1 -mask 17 -- /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.encoded /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra_input.dat --cso ./2015-05-05_17:04:53/dijkstra/cover/cs/encoded.4.cso --csl ./2015-05-05_17:04:53/dijkstra/cover/cs/encoded.4.csl:
+[.:    0, IP = 0x4011c4, i = 481496712, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x4011c4, rdx = 0x15f779430, rdx' = 0x15f779421
+elapsed cycles: 89811087867
+hi(checksum)=0x0651484E044488F0
+lo(checksum)=0x8A61BB16A5A889BA
+**********************
+INSTR   = 537417482
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 481496712
+TTYPE   = IN
+COMMAND = RREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x11
+THREAD  = 0
+ELAPSED = 32.67s
+----------------------------------------------------------------

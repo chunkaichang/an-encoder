@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 165248 -cmd RVAL -seed 1 -mask 29 -- /home/nrink/Projects/build/encode/encode/tests/bubblesort/bubblesort.cover.encoded --cso ./2015-05-05_13:23:20/bubblesort/cover/cs/encoded.98.cso --csl ./2015-05-05_13:23:20/bubblesort/cover/cs/encoded.98.csl:
+[.:    0, IP = 0x400c67, i = 165257, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, value = 72, value' = 85, addr = 0x602100, op = 0
+elapsed cycles: 975594075
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00007CDAE2B04650
+**********************
+INSTR   = 178691
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 165248
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x1d
+THREAD  = 0
+ELAPSED = 11.41s
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 164466 -cmd RADDR -seed 1 -mask 160 -- /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.cover.encoded --cso ./2015-05-05_17:04:53/quicksort/cover/cs/encoded.29.cso --csl ./2015-05-05_17:04:53/quicksort/cover/cs/encoded.29.csl:
+[.:    0, IP = 0x40103b, i = 164466, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, addr = 0x7fffffffe058, addr' = 0x7fffffffe0f8, op = 0
+**********************
+INSTR   = 164466
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 164466
+TTYPE   = IN
+COMMAND = RADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0xa0
+THREAD  = 0
+ELAPSED = 3.49s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 192649507 -cmd RADDR -seed 1 -mask 210 -- /home/nrink/Projects/build/encode/encode/tests/crc/crc.cover.encoded /home/nrink/Projects/build/encode/encode/tests/crc/crc_input_small.pcm --cso ./2015-05-05_15:21:14/crc/cover/cs/encoded.8.cso --csl ./2015-05-05_15:21:14/crc/cover/cs/encoded.8.csl:
+[.:    0, IP = 0x7fffe4618b01, i = 192649507, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 4, addr = 0x603010, addr' = 0x6030c2, op = 0
+elapsed cycles: 87167714661
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000C538EDCF
+**********************
+INSTR   = 241122590
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 192649507
+TTYPE   = IN
+COMMAND = RADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0xd2
+THREAD  = 0
+ELAPSED = 27.54s
+----------------------------------------------------------------

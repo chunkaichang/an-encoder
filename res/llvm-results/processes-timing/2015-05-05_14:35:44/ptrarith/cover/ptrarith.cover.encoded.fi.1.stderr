@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 165531 -cmd RVAL -seed 1 -mask 51 -- /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.cover.encoded --cso ./2015-05-05_14:35:44/ptrarith/cover/cs/encoded.1.cso --csl ./2015-05-05_14:35:44/ptrarith/cover/cs/encoded.1.csl:
+[.:    0, IP = 0x400cd6, i = 165536, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, value = 132, value' = 183, addr = 0x603178, op = 0
+elapsed cycles: 440738301
+hi(checksum)=0xBF169915BFBD511C
+lo(checksum)=0x048A5300FACBEDB4
+**********************
+INSTR   = 183137
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 165531
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x33
+THREAD  = 0
+ELAPSED = 9.34s
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 155556001 -cmd WADDR -seed 1 -mask 206 -- /home/nrink/Projects/build/encode/encode/tests/matmul/matmul.cover.encoded --cso ./2015-05-05_16:42:18/matmul/cover/cs/encoded.9.cso --csl ./2015-05-05_16:42:18/matmul/cover/cs/encoded.9.csl:
+[.:    0, IP = 0x400b93, i = 155556007, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, addr = 0x6020a0, addr' = 0x60206e, op = 0
+**********************
+INSTR   = 184548355
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 155556001
+TTYPE   = IN
+COMMAND = WADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0xce
+THREAD  = 0
+ELAPSED = 6.34s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

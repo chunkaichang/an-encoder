@@ -1,0 +1,72 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -m quicksort -- /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.cover.plain --cso /dev/null --csl /dev/null:
+[.:    0, IP = 0x400a80, i = 163655, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 1
+[.:    0, IP = 0x400a80, i = 163778, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 2
+[.:    0, IP = 0x400a80, i = 163812, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 3
+[.:    0, IP = 0x400a80, i = 163838, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 4
+[.:    0, IP = 0x400b3e, i = 163853, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 163862, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 163871, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400a80, i = 163938, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 5
+[.:    0, IP = 0x400a80, i = 163972, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 6
+[.:    0, IP = 0x400a80, i = 163998, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 7
+[.:    0, IP = 0x400b3e, i = 164013, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 164022, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 164031, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400a80, i = 164073, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 8
+[.:    0, IP = 0x400b3e, i = 164088, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400a80, i = 164123, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 9
+[.:    0, IP = 0x400a80, i = 164149, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter quicksort iteration = 10
+[.:    0, IP = 0x400b3e, i = 164164, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 164173, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+[.:    0, IP = 0x400b3e, i = 164182, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave quicksort
+elapsed cycles: 15086544
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00007CDAE2B040F7
+**********************
+INSTR   = 174425
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 0.41s
+----------------------------------------------------------------
+ranges of function quicksort:
+[       163655 -     164182 ]
+[       163778 -     163871 ]
+[       163812 -     163862 ]
+[       163838 -     163853 ]
+[       163938 -     164031 ]
+[       163972 -     164022 ]
+[       163998 -     164013 ]
+[       164073 -     164088 ]
+[       164123 -     164173 ]
+[       164149 -     164164 ]
+----------------------------------------------------------------

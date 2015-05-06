@@ -1,0 +1,19 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 48869675 -cmd RVAL -seed 1 -mask 147 -- /home/nrink/Projects/build/encode/encode/tests/matmul/matmul.cover.encoded --cso ./2015-05-05_11:40:48/matmul/cover/cs/encoded.3.cso --csl ./2015-05-05_11:40:48/matmul/cover/cs/encoded.3.csl:
+[.:    0, IP = 0x400cf8, i = 48869680, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, value = 6303760, value' = 6303875, addr = 0x7fffffffe178, op = 0
+**********************
+INSTR   = 182070699
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 48869675
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x93
+THREAD  = 0
+ELAPSED = 6.95s
+----------------------------------------------------------------

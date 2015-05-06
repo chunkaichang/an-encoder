@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 7868523 -cmd RREG -seed 1 -mask 67 -- /home/nrink/Projects/build/encode/encode/tests/matmul/matmul.cover.plain --cso ./2015-05-05_12:10:21/matmul/cover/cs/plain.1.cso --csl ./2015-05-05_12:10:21/matmul/cover/cs/plain.1.csl:
+[.:    0, IP = 0x400a21, i = 7868523, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x400a21, r13 = 0x605028, r13' = 0x60506b
+elapsed cycles: 5582091756
+hi(checksum)=0x115091939D753CA8
+lo(checksum)=0x1CD053E4088C0DDA
+**********************
+INSTR   = 9022806
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 7868523
+TTYPE   = IN
+COMMAND = RREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x43
+THREAD  = 0
+ELAPSED = 23.70s
+----------------------------------------------------------------

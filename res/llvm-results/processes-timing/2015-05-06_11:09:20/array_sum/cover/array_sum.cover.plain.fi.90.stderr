@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 151282 -cmd RREG -seed 1 -mask 46 -- /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.cover.plain --cso ./2015-05-06_11:09:20/array_sum/cover/cs/plain.90.cso --csl ./2015-05-06_11:09:20/array_sum/cover/cs/plain.90.csl:
+[.:    0, IP = 0x4009cb, i = 151282, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x4009cb, rip = 0x4009cb, rip' = 0x4009e5
+elapsed cycles: 98295339
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000000001AC
+**********************
+INSTR   = 159903
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 151282
+TTYPE   = IN
+COMMAND = RREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x2e
+THREAD  = 0
+ELAPSED = 1.77s
+----------------------------------------------------------------

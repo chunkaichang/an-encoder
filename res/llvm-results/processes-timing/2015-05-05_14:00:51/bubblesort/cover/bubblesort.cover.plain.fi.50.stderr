@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 164209 -cmd RADDR -seed 1 -mask 143 -- /home/nrink/Projects/build/encode/encode/tests/bubblesort/bubblesort.cover.plain --cso ./2015-05-05_14:00:51/bubblesort/cover/cs/plain.50.cso --csl ./2015-05-05_14:00:51/bubblesort/cover/cs/plain.50.csl:
+[.:    0, IP = 0x400af5, i = 164213, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, addr = 0x6020d0, addr' = 0x60205f, op = 0
+elapsed cycles: 49268082
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x2640272210AA549C
+**********************
+INSTR   = 174350
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 164209
+TTYPE   = IN
+COMMAND = RADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0x8f
+THREAD  = 0
+ELAPSED = 3.47s
+----------------------------------------------------------------

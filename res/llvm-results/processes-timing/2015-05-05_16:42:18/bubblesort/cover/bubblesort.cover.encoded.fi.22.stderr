@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 168178 -cmd WADDR -seed 1 -mask 218 -- /home/nrink/Projects/build/encode/encode/tests/bubblesort/bubblesort.cover.encoded --cso ./2015-05-05_16:42:18/bubblesort/cover/cs/encoded.22.cso --csl ./2015-05-05_16:42:18/bubblesort/cover/cs/encoded.22.csl:
+[.:    0, IP = 0x400c60, i = 168178, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, addr = 0x7fffffffe170, addr' = 0x7fffffffe1aa, op = 0
+**********************
+INSTR   = 168312
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 168178
+TTYPE   = IN
+COMMAND = WADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0xda
+THREAD  = 0
+ELAPSED = 0.87s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

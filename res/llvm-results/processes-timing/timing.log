@@ -1,0 +1,217 @@
+-----------------------------------------------------
+-p1 = 1
+-----------------------------------------------------
+2015-05-06_11:09:20
+./encode/tests/ -p0 1 -p1 1
+ 1299.73  user
+  194.86  system
+27:54.04  elapsed
+      89% CPU
+total hangs = 15
+
+2015-05-06_10:49:26
+./encode/tests/ -p0 2 -p1 1
+ 1257.17  user
+  191.86  system
+13:18.70  elapsed
+     181% CPU
+total hangs = 10
+
+2015-05-06_10:37:59
+./encode/tests/ -p0 4 -p1 1
+1372.04  user
+ 206.87  system
+7:42.56  elapsed
+    341% CPU
+total fails = 15
+
+2015-05-06_10:27:32
+./encode/tests/ -p0 8 -p1 1
+2199.73  user
+ 320.04  system
+6:44.62  elapsed
+    622% CPU
+total hangs = 9
+
+2015-05-06_10:13:34
+./encode/tests/ -p0 16 -p1 1
+2159.38  user
+ 296.59  system
+6:15.22  elapsed
+    654% CPU
+total hangs = 17
+
+-----------------------------------------------------
+-p1 = 2
+-----------------------------------------------------
+2015-05-05_17:36:16
+./encode/tests/ -p0 1 -p1 2
+ 1366.52  user
+  216.32  system
+15:07.55  elapsed
+     174% CPU
+total hangs = 15
+
+2015-05-05_17:25:31
+./encode/tests/ -p0 2 -p1 2
+1470.19  user
+ 254.79  system
+8:52.06  elapsed
+    324% CPU
+total hangs = 16
+
+2015-05-05_17:15:54
+./encode/tests/ -p0 4 -p1 2
+2369.79  user
+ 359.16  system
+7:07.03  elapsed
+    639% CPU
+total hangs = 16
+
+2015-05-05_17:04:53
+./encode/tests/ -p0 8 -p1 2
+2441.40  user
+ 343.59  system
+6:57.83  elapsed
+    666% CPU 
+total hangs = 17
+
+2015-05-05_16:55:44
+./encode/tests/ -p0 16 -p1 2
+2451.93  user
+ 341.94  system
+6:37.73  elapsed
+    702% CPU
+total hangs = 13
+
+-----------------------------------------------------
+-p1 = 4
+-----------------------------------------------------
+2015-05-05_16:42:18
+./encode/tests/ -p0 1 -p1 4
+ 1859.49  user
+  270.72  system
+10:55.45  elapsed
+     324% CPU
+total hangs = 14
+
+2015-05-05_16:31:56
+./encode/tests/ -p0 2 -p1 4
+2696.46  user
+ 384.82  system
+8:04.13  elapsed
+    636% CPU
+total hangs = 15
+
+2015-05-05_16:21:28
+./encode/tests/ -p0 4 -p1 4
+2817.00  user
+ 436.51  system
+7:39.41  elapsed
+    708% CPU
+total hangs = 11
+
+2015-05-05_16:02:12
+./encode/tests/ -p0 8 -p1 4
+3017.86  user
+ 423.45  system
+7:45.81  elapsed
+    738% CPU
+total hangs = 9
+
+2015-05-05_15:45:01
+./encode/tests/ -p0 16 -p1 4
+2843.51  user
+ 416.69  system
+7:41.88  elapsed
+    705% CPU
+total hangs = 18
+
+-----------------------------------------------------
+-p1 = 8
+-----------------------------------------------------
+2015-05-05_14:00:51
+./encode/tests/ -p0 1 -p1 8
+ 3562.87  user
+  540.28  system
+10:38.41  elapsed
+     642% CPU
+total hangs = 10
+
+2015-05-05_11:40:48
+./encode/tests/ -p0 2 -p1 8
+3620.56  user
+ 507.87  system
+9:40.06  elapsed
+    711% CPU
+total hangs = 13
+
+2015-05-05_11:58:41
+./encode/tests/ -p0 4 -p1 8
+ 737.88  user
+ 509.86  system
+9:30.94  elapsed
+    743% CPU
+total hangs = 10
+
+2015-05-05_12:10:21
+./encode/tests/ -p0 8 -p1 8
+3929.86 user
+ 545.58 system
+9:56.74 elapsed
+   749% CPU
+total hangs = 4
+
+2015-05-05_13:42:46
+./encode/tests/ -p0 16 -p1 8
+3743.77  user
+ 574.48  system
+9:49.41  elapsed
+   732%  CPU
+total hangs = 15 
+
+-----------------------------------------------------
+-p1 = 16
+-----------------------------------------------------
+2015-05-05_15:21:14
+./encode/tests/ -p0 1 -p1 16
+ 5409.69  user
+  741.39  system
+15:14.88  elapsed
+     672% CPU
+total hangs = 7
+
+2015-05-05_14:58:49
+./encode/tests/ -p0 2 -p1 16
+ 5508.74  user 
+  867.65  system
+14:38.34  elapsed
+     725% CPU
+total hangs = 7
+
+2015-05-05_14:35:44
+./encode/tests/ -p0 4 -p1 16
+ 5528.69  user
+  886.41  system
+14:12.22  elapsed
+     752% CPU
+total hangs = 7
+
+2015-05-05_13:23:20
+./encode/tests/ -p0 8 -p1 16
+ 5902.17  user
+  849.98  system
+15:05.84  elapsed
+     745% CPU
+total hangs = 11 
+
+2015-05-05_14:16:24
+./encode/tests/ -p0 16 -p1 16
+ 5624.80  user
+  898.96  system
+14:12.17  elapsed
+     765% CPU
+total hangs = 8
+
+
+

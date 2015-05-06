@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 151797 -cmd WVAL -seed 1 -mask 213 -- /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.cover.encoded --cso ./2015-05-05_16:55:44/array_sum/cover/cs/encoded.15.cso --csl ./2015-05-05_16:55:44/array_sum/cover/cs/encoded.15.csl:
+[.:    0, IP = 0x400a8f, i = 151812, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, value = 11496, value' = 11325, addr = 0x602090, op = 0
+elapsed cycles: 177458907
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000000001A4
+**********************
+INSTR   = 160611
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 151797
+TTYPE   = IN
+COMMAND = WVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0xd5
+THREAD  = 0
+ELAPSED = 3.42s
+----------------------------------------------------------------

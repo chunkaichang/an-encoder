@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 170835 -cmd RVAL -seed 1 -mask 120 -- /home/nrink/Projects/build/encode/encode/tests/des/des.tiny.cover.plain -e /home/nrink/Projects/build/encode/encode/tests/des/des.input.tiny.txt /dev/null 809 --cso ./2015-05-05_16:21:28/des.tiny/cover/cs/plain.1.cso --csl ./2015-05-05_16:21:28/des.tiny/cover/cs/plain.1.csl:
+[.:    0, IP = 0x400880, i = 170836, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, value = 140737026932096, value' = 140737026932216, addr = 0x602098, op = 0
+**********************
+INSTR   = 170838
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 170835
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x78
+THREAD  = 0
+ELAPSED = 1.13s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

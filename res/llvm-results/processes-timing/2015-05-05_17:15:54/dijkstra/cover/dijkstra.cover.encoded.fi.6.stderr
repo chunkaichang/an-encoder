@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 83689932 -cmd WVAL -seed 1 -mask 205 -- /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.encoded /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra_input.dat --cso ./2015-05-05_17:15:54/dijkstra/cover/cs/encoded.6.cso --csl ./2015-05-05_17:15:54/dijkstra/cover/cs/encoded.6.csl:
+[.:    0, IP = 0x401170, i = 83689944, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, value = 252, value' = 49, addr = 0x6020f0, op = 0
+elapsed cycles: 22959262224
+hi(checksum)=0x0651484E044488F0
+lo(checksum)=0x8A61BB16A5A889BA
+**********************
+INSTR   = 537417309
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 83689932
+TTYPE   = IN
+COMMAND = WVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0xcd
+THREAD  = 0
+ELAPSED = 7.86s
+----------------------------------------------------------------

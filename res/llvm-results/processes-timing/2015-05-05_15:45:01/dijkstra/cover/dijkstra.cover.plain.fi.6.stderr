@@ -1,0 +1,21 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 63210725 -cmd WVAL -seed 1 -mask 71 -- /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.plain /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra_input.dat --cso ./2015-05-05_15:45:01/dijkstra/cover/cs/plain.6.cso --csl ./2015-05-05_15:45:01/dijkstra/cover/cs/plain.6.csl:
+[.:    0, IP = 0x40100c, i = 63211050, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, value = 6392768, value' = 6392711, addr = 0x617f48, op = 0
+*** Error in `/home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.plain': free(): invalid pointer: 0x0000000000618b87 ***
+**********************
+INSTR   = 63812605
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 63210725
+TTYPE   = IN
+COMMAND = WVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x47
+THREAD  = 0
+ELAPSED = 7.29s
+Aborted (core dumped)
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 165264 -cmd WREG -seed 1 -mask 54 -- /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.cover.encoded --cso ./2015-05-05_13:42:46/ptrarith/cover/cs/encoded.85.cso --csl ./2015-05-05_13:42:46/ptrarith/cover/cs/encoded.85.csl:
+[.:    0, IP = 0x40108e, i = 165264, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x401091, rdx = (nil), rdx' = 0x36
+**********************
+INSTR   = 165266
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 165264
+TTYPE   = IN
+COMMAND = WREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x36
+THREAD  = 0
+ELAPSED = 3.36s
+Floating point exception (core dumped)
+----------------------------------------------------------------

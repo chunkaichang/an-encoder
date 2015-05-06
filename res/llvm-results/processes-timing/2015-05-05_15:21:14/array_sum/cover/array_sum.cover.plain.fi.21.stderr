@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 151195 -cmd RREG -seed 1 -mask 154 -- /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.cover.plain --cso ./2015-05-05_15:21:14/array_sum/cover/cs/plain.21.cso --csl ./2015-05-05_15:21:14/array_sum/cover/cs/plain.21.csl:
+[.:    0, IP = 0x400cf6, i = 151195, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x400cf6, rsp = 0x7fffffffe1b8, rsp' = 0x7fffffffe122
+**********************
+INSTR   = 151196
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 151195
+TTYPE   = IN
+COMMAND = RREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x9a
+THREAD  = 0
+ELAPSED = 3.16s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

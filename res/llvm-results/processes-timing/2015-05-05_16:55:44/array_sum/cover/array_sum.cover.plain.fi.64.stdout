@@ -1,0 +1,3 @@
+<stdout> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 151226 -cmd RREG -seed 1 -mask 65 -- /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.cover.plain --cso ./2015-05-05_16:55:44/array_sum/cover/cs/plain.64.cso --csl ./2015-05-05_16:55:44/array_sum/cover/cs/plain.64.csl:
+C: Tool (or Pin) caused signal 5 at PC 0x7fffe502c1a1
+C: Location may be in in-lined analysis code, try re-running with '-inline 0' to debug it----------------------------------------------------------------

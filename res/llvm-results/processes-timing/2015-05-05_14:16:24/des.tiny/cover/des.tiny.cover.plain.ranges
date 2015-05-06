@@ -1,0 +1,197 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -m ___enc_des -- /home/nrink/Projects/build/encode/encode/tests/des/des.tiny.cover.plain -e /home/nrink/Projects/build/encode/encode/tests/des/des.input.tiny.txt /dev/null 809 --cso /dev/null --csl /dev/null:
+[.:    0, IP = 0x4010c0, i = 159653, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 1
+[.:    0, IP = 0x4011ab, i = 159859, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 162000, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 2
+[.:    0, IP = 0x4011ab, i = 162206, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 162541, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 3
+[.:    0, IP = 0x4011ab, i = 162747, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 163082, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 4
+[.:    0, IP = 0x4011ab, i = 163288, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 163623, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 5
+[.:    0, IP = 0x4011ab, i = 163829, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 164164, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 6
+[.:    0, IP = 0x4011ab, i = 164370, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 164705, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 7
+[.:    0, IP = 0x4011ab, i = 164911, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 165246, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 8
+[.:    0, IP = 0x4011ab, i = 165452, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 165787, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 9
+[.:    0, IP = 0x4011ab, i = 165993, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 166328, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 10
+[.:    0, IP = 0x4011ab, i = 166534, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 166869, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 11
+[.:    0, IP = 0x4011ab, i = 167075, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 167410, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 12
+[.:    0, IP = 0x4011ab, i = 167616, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 167951, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 13
+[.:    0, IP = 0x4011ab, i = 168157, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 168492, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 14
+[.:    0, IP = 0x4011ab, i = 168698, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 169033, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 15
+[.:    0, IP = 0x4011ab, i = 169239, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 169574, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 16
+[.:    0, IP = 0x4011ab, i = 169780, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 170115, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 17
+[.:    0, IP = 0x4011ab, i = 170321, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 170656, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 18
+[.:    0, IP = 0x4011ab, i = 170862, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 171197, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 19
+[.:    0, IP = 0x4011ab, i = 171403, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 171738, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 20
+[.:    0, IP = 0x4011ab, i = 171944, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 172279, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 21
+[.:    0, IP = 0x4011ab, i = 172485, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 172820, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 22
+[.:    0, IP = 0x4011ab, i = 173026, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 173361, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 23
+[.:    0, IP = 0x4011ab, i = 173567, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 173902, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 24
+[.:    0, IP = 0x4011ab, i = 174108, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 174443, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 25
+[.:    0, IP = 0x4011ab, i = 174649, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 174984, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 26
+[.:    0, IP = 0x4011ab, i = 175190, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 175525, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 27
+[.:    0, IP = 0x4011ab, i = 175731, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 176066, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 28
+[.:    0, IP = 0x4011ab, i = 176272, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 176607, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 29
+[.:    0, IP = 0x4011ab, i = 176813, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 177148, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 30
+[.:    0, IP = 0x4011ab, i = 177354, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 177689, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 31
+[.:    0, IP = 0x4011ab, i = 177895, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 178230, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 32
+[.:    0, IP = 0x4011ab, i = 178436, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 178771, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 33
+[.:    0, IP = 0x4011ab, i = 178977, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 179312, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 34
+[.:    0, IP = 0x4011ab, i = 179518, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+[.:    0, IP = 0x4010c0, i = 179958, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_des iteration = 35
+[.:    0, IP = 0x4011ab, i = 180164, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_des
+elapsed cycles: 152678595
+hi(checksum)=0x68FE25C09409DC22
+lo(checksum)=0x8A842324B172309E
+**********************
+INSTR   = 189224
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 4.30s
+----------------------------------------------------------------
+ranges of function ___enc_des:
+[       159653 -     159859 ]
+[       162000 -     162206 ]
+[       162541 -     162747 ]
+[       163082 -     163288 ]
+[       163623 -     163829 ]
+[       164164 -     164370 ]
+[       164705 -     164911 ]
+[       165246 -     165452 ]
+[       165787 -     165993 ]
+[       166328 -     166534 ]
+[       166869 -     167075 ]
+[       167410 -     167616 ]
+[       167951 -     168157 ]
+[       168492 -     168698 ]
+[       169033 -     169239 ]
+[       169574 -     169780 ]
+[       170115 -     170321 ]
+[       170656 -     170862 ]
+[       171197 -     171403 ]
+[       171738 -     171944 ]
+[       172279 -     172485 ]
+[       172820 -     173026 ]
+[       173361 -     173567 ]
+[       173902 -     174108 ]
+[       174443 -     174649 ]
+[       174984 -     175190 ]
+[       175525 -     175731 ]
+[       176066 -     176272 ]
+[       176607 -     176813 ]
+[       177148 -     177354 ]
+[       177689 -     177895 ]
+[       178230 -     178436 ]
+[       178771 -     178977 ]
+[       179312 -     179518 ]
+[       179958 -     180164 ]
+----------------------------------------------------------------

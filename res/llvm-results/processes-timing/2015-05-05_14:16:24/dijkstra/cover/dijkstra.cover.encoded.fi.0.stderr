@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 254005549 -cmd TXT -seed 1 -mask 27 -- /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.encoded /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra_input.dat --cso ./2015-05-05_14:16:24/dijkstra/cover/cs/encoded.0.cso --csl ./2015-05-05_14:16:24/dijkstra/cover/cs/encoded.0.csl:
+[.:    0, IP = 0x401196, i = 254005549, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	ip' = 0x401198, size = 2, mask = 27, idx = 1, byte = 24, byte' = 3
+elapsed cycles: 1326976285119
+hi(checksum)=0x0651484E044488F0
+lo(checksum)=0x8A61BB16A5A889BA
+**********************
+INSTR   = 537417354
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 254005549
+TTYPE   = IN
+COMMAND = TXT
+SEL     = -1
+SEED    = 1
+MASK    = 0x1b
+THREAD  = 0
+ELAPSED = 400.32s
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 142469144 -cmd WADDR -seed 1 -mask 101 -- /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra.cover.plain /home/nrink/Projects/build/encode/encode/tests/dijkstra/dijkstra_input.dat --cso ./2015-05-05_16:21:28/dijkstra/cover/cs/plain.9.cso --csl ./2015-05-05_16:21:28/dijkstra/cover/cs/plain.9.csl:
+[.:    0, IP = 0x401034, i = 142469155, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, addr = 0x6020f0, addr' = 0x602095, op = 0
+**********************
+INSTR   = 143109428
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 142469144
+TTYPE   = IN
+COMMAND = WADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0x65
+THREAD  = 0
+ELAPSED = 9.22s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 167791 -cmd WREG -seed 1 -mask 158 -- /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.cover.encoded --cso ./2015-05-06_10:13:34/ptrarith/cover/cs/encoded.14.cso --csl ./2015-05-06_10:13:34/ptrarith/cover/cs/encoded.14.csl:
+[.:    0, IP = 0x401056, i = 167791, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x401058, rsp = 0x7fffffffe130, rsp' = 0x7fffffffe1ae
+**********************
+INSTR   = 167832
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 167791
+TTYPE   = IN
+COMMAND = WREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x9e
+THREAD  = 0
+ELAPSED = 2.16s
+Segmentation fault (core dumped)
+----------------------------------------------------------------

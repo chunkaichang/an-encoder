@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 221261714 -cmd WADDR -seed 1 -mask 66 -- /home/nrink/Projects/build/encode/encode/tests/crc/crc.cover.encoded /home/nrink/Projects/build/encode/encode/tests/crc/crc_input_small.pcm --cso ./2015-05-05_14:35:44/crc/cover/cs/encoded.7.cso --csl ./2015-05-05_14:35:44/crc/cover/cs/encoded.7.csl:
+[.:    0, IP = 0x400bb8, i = 221261716, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, addr = 0x6028b0, addr' = 0x6028f2, op = 0
+elapsed cycles: 115663482366
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000C538EDCF
+**********************
+INSTR   = 241122607
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 221261714
+TTYPE   = IN
+COMMAND = WADDR
+SEL     = -1
+SEED    = 1
+MASK    = 0x42
+THREAD  = 0
+ELAPSED = 38.44s
+----------------------------------------------------------------

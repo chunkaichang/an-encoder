@@ -1,0 +1,23 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 27725134 -cmd RVAL -seed 1 -mask 151 -- /home/nrink/Projects/build/encode/encode/tests/crc/crc.cover.plain /home/nrink/Projects/build/encode/encode/tests/crc/crc_input_small.pcm --cso ./2015-05-06_10:27:32/crc/cover/cs/plain.9.cso --csl ./2015-05-06_10:27:32/crc/cover/cs/plain.9.csl:
+[.:    0, IP = 0x7fffe47f1b01, i = 27725135, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 4, value = 4222428296, value' = 4222428191, addr = 0x603010, op = 0
+/home/nrink/Projects/build/encode/encode/tests/crc/crc_input_small.pcm: Bad file descriptor
+elapsed cycles: 1061528070
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000B46EB764
+**********************
+INSTR   = 27751354
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 27725134
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x97
+THREAD  = 0
+ELAPSED = 1.86s
+----------------------------------------------------------------

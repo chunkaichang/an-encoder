@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -- /home/nrink/Projects/build/encode/encode/tests/des/des.tiny.cover.encoded -e /home/nrink/Projects/build/encode/encode/tests/des/des.input.tiny.txt /dev/null 809 --cso /dev/null --csl /dev/null:
+elapsed cycles: 2050954611
+hi(checksum)=0x68FE25C09409DC22
+lo(checksum)=0x8A842324B172309E
+**********************
+INSTR   = 434873
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 3.03s
+----------------------------------------------------------------

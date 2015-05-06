@@ -1,0 +1,27 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -m ___enc_computation -- /home/nrink/Projects/build/encode/encode/tests/crc/crc.cover.plain /home/nrink/Projects/build/encode/encode/tests/crc/crc_input_small.pcm --cso /dev/null --csl /dev/null:
+[.:    0, IP = 0x400a50, i = 151818, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	enter ___enc_computation iteration = 1
+[.:    0, IP = 0x400ab2, i = 72739439, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	leave ___enc_computation
+elapsed cycles: 9288117825
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00000000C538EDCF
+**********************
+INSTR   = 72751176
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 0
+TTYPE   = IN
+COMMAND = NONE
+SEL     = -1
+SEED    = -559038737
+MASK    = 0x1
+THREAD  = 0
+ELAPSED = 6.89s
+----------------------------------------------------------------
+ranges of function ___enc_computation:
+[       151818 -   72739439 ]
+----------------------------------------------------------------

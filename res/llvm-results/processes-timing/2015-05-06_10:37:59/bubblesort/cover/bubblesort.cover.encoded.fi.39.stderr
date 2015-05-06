@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 165567 -cmd WREG -seed 1 -mask 113 -- /home/nrink/Projects/build/encode/encode/tests/bubblesort/bubblesort.cover.encoded --cso ./2015-05-06_10:37:59/bubblesort/cover/cs/encoded.39.cso --csl ./2015-05-06_10:37:59/bubblesort/cover/cs/encoded.39.csl:
+[.:    0, IP = 0x400c7e, i = 165567, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	at ip 0x400c81, rdx = 0x72c, rdx' = 0x75d
+elapsed cycles: 1108572432
+hi(checksum)=0x0000000000000000
+lo(checksum)=0x00007CDAE2B040F7
+**********************
+INSTR   = 179996
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 165567
+TTYPE   = IN
+COMMAND = WREG
+SEL     = -1
+SEED    = 1
+MASK    = 0x71
+THREAD  = 0
+ELAPSED = 1.93s
+----------------------------------------------------------------

@@ -1,0 +1,20 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 151162 -cmd RVAL -seed 1 -mask 21 -- /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.cover.plain --cso ./2015-05-05_14:58:49/array_sum/cover/cs/plain.17.cso --csl ./2015-05-05_14:58:49/array_sum/cover/cs/plain.17.csl:
+[.:    0, IP = 0x7fffe478842d, i = 151162, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = read, size = 8, value = 4197458, value' = 4197447, addr = 0x7fffffffe188, op = 0
+**********************
+INSTR   = 151163
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 151162
+TTYPE   = IN
+COMMAND = RVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0x15
+THREAD  = 0
+ELAPSED = 1.75s
+Illegal instruction (core dumped)
+----------------------------------------------------------------

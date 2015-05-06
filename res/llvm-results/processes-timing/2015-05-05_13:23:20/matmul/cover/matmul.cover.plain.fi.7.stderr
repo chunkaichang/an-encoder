@@ -1,0 +1,22 @@
+<stderr> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 4330624 -cmd WVAL -seed 1 -mask 223 -- /home/nrink/Projects/build/encode/encode/tests/matmul/matmul.cover.plain --cso ./2015-05-05_13:23:20/matmul/cover/cs/plain.7.cso --csl ./2015-05-05_13:23:20/matmul/cover/cs/plain.7.csl:
+[.:    0, IP = 0x400a2f, i = 4330627, wa = 0, ra = 0, rr = 0, wr = 0, it = 0, t = 0]
+	access = write, size = 8, value = 12258, value' = 12093, addr = 0x603728, op = 0
+elapsed cycles: 4079538936
+hi(checksum)=0xAD8390F05779BECB
+lo(checksum)=0xC4A447B868780000
+**********************
+INSTR   = 9022805
+WADDR   = 0
+RADDR   = 0
+RREG    = 0
+WREG    = 0
+ITER    = 0
+TRIGGER = 4330624
+TTYPE   = IN
+COMMAND = WVAL
+SEL     = -1
+SEED    = 1
+MASK    = 0xdf
+THREAD  = 0
+ELAPSED = 11.90s
+----------------------------------------------------------------
