@@ -168,11 +168,11 @@ class FiResult:
 
 class CmdParams:
     def __init__(self, trigger="", fault="", mask=""):
-        if trigger != "": self.trigger = trigger
+        if trigger != "": self.trigger = int(trigger)
         else: self.trigger = None
         if fault != "": self.fault = fault
         else: self.fault = None
-        if mask != "": self.mask = mask
+        if mask != "": self.mask = int(mask)
         else: self.mask = None
 
     def unpack(self):
