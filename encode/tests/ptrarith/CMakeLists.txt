@@ -7,7 +7,7 @@ set(REPETITIONS 10)
 BUILD_TEST_CASE(ptrarith ptrarith.veri)
 BUILD_TEST_CONFIG(ptrarith ptrarith.veri "" ${CMAKE_CURRENT_SOURCE_DIR}/ptrarith.veri.cfg)
 
-set(LENGTH 1024)
+set(LENGTH ${LENGTH_PERF})
 set(REPETITIONS 1000)
 BUILD_TEST_CASE(ptrarith ptrarith.perf)
 BUILD_TEST_CONFIG(ptrarith ptrarith.perf "" ${CMAKE_CURRENT_SOURCE_DIR}/ptrarith.perf.cfg)

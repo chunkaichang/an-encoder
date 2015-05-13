@@ -6,7 +6,7 @@ set(LENGTH 1024)
 BUILD_TEST_CASE(matmul matmul.veri)
 BUILD_TEST_CONFIG(matmul matmul.veri "" ${CMAKE_CURRENT_SOURCE_DIR}/matmul.veri.cfg)
 
-set(LENGTH 1024)
+set(LENGTH ${LENGTH_PERF})
 BUILD_TEST_CASE(matmul matmul.perf)
 BUILD_TEST_CONFIG(matmul matmul.perf "" ${CMAKE_CURRENT_SOURCE_DIR}/matmul.perf.cfg)
 

@@ -18,6 +18,8 @@ int main(int argc, char** argv) {
     uint64_t t1, t2, total = 0;
     unsigned i, j;
 
+    fprintf(stderr, "LENGTH=%d\n", LENGTH);
+    
     __cs_log(argc, argv);
     __cs_fopen(argc, argv);
     __cs_reset();

@@ -7,7 +7,7 @@ set(REPETITIONS 10)
 BUILD_TEST_CASE(bubblesort bubblesort.veri)
 BUILD_TEST_CONFIG(bubblesort bubblesort.veri "" ${CMAKE_CURRENT_SOURCE_DIR}/bubblesort.veri.cfg)
 
-set(LENGTH 100)
+set(LENGTH ${LENGTH_PERF})
 set(REPETITIONS 100)
 BUILD_TEST_CASE(bubblesort bubblesort.perf)
 BUILD_TEST_CONFIG(bubblesort bubblesort.perf "" ${CMAKE_CURRENT_SOURCE_DIR}/bubblesort.perf.cfg)

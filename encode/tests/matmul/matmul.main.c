@@ -14,7 +14,8 @@ extern void ___enc_kernel(long *, long *, long *, long);
 
 int main(int argc, char **argv) {
   unsigned long t1, t2, total = 0;
-
+  
+  fprintf(stderr, "LENGTH=%d\n", LENGTH);
   const unsigned size = LENGTH;
   a = (long*)malloc(size * sizeof(long));
   b = (long*)malloc(size * sizeof(long));

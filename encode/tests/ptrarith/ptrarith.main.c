@@ -10,6 +10,7 @@ extern void ___enc_copy(long, long, long);
 int main(int argc, char **argv) {
   unsigned long t1, t2, total = 0;
 
+  fprintf(stderr, "LENGTH=%d\n", LENGTH);
   const unsigned size = LENGTH;
   long *a = (long*)malloc(size * sizeof(long));
   long *b = (long*)malloc(size * sizeof(long));

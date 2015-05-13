@@ -7,7 +7,7 @@ set(REPETITIONS 10)
 BUILD_TEST_CASE(array_sum array_sum.veri)
 BUILD_TEST_CONFIG(array_sum array_sum.veri "" ${CMAKE_CURRENT_SOURCE_DIR}/array_sum.veri.cfg)
 
-set(LENGTH 10000)
+set(LENGTH ${LENGTH_PERF})
 set(REPETITIONS 100)
 BUILD_TEST_CASE(array_sum array_sum.perf)
 BUILD_TEST_CONFIG(array_sum array_sum.perf "" ${CMAKE_CURRENT_SOURCE_DIR}/array_sum.perf.cfg)

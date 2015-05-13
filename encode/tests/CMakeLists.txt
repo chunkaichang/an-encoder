@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(LENGTH_PERF "1000" CACHE STRING "")
+
 add_subdirectory(mylibs)
 
 add_subdirectory(array_sum)
