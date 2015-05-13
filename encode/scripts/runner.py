@@ -19,7 +19,7 @@ class TestRunner:
         else:
             self.runs = test.runs
 
-    def run(self, logfile=None):
+    def run(self, cso=True, logfile=None):
         if not logfile:
             logfile = os.sys.stdout
 
@@ -30,7 +30,8 @@ class TestRunner:
 
             self.cycles[k], self.checks[k], self.cs[k] = [], [], []
             for i in range(self.runs):
-                cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (k, i))
+                if cso: cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (k, i))
+                else:   cs = os.devnull
                 cmd = self.test.commands[k] + (" --cso %s" % cs)
                 p = subprocess.Popen(cmd.split(),
                                      bufsize=-1,
@@ -171,7 +172,7 @@ if __name__ == "__main__":
             runlog = os.path.join(test.get_outputs_dir(), name + ".veri.log")
             print "Opening file for writing: %s" % runlog
             runlog_file = open(runlog, "w")
-            runner.run(runlog_file)
+            runner.run(True, runlog_file)
             runlog_file.close()
 
             veri = os.path.join(test.get_outputs_dir(), name + ".veri")
@@ -188,7 +189,7 @@ if __name__ == "__main__":
             runlog = os.path.join(test.get_outputs_dir(), name + ".perf.log")
             print "Opening file for writing: %s" % runlog
             runlog_file = open(runlog, "w")
-            runner.run(runlog_file)
+            runner.run(False, runlog_file)
             runlog_file.close()
 
             stats = os.path.join(test.get_outputs_dir(), name + ".stats")
