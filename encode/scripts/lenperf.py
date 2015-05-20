@@ -14,6 +14,7 @@ def add_result(results, test_name, slow_down, length):
         results[test_name][length] = []
     results[test_name][length].append(float(slow_down))
 
+
 def write_results(results, path):
     for test_name in results.keys():
         file_path = os.path.join(path, test_name)
@@ -35,6 +36,7 @@ def make(source_dir, build_type="RELEASE", length=10):
     p.communicate()
     if p.returncode != 0:
         raise Exception("make", "make failed")
+
 
 def analyze(results, summary_path, length):
     file = open(summary_path, "r")
@@ -98,7 +100,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     results = dict()
-    lengths = ['10', '50', '100', '500', '1000', '2000', '3000', '5000', '7000', '9000']
+    """lengths = ['10', '50', '100', '500', '1000', '2000', '3000', '5000', '7000', '9000',
+               '10000', '15000', '20000', '30000', '50000', '100000']
+    """
+    lengths = []
+    for i in range(10, 500, 20):
+        lengths.append(i)
+    for i in range(500, 3000, 200):
+        lengths.append(i)
+    for i in range(3000, 8000, 500):
+        lengths.append(i)
+    for i in range(8000, 16000, 1000):
+        lengths.append(i)
+ 
     for l in lengths:
         make(args.source, args.build, l)
         tests_outdir = os.path.join(".", "LENGTH.%s" % str(l))
