@@ -104,15 +104,15 @@ if __name__ == "__main__":
                '10000', '15000', '20000', '30000', '50000', '100000']
     """
     lengths = []
-    for i in range(10, 500, 20):
+    for i in range(10, 4000, 10):
         lengths.append(i)
-    for i in range(500, 3000, 200):
+    """for i in range(500, 3000, 200):
         lengths.append(i)
     for i in range(3000, 8000, 500):
         lengths.append(i)
     for i in range(8000, 16000, 1000):
         lengths.append(i)
- 
+    """
     for l in lengths:
         make(args.source, args.build, l)
         tests_outdir = os.path.join(".", "LENGTH.%s" % str(l))
