@@ -113,7 +113,7 @@ if __name__ == "__main__":
     for i in range(8000, 16000, 1000):
         lengths.append(i)
     """
-    for i in range(10000, 100000, 5000):
+    for i in range(10**5, 2*10**6, 10**5):
         lengths.append(i)
 
     for l in lengths:
