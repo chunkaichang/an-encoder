@@ -19,11 +19,14 @@ def walk_length_dirs(test_name, dirname):
 
             return plain, encoded
 
-    res, rf = dict(), dict()
+    res, rf, nrf = dict(), dict(), dict()
     res["plain"], res["encoded"] = dict(), dict()
     rf["plain"] = open(test_name + ".cycles.plain", "w")
+    nrf["plain"] = open(test_name + ".cycles.norm.plain", "w")
     rf["encoded"] = open(test_name + ".cycles.encoded", "w")
+    nrf["encoded"] = open(test_name + ".cycles.norm.encoded", "w")
     quot = open(test_name + ".slow-down", "w")
+    nquot = open(test_name + ".norm.slow-down", "w")
 
     print os.listdir(dirname)
     length_dirs = [d for d in os.listdir(dirname) if "LENGTH" in d]
@@ -49,14 +52,35 @@ def walk_length_dirs(test_name, dirname):
     for k in res.keys():
         for l in res[k].keys():
             rf[k].write("%s %f\n" % (l, res[k][l]))
+    for k in rf.keys():
+        rf[k].close()
 
     for l in res["plain"].keys():
         q = res["encoded"][l] / res["plain"][l]
         quot.write("%s %f\n" % (l, q))
-
-    for k in rf.keys():
-        rf[k].close()
     quot.close()
+
+    # normalize, i.e. subtract offset:
+    def strmin(strlist):
+        ilist = [int(x) for x in strlist]
+        return str(min(ilist))
+
+    mins = dict()
+    mins["plain"] = strmin(res["plain"])
+    mins["encoded"] = strmin(res["encoded"])
+
+    for k in res.keys():
+        for l in res[k].keys():
+            nrf[k].write("%s %f\n" % (l, res[k][l] - res[k][mins[k]]))
+    for k in rf.keys():
+        nrf[k].close()
+
+    for l in res["plain"].keys():
+        divisor = (res["plain"][l] - res["plain"][mins["plain"]])
+        if divisor != 0:
+            q = (res["encoded"][l] - res["encoded"][mins["encoded"]]) / divisor
+            nquot.write("%s %f\n" % (l, q))
+    nquot.close()
 
 
 if __name__ == "__main__":
