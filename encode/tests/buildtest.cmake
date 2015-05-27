@@ -7,8 +7,8 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES "DEBUG" OR
   set(ENCODE_OPTS -no-inlining -no-opts)
 else()
   set(CLANG_EMIT_LLVM_OPTS -O0)
-  set(CLANG_LINK_OPTS -O2)
-  set(ENCODE_OPTS)
+  set(CLANG_LINK_OPTS -O0)
+  set(ENCODE_OPTS -no-inlining -no-opts)
 endif()
 
 macro(SET_BUILD_VARS TEST_NAME TARGET_NAME)

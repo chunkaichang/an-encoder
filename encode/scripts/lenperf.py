@@ -104,17 +104,16 @@ if __name__ == "__main__":
                '10000', '15000', '20000', '30000', '50000', '100000']
     """
     lengths = []
-    """for i in range(10, 4000, 10):
+    for i in range(10, 1000, 10):
         lengths.append(i)
-    for i in range(500, 3000, 200):
+    for i in range(1000, 8000, 100):
         lengths.append(i)
-    for i in range(3000, 8000, 500):
-        lengths.append(i)
-    for i in range(8000, 16000, 1000):
+    for i in range(8000, 16000, 400):
         lengths.append(i)
     """
     for i in range(10**5, 2*10**6, 10**5):
         lengths.append(i)
+    """
 
     for l in lengths:
         make(args.source, args.build, l)
