@@ -29,9 +29,10 @@ int main(int argc, char **argv) {
       for (j = 0; j < LENGTH; j++)
         a[j] = AN_ENCODE_VALUE((rand() % MAXRANDINT));
 
+      __cyc_warmup();
       t1 = __cyc_rdtsc();
       ___enc_quicksort(a, 0, LENGTH-1);
-      t2 = __cyc_rdtsc();
+      t2 = __cyc_rdtscp();
       total += t2 - t1;
 
       for (j = 0; j < LENGTH; j++) {

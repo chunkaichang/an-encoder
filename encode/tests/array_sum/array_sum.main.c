@@ -22,9 +22,10 @@ int main(int argc, char** argv) {
     for (i = 0; i < REPETITIONS; i++) {
       long sum;
 
+      __cyc_warmup();
       t1 = __cyc_rdtsc();
       sum = ___enc_init_and_sum(a, LENGTH, 42);
-      t2 = __cyc_rdtsc();
+      t2 = __cyc_rdtscp();
       total += t2 - t1;
 
       __cs_facc(sum);

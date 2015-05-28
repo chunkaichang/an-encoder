@@ -33,9 +33,10 @@ int main(int argc, char **argv) {
   __cs_fopen(argc, argv);
   __cs_reset();
 
+  __cyc_warmup();
   t1 = __cyc_rdtsc();
   ___enc_kernel(a, mat, b, size);
-  t2 = __cyc_rdtsc();
+  t2 = __cyc_rdtscp();
   total += t2 - t1;
 
   for (unsigned i = 0; i < size; i++) {
