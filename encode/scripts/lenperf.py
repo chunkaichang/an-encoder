@@ -100,20 +100,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     results = dict()
-    """lengths = ['10', '50', '100', '500', '1000', '2000', '3000', '5000', '7000', '9000',
-               '10000', '15000', '20000', '30000', '50000', '100000']
-    """
     lengths = []
-    for i in range(10, 1000, 10):
+    for i in range(1, 10, 1):
+        lengths.append(i)
+    for i in range(10, 100, 10):
+        lengths.append(i)
+    for i in range(100, 1000, 50):
         lengths.append(i)
     for i in range(1000, 8000, 100):
         lengths.append(i)
-    for i in range(8000, 16000, 400):
+    for i in range(8000, 32000, 1000):
         lengths.append(i)
-    """
-    for i in range(10**5, 2*10**6, 10**5):
-        lengths.append(i)
-    """
 
     for l in lengths:
         make(args.source, args.build, l)
