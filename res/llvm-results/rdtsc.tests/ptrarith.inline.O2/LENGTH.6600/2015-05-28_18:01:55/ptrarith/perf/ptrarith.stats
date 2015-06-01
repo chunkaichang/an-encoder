@@ -1,0 +1,31 @@
+Purge cycle no. 0
+Purging  ... plain: 8971898, encoded: 137647764 ... reason: plain, distance=380119.055
+Purging  ... plain: 8901243, encoded: 137801581 ... reason: plain, distance=309464.055
+Purging  ... encoded: 166078436, plain: 8597045 ... reason: encoded, distance=27744522.405
+Purging  ... encoded: 159214372, plain: 8553114 ... reason: encoded, distance=20880458.405
+Purge cycle no. 1
+Purging  ... plain: 8822383, encoded: 139464764 ... reason: plain, distance=233951.933673
+Purging  ... plain: 8845198, encoded: 138142461 ... reason: plain, distance=256766.933673
+Purging  ... encoded: 146225279, plain: 8581145 ... reason: encoded, distance=8133235.29592
+Purging  ... encoded: 144224661, plain: 8571260 ... reason: encoded, distance=6132617.29592
+Purge cycle no. 2
+Purging  ... plain: 8775876, encoded: 138156151 ... reason: plain, distance=189873.380208
+Purging  ... plain: 8783964, encoded: 137886076 ... reason: plain, distance=197961.380208
+Purging  ... encoded: 140245463, plain: 8600682 ... reason: encoded, distance=2235132.78646
+Purge cycle no. 3
+Purging  ... plain: 8751381, encoded: 137913664 ... reason: plain, distance=167508.084656
+Purging  ... plain: 8750361, encoded: 137918935 ... reason: plain, distance=166488.084656
+Purging  ... encoded: 140040936, plain: 8625452 ... reason: encoded, distance=2042545.99471
+Purging  ... encoded: 140044719, plain: 8563266 ... reason: encoded, distance=2046328.99471
+Purge cycle no. 4
+Purging  ... encoded: 139911320, plain: 8576944 ... reason: encoded, distance=1934144.55676
+Purging  ... encoded: 139763568, plain: 8572074 ... reason: encoded, distance=1786392.55676
+Purging  ... encoded: 139875776, plain: 8588490 ... reason: encoded, distance=1898600.55676
+Purge cycle no. 5
+Purging  ... encoded: 139544352, plain: 8564215 ... reason: encoded, distance=1598050.93956
+Purge cycle no. 6
+Nothing left to purge in this cycle ... done.
+samples left: 181
+mean:  {'plain': 8582098.331491712, 'encoded': 137937472.04972374}
+stdev: {'plain': 25129.71709794673, 'encoded': 224309.81772126586}
+mean slow-down: 16.0726976925
