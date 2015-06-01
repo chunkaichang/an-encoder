@@ -1,0 +1,47 @@
+
+
+*******************************************************************************
+Thu May 28 16:26:33 2015
+
+
+FIT:    data read from "ptrarith.cycles.plain"
+        format = z
+        x range restricted to [200.000 : 2000.00]
+        #datapoints = 27
+        residuals are weighted equally (unit weight)
+
+function used for fitting: fl(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 4.81123e+10       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 769.68
+
+initial set of free parameter values
+
+al              = 996.761
+bl              = 3814.62
+
+The maximum lambda = 1.000000e+20 was exceeded. Fit stopped.
+final sum of squares of residuals : 4.81123e+10
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 25
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 43869
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.92449e+09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+al              = 996.761          +/- 15.99        (1.604%)
+bl              = 3814.62          +/- 1.74e+04     (456.3%)
+
+
+correlation matrix of the fit parameters:
+
+               al     bl     
+al              1.000 
+bl             -0.874  1.000 

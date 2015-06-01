@@ -1,0 +1,47 @@
+
+
+*******************************************************************************
+Thu May 28 16:29:27 2015
+
+
+FIT:    data read from "ptrarith.cycles.encoded"
+        format = z
+        x range restricted to [200.000 : 8000.00]
+        #datapoints = 85
+        residuals are weighted equally (unit weight)
+
+function used for fitting: fm(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 6.60996e+11       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 3082.86
+
+initial set of free parameter values
+
+am              = 20880.7
+bm              = 248854
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 6.60967e+11
+rel. change during last iteration : -2.03446e-06
+
+degrees of freedom    (FIT_NDF)                        : 83
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 89238.2
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.96346e+09
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+am              = 20880.6          +/- 4.14         (0.01983%)
+bm              = 248851           +/- 1.805e+04    (7.254%)
+
+
+correlation matrix of the fit parameters:
+
+               am     bm     
+am              1.000 
+bm             -0.844  1.000 
