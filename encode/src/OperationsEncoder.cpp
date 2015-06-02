@@ -19,6 +19,24 @@ namespace {
     bool runOnBasicBlock(BasicBlock &BB) override;
 
     static char ID;
+
+    void insertCheckBefore(Value *V, const BasicBlock::iterator &I) {
+#ifdef CHECK_BEFORE
+      C->createAssert(V, &(*I));
+#endif
+#ifdef ACCU_ARGS
+      C->createAccumulate(V, &(*I));
+#endif
+    }
+
+    void insertCheckAfter(Value *V, const BasicBlock::iterator &I) {
+#ifdef CHECK_AFTER
+      C->createAssert(V, &(*std::next(I)));
+#endif
+#ifdef ACCU_RES
+      C->createAccumulate(V, &(*std::next(I)));
+#endif
+    }
   private:
     Coder *C;
   };
@@ -78,11 +96,19 @@ bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
       Type *int64Ty = Type::getInt64Ty(ctx),                   \
            *origTy = I->getOperand(0)->getType();              \
       \
+      Value *ppArg0 = C->preprocessForEncOp(I->getOperand(0), I);  \
+      Value *ppArg1 = C->preprocessForEncOp(I->getOperand(1), I);  \
+      \
+      insertCheckBefore(ppArg0, I);                   \
+      insertCheckBefore(ppArg1, I);                   \
+      \
       SmallVector<Value*, 2> args;                             \
-      args.push_back(C->preprocessForEncOp(I->getOperand(0), I)); \
-      args.push_back(C->preprocessForEncOp(I->getOperand(1), I)); \
+      args.push_back(ppArg0); \
+      args.push_back(ppArg1); \
       \
       Value *Res = C->createEncBinop((NAME), args, I);         \
+      \
+      insertCheckAfter(Res, I);                      \
       \
       Res = C->postprocessFromEncOp(Res, origTy, I);           \
       I->replaceAllUsesWith(Res);                              \
