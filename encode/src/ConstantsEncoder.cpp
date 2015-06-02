@@ -47,9 +47,8 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
       if (!CI)
         continue;
 
-      uint64_t value = CI->getZExtValue();
-      int64_t svalue = (int64_t)(value << 32) >> 32;
-      int64_t res = svalue * C->getA();
+      int64_t value = CI->getSExtValue();
+      int64_t res = value * C->getA();
       ConstantInt *CodedCI = ConstantInt::getSigned(dyn_cast<IntegerType>(C->getInt64Type()),
                                                     res);
       I->setOperand(i, CodedCI);
