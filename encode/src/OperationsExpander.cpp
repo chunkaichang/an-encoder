@@ -92,7 +92,7 @@ bool OperationsExpander::runOnFunction(Function &F) {
             Value *x = ci->getArgOperand(0);
             Value *a = ci->getArgOperand(1);
             IRBuilder<> builder(ci);
-            Value *res = builder.CreateURem(x, a);
+            Value *res = builder.CreateSRem(x, a);
             ci->replaceAllUsesWith(res);
             ci->eraseFromParent();
             break;
