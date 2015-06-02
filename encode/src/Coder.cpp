@@ -17,6 +17,10 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
     Intrinsic::getDeclaration(M,
                               Intrinsic::an_decode,
                               int64Ty);
+  this->Assert =
+    Intrinsic::getDeclaration(M,
+                              Intrinsic::an_assert,
+                              int64Ty);
   Builder = new IRBuilder<>(ctx);
 }
 
@@ -159,4 +163,25 @@ Value *Coder::createEncBinop(StringRef Name, ArrayRef<Value*> Args, Instruction 
   Builder->SetInsertPoint(I);
   Constant *binop = getEncBinopFunction(Name);
   return Builder->CreateCall(binop, Args);
+}
+
+
+Value *Coder::createLoadAccu(Instruction *I) {
+  GlobalVariable *accu
+        = M->getNamedGlobal("accu_enc");
+  Builder->SetInsertPoint(I);
+  return Builder->CreateLoad(accu);
+}
+
+Value *Coder::createAssert(Value *V, Instruction *I) {
+  if (V->getType() != int64Ty) return NULL;
+
+  Builder->SetInsertPoint(I);
+  return Builder->CreateCall2(Assert, V, A);
+}
+
+Value *Coder::createAssertOnAccu(Instruction *I) {
+  Builder->SetInsertPoint(I);
+  Value *accu = createLoadAccu(I);
+  return Builder->CreateCall2(Assert, accu, A);
 }

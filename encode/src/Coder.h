@@ -23,6 +23,10 @@ public:
 
   Value *createEncode(Value *V, Instruction *I);
   Value *createDecode(Value *V, Instruction *I);
+  Value *createAssert(Value *V, Instruction *I);
+  
+  Value *createLoadAccu(Instruction *I);
+  Value *createAssertOnAccu(Instruction *I);
 
   Constant *getEncBinopFunction(StringRef Name);
 public:
@@ -36,11 +40,12 @@ public:
   Value *preprocessForEncOp(Value *V, Instruction *I);
   Value *postprocessFromEncOp(Value *V, Type *DestTy, Instruction *I);
   Value *createEncBinop(StringRef Name, ArrayRef<Value*> Args, Instruction *I);
+
 private:
   Module *M;
   ConstantInt *A;
   IntegerType *int64Ty, *int32Ty;
-  Function *Encode, *Decode;
+  Function *Encode, *Decode, *Assert;
   IRBuilder<> *Builder;
 };
 #endif /* __CODER_H__ */
