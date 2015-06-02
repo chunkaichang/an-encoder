@@ -27,11 +27,13 @@ public:
   
   Value *createLoadAccu(Instruction *I);
   Value *createAssertOnAccu(Instruction *I);
+  Value *createAccumulate(Value *V, Instruction *I);
 
   Constant *getEncBinopFunction(StringRef Name);
 public:
   IntegerType *getInt64Type();
   IntegerType *getInt32Type();
+  Type *getVoidType();
   int64_t getA();
 
   Value *createEncRegionEntry(Value *V, Instruction *I);
@@ -45,7 +47,9 @@ private:
   Module *M;
   ConstantInt *A;
   IntegerType *int64Ty, *int32Ty;
+  Type *voidTy;
   Function *Encode, *Decode, *Assert;
+  Constant *Accumulate;
   IRBuilder<> *Builder;
 };
 #endif /* __CODER_H__ */

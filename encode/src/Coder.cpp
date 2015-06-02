@@ -8,6 +8,7 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
 
   this->int64Ty = Type::getInt64Ty(ctx);
   this->int32Ty = Type::getInt32Ty(ctx);
+  this->voidTy  = Type::getVoidTy(ctx);
   this->A = ConstantInt::getSigned(int64Ty, a);
   this->Encode =
     Intrinsic::getDeclaration(M,
@@ -21,6 +22,12 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
     Intrinsic::getDeclaration(M,
                               Intrinsic::an_assert,
                               int64Ty);
+
+  FunctionType *accuTy = FunctionType::get(voidTy,
+                                           int64Ty,
+                                           false);
+  this->Accumulate = M->getOrInsertFunction("accumulate_enc",
+                                            accuTy);
   Builder = new IRBuilder<>(ctx);
 }
 
@@ -34,6 +41,10 @@ IntegerType *Coder::getInt64Type() {
 
 IntegerType *Coder::getInt32Type() {
   return this->int32Ty;
+}
+
+Type *Coder::getVoidType() {
+  return this->voidTy;
 }
 
 int64_t Coder::getA() {
@@ -184,4 +195,9 @@ Value *Coder::createAssertOnAccu(Instruction *I) {
   Builder->SetInsertPoint(I);
   Value *accu = createLoadAccu(I);
   return Builder->CreateCall2(Assert, accu, A);
+}
+  
+Value *Coder::createAccumulate(Value *V, Instruction *I) {
+  Builder->SetInsertPoint(I);
+  return Builder->CreateCall(Accumulate, V);
 }
