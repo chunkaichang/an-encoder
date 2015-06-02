@@ -14,6 +14,7 @@ add_executable(encode encode.cpp
                       ModuleChecker.cpp
                       InterfaceHandler.cpp
                       BoolExtHandler.cpp
+                      CheckInserter.cpp
                       Coder.cpp
                       UsesVault.cpp)
 add_dependencies(encode anlib.bc)
@@ -39,6 +40,25 @@ if ("$LLVM_ENABLE_RTTI" MATCHES "ON")
 else()
   set(RTTI -fno-rtti)
 endif()
+
+if (CHECK_BEFORE)
+  add_definitions(-DCHECK_BEFORE)
+endif ()
+if (CHECK_AFTER)
+  add_definitions(-DCHECK_AFTER)
+endif ()
+if (CHECK_BB)
+  add_definitions(-DCHECK_BB)
+endif ()
+if (CHECK_FUN)
+  add_definitions(-DCHECK_BEFORE)
+endif ()
+if (ACCU_ARGS)
+  add_definitions(-DACCU_ARGS)
+endif ()
+if (ACCU_RES)
+  add_definitions(-DACCU_RES)
+endif ()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
 
