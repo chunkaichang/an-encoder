@@ -22,15 +22,16 @@ void invalidate_accu_enc()
 {
   accu_enc += 1;
 }
-void accumulate_enc(int64_t x_enc)
-{
-  int64_t  x_mask = x_enc >> 63;
-  uint64_t ux_enc = (x_enc + x_mask) ^ x_mask;
-
+void check_enc() {
   if (__builtin_an_check_i32(accu_enc, A)) {
     signal_enc();
     __builtin_an_assert_i32(accu_enc, A);
   }
+}
+void accumulate_enc(int64_t x_enc)
+{
+  int64_t  x_mask = x_enc >> 63;
+  uint64_t ux_enc = (x_enc + x_mask) ^ x_mask;
 
   if (ux_enc > UINT64_MAX - accu_enc) {
     accu_enc = 0;
@@ -259,6 +260,7 @@ int64_t shl_enc(int64_t x_enc, int64_t y_enc)
   int64_t x = __builtin_an_decode_i64(x_enc, A);
   int64_t y = __builtin_an_decode_i64(y_enc, A);
   r_enc = __builtin_an_encode_i64(x << y, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   /* TODO: Find out if performance is better or worse with direct en-/decoding: */
   //r_enc = mul_enc(x_enc, pow2_enc(y_enc));
   return r_enc;
@@ -266,9 +268,10 @@ int64_t shl_enc(int64_t x_enc, int64_t y_enc)
 int64_t shr_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  uint64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  uint64_t y = __builtin_an_decode_i64(y_enc, A);
   r_enc = __builtin_an_encode_i64(x >> y, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   /* TODO: Find out if performance is better or worse with direct en-/decoding: */
   //r_enc = udiv_enc(x_enc, pow2_enc(y_enc));
   return r_enc;
@@ -277,9 +280,10 @@ int64_t ashr_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
   int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  uint64_t y = __builtin_an_decode_i64(y_enc, A);
   int64_t asr = x >> y;
   r_enc = __builtin_an_encode_i64(asr, A);
+  accumulate_enc(r_enc);  // don't really makes sense - r_enc has just been encoded
   /* TODO: Find out if performance is better or worse with direct en-/decoding: */
   /* FIXME: Using 'pow2_enc' here seems to produce wrong result! */
   //r_enc = sdiv_enc(x_enc, pow2_enc(y_enc));
