@@ -39,6 +39,10 @@ Pass *createCallHandler(Coder*);
 Pass *createOperationsExpander(Coder*);
 Pass *createInterfaceHandler(Coder*);
 
+// Passes for insertion of checks:
+Pass *createBBCheckInserter(Coder*);
+Pass *createFunCheckInserter(Coder*);
+
 // Utility passes:
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
 
@@ -123,7 +127,8 @@ static inline bool linkModules(Module *dst,
 }
 
 const std::string globalCodeName("A");
-const uint32_t    globalCodeValue = 12; //1 << 4;
+const uint64_t    globalCodeValue = ((1 << 19) - 1); // 524287
+                                    //12; //1 << 4;
 
 static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
@@ -153,6 +158,10 @@ static int processModule(char **argv, LLVMContext &Context) {
   // as its file name:
   libraryPath += "anlib.bc";
 
+  // Remove explicit calls to 'accumulate_enc':
+  // (The 'OperationsEncoder' now decides when the accumulator should be updated,
+  // based on CMake options.)
+  linkagePM.add(createAccumulateRemover());
   // By applying this linkage to library functions (rather than 'ExternalLinkage',
   // which is the default) we achieve that after linking no further copies of the
   // original library functions remain in the module 'mod': (Functions are inlined
@@ -202,11 +211,6 @@ static int processModule(char **argv, LLVMContext &Context) {
       std::cerr << linkError;
       return 1;
     }
-    // To generate an optimized variant of the "AN encoding", remove calls
-    // to update the accumulator:
-    {
-      // postLinkPM.add(createAccumulateRemover());
-    }
 
     // 'CallHandler' must run only after linking the library; otherwise it
     // would decode arguments to library functions (e.g. 'add_enc',
@@ -225,9 +229,24 @@ static int processModule(char **argv, LLVMContext &Context) {
       // 2015./03/12, TODO: Check that this is working properly: (Currently
       // it seems be non-effective since the functions which implement
       // encoded operations are not inlined early enough.)
-      postLinkPM.add(createEncodeDecodeRemover());
+      //postLinkPM.add(createEncodeDecodeRemover());
     }
 
+    // We run the 'CheckInserters' here for two reasons:
+    //  1. Since they will insert new calls to the 'an_assert' intrinsic,
+    //     they must be run before the 'OperationsExpander'.
+    //  2. Since they assert on the accumulator, they must be run before
+    //     optimizations, which may promote the accumulator from a global
+    //     variable into a register.
+#ifdef CHECK_BB
+    postLinkPM.add(createBBCheckInserter(&C));
+#endif
+#ifdef CHECK_FUN
+    // We run inlining here to avoid inserting checks at the end of functions
+    // which will later be inlined:
+    if (!NoInlining) postLinkPM.add(llvm::createFunctionInliningPass());
+    postLinkPM.add(createFunCheckInserter(&C));
+#endif    
     postLinkPM.add(createOperationsExpander(&C));
     // Due to previously inserted encode/decode instructions some values
     // that used to be constants may no longer appear to be constant. However,
