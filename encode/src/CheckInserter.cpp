@@ -9,99 +9,59 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Metadata.h"
 
-#include "llvm/Support/raw_ostream.h"
-
 #include "Coder.h"
 
 using namespace llvm;
 
 namespace {
-  struct CheckConstr {
-    virtual Value *getCheckFun(Module *M) {
-        LLVMContext &ctx = M->getContext();
-        FunctionType *checkTy = FunctionType::get(Type::getVoidTy(ctx), false);
-        Value *check = M->getOrInsertFunction("check_enc", checkTy);
-        return check;
-    }
-  };
-
-  struct CheckInserter : public BasicBlockPass, public CheckConstr {
-    CheckInserter(Coder *c, bool before = true) : BasicBlockPass(ID), C(c), Before(before) {}
+  struct BBCheckInserter : public BasicBlockPass {
+    BBCheckInserter(Coder *c) : BasicBlockPass(ID), C(c) {}
 
     bool runOnBasicBlock(BasicBlock &BB) override;
 
     static char ID;
-
   private:
-    bool Before;
     Coder *C;
   };
   
-  struct BBCheckInserter : public BasicBlockPass, public CheckConstr {
-    BBCheckInserter() : BasicBlockPass(ID) {}
-
-    bool runOnBasicBlock(BasicBlock &BB) override;
-
-    static char ID;
-  };
-  
-  struct FunCheckInserter : public FunctionPass, public CheckConstr {
-    FunCheckInserter() : FunctionPass(ID) {}
+  struct FunCheckInserter : public FunctionPass {
+    FunCheckInserter(Coder *c) : FunctionPass(ID), C(c) {}
 
     bool runOnFunction(Function &F) override;
 
     static char ID;
+  private:
+    Coder *C;
   };
 }
-
-char CheckInserter::ID = 0;
-
-bool CheckInserter::runOnBasicBlock(BasicBlock &BB) {
-  bool modified = false;
-  Module *M = BB.getParent()->getParent();
-
-  auto I = BB.begin(), E = BB.end();
-  while( I != E) {
-    auto N = std::next(I);
-    CallInst *ci = dyn_cast<CallInst>(I);
-    Function *callee = ci ? ci->getCalledFunction() : nullptr;
-    if (callee && callee->getName().equals("accumulate_enc")) {
-	IRBuilder<> builder(&BB);
-	if (Before) C->createAssertOnAccu(I);
-	else C->createAssertOnAccu(N);
-        modified = true;
-    }
-    I = N;
-  }
-
-  return modified;
-}
-
-Pass *createCheckInserter(Coder *c, bool before=true) {
-  return new CheckInserter(c, before);
-}
-
 
 char BBCheckInserter::ID = 0;
 
 bool BBCheckInserter::runOnBasicBlock(BasicBlock &BB) {
+  Function *F = BB.getParent();
+  // Do not insert checks in functions from the 'anlib' library:
+  if (F->getName().endswith_lower("_enc"))
+    return false;
   Module *M = BB.getParent()->getParent();
 
   Instruction *term = BB.getTerminator();
   assert(term && "Basic block not well-formed");
-  IRBuilder<> builder(term);
-  builder.CreateCall(getCheckFun(M));
+  C->createAssertOnAccu(term);
   return true;
 }
 
-Pass *createBBCheckInserter() {
-  return new BBCheckInserter();
+Pass *createBBCheckInserter(Coder *c) {
+  return new BBCheckInserter(c);
 }
 
 
 char FunCheckInserter::ID = 0;
 
 bool FunCheckInserter::runOnFunction(Function &F) {
+  // Do not insert checks in functions from the 'anlib' library:
+  if (F.getName().endswith_lower("_enc"))
+    return false;
+
   Module *M = F.getParent();
 
   for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i) {
@@ -109,13 +69,12 @@ bool FunCheckInserter::runOnFunction(Function &F) {
     TerminatorInst *ti = BB.getTerminator();
     assert(ti && "Basic block not well-formed");
     if (ReturnInst *ri = dyn_cast<ReturnInst>(ti)) {
-      IRBuilder<> builder(ti);
-      builder.CreateCall(getCheckFun(M));
+      C->createAssertOnAccu(ri);
     }
   }
   return true;
 }
 
-Pass *createFunCheckInserter() {
-  return new FunCheckInserter();
+Pass *createFunCheckInserter(Coder *c) {
+  return new FunCheckInserter(c);
 }
