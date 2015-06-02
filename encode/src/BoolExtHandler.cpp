@@ -51,8 +51,10 @@ bool BoolExtHandler::runOnBasicBlock(BasicBlock &BB) {
     }
 
     // Now find the final 'ZExt' or 'SExt' to 'i64':
+    // (Since the cast instruction 'ci' may already be the final 'ZExt' or
+    // 'SExt', we initialize the work list with the argument of 'ci'.) 
     std::set<Value*> worklist;
-    worklist.insert(&(*I));
+    worklist.insert(ci->getOperand(0));
 
     while (!worklist.empty()) {
       for (auto wli = worklist.begin(), wle = worklist.end(); wli != wle; ++wli) {
@@ -72,6 +74,7 @@ bool BoolExtHandler::runOnBasicBlock(BasicBlock &BB) {
             UsesVault UV(ci->uses());
             BasicBlock::iterator CI(ci);
             Value *enc = C->createEncode(ci, std::next(CI));
+            assert(enc);
             UV.replaceWith(enc);
             modified = true;
           }
