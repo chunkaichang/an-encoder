@@ -21,27 +21,29 @@ int main(int argc, char **argv) {
   b = (long*)malloc(size * sizeof(long));
   mat = (long*)malloc(size * size * sizeof(long));
 
-  for (unsigned i = 0; i < size; i++) {
-    for (unsigned j = 0; j < size; j++)
-      mat[i*size + j] = AN_ENCODE_VALUE(i);
+  for (unsigned k = 0; k < REPETITIONS; k++) {
+    for (unsigned i = 0; i < size; i++) {
+      for (unsigned j = 0; j < size; j++)
+        mat[i*size + j] = AN_ENCODE_VALUE(i);
 
-    b[i] = AN_ENCODE_VALUE(1);
-    a[i] = AN_ENCODE_VALUE(0);
-  }
+      b[i] = AN_ENCODE_VALUE(1);
+      a[i] = AN_ENCODE_VALUE(0);
+    }
 
-  __cs_log(argc, argv);
-  __cs_fopen(argc, argv);
-  __cs_reset();
+    __cs_log(argc, argv);
+    __cs_fopen(argc, argv);
+    __cs_reset();
 
-  __cyc_warmup();
-  t1 = __cyc_rdtsc();
-  ___enc_kernel(a, mat, b, size);
-  t2 = __cyc_rdtscp();
-  total += t2 - t1;
+    __cyc_warmup();
+    t1 = __cyc_rdtsc();
+    ___enc_kernel(a, mat, b, size);
+    t2 = __cyc_rdtscp();
+    total += t2 - t1;
 
-  for (unsigned i = 0; i < size; i++) {
-    __cs_facc(AN_DECODE_VALUE(a[i]));
-    __cs_acc(AN_DECODE_VALUE(a[i]));
+    for (unsigned i = 0; i < size; i++) {
+      __cs_facc(AN_DECODE_VALUE(a[i]));
+      __cs_acc(AN_DECODE_VALUE(a[i]));
+    }
   }
 
   __cyc_msg(total);
