@@ -127,7 +127,8 @@ static inline bool linkModules(Module *dst,
 }
 
 const std::string globalCodeName("A");
-const uint64_t    globalCodeValue = ((1 << 19) - 1); // 524287
+const uint64_t    globalCodeValue = 58659;
+                                    // '((1 << 19) - 1) == 524287'
                                     //12; //1 << 4;
 
 static int processModule(char **argv, LLVMContext &Context) {
