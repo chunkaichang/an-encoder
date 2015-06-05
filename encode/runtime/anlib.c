@@ -14,32 +14,35 @@ static uint64_t A;
 // Hence the accumulator should probably be signed too.
 // (Note that in 'accumulate_enc' we take care to ensure that
 // the accumulator never actually takes on negative values.)
-static int64_t accu_enc = 0;
+static int64_t accu0_enc = 0;
+static int64_t accu1_enc = 0;
 
-void accumulate_enc(int64_t x_enc)
-{
-  int64_t  x_mask = x_enc >> 63;
-  uint64_t ux_enc = (x_enc + x_mask) ^ x_mask;
+#ifdef LOG_ACCU
+  #define LOG_ACCU_PRINTF(...) fprintf(stderr, __VA_ARGS__)
+#else
+  #define LOG_ACCU_PRINTF(...)
+#endif 
 
-  // This should never happen:
-  if (!(accu_enc < INT64_MAX)
-      || (accu_enc < 0)) {
-    exit(4);
-  }
-  // Bad overflow has happened in the test program,
-  // hence exit:
-  if (ux_enc >= INT64_MAX) {
-    exit(3);
-  }
-  if (ux_enc > INT64_MAX - accu_enc) {
-    // Do a check before resetting the accumulator:
-    __builtin_an_assert_i32(accu_enc, A);
-    accu_enc = 0;
-  }
-  accu_enc += ux_enc;
-  // NOTE: The following assert fails when 'x_enc' overflows. A way to avoid this is to choose a
-  // power of 2 as the value of 'A'.
-  //__builtin_an_assert_i32(accu_enc, A);
+void accumulate_enc(int64_t x_enc) {}
+
+#define ___accumulate_enc(x_enc, accu) \
+{ \
+  int64_t old_accu = accu; \
+  LOG_ACCU_PRINTF("x_enc=0x%016lx, old_accu=0x%016lx, ", x_enc, old_accu); \
+  \
+  if(__builtin_saddl_overflow(old_accu, x_enc, &accu)) { \
+    LOG_ACCU_PRINTF("OF, new_accu=0x%016lx", accu); \
+    __builtin_an_assert_i64(old_accu, A); \
+    accu = 0; \
+  } \
+  LOG_ACCU_PRINTF("\n"); \
+}
+
+void ___accumulate0_enc(int64_t x_enc) {
+  ___accumulate_enc(x_enc, accu0_enc);
+}
+void ___accumulate1_enc(int64_t x_enc) {
+  ___accumulate_enc(x_enc, accu1_enc);
 }
 
 int64_t pow2_enc(int64_t x_enc)
