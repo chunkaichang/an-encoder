@@ -19,6 +19,13 @@ set(CHECK_FUN    OFF CACHE BOOL "")
 set(ACCU_ARGS OFF CACHE BOOL "")
 set(ACCU_RES  OFF CACHE BOOL "")
 
+set(NUM_ACCUS "1" CACHE STRING "")
+
+set(MEM2REG  OFF CACHE BOOL "")
+set(TOGGLE_CHECKS  OFF CACHE BOOL "")
+
+set(LOG_ACCU OFF CACHE BOOL "")
+
 add_subdirectory(src)
 add_subdirectory(runtime)
 add_subdirectory(tests)
