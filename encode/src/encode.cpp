@@ -50,6 +50,7 @@ Pass *createLinkagePass(GlobalValue::LinkageTypes);
 Pass *createAccumulateRemover();
 Pass *createEncodeDecodeRemover();
 Pass *createSExtTruncPass();
+Pass *createAccuPromoter(Coder *);
 
 // Command line arguments:
 static cl::opt<std::string>
@@ -266,6 +267,21 @@ static int processModule(char **argv, LLVMContext &Context) {
     }
     postLinkPM.add(createConstantPropagationPass());
     if (!NoVerifying) postLinkPM.add(createVerifierPass());
+//    if (!NoOpts && !NoInlining) {
+    {
+      //mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("___accumulate0_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("___accumulate1_enc")->addFnAttr(Attribute::AlwaysInline);
+      postLinkPM.add(llvm::createFunctionInliningPass());
+      // Replace the global accumulator with a local variable,
+      // one per function:
+      postLinkPM.add(createAccuPromoter(&C));
+      // Then encourage the keeping of local variables in
+      // registers (rather than on ths tack):
+#ifdef MEM2REG
+      postLinkPM.add(createPromoteMemoryToRegisterPass());
+#endif
+    }
     postLinkPM.run(*mod);
 
     // Add optimization passes (roughly the equivalent of "-O2",

@@ -1,9 +1,11 @@
 
+#include <sstream>
+
 #include "Coder.h"
 
 using namespace llvm;
 
-Coder::Coder(Module *m, unsigned a) : M(m) {
+Coder::Coder(Module *m, unsigned a) : M(m), toggle(0) {
   LLVMContext &ctx = M->getContext();
 
   this->int64Ty = Type::getInt64Ty(ctx);
@@ -26,8 +28,12 @@ Coder::Coder(Module *m, unsigned a) : M(m) {
   FunctionType *accuTy = FunctionType::get(voidTy,
                                            int64Ty,
                                            false);
-  this->Accumulate = M->getOrInsertFunction("accumulate_enc",
-                                            accuTy);
+  /* this->Accumulate = */
+//      M->getOrInsertFunction("___accumulate_enc", accuTy);
+  this->Accumulate0 = M->getOrInsertFunction("___accumulate0_enc",
+                                              accuTy);
+  this->Accumulate1 = M->getOrInsertFunction("___accumulate1_enc",
+                                              accuTy);
   Builder = new IRBuilder<>(ctx);
 }
 
@@ -177,9 +183,10 @@ Value *Coder::createEncBinop(StringRef Name, ArrayRef<Value*> Args, Instruction 
 }
 
 
-Value *Coder::createLoadAccu(Instruction *I) {
+Value *Coder::createLoadAccu(Instruction *I, unsigned i) {
+  std::string accu_name = (i % NUM_ACCUS) ? "accu1_enc" : "accu0_enc";
   GlobalVariable *accu
-        = M->getNamedGlobal("accu_enc");
+        = M->getNamedGlobal(accu_name);
   Builder->SetInsertPoint(I);
   return Builder->CreateLoad(accu);
 }
@@ -192,12 +199,19 @@ Value *Coder::createAssert(Value *V, Instruction *I) {
 }
 
 Value *Coder::createAssertOnAccu(Instruction *I) {
+  Value *res;
   Builder->SetInsertPoint(I);
-  Value *accu = createLoadAccu(I);
-  return Builder->CreateCall2(Assert, accu, A);
+  for (unsigned i = 0; i < NUM_ACCUS; i++) {
+    Value *accu = createLoadAccu(I, i);
+    res = Builder->CreateCall2(Assert, accu, A);
+  }
+  return res;
 }
   
 Value *Coder::createAccumulate(Value *V, Instruction *I) {
   Builder->SetInsertPoint(I);
-  return Builder->CreateCall(Accumulate, V);
+  if ((toggle++) % NUM_ACCUS)
+    return Builder->CreateCall(Accumulate1, V);
+  else
+    return Builder->CreateCall(Accumulate0, V);
 }

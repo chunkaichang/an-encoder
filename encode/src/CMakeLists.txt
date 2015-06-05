@@ -15,6 +15,7 @@ add_executable(encode encode.cpp
                       InterfaceHandler.cpp
                       BoolExtHandler.cpp
                       CheckInserter.cpp
+                      AccuPromoter.cpp
                       Coder.cpp
                       UsesVault.cpp)
 add_dependencies(encode anlib.bc)
@@ -59,6 +60,16 @@ endif ()
 if (ACCU_RES)
   add_definitions(-DACCU_RES)
 endif ()
+if (MEM2REG)
+  add_definitions(-DMEM2REG)
+endif ()
+if (TOGGLE_CHECKS)
+  add_definitions(-DTOGGLE_CHECKS)
+endif ()
+if (LOG_ACCU)
+  add_definitions(-DLOG_ACCU)
+endif ()
+add_definitions(-DNUM_ACCUS=${NUM_ACCUS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
 

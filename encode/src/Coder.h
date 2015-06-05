@@ -25,7 +25,7 @@ public:
   Value *createDecode(Value *V, Instruction *I);
   Value *createAssert(Value *V, Instruction *I);
   
-  Value *createLoadAccu(Instruction *I);
+  Value *createLoadAccu(Instruction *I, unsigned i);
   Value *createAssertOnAccu(Instruction *I);
   Value *createAccumulate(Value *V, Instruction *I);
 
@@ -49,7 +49,9 @@ private:
   IntegerType *int64Ty, *int32Ty;
   Type *voidTy;
   Function *Encode, *Decode, *Assert;
-  Constant *Accumulate;
+  //Constant *Accumulate;
+  Constant *Accumulate0, *Accumulate1;
   IRBuilder<> *Builder;
+  unsigned toggle;
 };
 #endif /* __CODER_H__ */

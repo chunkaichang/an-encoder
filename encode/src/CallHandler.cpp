@@ -46,7 +46,19 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
       continue;
     }
 
+    Function *add_with_overflow = Intrinsic::getDeclaration(M,
+                                                            Intrinsic::sadd_with_overflow,
+                                                            int64Ty);
     Function *F = CI->getCalledFunction();
+    if (F == add_with_overflow
+#if (defined(PRINTF_DEBUG) || defined(LOG_ACCU))
+        || F->getName().startswith("printf")
+        || F->getName().startswith("fprintf")
+#endif
+       ) {
+      I = N;
+      continue;
+    }
     // Only operate on functions that are externally defined,
     // i.e. such functions for which only a declaration exists
     // within the current module:

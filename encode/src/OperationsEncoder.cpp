@@ -14,13 +14,19 @@ using namespace llvm;
 
 namespace {
   struct OperationsEncoder : public BasicBlockPass {
-    OperationsEncoder(Coder *c) : BasicBlockPass(ID), C(c) {}
+    OperationsEncoder(Coder *c) : BasicBlockPass(ID), C(c),
+      toggle_before(0), toggle_after(0) {}
 
     bool runOnBasicBlock(BasicBlock &BB) override;
 
     static char ID;
 
     void insertCheckBefore(Value *V, const BasicBlock::iterator &I) {
+      // Do not check constants:
+      if (dyn_cast<ConstantInt>(V)) return;
+#ifdef TOGGLE_CHECKS
+      if ((toggle_before++) & 1) return;
+#endif
 #ifdef CHECK_BEFORE
       C->createAssert(V, &(*I));
 #endif
@@ -30,6 +36,11 @@ namespace {
     }
 
     void insertCheckAfter(Value *V, const BasicBlock::iterator &I) {
+      // Do not check constants:
+      if (dyn_cast<ConstantInt>(V)) return;
+#ifdef TOGGLE_CHECKS
+      if ((toggle_after++) & 1) return;
+#endif
 #ifdef CHECK_AFTER
       C->createAssert(V, &(*std::next(I)));
 #endif
@@ -39,6 +50,7 @@ namespace {
     }
   private:
     Coder *C;
+    unsigned toggle_before, toggle_after;
   };
 }
 
