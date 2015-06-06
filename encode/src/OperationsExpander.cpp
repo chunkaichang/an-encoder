@@ -92,6 +92,13 @@ bool OperationsExpander::runOnFunction(Function &F) {
             Value *x = ci->getArgOperand(0);
             Value *a = ci->getArgOperand(1);
             IRBuilder<> builder(ci);
+#ifdef BLOCK_SREM
+            Constant *srem_blocker  =
+              Intrinsic::getDeclaration(M,
+                                        Intrinsic::x86_movswift,
+                                        C->getInt64Type());
+            x = builder.CreateCall(srem_blocker, x);
+#endif
             Value *res = builder.CreateSRem(x, a);
             ci->replaceAllUsesWith(res);
             ci->eraseFromParent();
