@@ -32,7 +32,13 @@ class TestRunner:
             for i in range(self.runs):
                 if cso: cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (k, i))
                 else:   cs = os.devnull
-                cmd = self.test.commands[k] + (" --cso %s" % cs)
+                split = self.test.commands[k].split()
+                cmd = "cset shield -e " + split.pop(0) + " -- "
+                while(len(split)):
+                  cmd += split.pop(0) + " "
+                # cmd = self.test.commands[k] + (" --cso %s" % cs)
+                cmd += (" --cso %s" % cs)
+                logfile.write("real command=%s\n" % cmd)
                 p = subprocess.Popen(cmd.split(),
                                      bufsize=-1,
                                      stdout=open(os.devnull, "w"),
