@@ -1,0 +1,11 @@
+Purge cycle no. 0
+Purging  ... plain: 1907631, encoded: 8672040 ... reason: plain, distance=522994.23
+Purging  ... encoded: 16269103, plain: 1375200 ... reason: encoded, distance=7394175.09
+Purge cycle no. 1
+Purging  ... plain: 1727229, encoded: 8798319 ... reason: plain, distance=347832.612245
+Purge cycle no. 2
+Nothing left to purge in this cycle ... done.
+samples left: 97
+mean:  {'plain': 1375810.4845360825, 'encoded': 8801580.711340206}
+stdev: {'plain': 42754.48729108088, 'encoded': 125422.97432172255}
+mean slow-down: 6.39737871623

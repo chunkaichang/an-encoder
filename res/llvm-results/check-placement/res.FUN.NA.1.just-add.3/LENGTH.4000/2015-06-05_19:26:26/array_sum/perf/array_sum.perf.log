@@ -1,0 +1,2206 @@
+key=plain, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=0, <stderr>:
+LENGTH=4000
+elapsed cycles: 773313
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=0, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=1, <stderr>:
+LENGTH=4000
+elapsed cycles: 773451
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=1, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=2, <stderr>:
+LENGTH=4000
+elapsed cycles: 775224
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=2, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=3, <stderr>:
+LENGTH=4000
+elapsed cycles: 941229
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=3, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=4, <stderr>:
+LENGTH=4000
+elapsed cycles: 775470
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=4, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=5, <stderr>:
+LENGTH=4000
+elapsed cycles: 774243
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=5, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=6, <stderr>:
+LENGTH=4000
+elapsed cycles: 775956
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=6, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=7, <stderr>:
+LENGTH=4000
+elapsed cycles: 776223
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=7, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=8, <stderr>:
+LENGTH=4000
+elapsed cycles: 774078
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=8, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=9, <stderr>:
+LENGTH=4000
+elapsed cycles: 773871
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=9, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=10, <stderr>:
+LENGTH=4000
+elapsed cycles: 773349
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=10, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=11, <stderr>:
+LENGTH=4000
+elapsed cycles: 773472
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=11, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=12, <stderr>:
+LENGTH=4000
+elapsed cycles: 773277
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=12, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=13, <stderr>:
+LENGTH=4000
+elapsed cycles: 805818
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=13, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=14, <stderr>:
+LENGTH=4000
+elapsed cycles: 772815
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=14, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=15, <stderr>:
+LENGTH=4000
+elapsed cycles: 773115
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=15, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=16, <stderr>:
+LENGTH=4000
+elapsed cycles: 997104
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=16, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=17, <stderr>:
+LENGTH=4000
+elapsed cycles: 805347
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=17, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=18, <stderr>:
+LENGTH=4000
+elapsed cycles: 805608
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=18, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=19, <stderr>:
+LENGTH=4000
+elapsed cycles: 806040
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=19, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=20, <stderr>:
+LENGTH=4000
+elapsed cycles: 772899
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=20, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=21, <stderr>:
+LENGTH=4000
+elapsed cycles: 944382
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=21, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=22, <stderr>:
+LENGTH=4000
+elapsed cycles: 805743
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=22, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=23, <stderr>:
+LENGTH=4000
+elapsed cycles: 805224
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=23, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=24, <stderr>:
+LENGTH=4000
+elapsed cycles: 805338
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=24, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=25, <stderr>:
+LENGTH=4000
+elapsed cycles: 805599
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=25, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=26, <stderr>:
+LENGTH=4000
+elapsed cycles: 805905
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=26, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=27, <stderr>:
+LENGTH=4000
+elapsed cycles: 805359
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=27, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=28, <stderr>:
+LENGTH=4000
+elapsed cycles: 805695
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=28, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=29, <stderr>:
+LENGTH=4000
+elapsed cycles: 772995
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=29, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=30, <stderr>:
+LENGTH=4000
+elapsed cycles: 772977
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=30, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=31, <stderr>:
+LENGTH=4000
+elapsed cycles: 773619
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=31, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=32, <stderr>:
+LENGTH=4000
+elapsed cycles: 804804
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=32, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=33, <stderr>:
+LENGTH=4000
+elapsed cycles: 805848
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=33, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=34, <stderr>:
+LENGTH=4000
+elapsed cycles: 806097
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=34, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=35, <stderr>:
+LENGTH=4000
+elapsed cycles: 805389
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=35, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=36, <stderr>:
+LENGTH=4000
+elapsed cycles: 804627
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=36, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=37, <stderr>:
+LENGTH=4000
+elapsed cycles: 805962
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=37, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=38, <stderr>:
+LENGTH=4000
+elapsed cycles: 805548
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=38, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=39, <stderr>:
+LENGTH=4000
+elapsed cycles: 878991
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=39, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=40, <stderr>:
+LENGTH=4000
+elapsed cycles: 805944
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=40, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=41, <stderr>:
+LENGTH=4000
+elapsed cycles: 806436
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=41, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=42, <stderr>:
+LENGTH=4000
+elapsed cycles: 807372
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=42, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=43, <stderr>:
+LENGTH=4000
+elapsed cycles: 805215
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=43, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=44, <stderr>:
+LENGTH=4000
+elapsed cycles: 805179
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=44, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=45, <stderr>:
+LENGTH=4000
+elapsed cycles: 805146
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=45, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=46, <stderr>:
+LENGTH=4000
+elapsed cycles: 805590
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=46, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=47, <stderr>:
+LENGTH=4000
+elapsed cycles: 805650
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=47, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=48, <stderr>:
+LENGTH=4000
+elapsed cycles: 807315
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=48, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=49, <stderr>:
+LENGTH=4000
+elapsed cycles: 772449
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=49, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=50, <stderr>:
+LENGTH=4000
+elapsed cycles: 772638
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=50, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=51, <stderr>:
+LENGTH=4000
+elapsed cycles: 773100
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=51, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=52, <stderr>:
+LENGTH=4000
+elapsed cycles: 772803
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=52, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=53, <stderr>:
+LENGTH=4000
+elapsed cycles: 772452
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=53, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=54, <stderr>:
+LENGTH=4000
+elapsed cycles: 804339
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=54, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=55, <stderr>:
+LENGTH=4000
+elapsed cycles: 772857
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=55, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=56, <stderr>:
+LENGTH=4000
+elapsed cycles: 773139
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=56, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=57, <stderr>:
+LENGTH=4000
+elapsed cycles: 773157
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=57, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=58, <stderr>:
+LENGTH=4000
+elapsed cycles: 772494
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=58, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=59, <stderr>:
+LENGTH=4000
+elapsed cycles: 773337
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=59, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=60, <stderr>:
+LENGTH=4000
+elapsed cycles: 773133
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=60, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=61, <stderr>:
+LENGTH=4000
+elapsed cycles: 773028
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=61, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=62, <stderr>:
+LENGTH=4000
+elapsed cycles: 773061
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=62, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=63, <stderr>:
+LENGTH=4000
+elapsed cycles: 808173
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=63, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=64, <stderr>:
+LENGTH=4000
+elapsed cycles: 772536
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=64, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=65, <stderr>:
+LENGTH=4000
+elapsed cycles: 773484
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=65, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=66, <stderr>:
+LENGTH=4000
+elapsed cycles: 773214
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=66, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=67, <stderr>:
+LENGTH=4000
+elapsed cycles: 772929
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=67, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=68, <stderr>:
+LENGTH=4000
+elapsed cycles: 773028
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=68, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=69, <stderr>:
+LENGTH=4000
+elapsed cycles: 773019
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=69, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=70, <stderr>:
+LENGTH=4000
+elapsed cycles: 772524
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=70, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=71, <stderr>:
+LENGTH=4000
+elapsed cycles: 773748
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=71, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=72, <stderr>:
+LENGTH=4000
+elapsed cycles: 773226
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=72, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=73, <stderr>:
+LENGTH=4000
+elapsed cycles: 795009
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=73, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=74, <stderr>:
+LENGTH=4000
+elapsed cycles: 773820
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=74, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=75, <stderr>:
+LENGTH=4000
+elapsed cycles: 773706
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=75, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=76, <stderr>:
+LENGTH=4000
+elapsed cycles: 775002
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=76, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=77, <stderr>:
+LENGTH=4000
+elapsed cycles: 773364
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=77, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=78, <stderr>:
+LENGTH=4000
+elapsed cycles: 772788
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=78, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=79, <stderr>:
+LENGTH=4000
+elapsed cycles: 1209081
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=79, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=80, <stderr>:
+LENGTH=4000
+elapsed cycles: 805389
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=80, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=81, <stderr>:
+LENGTH=4000
+elapsed cycles: 774699
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=81, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=82, <stderr>:
+LENGTH=4000
+elapsed cycles: 774786
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=82, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=83, <stderr>:
+LENGTH=4000
+elapsed cycles: 775329
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=83, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=84, <stderr>:
+LENGTH=4000
+elapsed cycles: 774654
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=84, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=85, <stderr>:
+LENGTH=4000
+elapsed cycles: 789012
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=85, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=86, <stderr>:
+LENGTH=4000
+elapsed cycles: 826161
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=86, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=87, <stderr>:
+LENGTH=4000
+elapsed cycles: 806754
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=87, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=88, <stderr>:
+LENGTH=4000
+elapsed cycles: 805539
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=88, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=89, <stderr>:
+LENGTH=4000
+elapsed cycles: 778584
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=89, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=90, <stderr>:
+LENGTH=4000
+elapsed cycles: 804630
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=90, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=91, <stderr>:
+LENGTH=4000
+elapsed cycles: 795402
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=91, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=92, <stderr>:
+LENGTH=4000
+elapsed cycles: 777141
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=92, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=93, <stderr>:
+LENGTH=4000
+elapsed cycles: 776127
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=93, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=94, <stderr>:
+LENGTH=4000
+elapsed cycles: 776616
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=94, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=95, <stderr>:
+LENGTH=4000
+elapsed cycles: 793944
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=95, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=96, <stderr>:
+LENGTH=4000
+elapsed cycles: 782472
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=96, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=97, <stderr>:
+LENGTH=4000
+elapsed cycles: 790821
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=97, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=98, <stderr>:
+LENGTH=4000
+elapsed cycles: 775449
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=98, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.plain --  --cso /dev/null
+key=plain, no.=99, <stderr>:
+LENGTH=4000
+elapsed cycles: 777318
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=plain, no.=99, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=plain, no.=99, cso file:
+/dev/null
+----------------------------------------------
+key=encoded, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=0, <stderr>:
+LENGTH=4000
+elapsed cycles: 2853501
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=0, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=1, <stderr>:
+LENGTH=4000
+elapsed cycles: 3354868
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=1, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=2, <stderr>:
+LENGTH=4000
+elapsed cycles: 2842389
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=2, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=3, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657337
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=3, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=4, <stderr>:
+LENGTH=4000
+elapsed cycles: 2689296
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=4, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=5, <stderr>:
+LENGTH=4000
+elapsed cycles: 2690238
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=5, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=6, <stderr>:
+LENGTH=4000
+elapsed cycles: 2689398
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=6, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=7, <stderr>:
+LENGTH=4000
+elapsed cycles: 2690340
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=7, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=8, <stderr>:
+LENGTH=4000
+elapsed cycles: 2690598
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=8, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=9, <stderr>:
+LENGTH=4000
+elapsed cycles: 2690574
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=9, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=10, <stderr>:
+LENGTH=4000
+elapsed cycles: 2691090
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=10, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=11, <stderr>:
+LENGTH=4000
+elapsed cycles: 2692086
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=11, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=12, <stderr>:
+LENGTH=4000
+elapsed cycles: 2804454
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=12, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=13, <stderr>:
+LENGTH=4000
+elapsed cycles: 2802885
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=13, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=14, <stderr>:
+LENGTH=4000
+elapsed cycles: 2689461
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=14, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=15, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657532
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=15, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=16, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657739
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=16, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=17, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657823
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=17, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=18, <stderr>:
+LENGTH=4000
+elapsed cycles: 2758722
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=18, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=19, <stderr>:
+LENGTH=4000
+elapsed cycles: 2725779
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=19, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=20, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657280
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=20, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=21, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657292
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=21, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=22, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656509
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=22, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=23, <stderr>:
+LENGTH=4000
+elapsed cycles: 2766432
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=23, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=24, <stderr>:
+LENGTH=4000
+elapsed cycles: 2867151
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=24, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=25, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657103
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=25, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=26, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656062
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=26, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=27, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657307
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=27, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=28, <stderr>:
+LENGTH=4000
+elapsed cycles: 2659710
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=28, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=29, <stderr>:
+LENGTH=4000
+elapsed cycles: 2758374
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=29, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=30, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657100
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=30, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=31, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656794
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=31, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=32, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657952
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=32, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=33, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656845
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=33, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=34, <stderr>:
+LENGTH=4000
+elapsed cycles: 2698377
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=34, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=35, <stderr>:
+LENGTH=4000
+elapsed cycles: 2899215
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=35, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=36, <stderr>:
+LENGTH=4000
+elapsed cycles: 2933613
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=36, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=37, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658861
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=37, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=38, <stderr>:
+LENGTH=4000
+elapsed cycles: 2660352
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=38, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=39, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658141
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=39, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=40, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658294
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=40, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=41, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658687
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=41, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=42, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657334
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=42, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=43, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657205
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=43, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=44, <stderr>:
+LENGTH=4000
+elapsed cycles: 2873046
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=44, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=45, <stderr>:
+LENGTH=4000
+elapsed cycles: 2867892
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=45, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=46, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657895
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=46, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=47, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656788
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=47, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=48, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656902
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=48, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=49, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657505
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=49, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=50, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657097
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=50, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=51, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658621
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=51, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=52, <stderr>:
+LENGTH=4000
+elapsed cycles: 2766312
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=52, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=53, <stderr>:
+LENGTH=4000
+elapsed cycles: 2772948
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=53, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=54, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657094
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=54, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=55, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656554
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=55, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=56, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656911
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=56, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=57, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657646
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=57, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=58, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656605
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=58, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=59, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656725
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=59, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=60, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656869
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=60, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=61, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657268
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=61, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=62, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658255
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=62, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=63, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656440
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=63, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=64, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656461
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=64, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=65, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657619
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=65, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=66, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657169
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=66, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=67, <stderr>:
+LENGTH=4000
+elapsed cycles: 2668647
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=67, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=68, <stderr>:
+LENGTH=4000
+elapsed cycles: 2660772
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=68, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=69, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657811
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=69, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=70, <stderr>:
+LENGTH=4000
+elapsed cycles: 2841315
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=70, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=71, <stderr>:
+LENGTH=4000
+elapsed cycles: 2836344
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=71, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=72, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656437
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=72, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=73, <stderr>:
+LENGTH=4000
+elapsed cycles: 2834607
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=73, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=74, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657598
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=74, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=75, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657391
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=75, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=76, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656755
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=76, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=77, <stderr>:
+LENGTH=4000
+elapsed cycles: 2689392
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=77, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=78, <stderr>:
+LENGTH=4000
+elapsed cycles: 2695698
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=78, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=79, <stderr>:
+LENGTH=4000
+elapsed cycles: 2868132
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=79, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=80, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656854
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=80, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=81, <stderr>:
+LENGTH=4000
+elapsed cycles: 2688852
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=81, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=82, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657196
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=82, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=83, <stderr>:
+LENGTH=4000
+elapsed cycles: 2661096
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=83, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=84, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658087
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=84, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=85, <stderr>:
+LENGTH=4000
+elapsed cycles: 2691252
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=85, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=86, <stderr>:
+LENGTH=4000
+elapsed cycles: 2801787
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=86, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=87, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657226
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=87, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=88, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656734
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=88, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=89, <stderr>:
+LENGTH=4000
+elapsed cycles: 2656656
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=89, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=90, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657358
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=90, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=91, <stderr>:
+LENGTH=4000
+elapsed cycles: 2657787
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=91, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=92, <stderr>:
+LENGTH=4000
+elapsed cycles: 2680809
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=92, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=93, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658723
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=93, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=94, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658723
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=94, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=95, <stderr>:
+LENGTH=4000
+elapsed cycles: 2766954
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=95, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=96, <stderr>:
+LENGTH=4000
+elapsed cycles: 2871039
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=96, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=97, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658921
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=97, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=98, <stderr>:
+LENGTH=4000
+elapsed cycles: 2658972
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=98, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/array_sum/array_sum.perf.encoded --  --cso /dev/null
+key=encoded, no.=99, <stderr>:
+LENGTH=4000
+elapsed cycles: 2668347
+hi(checksum)=0x56C8B46832959204
+lo(checksum)=0x4FEFFAEE68B57F00
+key=encoded, no.=99, <checksum>:
+0x56C8B468329592044FEFFAEE68B57F00
+key=encoded, no.=99, cso file:
+/dev/null
+----------------------------------------------

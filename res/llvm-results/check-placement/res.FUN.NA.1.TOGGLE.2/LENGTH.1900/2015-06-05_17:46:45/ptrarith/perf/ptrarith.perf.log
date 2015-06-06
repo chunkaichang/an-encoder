@@ -1,0 +1,2206 @@
+key=plain, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=0, <stderr>:
+LENGTH=1900
+elapsed cycles: 200481
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=0, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=1, <stderr>:
+LENGTH=1900
+elapsed cycles: 197703
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=1, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=2, <stderr>:
+LENGTH=1900
+elapsed cycles: 197850
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=2, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=3, <stderr>:
+LENGTH=1900
+elapsed cycles: 196953
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=3, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=4, <stderr>:
+LENGTH=1900
+elapsed cycles: 199473
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=4, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=5, <stderr>:
+LENGTH=1900
+elapsed cycles: 198747
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=5, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=6, <stderr>:
+LENGTH=1900
+elapsed cycles: 200082
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=6, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=7, <stderr>:
+LENGTH=1900
+elapsed cycles: 199257
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=7, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=8, <stderr>:
+LENGTH=1900
+elapsed cycles: 196782
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=8, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=9, <stderr>:
+LENGTH=1900
+elapsed cycles: 195813
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=9, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=10, <stderr>:
+LENGTH=1900
+elapsed cycles: 195441
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=10, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=11, <stderr>:
+LENGTH=1900
+elapsed cycles: 200259
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=11, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=12, <stderr>:
+LENGTH=1900
+elapsed cycles: 199824
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=12, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=13, <stderr>:
+LENGTH=1900
+elapsed cycles: 195018
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=13, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=14, <stderr>:
+LENGTH=1900
+elapsed cycles: 196998
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=14, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=15, <stderr>:
+LENGTH=1900
+elapsed cycles: 196938
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=15, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=16, <stderr>:
+LENGTH=1900
+elapsed cycles: 197007
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=16, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=17, <stderr>:
+LENGTH=1900
+elapsed cycles: 208923
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=17, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=18, <stderr>:
+LENGTH=1900
+elapsed cycles: 200628
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=18, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=19, <stderr>:
+LENGTH=1900
+elapsed cycles: 198441
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=19, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=20, <stderr>:
+LENGTH=1900
+elapsed cycles: 196671
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=20, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=21, <stderr>:
+LENGTH=1900
+elapsed cycles: 198120
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=21, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=22, <stderr>:
+LENGTH=1900
+elapsed cycles: 197934
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=22, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=23, <stderr>:
+LENGTH=1900
+elapsed cycles: 196761
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=23, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=24, <stderr>:
+LENGTH=1900
+elapsed cycles: 197322
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=24, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=25, <stderr>:
+LENGTH=1900
+elapsed cycles: 197445
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=25, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=26, <stderr>:
+LENGTH=1900
+elapsed cycles: 197130
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=26, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=27, <stderr>:
+LENGTH=1900
+elapsed cycles: 232503
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=27, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=28, <stderr>:
+LENGTH=1900
+elapsed cycles: 195171
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=28, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=29, <stderr>:
+LENGTH=1900
+elapsed cycles: 198729
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=29, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=30, <stderr>:
+LENGTH=1900
+elapsed cycles: 198402
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=30, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=31, <stderr>:
+LENGTH=1900
+elapsed cycles: 199356
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=31, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=32, <stderr>:
+LENGTH=1900
+elapsed cycles: 196158
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=32, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=33, <stderr>:
+LENGTH=1900
+elapsed cycles: 196536
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=33, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=34, <stderr>:
+LENGTH=1900
+elapsed cycles: 196974
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=34, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=35, <stderr>:
+LENGTH=1900
+elapsed cycles: 198417
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=35, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=36, <stderr>:
+LENGTH=1900
+elapsed cycles: 196533
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=36, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=37, <stderr>:
+LENGTH=1900
+elapsed cycles: 199911
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=37, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=38, <stderr>:
+LENGTH=1900
+elapsed cycles: 195000
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=38, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=39, <stderr>:
+LENGTH=1900
+elapsed cycles: 197025
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=39, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=40, <stderr>:
+LENGTH=1900
+elapsed cycles: 197739
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=40, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=41, <stderr>:
+LENGTH=1900
+elapsed cycles: 194202
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=41, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=42, <stderr>:
+LENGTH=1900
+elapsed cycles: 199128
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=42, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=43, <stderr>:
+LENGTH=1900
+elapsed cycles: 234726
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=43, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=44, <stderr>:
+LENGTH=1900
+elapsed cycles: 194508
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=44, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=45, <stderr>:
+LENGTH=1900
+elapsed cycles: 201297
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=45, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=46, <stderr>:
+LENGTH=1900
+elapsed cycles: 199197
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=46, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=47, <stderr>:
+LENGTH=1900
+elapsed cycles: 196821
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=47, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=48, <stderr>:
+LENGTH=1900
+elapsed cycles: 199026
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=48, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=49, <stderr>:
+LENGTH=1900
+elapsed cycles: 197055
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=49, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=50, <stderr>:
+LENGTH=1900
+elapsed cycles: 197649
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=50, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=51, <stderr>:
+LENGTH=1900
+elapsed cycles: 196896
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=51, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=52, <stderr>:
+LENGTH=1900
+elapsed cycles: 195987
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=52, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=53, <stderr>:
+LENGTH=1900
+elapsed cycles: 196149
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=53, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=54, <stderr>:
+LENGTH=1900
+elapsed cycles: 195957
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=54, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=55, <stderr>:
+LENGTH=1900
+elapsed cycles: 199926
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=55, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=56, <stderr>:
+LENGTH=1900
+elapsed cycles: 195891
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=56, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=57, <stderr>:
+LENGTH=1900
+elapsed cycles: 198051
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=57, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=58, <stderr>:
+LENGTH=1900
+elapsed cycles: 196323
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=58, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=59, <stderr>:
+LENGTH=1900
+elapsed cycles: 195822
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=59, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=60, <stderr>:
+LENGTH=1900
+elapsed cycles: 232014
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=60, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=61, <stderr>:
+LENGTH=1900
+elapsed cycles: 194805
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=61, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=62, <stderr>:
+LENGTH=1900
+elapsed cycles: 195819
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=62, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=63, <stderr>:
+LENGTH=1900
+elapsed cycles: 199254
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=63, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=64, <stderr>:
+LENGTH=1900
+elapsed cycles: 197364
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=64, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=65, <stderr>:
+LENGTH=1900
+elapsed cycles: 196512
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=65, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=66, <stderr>:
+LENGTH=1900
+elapsed cycles: 199644
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=66, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=67, <stderr>:
+LENGTH=1900
+elapsed cycles: 198645
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=67, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=68, <stderr>:
+LENGTH=1900
+elapsed cycles: 196749
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=68, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=69, <stderr>:
+LENGTH=1900
+elapsed cycles: 197907
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=69, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=70, <stderr>:
+LENGTH=1900
+elapsed cycles: 199053
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=70, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=71, <stderr>:
+LENGTH=1900
+elapsed cycles: 197604
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=71, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=72, <stderr>:
+LENGTH=1900
+elapsed cycles: 196266
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=72, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=73, <stderr>:
+LENGTH=1900
+elapsed cycles: 196974
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=73, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=74, <stderr>:
+LENGTH=1900
+elapsed cycles: 243672
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=74, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=75, <stderr>:
+LENGTH=1900
+elapsed cycles: 196887
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=75, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=76, <stderr>:
+LENGTH=1900
+elapsed cycles: 198819
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=76, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=77, <stderr>:
+LENGTH=1900
+elapsed cycles: 195906
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=77, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=78, <stderr>:
+LENGTH=1900
+elapsed cycles: 200223
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=78, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=79, <stderr>:
+LENGTH=1900
+elapsed cycles: 198435
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=79, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=80, <stderr>:
+LENGTH=1900
+elapsed cycles: 197166
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=80, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=81, <stderr>:
+LENGTH=1900
+elapsed cycles: 198612
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=81, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=82, <stderr>:
+LENGTH=1900
+elapsed cycles: 196452
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=82, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=83, <stderr>:
+LENGTH=1900
+elapsed cycles: 196095
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=83, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=84, <stderr>:
+LENGTH=1900
+elapsed cycles: 196977
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=84, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=85, <stderr>:
+LENGTH=1900
+elapsed cycles: 200247
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=85, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=86, <stderr>:
+LENGTH=1900
+elapsed cycles: 197829
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=86, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=87, <stderr>:
+LENGTH=1900
+elapsed cycles: 196584
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=87, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=88, <stderr>:
+LENGTH=1900
+elapsed cycles: 197058
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=88, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=89, <stderr>:
+LENGTH=1900
+elapsed cycles: 195525
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=89, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=90, <stderr>:
+LENGTH=1900
+elapsed cycles: 196947
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=90, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=91, <stderr>:
+LENGTH=1900
+elapsed cycles: 238995
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=91, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=92, <stderr>:
+LENGTH=1900
+elapsed cycles: 196869
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=92, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=93, <stderr>:
+LENGTH=1900
+elapsed cycles: 199071
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=93, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=94, <stderr>:
+LENGTH=1900
+elapsed cycles: 197217
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=94, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=95, <stderr>:
+LENGTH=1900
+elapsed cycles: 196743
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=95, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=96, <stderr>:
+LENGTH=1900
+elapsed cycles: 198615
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=96, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=97, <stderr>:
+LENGTH=1900
+elapsed cycles: 196674
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=97, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=98, <stderr>:
+LENGTH=1900
+elapsed cycles: 201564
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=98, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.plain --  --cso /dev/null
+key=plain, no.=99, <stderr>:
+LENGTH=1900
+elapsed cycles: 198645
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=plain, no.=99, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=plain, no.=99, cso file:
+/dev/null
+----------------------------------------------
+key=encoded, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=0, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635708
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=0, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=1, <stderr>:
+LENGTH=1900
+elapsed cycles: 1669224
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=1, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=2, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635987
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=2, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=3, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635648
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=3, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=4, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635228
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=4, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=5, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636554
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=5, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=6, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637346
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=6, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=7, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636875
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=7, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=8, <stderr>:
+LENGTH=1900
+elapsed cycles: 1670205
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=8, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=9, <stderr>:
+LENGTH=1900
+elapsed cycles: 1729815
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=9, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=10, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636860
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=10, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=11, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637376
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=11, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=12, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637529
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=12, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=13, <stderr>:
+LENGTH=1900
+elapsed cycles: 1669083
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=13, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=14, <stderr>:
+LENGTH=1900
+elapsed cycles: 1714065
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=14, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=15, <stderr>:
+LENGTH=1900
+elapsed cycles: 1647573
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=15, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=16, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637727
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=16, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=17, <stderr>:
+LENGTH=1900
+elapsed cycles: 1669983
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=17, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=18, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637601
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=18, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=19, <stderr>:
+LENGTH=1900
+elapsed cycles: 1729761
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=19, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=20, <stderr>:
+LENGTH=1900
+elapsed cycles: 1670802
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=20, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=21, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637223
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=21, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=22, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637070
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=22, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=23, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635579
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=23, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=24, <stderr>:
+LENGTH=1900
+elapsed cycles: 1710783
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=24, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=25, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635285
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=25, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=26, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636488
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=26, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=27, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636782
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=27, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=28, <stderr>:
+LENGTH=1900
+elapsed cycles: 1720368
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=28, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=29, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635771
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=29, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=30, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637619
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=30, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=31, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636119
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=31, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=32, <stderr>:
+LENGTH=1900
+elapsed cycles: 1669539
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=32, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=33, <stderr>:
+LENGTH=1900
+elapsed cycles: 1714953
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=33, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=34, <stderr>:
+LENGTH=1900
+elapsed cycles: 1639503
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=34, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=35, <stderr>:
+LENGTH=1900
+elapsed cycles: 1643949
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=35, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=36, <stderr>:
+LENGTH=1900
+elapsed cycles: 1711587
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=36, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=37, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637310
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=37, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=38, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635909
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=38, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=39, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636470
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=39, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=40, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637235
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=40, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=41, <stderr>:
+LENGTH=1900
+elapsed cycles: 1642530
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=41, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=42, <stderr>:
+LENGTH=1900
+elapsed cycles: 1638474
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=42, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=43, <stderr>:
+LENGTH=1900
+elapsed cycles: 1686312
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=43, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=44, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636377
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=44, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=45, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637265
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=45, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=46, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636017
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=46, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=47, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636590
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=47, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=48, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636458
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=48, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=49, <stderr>:
+LENGTH=1900
+elapsed cycles: 1673436
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=49, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=50, <stderr>:
+LENGTH=1900
+elapsed cycles: 1672362
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=50, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=51, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635054
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=51, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=52, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635339
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=52, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=53, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636266
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=53, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=54, <stderr>:
+LENGTH=1900
+elapsed cycles: 1650072
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=54, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=55, <stderr>:
+LENGTH=1900
+elapsed cycles: 1634970
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=55, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=56, <stderr>:
+LENGTH=1900
+elapsed cycles: 1638129
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=56, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=57, <stderr>:
+LENGTH=1900
+elapsed cycles: 1648632
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=57, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=58, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635738
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=58, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=59, <stderr>:
+LENGTH=1900
+elapsed cycles: 1678689
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=59, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=60, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635549
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=60, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=61, <stderr>:
+LENGTH=1900
+elapsed cycles: 1668456
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=61, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=62, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636443
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=62, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=63, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637766
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=63, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=64, <stderr>:
+LENGTH=1900
+elapsed cycles: 1727166
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=64, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=65, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635882
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=65, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=66, <stderr>:
+LENGTH=1900
+elapsed cycles: 1707777
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=66, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=67, <stderr>:
+LENGTH=1900
+elapsed cycles: 1726908
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=67, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=68, <stderr>:
+LENGTH=1900
+elapsed cycles: 1640733
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=68, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=69, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637610
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=69, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=70, <stderr>:
+LENGTH=1900
+elapsed cycles: 1640391
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=70, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=71, <stderr>:
+LENGTH=1900
+elapsed cycles: 1717389
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=71, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=72, <stderr>:
+LENGTH=1900
+elapsed cycles: 1674357
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=72, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=73, <stderr>:
+LENGTH=1900
+elapsed cycles: 1638480
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=73, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=74, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636092
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=74, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=75, <stderr>:
+LENGTH=1900
+elapsed cycles: 1670283
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=75, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=76, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636755
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=76, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=77, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636494
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=77, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=78, <stderr>:
+LENGTH=1900
+elapsed cycles: 1640568
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=78, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=79, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636599
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=79, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=80, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637526
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=80, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=81, <stderr>:
+LENGTH=1900
+elapsed cycles: 1640505
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=81, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=82, <stderr>:
+LENGTH=1900
+elapsed cycles: 1684431
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=82, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=83, <stderr>:
+LENGTH=1900
+elapsed cycles: 1651905
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=83, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=84, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635747
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=84, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=85, <stderr>:
+LENGTH=1900
+elapsed cycles: 1672524
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=85, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=86, <stderr>:
+LENGTH=1900
+elapsed cycles: 1638717
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=86, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=87, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635672
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=87, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=88, <stderr>:
+LENGTH=1900
+elapsed cycles: 1674396
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=88, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=89, <stderr>:
+LENGTH=1900
+elapsed cycles: 1670421
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=89, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=90, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635483
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=90, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=91, <stderr>:
+LENGTH=1900
+elapsed cycles: 1669860
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=91, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=92, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636587
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=92, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=93, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635444
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=93, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=94, <stderr>:
+LENGTH=1900
+elapsed cycles: 1682076
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=94, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=95, <stderr>:
+LENGTH=1900
+elapsed cycles: 1681935
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=95, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=96, <stderr>:
+LENGTH=1900
+elapsed cycles: 1635348
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=96, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=97, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637265
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=97, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=98, <stderr>:
+LENGTH=1900
+elapsed cycles: 1636182
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=98, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/ptrarith/ptrarith.perf.encoded --  --cso /dev/null
+key=encoded, no.=99, <stderr>:
+LENGTH=1900
+elapsed cycles: 1637043
+hi(checksum)=0x73183D56D4C65F2F
+lo(checksum)=0x6D4192ED62BFFE48
+key=encoded, no.=99, <checksum>:
+0x73183D56D4C65F2F6D4192ED62BFFE48
+key=encoded, no.=99, cso file:
+/dev/null
+----------------------------------------------

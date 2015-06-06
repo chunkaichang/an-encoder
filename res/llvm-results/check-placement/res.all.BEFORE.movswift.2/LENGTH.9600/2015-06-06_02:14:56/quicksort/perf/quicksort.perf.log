@@ -1,0 +1,2206 @@
+key=plain, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=0, <stderr>:
+LENGTH=9600
+elapsed cycles: 155604990
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=0, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=1, <stderr>:
+LENGTH=9600
+elapsed cycles: 158532540
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=1, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=2, <stderr>:
+LENGTH=9600
+elapsed cycles: 160524498
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=2, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=3, <stderr>:
+LENGTH=9600
+elapsed cycles: 160674063
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=3, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=4, <stderr>:
+LENGTH=9600
+elapsed cycles: 160851291
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=4, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=5, <stderr>:
+LENGTH=9600
+elapsed cycles: 159565212
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=5, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=6, <stderr>:
+LENGTH=9600
+elapsed cycles: 160996389
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=6, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=7, <stderr>:
+LENGTH=9600
+elapsed cycles: 160244205
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=7, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=8, <stderr>:
+LENGTH=9600
+elapsed cycles: 161306769
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=8, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=9, <stderr>:
+LENGTH=9600
+elapsed cycles: 160918947
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=9, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=10, <stderr>:
+LENGTH=9600
+elapsed cycles: 160328883
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=10, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=11, <stderr>:
+LENGTH=9600
+elapsed cycles: 160652160
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=11, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=12, <stderr>:
+LENGTH=9600
+elapsed cycles: 160011828
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=12, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=13, <stderr>:
+LENGTH=9600
+elapsed cycles: 160153851
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=13, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=14, <stderr>:
+LENGTH=9600
+elapsed cycles: 160778937
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=14, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=15, <stderr>:
+LENGTH=9600
+elapsed cycles: 160120683
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=15, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=16, <stderr>:
+LENGTH=9600
+elapsed cycles: 160788279
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=16, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=17, <stderr>:
+LENGTH=9600
+elapsed cycles: 160762521
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=17, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=18, <stderr>:
+LENGTH=9600
+elapsed cycles: 160538190
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=18, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=19, <stderr>:
+LENGTH=9600
+elapsed cycles: 160680096
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=19, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=20, <stderr>:
+LENGTH=9600
+elapsed cycles: 159635403
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=20, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=21, <stderr>:
+LENGTH=9600
+elapsed cycles: 160656828
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=21, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=22, <stderr>:
+LENGTH=9600
+elapsed cycles: 160763838
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=22, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=23, <stderr>:
+LENGTH=9600
+elapsed cycles: 160406490
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=23, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=24, <stderr>:
+LENGTH=9600
+elapsed cycles: 160758129
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=24, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=25, <stderr>:
+LENGTH=9600
+elapsed cycles: 160520343
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=25, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=26, <stderr>:
+LENGTH=9600
+elapsed cycles: 161010375
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=26, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=27, <stderr>:
+LENGTH=9600
+elapsed cycles: 159536496
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=27, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=28, <stderr>:
+LENGTH=9600
+elapsed cycles: 161176527
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=28, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=29, <stderr>:
+LENGTH=9600
+elapsed cycles: 159986271
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=29, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=30, <stderr>:
+LENGTH=9600
+elapsed cycles: 161308560
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=30, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=31, <stderr>:
+LENGTH=9600
+elapsed cycles: 160627908
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=31, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=32, <stderr>:
+LENGTH=9600
+elapsed cycles: 160971930
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=32, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=33, <stderr>:
+LENGTH=9600
+elapsed cycles: 160361355
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=33, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=34, <stderr>:
+LENGTH=9600
+elapsed cycles: 160927053
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=34, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=35, <stderr>:
+LENGTH=9600
+elapsed cycles: 159809340
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=35, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=36, <stderr>:
+LENGTH=9600
+elapsed cycles: 161723703
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=36, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=37, <stderr>:
+LENGTH=9600
+elapsed cycles: 160924407
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=37, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=38, <stderr>:
+LENGTH=9600
+elapsed cycles: 161130522
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=38, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=39, <stderr>:
+LENGTH=9600
+elapsed cycles: 160677519
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=39, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=40, <stderr>:
+LENGTH=9600
+elapsed cycles: 160630245
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=40, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=41, <stderr>:
+LENGTH=9600
+elapsed cycles: 160609716
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=41, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=42, <stderr>:
+LENGTH=9600
+elapsed cycles: 159785400
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=42, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=43, <stderr>:
+LENGTH=9600
+elapsed cycles: 161264352
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=43, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=44, <stderr>:
+LENGTH=9600
+elapsed cycles: 160422282
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=44, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=45, <stderr>:
+LENGTH=9600
+elapsed cycles: 161128014
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=45, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=46, <stderr>:
+LENGTH=9600
+elapsed cycles: 160485171
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=46, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=47, <stderr>:
+LENGTH=9600
+elapsed cycles: 160774023
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=47, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=48, <stderr>:
+LENGTH=9600
+elapsed cycles: 161129985
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=48, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=49, <stderr>:
+LENGTH=9600
+elapsed cycles: 161158926
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=49, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=50, <stderr>:
+LENGTH=9600
+elapsed cycles: 159421890
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=50, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=51, <stderr>:
+LENGTH=9600
+elapsed cycles: 160391256
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=51, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=52, <stderr>:
+LENGTH=9600
+elapsed cycles: 159627054
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=52, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=53, <stderr>:
+LENGTH=9600
+elapsed cycles: 161360766
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=53, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=54, <stderr>:
+LENGTH=9600
+elapsed cycles: 160745379
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=54, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=55, <stderr>:
+LENGTH=9600
+elapsed cycles: 161039688
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=55, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=56, <stderr>:
+LENGTH=9600
+elapsed cycles: 160068681
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=56, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=57, <stderr>:
+LENGTH=9600
+elapsed cycles: 161392413
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=57, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=58, <stderr>:
+LENGTH=9600
+elapsed cycles: 160534797
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=58, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=59, <stderr>:
+LENGTH=9600
+elapsed cycles: 161394342
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=59, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=60, <stderr>:
+LENGTH=9600
+elapsed cycles: 160336602
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=60, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=61, <stderr>:
+LENGTH=9600
+elapsed cycles: 160308021
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=61, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=62, <stderr>:
+LENGTH=9600
+elapsed cycles: 160032882
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=62, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=63, <stderr>:
+LENGTH=9600
+elapsed cycles: 160576818
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=63, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=64, <stderr>:
+LENGTH=9600
+elapsed cycles: 159550557
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=64, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=65, <stderr>:
+LENGTH=9600
+elapsed cycles: 160794468
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=65, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=66, <stderr>:
+LENGTH=9600
+elapsed cycles: 160245519
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=66, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=67, <stderr>:
+LENGTH=9600
+elapsed cycles: 160818480
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=67, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=68, <stderr>:
+LENGTH=9600
+elapsed cycles: 160285596
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=68, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=69, <stderr>:
+LENGTH=9600
+elapsed cycles: 160325217
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=69, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=70, <stderr>:
+LENGTH=9600
+elapsed cycles: 159944568
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=70, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=71, <stderr>:
+LENGTH=9600
+elapsed cycles: 161214186
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=71, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=72, <stderr>:
+LENGTH=9600
+elapsed cycles: 163306146
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=72, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=73, <stderr>:
+LENGTH=9600
+elapsed cycles: 161467062
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=73, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=74, <stderr>:
+LENGTH=9600
+elapsed cycles: 160578552
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=74, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=75, <stderr>:
+LENGTH=9600
+elapsed cycles: 161169525
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=75, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=76, <stderr>:
+LENGTH=9600
+elapsed cycles: 160914147
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=76, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=77, <stderr>:
+LENGTH=9600
+elapsed cycles: 160791462
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=77, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=78, <stderr>:
+LENGTH=9600
+elapsed cycles: 160314621
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=78, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=79, <stderr>:
+LENGTH=9600
+elapsed cycles: 159991947
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=79, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=80, <stderr>:
+LENGTH=9600
+elapsed cycles: 160599288
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=80, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=81, <stderr>:
+LENGTH=9600
+elapsed cycles: 160764675
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=81, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=82, <stderr>:
+LENGTH=9600
+elapsed cycles: 160471194
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=82, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=83, <stderr>:
+LENGTH=9600
+elapsed cycles: 159749157
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=83, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=84, <stderr>:
+LENGTH=9600
+elapsed cycles: 161435088
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=84, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=85, <stderr>:
+LENGTH=9600
+elapsed cycles: 160441332
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=85, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=86, <stderr>:
+LENGTH=9600
+elapsed cycles: 160702521
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=86, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=87, <stderr>:
+LENGTH=9600
+elapsed cycles: 161112309
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=87, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=88, <stderr>:
+LENGTH=9600
+elapsed cycles: 160618917
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=88, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=89, <stderr>:
+LENGTH=9600
+elapsed cycles: 160704432
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=89, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=90, <stderr>:
+LENGTH=9600
+elapsed cycles: 160604106
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=90, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=91, <stderr>:
+LENGTH=9600
+elapsed cycles: 160073451
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=91, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=92, <stderr>:
+LENGTH=9600
+elapsed cycles: 161179419
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=92, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=93, <stderr>:
+LENGTH=9600
+elapsed cycles: 160268070
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=93, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=94, <stderr>:
+LENGTH=9600
+elapsed cycles: 160160301
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=94, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=95, <stderr>:
+LENGTH=9600
+elapsed cycles: 160531854
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=95, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=96, <stderr>:
+LENGTH=9600
+elapsed cycles: 160827777
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=96, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=97, <stderr>:
+LENGTH=9600
+elapsed cycles: 159507867
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=97, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=98, <stderr>:
+LENGTH=9600
+elapsed cycles: 160882710
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=98, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.plain --  --cso /dev/null
+key=plain, no.=99, <stderr>:
+LENGTH=9600
+elapsed cycles: 160584075
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=plain, no.=99, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=plain, no.=99, cso file:
+/dev/null
+----------------------------------------------
+key=encoded, runs=100 ...
+command=/home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=0, <stderr>:
+LENGTH=9600
+elapsed cycles: 264432378
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=0, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=0, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=1, <stderr>:
+LENGTH=9600
+elapsed cycles: 264957783
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=1, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=1, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=2, <stderr>:
+LENGTH=9600
+elapsed cycles: 264438297
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=2, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=2, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=3, <stderr>:
+LENGTH=9600
+elapsed cycles: 264678360
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=3, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=3, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=4, <stderr>:
+LENGTH=9600
+elapsed cycles: 265168401
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=4, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=4, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=5, <stderr>:
+LENGTH=9600
+elapsed cycles: 264592851
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=5, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=5, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=6, <stderr>:
+LENGTH=9600
+elapsed cycles: 264755346
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=6, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=6, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=7, <stderr>:
+LENGTH=9600
+elapsed cycles: 264841968
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=7, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=7, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=8, <stderr>:
+LENGTH=9600
+elapsed cycles: 262908903
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=8, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=8, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=9, <stderr>:
+LENGTH=9600
+elapsed cycles: 268430409
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=9, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=9, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=10, <stderr>:
+LENGTH=9600
+elapsed cycles: 264529419
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=10, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=10, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=11, <stderr>:
+LENGTH=9600
+elapsed cycles: 265512288
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=11, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=11, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=12, <stderr>:
+LENGTH=9600
+elapsed cycles: 264888771
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=12, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=12, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=13, <stderr>:
+LENGTH=9600
+elapsed cycles: 265694667
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=13, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=13, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=14, <stderr>:
+LENGTH=9600
+elapsed cycles: 264287106
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=14, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=14, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=15, <stderr>:
+LENGTH=9600
+elapsed cycles: 264775470
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=15, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=15, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=16, <stderr>:
+LENGTH=9600
+elapsed cycles: 264497871
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=16, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=16, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=17, <stderr>:
+LENGTH=9600
+elapsed cycles: 264878892
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=17, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=17, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=18, <stderr>:
+LENGTH=9600
+elapsed cycles: 264602265
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=18, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=18, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=19, <stderr>:
+LENGTH=9600
+elapsed cycles: 264785271
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=19, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=19, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=20, <stderr>:
+LENGTH=9600
+elapsed cycles: 264511923
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=20, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=20, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=21, <stderr>:
+LENGTH=9600
+elapsed cycles: 264789702
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=21, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=21, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=22, <stderr>:
+LENGTH=9600
+elapsed cycles: 264635277
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=22, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=22, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=23, <stderr>:
+LENGTH=9600
+elapsed cycles: 264783513
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=23, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=23, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=24, <stderr>:
+LENGTH=9600
+elapsed cycles: 264436623
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=24, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=24, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=25, <stderr>:
+LENGTH=9600
+elapsed cycles: 264812907
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=25, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=25, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=26, <stderr>:
+LENGTH=9600
+elapsed cycles: 264780813
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=26, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=26, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=27, <stderr>:
+LENGTH=9600
+elapsed cycles: 265234989
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=27, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=27, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=28, <stderr>:
+LENGTH=9600
+elapsed cycles: 264614505
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=28, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=28, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=29, <stderr>:
+LENGTH=9600
+elapsed cycles: 264282804
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=29, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=29, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=30, <stderr>:
+LENGTH=9600
+elapsed cycles: 264562599
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=30, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=30, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=31, <stderr>:
+LENGTH=9600
+elapsed cycles: 264033477
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=31, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=31, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=32, <stderr>:
+LENGTH=9600
+elapsed cycles: 264055905
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=32, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=32, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=33, <stderr>:
+LENGTH=9600
+elapsed cycles: 264700242
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=33, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=33, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=34, <stderr>:
+LENGTH=9600
+elapsed cycles: 264447942
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=34, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=34, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=35, <stderr>:
+LENGTH=9600
+elapsed cycles: 262863993
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=35, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=35, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=36, <stderr>:
+LENGTH=9600
+elapsed cycles: 267558882
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=36, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=36, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=37, <stderr>:
+LENGTH=9600
+elapsed cycles: 264278007
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=37, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=37, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=38, <stderr>:
+LENGTH=9600
+elapsed cycles: 264622863
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=38, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=38, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=39, <stderr>:
+LENGTH=9600
+elapsed cycles: 264762774
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=39, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=39, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=40, <stderr>:
+LENGTH=9600
+elapsed cycles: 264208026
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=40, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=40, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=41, <stderr>:
+LENGTH=9600
+elapsed cycles: 264192714
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=41, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=41, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=42, <stderr>:
+LENGTH=9600
+elapsed cycles: 264483240
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=42, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=42, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=43, <stderr>:
+LENGTH=9600
+elapsed cycles: 264695337
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=43, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=43, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=44, <stderr>:
+LENGTH=9600
+elapsed cycles: 263965347
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=44, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=44, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=45, <stderr>:
+LENGTH=9600
+elapsed cycles: 264610698
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=45, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=45, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=46, <stderr>:
+LENGTH=9600
+elapsed cycles: 264623199
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=46, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=46, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=47, <stderr>:
+LENGTH=9600
+elapsed cycles: 264797415
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=47, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=47, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=48, <stderr>:
+LENGTH=9600
+elapsed cycles: 264469224
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=48, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=48, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=49, <stderr>:
+LENGTH=9600
+elapsed cycles: 264898731
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=49, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=49, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=50, <stderr>:
+LENGTH=9600
+elapsed cycles: 264116547
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=50, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=50, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=51, <stderr>:
+LENGTH=9600
+elapsed cycles: 264508245
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=51, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=51, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=52, <stderr>:
+LENGTH=9600
+elapsed cycles: 264340314
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=52, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=52, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=53, <stderr>:
+LENGTH=9600
+elapsed cycles: 264876342
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=53, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=53, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=54, <stderr>:
+LENGTH=9600
+elapsed cycles: 264194970
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=54, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=54, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=55, <stderr>:
+LENGTH=9600
+elapsed cycles: 264694284
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=55, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=55, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=56, <stderr>:
+LENGTH=9600
+elapsed cycles: 264379599
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=56, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=56, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=57, <stderr>:
+LENGTH=9600
+elapsed cycles: 264841200
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=57, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=57, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=58, <stderr>:
+LENGTH=9600
+elapsed cycles: 264147162
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=58, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=58, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=59, <stderr>:
+LENGTH=9600
+elapsed cycles: 264804930
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=59, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=59, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=60, <stderr>:
+LENGTH=9600
+elapsed cycles: 264555375
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=60, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=60, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=61, <stderr>:
+LENGTH=9600
+elapsed cycles: 265646952
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=61, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=61, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=62, <stderr>:
+LENGTH=9600
+elapsed cycles: 264305109
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=62, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=62, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=63, <stderr>:
+LENGTH=9600
+elapsed cycles: 264414678
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=63, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=63, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=64, <stderr>:
+LENGTH=9600
+elapsed cycles: 271619130
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=64, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=64, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=65, <stderr>:
+LENGTH=9600
+elapsed cycles: 264666723
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=65, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=65, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=66, <stderr>:
+LENGTH=9600
+elapsed cycles: 264653082
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=66, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=66, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=67, <stderr>:
+LENGTH=9600
+elapsed cycles: 265038780
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=67, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=67, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=68, <stderr>:
+LENGTH=9600
+elapsed cycles: 264801495
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=68, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=68, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=69, <stderr>:
+LENGTH=9600
+elapsed cycles: 264451683
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=69, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=69, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=70, <stderr>:
+LENGTH=9600
+elapsed cycles: 264618087
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=70, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=70, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=71, <stderr>:
+LENGTH=9600
+elapsed cycles: 265920759
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=71, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=71, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=72, <stderr>:
+LENGTH=9600
+elapsed cycles: 264661317
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=72, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=72, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=73, <stderr>:
+LENGTH=9600
+elapsed cycles: 265305309
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=73, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=73, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=74, <stderr>:
+LENGTH=9600
+elapsed cycles: 264770946
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=74, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=74, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=75, <stderr>:
+LENGTH=9600
+elapsed cycles: 265507296
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=75, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=75, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=76, <stderr>:
+LENGTH=9600
+elapsed cycles: 264743211
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=76, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=76, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=77, <stderr>:
+LENGTH=9600
+elapsed cycles: 265608201
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=77, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=77, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=78, <stderr>:
+LENGTH=9600
+elapsed cycles: 264948036
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=78, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=78, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=79, <stderr>:
+LENGTH=9600
+elapsed cycles: 265463709
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=79, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=79, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=80, <stderr>:
+LENGTH=9600
+elapsed cycles: 264412302
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=80, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=80, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=81, <stderr>:
+LENGTH=9600
+elapsed cycles: 265650588
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=81, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=81, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=82, <stderr>:
+LENGTH=9600
+elapsed cycles: 264960099
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=82, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=82, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=83, <stderr>:
+LENGTH=9600
+elapsed cycles: 265593033
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=83, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=83, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=84, <stderr>:
+LENGTH=9600
+elapsed cycles: 264529389
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=84, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=84, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=85, <stderr>:
+LENGTH=9600
+elapsed cycles: 265433307
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=85, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=85, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=86, <stderr>:
+LENGTH=9600
+elapsed cycles: 264756375
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=86, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=86, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=87, <stderr>:
+LENGTH=9600
+elapsed cycles: 264946515
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=87, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=87, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=88, <stderr>:
+LENGTH=9600
+elapsed cycles: 266042475
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=88, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=88, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=89, <stderr>:
+LENGTH=9600
+elapsed cycles: 263396643
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=89, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=89, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=90, <stderr>:
+LENGTH=9600
+elapsed cycles: 264924870
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=90, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=90, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=91, <stderr>:
+LENGTH=9600
+elapsed cycles: 269513172
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=91, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=91, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=92, <stderr>:
+LENGTH=9600
+elapsed cycles: 264680700
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=92, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=92, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=93, <stderr>:
+LENGTH=9600
+elapsed cycles: 265083819
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=93, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=93, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=94, <stderr>:
+LENGTH=9600
+elapsed cycles: 264397926
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=94, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=94, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=95, <stderr>:
+LENGTH=9600
+elapsed cycles: 264823689
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=95, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=95, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=96, <stderr>:
+LENGTH=9600
+elapsed cycles: 265513080
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=96, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=96, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=97, <stderr>:
+LENGTH=9600
+elapsed cycles: 264459612
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=97, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=97, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=98, <stderr>:
+LENGTH=9600
+elapsed cycles: 265437951
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=98, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=98, cso file:
+/dev/null
+----------------------------------------------
+real command=cset shield -e /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.perf.encoded --  --cso /dev/null
+key=encoded, no.=99, <stderr>:
+LENGTH=9600
+elapsed cycles: 264504858
+hi(checksum)=0x02A943C33458DB48
+lo(checksum)=0x9546D2C334F5A08D
+key=encoded, no.=99, <checksum>:
+0x2A943C33458DB489546D2C334F5A08D
+key=encoded, no.=99, cso file:
+/dev/null
+----------------------------------------------

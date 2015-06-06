@@ -1,0 +1,12 @@
+base name for test: quicksort
+	performance test: ./encode/tests/quicksort/quicksort.perf.cfg
+	slow-down: 1.532174
+----------------------------------------------
+base name for test: array_sum
+	performance test: ./encode/tests/array_sum/array_sum.perf.cfg
+	slow-down: 4.784073
+----------------------------------------------
+base name for test: ptrarith
+	performance test: ./encode/tests/ptrarith/ptrarith.perf.cfg
+	slow-down: 10.015587
+----------------------------------------------
