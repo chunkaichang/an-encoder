@@ -16,4 +16,6 @@ set(CLANGXX ${LLVM_INSTALL_PREFIX}/bin/clang++)
 set(CMAKE_CXX_COMPILER ${CLANGXX})
 message("Using C++ compiler: ${CLANGXX}")
 
+set(LINK   ${LLVM_INSTALL_PREFIX}/bin/llvm-link)
+
 add_subdirectory(encode)
