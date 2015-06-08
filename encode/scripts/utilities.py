@@ -79,31 +79,27 @@ class ArgListProcessor:
         self.n = len(arg_list)
         self.finished = multiprocessing.Value('i', 0)
         self.sema = multiprocessing.Manager().Semaphore(processes)
-        self.lock = multiprocessing.Manager().Lock()
-        self.done = multiprocessing.Manager().Event()
 
     def target_with_sema(self, *args):
-        # start processing provided we get the semaphore:
-        self.sema.acquire()
         result = self.target(*args)
         self.sema.release()
-        # increment counter of finished processes:
-        self.lock.acquire()
-        self.finished.value += 1
-        if self.finished.value == self.n:
-            self.done.set()
-        self.lock.release()
         return result
 
     def run(self):
-        self.done.clear()
         started = []
         while len(self.arg_list) > 0:
             p = multiprocessing.Process(target=self.target_with_sema, args=self.arg_list.pop(0))
             p.daemon = False
+            """ Apparently it leads to more robust execution of multiple processes if the semaphore
+                is acquired here (rather than in 'target_with_sema'). Perhaps Python's
+                'multiprocessing' module cannot deal efficiently with too many processes being
+                started and immediately suspended (on the semaphore).
+            """
+            self.sema.acquire()
             started.append(p)
             p.start()
-        self.done.wait()
+        for p in started:
+            p.join()
         return
 
 
