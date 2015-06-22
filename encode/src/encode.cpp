@@ -35,6 +35,7 @@ Pass *createConstantsEncoder(Coder*);
 Pass *createBoolExtHandler(Coder*);
 Pass *createOperationsEncoder(Coder*);
 Pass *createGEPHandler(Coder*);
+Pass *createExpandGetElementPtrPass(Coder*);
 Pass *createCallHandler(Coder*);
 Pass *createOperationsExpander(Coder*);
 Pass *createInterfaceHandler(Coder*);
@@ -193,6 +194,7 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createModuleChecker(&C, true));
 
+    codePM.add(createExpandGetElementPtrPass(&C));
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
     // LLVM inserts 'ZExt' and 'SExt' instructions when boolean arguments
@@ -205,7 +207,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     //codePM.add(createModuleChecker(&C, false));
 
     codePM.add(createInterfaceHandler(&C));
-    codePM.add(createGEPHandler(&C));
+    //codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 
     linkagePM.run(*library);

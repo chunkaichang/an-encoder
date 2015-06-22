@@ -67,6 +67,8 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
       if (F->isIntrinsic() &&
           (F->getIntrinsicID() == Intrinsic::an_encode ||
            F->getIntrinsicID() == Intrinsic::an_decode ||
+           F->getIntrinsicID() == Intrinsic::an_encode_value ||
+           F->getIntrinsicID() == Intrinsic::an_decode_value ||
            F->getIntrinsicID() == Intrinsic::an_check  ||
            F->getIntrinsicID() == Intrinsic::an_signal ||
            F->getIntrinsicID() == Intrinsic::an_assert ||
@@ -77,8 +79,12 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
       // Decode the arguments to external function calls:
       for (unsigned i = 0; i < CI->getNumArgOperands(); i++) {
         Value *Op = CI->getArgOperand(i);
-        if (!Op->getType()->isIntegerTy())
+        if (!Op->getType()->isIntegerTy() &&
+        		!Op->getType()->isPointerTy())
           continue;
+				if (Op->getType()->isPointerTy() &&
+					  dyn_cast<GlobalValue>(Op->stripPointerCasts()))
+					continue;
 
         Op = C->createEncRegionExit(Op, Op->getType(), CI);
         if (i < F->getFunctionType()->getNumParams()) {
@@ -92,9 +98,10 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
       }
       // Encode the return value from the external function call:
       Type *retTy = F->getReturnType();
-      if (retTy->isIntegerTy()) {
+      if (retTy->isIntegerTy() || retTy->isPointerTy()) {
         Value *ret = CI;
-        if (ret->getType() == C->getInt64Type()) {
+        if (ret->getType() == C->getInt64Type() ||
+						ret->getType()->isPointerTy()) {
           // Save all current uses of the return value to the vault. These
           // are the uses that need to be replaced with the encoded return
           // value. (The 'createEncRegionEntry' method will give rise to
@@ -123,7 +130,19 @@ bool CallHandler::runOnBasicBlock(BasicBlock &BB) {
         }
         modified = true;
       }
-    }
+    } else {
+			// encode pointers to global variables if they are passed as arguments
+      for (unsigned i = 0; i < CI->getNumArgOperands(); i++) {
+        Value *Op = CI->getArgOperand(i);
+				if (Op->getType()->isPointerTy() &&
+					  dyn_cast<GlobalValue>(Op->stripPointerCasts())) {
+        
+					Op = C->createEncode(Op, CI);
+        	CI->setArgOperand(i, Op);
+        	modified = true;
+				}
+			}
+		}
     I = N;
   }
 
