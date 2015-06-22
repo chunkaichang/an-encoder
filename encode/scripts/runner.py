@@ -33,7 +33,7 @@ class TestRunner:
                 if cso: cs = os.path.join(self.test.get_cs_dir(), "%s.%d" % (k, i))
                 else:   cs = os.devnull
                 split = self.test.commands[k].split()
-                cmd = "cset shield -e " + split.pop(0) + " -- "
+                cmd = split.pop(0) + " "
                 while(len(split)):
                   cmd += split.pop(0) + " "
                 # cmd = self.test.commands[k] + (" --cso %s" % cs)
