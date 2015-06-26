@@ -13,7 +13,7 @@
 
 #define log0(...) printf(__VA_ARGS__)
 #define log1(...) printf(__VA_ARGS__)
-#define ADJ_PRINT(...) printf(__VA_ARGS__)
+#define ADJ_PRINT(...) /*printf(__VA_ARGS__)*/
 
 extern void ___enc_dijkstra(long, long);
 
