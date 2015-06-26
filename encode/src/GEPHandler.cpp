@@ -48,7 +48,9 @@ bool GEPHandler::runOnBasicBlock(BasicBlock &BB) {
         modified = true;
       }
 
-      if (!dyn_cast<GlobalValue>(Ptr->stripPointerCasts())) {
+      // Since pointers are assumed to be encoded, we must encode
+      // the result of a 'GEP' instruction:
+      {
         UsesVault UV(I->uses());
         Value *enc = C->createEncode(I, std::next(I));
         UV.replaceWith(enc);
