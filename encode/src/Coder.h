@@ -21,8 +21,8 @@ public:
   Value *createZExt(Value *V, Type *DestTy, Instruction *I);
   Value *createTrunc(Value *V, Type *DestTy, Instruction *I);
 
-  Value *createEncode(Value *V, Instruction *I);
-  Value *createDecode(Value *V, Instruction *I);
+  Value *createEncode(Value *V, Instruction *I, bool noA = false);
+  Value *createDecode(Value *V, Instruction *I, bool noA = false);
   Value *createAssert(Value *V, Instruction *I);
   
   Value *createLoadAccu(Instruction *I, unsigned i);
@@ -49,6 +49,7 @@ private:
   IntegerType *int64Ty, *int32Ty;
   Type *voidTy;
   Function *Encode, *Decode, *Assert;
+  Function *EncodeValue, *DecodeValue;
   //Constant *Accumulate;
   Constant *Accumulate0, *Accumulate1;
   IRBuilder<> *Builder;

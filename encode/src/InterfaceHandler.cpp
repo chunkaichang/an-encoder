@@ -31,7 +31,7 @@ bool InterfaceHandler::runOnFunction(Function &F) {
     return false;
 
   for (Function::arg_iterator a = F.arg_begin(), e = F.arg_end(); a != e; ++a) {
-    if (a->getType()->isIntegerTy()) {
+    if (a->getType()->isIntegerTy() || a->getType()->isPointerTy()) {
       UsesVault UV(a->uses());
       Value *arg = a;
       Instruction *insertPt = F.getEntryBlock().begin();
@@ -40,7 +40,7 @@ bool InterfaceHandler::runOnFunction(Function &F) {
     }
   }
 
-  if (F.getReturnType()->isIntegerTy()) {
+  if (F.getReturnType()->isIntegerTy() || F.getReturnType()->isPointerTy()) {
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i) {
       BasicBlock &BB = *i;
       TerminatorInst *ti = BB.getTerminator();

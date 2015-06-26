@@ -16,9 +16,17 @@ Coder::Coder(Module *m, unsigned a) : M(m), toggle(0) {
     Intrinsic::getDeclaration(M,
                               Intrinsic::an_encode,
                               int64Ty);
+  this->EncodeValue =
+    Intrinsic::getDeclaration(M,
+                              Intrinsic::an_encode_value,
+                              int64Ty);
   this->Decode =
     Intrinsic::getDeclaration(M,
                               Intrinsic::an_decode,
+                              int64Ty);
+  this->DecodeValue =
+    Intrinsic::getDeclaration(M,
+                              Intrinsic::an_decode_value,
                               int64Ty);
   this->Assert =
     Intrinsic::getDeclaration(M,
@@ -84,48 +92,66 @@ Value *Coder::createTrunc(Value *V, Type *DestTy, Instruction *I) {
 
 // NOTE: The "encode" and "decode" methods only handle values that
 // are 64bit integers.
-Value *Coder::createEncode(Value *V, Instruction *I) {
-  if (V->getType() != int64Ty)
+Value *Coder::createEncode(Value *V, Instruction *I, bool noA) {
+	bool pointerTy = V->getType()->isPointerTy();
+	Value *res = NULL;
+
+  if (V->getType() != int64Ty && !pointerTy)
     return NULL;
 
   Builder->SetInsertPoint(I);
-  return Builder->CreateCall2(Encode, V, A);
+	
+	res = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  res = noA ? Builder->CreateCall(EncodeValue, res)
+						: Builder->CreateCall2(Encode, res, A);
+	res = pointerTy ? Builder->CreateIntToPtr(res, V->getType()) : res;
+	return res;
 }
 
-Value *Coder::createDecode(Value *V, Instruction *I) {
-  if (V->getType() != int64Ty)
+Value *Coder::createDecode(Value *V, Instruction *I, bool noA) {
+	bool pointerTy = V->getType()->isPointerTy();
+	Value *res = NULL;
+
+  if (V->getType() != int64Ty && !pointerTy)
     return NULL;
 
   Builder->SetInsertPoint(I);
-  return Builder->CreateCall2(Decode, V, A);
+
+	res = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  res = noA ? Builder->CreateCall(DecodeValue, res)
+  					: Builder->CreateCall2(Decode, res, A);
+	res = pointerTy ? Builder->CreateIntToPtr(res, V->getType()) : res;
+	return res;
 }
 
 // This method should be called on values that enter an encoded region,
 // e.g. return values from an external function call:
 Value *Coder::createEncRegionEntry(Value *V, Instruction *I) {
-  if (!V->getType()->isIntegerTy())
+	bool pointerTy = V->getType()->isPointerTy();
+  if (!V->getType()->isIntegerTy() && !pointerTy)
     return NULL;
 
   Type *origTy = V->getType();
-  unsigned w = origTy->getIntegerBitWidth();
+  unsigned w = pointerTy ? 64 : origTy->getIntegerBitWidth();
   if (w < 64) V = createSExt(V, int64Ty, I);
   V = createEncode(V, I);
   //Handle values of bitwidth < 64 properly:
-  return postprocessFromEncOp(V, origTy, I);
+  return pointerTy ? V : postprocessFromEncOp(V, origTy, I);
 }
 
 // This method should be called on calues that leave an encoded region,
 // e.g. arguments to external function calls:
 Value *Coder::createEncRegionExit(Value *V, Type *DestTy, Instruction *I) {
-  if (!DestTy->isIntegerTy())
+	bool pointerTy = V->getType()->isPointerTy();
+  if (!DestTy->isIntegerTy() && !pointerTy)
     return NULL;
 
   //Handle values of bitwidth < 64 properly:
-  V = preprocessForEncOp(V, I);
-  assert(V->getType() == int64Ty);
+  V = pointerTy ? V : preprocessForEncOp(V, I);
+  assert(pointerTy || V->getType() == int64Ty);
   V = createDecode(V, I);
 
-  unsigned w = DestTy->getIntegerBitWidth();
+  unsigned w = pointerTy ? 64 : DestTy->getIntegerBitWidth();
   if (w < 64) V = createTrunc(V, DestTy, I);
   return V;
 }
@@ -192,10 +218,15 @@ Value *Coder::createLoadAccu(Instruction *I, unsigned i) {
 }
 
 Value *Coder::createAssert(Value *V, Instruction *I) {
-  if (V->getType() != int64Ty) return NULL;
+	bool pointerTy = V->getType()->isPointerTy();
+	Value *res = NULL;
+  if (V->getType() != int64Ty && !pointerTy) return NULL;
 
   Builder->SetInsertPoint(I);
-  return Builder->CreateCall2(Assert, V, A);
+
+	res = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  res = Builder->CreateCall2(Assert, res, A);
+	return res;
 }
 
 Value *Coder::createAssertOnAccu(Instruction *I) {
