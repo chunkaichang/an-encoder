@@ -67,6 +67,24 @@ bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
     unsigned Op = I->getOpcode();
     switch (Op) {
     default: break;
+    case Instruction::Load: {
+      insertCheckAfter(I, I);
+      break;
+    }
+    case Instruction::Store: {
+      insertCheckBefore(I->getOperand(0), I);
+      C->createAssert(I->getOperand(0), &(*I));
+      break; 
+    }
+    case Instruction::ICmp: { 
+      ICmpInst *cmp = dyn_cast<ICmpInst>(&(*I));
+      assert(cmp);
+      if (!cmp->isIntPredicate()) break;
+
+      insertCheckBefore(I->getOperand(0), I);
+      insertCheckBefore(I->getOperand(1), I);
+      break;
+    }
     case Instruction::Call: {
       // Deferred to the 'CallHandler' pass.
       break;
