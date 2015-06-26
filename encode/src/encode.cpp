@@ -35,7 +35,6 @@ Pass *createConstantsEncoder(Coder*);
 Pass *createBoolExtHandler(Coder*);
 Pass *createOperationsEncoder(Coder*);
 Pass *createGEPHandler(Coder*);
-Pass *createExpandGetElementPtrPass(Coder*);
 Pass *createCallHandler(Coder*);
 Pass *createOperationsExpander(Coder*);
 Pass *createInterfaceHandler(Coder*);
@@ -194,9 +193,9 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createModuleChecker(&C, true));
 
-    codePM.add(createExpandGetElementPtrPass(&C));
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
+    codePM.add(createGEPHandler(&C));
     // LLVM inserts 'ZExt' and 'SExt' instructions when boolean arguments
     // (i.e. of type 'i1') appear in bitwise operations. The "BoolExtHandler"
     // pass encodes values that have originated from boolean values by this

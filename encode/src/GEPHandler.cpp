@@ -6,6 +6,7 @@
 #include "llvm/IR/Instructions.h"
 
 #include "Coder.h"
+#include "UsesVault.h"
 
 using namespace llvm;
 
@@ -31,7 +32,11 @@ bool GEPHandler::runOnBasicBlock(BasicBlock &BB) {
     GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(&(*I));
 
     if (GEP) {
-      for (unsigned i = 0; i < I->getNumOperands(); i++) {
+      Value *Ptr = GEP->getPointerOperand();
+      if (!dyn_cast<GlobalValue>(Ptr->stripPointerCasts()))
+        GEP->setOperand(0, C->createDecode(Ptr, GEP));
+
+      for (unsigned i = 1; i < I->getNumOperands(); i++) {
         Value *Op = I->getOperand(i);
         if (!Op->getType()->isIntegerTy())
           continue;
@@ -41,6 +46,12 @@ bool GEPHandler::runOnBasicBlock(BasicBlock &BB) {
         I->setOperand(i, NewOp);
 
         modified = true;
+      }
+
+      if (!dyn_cast<GlobalValue>(Ptr->stripPointerCasts())) {
+        UsesVault UV(I->uses());
+        Value *enc = C->createEncode(I, std::next(I));
+        UV.replaceWith(enc);
       }
     }
   }

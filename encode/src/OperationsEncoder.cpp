@@ -67,13 +67,31 @@ bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
     unsigned Op = I->getOpcode();
     switch (Op) {
     default: break;
+    case Instruction::Alloca: {
+      UsesVault UV(I->uses());
+      Value *enc = C->createEncode(I, std::next(I));
+      UV.replaceWith(enc);
+      break;
+    }
     case Instruction::Load: {
+      Value *ptr = I->getOperand(0);
+      if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+        insertCheckBefore(ptr, I);
+        I->setOperand(0, C->createDecode(ptr, I));
+      }
+
       insertCheckAfter(I, I);
       break;
     }
     case Instruction::Store: {
       insertCheckBefore(I->getOperand(0), I);
-      C->createAssert(I->getOperand(0), &(*I));
+
+      Value *ptr = I->getOperand(1);
+      if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+        insertCheckBefore(ptr, I);
+        I->setOperand(1, C->createDecode(ptr, I));
+      }
+
       break; 
     }
     case Instruction::ICmp: { 
@@ -93,39 +111,6 @@ bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
       // Deferred to the 'GEPHandler' pass.
       break;
     }
-		case Instruction::Alloca: {
-      UsesVault UV(I->uses());
-      Value *EncInt = C->createEncode(I, std::next(I));
-      UV.replaceWith(EncInt);
-      
-			insertCheckAfter(EncInt, std::next(I));
-      modified = true;
-      break;
-		}
-		case Instruction::Load: {
-			Value *ptr = I->getOperand(0);
-			if (dyn_cast<GlobalValue>(ptr->stripPointerCasts())) 
-				break;
-      insertCheckBefore(ptr, I);
-
-			ptr = C->createDecode(ptr, I);
-			I->setOperand(0, ptr);
-
-      insertCheckAfter(I, I);
-			break;
-		}
-		case Instruction::Store: {
-      insertCheckBefore(I->getOperand(0), I);
-
-			Value *ptr = I->getOperand(1);
-			if (dyn_cast<GlobalValue>(ptr->stripPointerCasts())) 
-				break;
-      insertCheckBefore(ptr, I);
-
-			ptr = C->createDecode(ptr, I);
-			I->setOperand(1, ptr);
-			break;
-		}
     /*case Instruction::PtrToInt: {
       // Save all current uses of the 'ptrtoint' instruction to the
       // vault. These are the uses that need to be replaced with the
