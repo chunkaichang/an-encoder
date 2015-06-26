@@ -4,7 +4,6 @@ add_executable(encode encode.cpp
                       GlobalsEncoder.cpp
                       ConstantsEncoder.cpp
                       GEPHandler.cpp
-                      GEPExpander.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
                       EncodeDecodeRemover.cpp
