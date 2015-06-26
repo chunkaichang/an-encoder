@@ -241,6 +241,10 @@ Value *Coder::createAssertOnAccu(Instruction *I) {
   
 Value *Coder::createAccumulate(Value *V, Instruction *I) {
   Builder->SetInsertPoint(I);
+
+  if (V->getType()->isPointerTy())
+    V = Builder->CreatePtrToInt(V, int64Ty);
+
   if ((toggle++) % NUM_ACCUS)
     return Builder->CreateCall(Accumulate1, V);
   else
