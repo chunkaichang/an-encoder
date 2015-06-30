@@ -52,6 +52,9 @@ private:
   Function *EncodeValue, *DecodeValue;
   //Constant *Accumulate;
   Constant *Accumulate0, *Accumulate1;
+public:
+  Constant *idr, *ce;
+private:
   IRBuilder<> *Builder;
   unsigned toggle;
 };

@@ -84,10 +84,11 @@ int64_t mul_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
 
-  __int128_t tmp = 0;
-  tmp = __builtin_an_decode_i128((__int128_t)x_enc * (__int128_t)y_enc, A);
+  int64_t tmp = 0;
+  tmp = __builtin_an_decode_i64(x_enc, A)
+        * __builtin_an_decode_i64(y_enc, A);
 
-  r_enc = (int64_t) tmp;
+  r_enc = __builtin_an_encode_i64(tmp, A);
   accumulate_enc(r_enc);
   return r_enc;
 }

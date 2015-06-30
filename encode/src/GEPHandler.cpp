@@ -33,8 +33,10 @@ bool GEPHandler::runOnBasicBlock(BasicBlock &BB) {
 
     if (GEP) {
       Value *Ptr = GEP->getPointerOperand();
-      if (!dyn_cast<GlobalValue>(Ptr->stripPointerCasts()))
+      if (!dyn_cast<GlobalValue>(Ptr->stripPointerCasts())) {
+      	//C->createAssert(Ptr, &(*I));
         GEP->setOperand(0, C->createDecode(Ptr, GEP));
+      }
 
       for (unsigned i = 1; i < I->getNumOperands(); i++) {
         Value *Op = I->getOperand(i);

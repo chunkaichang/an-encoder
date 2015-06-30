@@ -135,8 +135,8 @@ const uint64_t    globalCodeValue = 58659;
 static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
   std::unique_ptr<Module> M;
-  Module *mod, *library;
-  PassManager PM, linkagePM, cyclePM;
+  Module *mod, *library, *idr;
+  PassManager PM, linkagePM, linkIDRPM, cyclePM;
   std::string linkError;
 
   mod = openFileAsModule(InputFilename, Err, Context);
@@ -150,15 +150,17 @@ static int processModule(char **argv, LLVMContext &Context) {
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
   if (!Out) return 1;
 
-  std::string libraryPath(""), binaryPath(argv[0]);
+  std::string libraryPath(""), idrPath(""), binaryPath(argv[0]);
   int pos = binaryPath.rfind('/');
   if (pos != std::string::npos)
     libraryPath = binaryPath.substr(0, pos+1);
+	idrPath = libraryPath;
   // If no '/' is found in 'argv[0]', then this binary is executed from the directory
   // it is in, i.e. the current working directory is this binary's directory. Since the
   // library is expected to reside in the same directory, its relative paths is the same
   // as its file name:
   libraryPath += "anlib.bc";
+	idrPath += "idivrem.bc";
 
   // Remove explicit calls to 'accumulate_enc':
   // (The 'OperationsEncoder' now decides when the accumulator should be updated,
@@ -173,6 +175,11 @@ static int processModule(char **argv, LLVMContext &Context) {
   if (!ExpandOnly) {
     library = openFileAsModule(libraryPath, Err, Context);
     if (library == nullptr) {
+      Err.print(argv[0], errs());
+      return 1;
+    }
+    idr = openFileAsModule(idrPath, Err, Context);
+    if (idr == nullptr) {
       Err.print(argv[0], errs());
       return 1;
     }
@@ -284,6 +291,13 @@ static int processModule(char **argv, LLVMContext &Context) {
 #endif
     }
     postLinkPM.run(*mod);
+    linkIDRPM.add(createLinkagePass(GlobalValue::ExternalLinkage));
+		linkIDRPM.run(*idr);
+		if (linkModules(mod, idr, &linkError)) {
+      std::cerr << linkError;
+      return 1;
+    }
+    
 
     // Add optimization passes (roughly the equivalent of "-O2",
     // code was inspired by 'opt.cpp'):

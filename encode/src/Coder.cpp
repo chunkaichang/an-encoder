@@ -42,6 +42,22 @@ Coder::Coder(Module *m, unsigned a) : M(m), toggle(0) {
                                               accuTy);
   this->Accumulate1 = M->getOrInsertFunction("___accumulate1_enc",
                                               accuTy);
+
+  SmallVector<Type*, 4> idr_args;
+  idr_args.push_back(Type::getInt64PtrTy(ctx));  
+  idr_args.push_back(Type::getInt64PtrTy(ctx));  
+  idr_args.push_back(int64Ty);  
+  idr_args.push_back(int64Ty);  
+  FunctionType *idrTy = FunctionType::get(voidTy,
+                                          idr_args,
+                                          false);
+  this->idr = M->getOrInsertFunction("idivrem", idrTy);
+	
+  FunctionType *ceTy = FunctionType::get(voidTy,
+                                         int64Ty,
+                                         false);
+  this->ce = M->getOrInsertFunction("condexit", ceTy);
+
   Builder = new IRBuilder<>(ctx);
 }
 
@@ -117,11 +133,11 @@ Value *Coder::createDecode(Value *V, Instruction *I, bool noA) {
 
   Builder->SetInsertPoint(I);
 
-	res = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  res = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
   res = noA ? Builder->CreateCall(DecodeValue, res)
-  					: Builder->CreateCall2(Decode, res, A);
-	res = pointerTy ? Builder->CreateIntToPtr(res, V->getType()) : res;
-	return res;
+            : Builder->CreateCall2(Decode, res, A);
+  res = pointerTy ? Builder->CreateIntToPtr(res, V->getType()) : res;
+  return res;
 }
 
 // This method should be called on values that enter an encoded region,

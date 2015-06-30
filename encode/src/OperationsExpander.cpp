@@ -35,6 +35,10 @@ char OperationsExpander::ID = 0;
 bool OperationsExpander::runOnFunction(Function &F) {
   LLVMContext &ctx = F.getContext();
   Module *M = F.getParent();
+  					
+  IRBuilder<> builder(F.getEntryBlock().begin());
+	Value *div = builder.CreateAlloca(C->getInt64Type());
+  Value *rem = builder.CreateAlloca(C->getInt64Type());
 
   bool m = true, modified = false;
   // Loop until no more modifications are made to the function:
@@ -72,7 +76,36 @@ bool OperationsExpander::runOnFunction(Function &F) {
             break;                                          \
           }
           HANDLE_REPLACE_OPERATION(an_encode, Mul)
-          HANDLE_REPLACE_OPERATION(an_decode, SDiv)
+          //HANDLE_REPLACE_OPERATION(an_decode, SDiv)
+          case Intrinsic::an_decode: {
+						Value *x = ci->getArgOperand(0);
+						Value *a = ci->getArgOperand(1);
+						ConstantInt *xi = dyn_cast<ConstantInt>(x);
+						if (xi) {
+						  int64_t xv = xi->getSExtValue();
+							assert(xv % C->getA() == 0);
+							int64_t dx = xv / C->getA();
+							ci->replaceAllUsesWith(ConstantInt::get(C->getInt64Type(),
+																											dx));
+              ci->eraseFromParent();
+              m = modified = true;
+              break;            
+						}
+
+            IRBuilder<> builder(ci);                    \
+						SmallVector<Value*,4> args;
+						args.push_back(div);
+						args.push_back(rem);
+						args.push_back(x);
+						args.push_back(a);
+						builder.CreateCall(C->idr, args);
+						builder.CreateCall(C->ce,
+															 builder.CreateLoad(rem));
+						ci->replaceAllUsesWith(builder.CreateLoad(div));
+            ci->eraseFromParent();
+            m = modified = true;
+            break;            
+					}
 
 #define HANDLE_REPLACE_VALUE_OPERATION(value_intrinsic, coder_operation)  \
           case Intrinsic::value_intrinsic: {                  \
