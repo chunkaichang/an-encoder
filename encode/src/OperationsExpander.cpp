@@ -92,16 +92,12 @@ bool OperationsExpander::runOnFunction(Function &F) {
               break;            
 						}
 
-            IRBuilder<> builder(ci);                    \
-						SmallVector<Value*,4> args;
-						args.push_back(div);
-						args.push_back(rem);
-						args.push_back(x);
-						args.push_back(a);
-						builder.CreateCall(C->idr, args);
-						builder.CreateCall(C->ce,
-															 builder.CreateLoad(rem));
-						ci->replaceAllUsesWith(builder.CreateLoad(div));
+            IRBuilder<> builder(ci);
+            Value *div = builder.CreateSDiv(x, a);
+            Value *tmp = builder.CreateMul(div, a);
+            Value *rem = builder.CreateSub(x, tmp);
+						builder.CreateCall(C->ce, rem);
+						ci->replaceAllUsesWith(div);
             ci->eraseFromParent();
             m = modified = true;
             break;            
