@@ -73,14 +73,14 @@ public:
 
 private:
 	Instruction *createExitAtEnd(BasicBlock *BB);
-	Instruction *createCmpZeroAfter(Instruction *I);
-	BasicBlock *createTrapBlockOnFalse(Instruction *I);
+	Value *createCmpZero(Value *v, BasicBlock::iterator &I);
+	BasicBlock *createTrapBlockOnFalse(Value *v, BasicBlock::iterator &I);
 
 public:
-	Instruction *expandEncode(Instruction *I);
-	Instruction *expandDecode(Instruction *I);
-	Instruction *expandCheck(Instruction *I);
-	Instruction *expandAssert(Instruction *I);
+	Value *expandEncode(BasicBlock::iterator &I);
+	Value *expandDecode(BasicBlock::iterator &I);
+	Value *expandCheck(BasicBlock::iterator &I);
+	Instruction *expandAssert(BasicBlock::iterator &I);
 
 private:
 	Module *M;

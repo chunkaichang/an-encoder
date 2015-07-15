@@ -32,6 +32,14 @@ namespace {
 
 char OperationsExpander::ID = 0;
 
+static void populateWorkList(std::vector<BasicBlock::iterator> &worklist, Function &F) {
+	for (auto BI = F.begin(), BE = F.end(); BI != BE; BI++) {
+		for (auto I = BI->begin(), E = BI->end(); I != E; I++) {
+			worklist.push_back(I);
+		}
+	}
+}
+
 bool OperationsExpander::runOnFunction(Function &F) {
 	LLVMContext &ctx = F.getContext();
 	Module *M = F.getParent();
@@ -43,64 +51,53 @@ bool OperationsExpander::runOnFunction(Function &F) {
 	// the assert and signal intrinsics creates new basic blocks.)
 	while (m) {
 		m = false;
-		std::vector<BasicBlock*> BBWorkList;
-		for (auto BI = F.begin(), BE = F.end(); BI != BE; BI++) {
-			BBWorkList.push_back(&(*BI));
-		}
+		std::vector<BasicBlock::iterator> worklist;
+		populateWorkList(worklist, F);
 
-		auto BI = BBWorkList.begin(), BE = BBWorkList.end();
-		for (; BI != BE; BI++) {
-			std::vector<Instruction*> IWorkList;
-			for (auto I = (*BI)->begin(), E = (*BI)->end(); I != E; I++) {
-				IWorkList.push_back(&(*I));
+		for (auto it = worklist.begin(); it != worklist.end(); it++) {
+			BasicBlock::iterator &i = *it;
+			// We are only interested in call instructions, in particular
+			// such instructions which call the "AN coding" intrinsics:
+			CallInst *ci = dyn_cast<CallInst>(i);
+			Function *callee = ci ? ci->getCalledFunction() : nullptr;
+			if (!callee || !callee->isIntrinsic())
+				continue;
+
+			switch (callee->getIntrinsicID()) {
+			default: break;
+			case Intrinsic::an_encode: {
+				PC->expandEncode(i);
+				m |= true;
+				break;
 			}
-
-			auto I = IWorkList.begin(), E = IWorkList.end();
-			for (; I != E; I++) {
-				Instruction *i = *I;
-				// We are only interested in call instructions, in particular
-				// such instructions which call the "AN coding" intrinsics:
-				CallInst *ci = dyn_cast<CallInst>(i);
-				Function *callee = ci ? ci->getCalledFunction() : nullptr;
-				if (!callee || !callee->isIntrinsic())
-					continue;
-
-				switch (callee->getIntrinsicID()) {
-				default: break;
-				case Intrinsic::an_encode: {
-					PC->expandEncode(i);
-					m |= true;
-					break;
-				}
-				case Intrinsic::an_decode: {
-					PC->expandDecode(i);
-					m |= true;
-					break;
-				}
-				case Intrinsic::an_encode_value:
-				case Intrinsic::an_decode_value: {
-					Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
-					Value *result = (callee->getIntrinsicID() == Intrinsic::an_encode_value)
-									? PC->createEncode(x, ci)
-									: PC->createDecode(x, ci);
-					ci->replaceAllUsesWith(result);
-					ci->eraseFromParent();
-					m = true;
-					break;
-				}
-				case Intrinsic::an_check: {
-					PC->expandCheck(i);
-					m |= true;
-					break;
-				}
-				case Intrinsic::an_assert: {
-					PC->expandAssert(i);
-					m |= true;
-					break;
-				}
-				}
-				modified |= m;
+			case Intrinsic::an_decode: {
+				PC->expandDecode(i);
+				m |= true;
+				break;
 			}
+			case Intrinsic::an_encode_value:
+			case Intrinsic::an_decode_value: {
+				Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
+				Value *result = (callee->getIntrinsicID() == Intrinsic::an_encode_value)
+								? PC->createEncode(x, ci)
+								: PC->createDecode(x, ci);
+				ci->replaceAllUsesWith(result);
+				ci->eraseFromParent();
+				m = true;
+				break;
+			}
+			case Intrinsic::an_check: {
+				PC->expandCheck(i);
+				m |= true;
+				break;
+			}
+			case Intrinsic::an_assert: {
+				PC->expandAssert(i);
+				m |= true;
+				break;
+			}
+			}
+			modified |= m;
 		}
 	}
 

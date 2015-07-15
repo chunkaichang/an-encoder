@@ -454,28 +454,25 @@ Instruction *ProfiledCoder::createExitAtEnd(BasicBlock *BB) {
 	return Builder->CreateUnreachable();
 }
 
-Instruction *ProfiledCoder::createCmpZeroAfter(Instruction *I) {
+Value *ProfiledCoder::createCmpZero(Value *v, BasicBlock::iterator &I) {
 	assert(isInt64Type(I));
-	BasicBlock::iterator BI(I);
-	Builder->SetInsertPoint(std::next(BI));
+	Builder->SetInsertPoint(I);
 
 	ConstantInt *Zero = ConstantInt::getSigned(int64Ty, 0);
-    Value *result = Builder->CreateICmpEQ(I, Zero);
-    return dyn_cast<Instruction>(result);
+    return Builder->CreateICmpEQ(v, Zero);
 }
 
-BasicBlock *ProfiledCoder::createTrapBlockOnFalse(Instruction *I) {
+BasicBlock *ProfiledCoder::createTrapBlockOnFalse(Value *v, BasicBlock::iterator &I) {
 	assert(I->getOpcode() == Instruction::ICmp);
 	BasicBlock *BB = I->getParent();
-	BasicBlock::iterator BI(I);
-	BasicBlock *splitBB = BB->splitBasicBlock(std::next(BI)),
+	BasicBlock *splitBB = BB->splitBasicBlock(I),
     	       *trapBB  = BasicBlock::Create(BB->getContext(),
     	                                     "",
     	                                     BB->getParent());
 	// Terminating instruction will be a jump to 'splitBB':
     Instruction *term = BB->getTerminator();
     Builder->SetInsertPoint(term);
-    Builder->CreateCondBr(I, splitBB, trapBB);
+    Builder->CreateCondBr(v, splitBB, trapBB);
     // The original terminator (inserted by the 'splitBasicBlock'
     // method) is no longer needed):
     term->eraseFromParent();
@@ -494,7 +491,7 @@ static bool isIntrinsic(Instruction *I, Intrinsic::ID id) {
 
 }
 
-Instruction *ProfiledCoder::expandEncode(Instruction *I) {
+Value *ProfiledCoder::expandEncode(BasicBlock::iterator &I) {
 	assert(isIntrinsic(I, Intrinsic::an_encode));
 
     Builder->SetInsertPoint(I);
@@ -502,10 +499,10 @@ Instruction *ProfiledCoder::expandEncode(Instruction *I) {
     Value *result = Builder->CreateMul(ci->getArgOperand(0), ci->getArgOperand(1));
     I->replaceAllUsesWith(result);
     I->eraseFromParent();
-    return dyn_cast<Instruction>(result);
+    return result;
 }
 
-Instruction *ProfiledCoder::expandDecode(Instruction *I) {
+Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
 	assert(isIntrinsic(I, Intrinsic::an_decode));
 	BasicBlock *BB = I->getParent();
 
@@ -521,17 +518,17 @@ Instruction *ProfiledCoder::expandDecode(Instruction *I) {
     		x = Builder->CreateCall(Blocker, x);
 
         Value *rem = Builder->CreateSub(x, mul);
-    	Instruction *cmp = createCmpZeroAfter(dyn_cast<Instruction>(rem));
-    	BasicBlock *trap = createTrapBlockOnFalse(cmp);
+    	Value *cmp = createCmpZero(rem, I);
+    	BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
     	createExitAtEnd(trap);
     }
 
     I->replaceAllUsesWith(result);
     I->eraseFromParent();
-    return dyn_cast<Instruction>(result);
+    return result;
 }
 
-Instruction *ProfiledCoder::expandCheck(Instruction *I) {
+Value *ProfiledCoder::expandCheck(BasicBlock::iterator &I) {
 	assert(isIntrinsic(I, Intrinsic::an_check));
 
     Builder->SetInsertPoint(I);
@@ -544,10 +541,10 @@ Instruction *ProfiledCoder::expandCheck(Instruction *I) {
     Value *result = Builder->CreateSRem(x, this->A);
     I->replaceAllUsesWith(result);
     I->eraseFromParent();
-    return dyn_cast<Instruction>(result);
+    return result;
 }
 
-Instruction *ProfiledCoder::expandAssert(Instruction *I) {
+Instruction *ProfiledCoder::expandAssert(BasicBlock::iterator &I) {
 	assert(isIntrinsic(I, Intrinsic::an_assert));
 
 	Builder->SetInsertPoint(I);
@@ -558,8 +555,8 @@ Instruction *ProfiledCoder::expandAssert(Instruction *I) {
 		x = Builder->CreateCall(Blocker, x);
 
 	Value *rem = Builder->CreateSRem(x, this->A);
-    Instruction *cmp = createCmpZeroAfter(dyn_cast<Instruction>(rem));
-    BasicBlock *trap = createTrapBlockOnFalse(cmp);
+    Value *cmp = createCmpZero(rem, I);
+    BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
     Instruction *result = createExitAtEnd(trap);
 
     I->eraseFromParent();
