@@ -21,8 +21,11 @@
 #include "llvm/LinkAllPasses.h"
 
 #include <iostream>
+#include <fstream>
 
 #include "Coder.h"
+#include "ProfiledCoder.h"
+#include "ProfileParser.h"
 
 using namespace llvm;
 
@@ -33,9 +36,9 @@ Pass *createModuleChecker(Coder*, bool);
 Pass *createGlobalsEncoder(Coder*);
 Pass *createConstantsEncoder(Coder*);
 Pass *createBoolExtHandler(Coder*);
-Pass *createOperationsEncoder(Coder*);
+Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createGEPHandler(Coder*);
-Pass *createCallHandler(Coder*);
+Pass *createCallHandler(ProfiledCoder*);
 Pass *createOperationsExpander(Coder*);
 Pass *createInterfaceHandler(Coder*);
 
@@ -58,6 +61,9 @@ InputFilename(cl::Positional, cl::desc("<input bitcode>"), cl::init("-"));
 
 static cl::opt<std::string>
 OutputFilename("o", cl::desc("Output filename"), cl::value_desc("filename"));
+
+static cl::opt<std::string>
+ProfileFilename("p", cl::desc("Path to file with encoding profile"), cl::value_desc("filename"));
 
 static cl::opt<bool>
 ExpandOnly("expand-only", cl::init(false), cl::desc("Only expand en-/decoding instrinsics"));
@@ -146,6 +152,12 @@ static int processModule(char **argv, LLVMContext &Context) {
   }
   Coder C(mod, globalCodeValue);
 
+  std::ifstream ifs(ProfileFilename.c_str());
+  ProfileParser PP;
+  PP.parseFile(ifs);
+  ifs.close();
+  ProfiledCoder PC(mod, &PP, globalCodeValue);
+
   // Figure out where we are going to send the output.
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
   if (!Out) return 1;
@@ -202,13 +214,13 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
-    codePM.add(createGEPHandler(&C));
+    //codePM.add(createGEPHandler(&C));
     // LLVM inserts 'ZExt' and 'SExt' instructions when boolean arguments
     // (i.e. of type 'i1') appear in bitwise operations. The "BoolExtHandler"
     // pass encodes values that have originated from boolean values by this
     // kind of extension:
-    codePM.add(createBoolExtHandler(&C));
-    codePM.add(createOperationsEncoder(&C));
+    //codePM.add(createBoolExtHandler(&C));
+    codePM.add(createOperationsEncoder(&PC));
 
     //codePM.add(createModuleChecker(&C, false));
 
@@ -225,7 +237,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     // 'CallHandler' must run only after linking the library; otherwise it
     // would decode arguments to library functions (e.g. 'add_enc',
     // 'accumulate_enc' etc.):
-    postLinkPM.add(createCallHandler(&C));
+    //postLinkPM.add(createCallHandler(&C));
     // Calls to external functions may take constants as arguments. After
     // the 'CallHandler' has run, what used to be a constant previously may
     // no longer be constant - at least not until we have run the

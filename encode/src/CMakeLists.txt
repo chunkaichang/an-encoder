@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 2.8)
 add_executable(encode encode.cpp
                       GlobalsEncoder.cpp
                       ConstantsEncoder.cpp
-                      GEPHandler.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
                       EncodeDecodeRemover.cpp
@@ -17,7 +16,9 @@ add_executable(encode encode.cpp
                       CheckInserter.cpp
                       AccuPromoter.cpp
                       Coder.cpp
-                      UsesVault.cpp)
+                      UsesVault.cpp
+                      ProfileParser.cpp
+                      ProfiledCoder.cpp)
 add_dependencies(encode anlib.bc)
 
 # Find the libraries that correspond to the LLVM components

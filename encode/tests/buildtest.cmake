@@ -1,15 +1,17 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(ENCODE_OPTS -p ${CMAKE_CURRENT_SOURCE_DIR}/../test.ep)
+
 if ("${CMAKE_BUILD_TYPE}" MATCHES "DEBUG" OR
     "${CMAKE_BUILD_TYPE}" MATCHES "Debug")
   set(CLANG_EMIT_LLVM_OPTS -O0)
   set(CLANG_LINK_OPTS -O0)
-  set(ENCODE_OPTS -no-inlining -no-opts)
+  set(ENCODE_OPTS ${ENCODE_OPTS} -no-inlining -no-opts)
   set(DEBUG_OPTS -g)
 else()
   set(CLANG_EMIT_LLVM_OPTS -O2)
   set(CLANG_LINK_OPTS -O2)
-  set(ENCODE_OPTS)
+  set(ENCODE_OPTS ${ENCODE_OPTS})
   set(DEBUG_OPTS)
 endif()
 
