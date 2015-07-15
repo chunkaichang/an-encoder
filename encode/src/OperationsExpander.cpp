@@ -13,249 +13,100 @@
 
 #include <iostream>
 
-#include "Coder.h"
+#include "ProfiledCoder.h"
 
 using namespace llvm;
 
 namespace {
   struct OperationsExpander : public FunctionPass {
-    OperationsExpander(Coder *c) : FunctionPass(ID), C(c) {}
+    OperationsExpander(ProfiledCoder *pc) : FunctionPass(ID), PC(pc) {}
 
     bool runOnFunction(Function &F) override;
 
     static char ID;
 
   private:
-    Coder *C;
+    ProfiledCoder *PC;
   };
 }
 
 char OperationsExpander::ID = 0;
 
 bool OperationsExpander::runOnFunction(Function &F) {
-  LLVMContext &ctx = F.getContext();
-  Module *M = F.getParent();
-  					
-  IRBuilder<> builder(F.getEntryBlock().begin());
-	Value *div = builder.CreateAlloca(C->getInt64Type());
-  Value *rem = builder.CreateAlloca(C->getInt64Type());
+	LLVMContext &ctx = F.getContext();
+	Module *M = F.getParent();
 
-  bool m = true, modified = false;
-  // Loop until no more modifications are made to the function:
-  // ('m' indicates if the previous pass has made modifications,
-  // hence 'm' start out true. Looping is necessary since expanding
-  // the assert and signal intrinsics creates new basic blocks.)
-  while (m) {
-    m = false;
-    auto BB = F.begin(), BE = F.end();
-    // Iterate over the basics blocks in 'F':
-    while( BB != BE) {
-      auto BN = std::next(BB);
-      auto I = BB->begin(), E = BB->end();
-      // Iterate over instructions in basic block 'BB':
-      while( I != E) {
-        auto N = std::next(I);
-        // We are only interested in call instructions, in particular
-        // such instructions which call the "AN coding" intrinsics:
-        CallInst *ci = dyn_cast<CallInst>(I);
-        Function *callee = ci ? ci->getCalledFunction() : nullptr;
+	bool m = true, modified = false;
+	// Loop until no more modifications are made to the function:
+	// ('m' indicates if the previous pass has made modifications,
+	// hence 'm' start out true. Looping is necessary since expanding
+	// the assert and signal intrinsics creates new basic blocks.)
+	while (m) {
+		m = false;
+		std::vector<BasicBlock*> BBWorkList;
+		for (auto BI = F.begin(), BE = F.end(); BI != BE; BI++) {
+			BBWorkList.push_back(&(*BI));
+		}
 
-        if (callee && callee->isIntrinsic()) {
-          switch (callee->getIntrinsicID()) {
-          default: break;
-#define HANDLE_REPLACE_OPERATION(intrinsic, operation)  \
-          case Intrinsic::intrinsic: {                  \
-            Value *x = ci->getArgOperand(0);            \
-            Value *a = ci->getArgOperand(1);            \
-                                                        \
-            IRBuilder<> builder(ci);                    \
-            Value *res = builder.Create ## operation(x, a); \
-            ci->replaceAllUsesWith(res);                    \
-            ci->eraseFromParent();                          \
-            m = modified = true;                            \
-            break;                                          \
-          }
-          HANDLE_REPLACE_OPERATION(an_encode, Mul)
-          //HANDLE_REPLACE_OPERATION(an_decode, SDiv)
-          case Intrinsic::an_decode: {
-						Value *x = ci->getArgOperand(0);
-						Value *a = ci->getArgOperand(1);
-						ConstantInt *xi = dyn_cast<ConstantInt>(x);
-						if (xi) {
-						  int64_t xv = xi->getSExtValue();
-							assert(xv % C->getA() == 0);
-							int64_t dx = xv / C->getA();
-							ci->replaceAllUsesWith(ConstantInt::get(C->getInt64Type(),
-																											dx));
-              ci->eraseFromParent();
-              m = modified = true;
-              break;            
-						}
+		auto BI = BBWorkList.begin(), BE = BBWorkList.end();
+		for (; BI != BE; BI++) {
+			std::vector<Instruction*> IWorkList;
+			for (auto I = (*BI)->begin(), E = (*BI)->end(); I != E; I++) {
+				IWorkList.push_back(&(*I));
+			}
 
-            IRBuilder<> builder(ci);
-            Value *div = builder.CreateSDiv(x, a);
-            Value *tmp = builder.CreateMul(div, a);
-            Value *rem = builder.CreateSub(x, tmp);
-						builder.CreateCall(C->ce, rem);
-						ci->replaceAllUsesWith(div);
-            ci->eraseFromParent();
-            m = modified = true;
-            break;            
-					}
+			auto I = IWorkList.begin(), E = IWorkList.end();
+			for (; I != E; I++) {
+				Instruction *i = *I;
+				// We are only interested in call instructions, in particular
+				// such instructions which call the "AN coding" intrinsics:
+				CallInst *ci = dyn_cast<CallInst>(i);
+				Function *callee = ci ? ci->getCalledFunction() : nullptr;
+				if (!callee || !callee->isIntrinsic())
+					continue;
 
-#define HANDLE_REPLACE_VALUE_OPERATION(value_intrinsic, coder_operation)  \
-          case Intrinsic::value_intrinsic: {                  \
-            Value *x = ci->getArgOperand(0);                  \
-                                                              \
-            Value *sext = C->createSExt(x, C->getInt64Type(), ci); \
-            Value *res = C->create ## coder_operation(sext, ci);   \
-            ci->replaceAllUsesWith(res);                      \
-            ci->eraseFromParent();                            \
-            m = modified = true;                              \
-            break;                                            \
-          }
-          HANDLE_REPLACE_VALUE_OPERATION(an_encode_value, Encode)
-          HANDLE_REPLACE_VALUE_OPERATION(an_decode_value, Decode)
+				switch (callee->getIntrinsicID()) {
+				default: break;
+				case Intrinsic::an_encode: {
+					PC->expandEncode(i);
+					m |= true;
+					break;
+				}
+				case Intrinsic::an_decode: {
+					PC->expandDecode(i);
+					m |= true;
+					break;
+				}
+				case Intrinsic::an_encode_value:
+				case Intrinsic::an_decode_value: {
+					Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
+					Value *result = (callee->getIntrinsicID() == Intrinsic::an_encode_value)
+									? PC->createEncode(x, ci)
+									: PC->createDecode(x, ci);
+					ci->replaceAllUsesWith(result);
+					ci->eraseFromParent();
+					m = true;
+					break;
+				}
+				case Intrinsic::an_check: {
+					PC->expandCheck(i);
+					m |= true;
+					break;
+				}
+				case Intrinsic::an_assert: {
+					PC->expandAssert(i);
+					m |= true;
+					break;
+				}
+				}
+				modified |= m;
+			}
+		}
+	}
 
-          case Intrinsic::an_check: {
-            Value *x = ci->getArgOperand(0);
-            Value *a = ci->getArgOperand(1);
-            IRBuilder<> builder(ci);
-#ifdef BLOCK_SREM
-            Constant *srem_blocker  =
-              Intrinsic::getDeclaration(M,
-                                        Intrinsic::x86_movswift,
-                                        C->getInt64Type());
-            x = builder.CreateCall(srem_blocker, x);
-#endif
-            Value *res = builder.CreateSRem(x, a);
-            ci->replaceAllUsesWith(res);
-            ci->eraseFromParent();
-            break;
-          }
-          case Intrinsic::an_signal:
-          case Intrinsic::an_assert: {
-            unsigned ID = callee->getIntrinsicID();
-            Value *x = ci->getArgOperand(0);
-            Value *a = ci->getArgOperand(1);
-
-            BasicBlock *splitBB = BB->splitBasicBlock(I),
-                       *trapBB  = BasicBlock::Create(BB->getContext(),
-                                                     "",
-                                                     BB->getParent());
-            assert(splitBB && "Failed to split basic block");
-            Instruction *term = BB->getTerminator();
-
-            // Insert a 'check': (This will be expanded by a subsequent
-            // iteration of the while loop.)
-            IRBuilder<> builder(term);
-            Value *check =
-              Intrinsic::getDeclaration(M,
-                                        Intrinsic::an_check,
-                                        x->getType());
-            Value *res = builder.CreateCall2(check, x, a);
-            Value *zero = ConstantInt::getSigned(res->getType(), 0);
-            Value *cmp = builder.CreateICmpNE(res, zero);
-            // If the 'check' fails (i.e. returns a non-zero value),
-            // branch to the trapping block:
-            builder.CreateCondBr(cmp, trapBB, splitBB);
-            // The original terminator (inserted by the 'splitBasicBlock'
-            // method) is no longer needed):
-            term->eraseFromParent();
-
-            IRBuilder<> trapBuilder(trapBB);
-            if (ID == Intrinsic::an_assert) {
-              // If an error is detected, we exit with code 2. This exit code
-              // is used by a Python script to detect that the "AN Encoder" has
-              // successfully identified an error.
-              FunctionType *exitTy = FunctionType::get(Type::getVoidTy(ctx),
-                                                       Type::getInt32Ty(ctx),
-                                                       false);
-              Value *exit = M->getOrInsertFunction("exit", exitTy);
-
-              trapBuilder.CreateCall(exit, ConstantInt::getSigned(Type::getInt32Ty(ctx), 2));
-              trapBuilder.CreateUnreachable();
-            } else {
-              // Insert a call to 'puts', which prints an error message
-              // to the console, but otherwise allows execution to continue
-              // at 'splitBB':
-              Type *int32Ty   = Type::getInt32Ty(ctx);
-              Type *int8PtrTy = Type::getInt8PtrTy(ctx);
-
-              Value *str = M->getGlobalVariable(".str1", true);
-              str = trapBuilder.CreateBitCast(str, int8PtrTy);
-              FunctionType *fty = FunctionType::get(int32Ty,
-                                                    int8PtrTy,
-                                                    false);
-              Value *puts = M->getOrInsertFunction("puts", fty);
-              trapBuilder.CreateCall(puts, str);
-              trapBuilder.CreateBr(splitBB);
-            }
-            // Make the next loop interation visit the newly inserted
-            // terminator of 'BB', which is the conditional branch to
-            // either 'trapBB' or śplitBB':(In principle the new terminator
-            // does not need to be visited since we know that it is not a
-            // call to an intrinsic. However, doing the following
-            // assignment keeps the logic of the nested while loops
-            // consistent).
-            N = BB->getTerminator();
-            ci->eraseFromParent();
-            m = modified = true;
-            break;
-          }
-          case Intrinsic::an_placeholder: {
-            // TODO: This is experimental -- only here as "proof of
-            // principle".
-            assert(ci->getNumUses() == 0 &&
-                   "Unhandled placeholdes has uses");
-            ci->dump();
-
-            if (ci->getNumArgOperands() == 3 &&
-                ci->getArgOperand(0)->getType()->isIntegerTy()) {
-              ConstantInt *Arg0 =
-                dyn_cast<ConstantInt>(ci->getArgOperand(0));
-              if (Arg0) {
-                uint64_t i = Arg0->getLimitedValue();
-                switch(i) {
-                default: break;
-                case 0:
-                case 1: {
-                  IRBuilder<> builder(ci);
-                  Intrinsic::ID id = (i == 0) ? Intrinsic::an_assert
-                                              : Intrinsic::an_signal;
-                  SmallVector<Type*, 2> args;
-                  args.push_back(ci->getArgOperand(1)->getType());
-                  args.push_back(ci->getArgOperand(1)->getType());
-                  Value *intr = Intrinsic::getDeclaration(M, id, args);
-                  Value *Arg2 = builder.CreateSExt(ci->getArgOperand(2),
-                                                   ci->getArgOperand(1)->getType());
-                  builder.CreateCall2(intr,
-                                      ci->getArgOperand(1),
-                                      Arg2);
-                  break;
-                }
-                }
-              }
-            }
-            ci->eraseFromParent();
-            m = modified = true;
-            break;
-          }
-          }
-        }
-        // Update the iterator for the inner while loop over instructions
-        // in a basic block:
-        I = N;
-      } /* while( I != E) */
-      // Update the iterator for the while loop over basic blocks in
-      // function 'F':
-      BB = BN;
-    } /* while( BB != BE) */
-  } /* while (m) */
-
-  return modified;
+	return modified;
 }
 
-Pass *createOperationsExpander(Coder *c) {
-  return new OperationsExpander(c);
+Pass *createOperationsExpander(ProfiledCoder *pc) {
+  return new OperationsExpander(pc);
 }

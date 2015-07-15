@@ -14,3 +14,5 @@ add_subdirectory(matmul_overflow)
 add_subdirectory(matmul_while)
 add_subdirectory(ptrarith)
 add_subdirectory(quicksort)
+
+add_subdirectory(profiles)

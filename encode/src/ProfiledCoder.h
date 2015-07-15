@@ -24,16 +24,15 @@ public:
 	ProfiledCoder (Module *m, ProfileParser *pp, unsigned a=1);
 	~ProfiledCoder ();
 
-private:
+public:
 	Value *createSExt(Value *V, Type *DestTy, Instruction *I);
 	Value *createZExt(Value *V, Type *DestTy, Instruction *I);
-
-public:
 	Value *createTrunc(Value *V, Type *DestTy, Instruction *I);
 
 public:
 	Value *createEncode(Value *V, Instruction *I);
 	Value *createDecode(Value *V, Instruction *I);
+	Value *createCheck(Value *V, Instruction *I);
 	Value *createAssert(Value *V, Instruction *I);
 
 private:
@@ -73,12 +72,24 @@ public:
 	bool handleTrunc(Instruction *I);
 
 private:
+	Instruction *createExitAtEnd(BasicBlock *BB);
+	Instruction *createCmpZeroAfter(Instruction *I);
+	BasicBlock *createTrapBlockOnFalse(Instruction *I);
+
+public:
+	Instruction *expandEncode(Instruction *I);
+	Instruction *expandDecode(Instruction *I);
+	Instruction *expandCheck(Instruction *I);
+	Instruction *expandAssert(Instruction *I);
+
+private:
 	Module *M;
 
 	ConstantInt *A;
 	IntegerType *int64Ty, *int32Ty;
 	Type *voidTy;
-	Function *Encode, *Decode, *Assert;
+	Function *Encode, *Decode, *Check, *Assert, *Blocker;
+	Constant *Exit;
 
 	ProfileParser *PP;
 

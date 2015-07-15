@@ -46,6 +46,9 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
       ConstantInt *CI = dyn_cast<ConstantInt>(Op);
       if (!CI)
         continue;
+      IntegerType *type = dyn_cast<IntegerType>(Op->getType());
+      if (type->getBitWidth() != 64)
+    	  continue;
 
       int64_t value = CI->getSExtValue();
       int64_t res = value * C->getA();

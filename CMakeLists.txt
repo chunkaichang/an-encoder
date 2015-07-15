@@ -18,4 +18,6 @@ message("Using C++ compiler: ${CLANGXX}")
 
 set(LINK   ${LLVM_INSTALL_PREFIX}/bin/llvm-link)
 
+set(LLVM_DIS   ${LLVM_INSTALL_PREFIX}/bin/llvm-dis)
+
 add_subdirectory(encode)

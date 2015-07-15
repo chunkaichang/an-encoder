@@ -80,6 +80,7 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
 
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_2_BC}
                      COMMAND ${ENCODE_BIN_DIR}/encode -expand-only
+                             ${ENCODE_OPTS}
                              -o ${MAIN_MODULE_ENC_2_BC} ${MAIN_MODULE_ENC_BC}
                      DEPENDS encode ${MAIN_MODULE_ENC_BC})
 

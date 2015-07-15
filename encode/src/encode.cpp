@@ -39,7 +39,7 @@ Pass *createBoolExtHandler(Coder*);
 Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createGEPHandler(Coder*);
 Pass *createCallHandler(ProfiledCoder*);
-Pass *createOperationsExpander(Coder*);
+Pass *createOperationsExpander(ProfiledCoder*);
 Pass *createInterfaceHandler(Coder*);
 
 // Passes for insertion of checks:
@@ -141,8 +141,8 @@ const uint64_t    globalCodeValue = 58659;
 static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
   std::unique_ptr<Module> M;
-  Module *mod, *library, *idr;
-  PassManager PM, linkagePM, linkIDRPM, cyclePM;
+  Module *mod, *library;
+  PassManager PM, linkagePM;
   std::string linkError;
 
   mod = openFileAsModule(InputFilename, Err, Context);
@@ -152,7 +152,11 @@ static int processModule(char **argv, LLVMContext &Context) {
   }
   Coder C(mod, globalCodeValue);
 
-  std::ifstream ifs(ProfileFilename.c_str());
+  std::string name(ProfileFilename);
+  std::ifstream ifs(name.c_str());
+  if (!ifs.good())
+	  return 1;
+
   ProfileParser PP;
   PP.parseFile(ifs);
   ifs.close();
@@ -172,7 +176,6 @@ static int processModule(char **argv, LLVMContext &Context) {
   // library is expected to reside in the same directory, its relative paths is the same
   // as its file name:
   libraryPath += "anlib.bc";
-	idrPath += "idivrem.bc";
 
   // Remove explicit calls to 'accumulate_enc':
   // (The 'OperationsEncoder' now decides when the accumulator should be updated,
@@ -187,11 +190,6 @@ static int processModule(char **argv, LLVMContext &Context) {
   if (!ExpandOnly) {
     library = openFileAsModule(libraryPath, Err, Context);
     if (library == nullptr) {
-      Err.print(argv[0], errs());
-      return 1;
-    }
-    idr = openFileAsModule(idrPath, Err, Context);
-    if (idr == nullptr) {
       Err.print(argv[0], errs());
       return 1;
     }
@@ -210,7 +208,7 @@ static int processModule(char **argv, LLVMContext &Context) {
                                                   globalCodeValue));
     }
 
-    codePM.add(createModuleChecker(&C, true));
+    //codePM.add(createModuleChecker(&C, true));
 
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
@@ -260,16 +258,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     //  2. Since they assert on the accumulator, they must be run before
     //     optimizations, which may promote the accumulator from a global
     //     variable into a register.
-#ifdef CHECK_BB
-    postLinkPM.add(createBBCheckInserter(&C));
-#endif
-#ifdef CHECK_FUN
-    // We run inlining here to avoid inserting checks at the end of functions
-    // which will later be inlined:
-    if (!NoInlining) postLinkPM.add(llvm::createFunctionInliningPass());
-    postLinkPM.add(createFunCheckInserter(&C));
-#endif    
-    postLinkPM.add(createOperationsExpander(&C));
+    postLinkPM.add(createOperationsExpander(&PC));
     // Due to previously inserted encode/decode instructions some values
     // that used to be constants may no longer appear to be constant. However,
     // after the decode/encode instructions have been expanded, one should be
@@ -298,18 +287,8 @@ static int processModule(char **argv, LLVMContext &Context) {
       postLinkPM.add(createAccuPromoter(&C));
       // Then encourage the keeping of local variables in
       // registers (rather than on ths tack):
-#ifdef MEM2REG
-      postLinkPM.add(createPromoteMemoryToRegisterPass());
-#endif
     }
     postLinkPM.run(*mod);
-    linkIDRPM.add(createLinkagePass(GlobalValue::ExternalLinkage));
-		linkIDRPM.run(*idr);
-		if (linkModules(mod, idr, &linkError)) {
-      std::cerr << linkError;
-      return 1;
-    }
-    
 
     // Add optimization passes (roughly the equivalent of "-O2",
     // code was inspired by 'opt.cpp'):
@@ -332,7 +311,7 @@ static int processModule(char **argv, LLVMContext &Context) {
       if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
     }
   } else {
-    PM.add(createOperationsExpander(&C));
+    PM.add(createOperationsExpander(&PC));
   }
 
   if (!NoInlining) PM.add(llvm::createFunctionInliningPass());

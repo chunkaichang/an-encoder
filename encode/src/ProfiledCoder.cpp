@@ -27,9 +27,21 @@ ProfiledCoder::ProfiledCoder (Module *m, ProfileParser *pp, unsigned a)
 	Decode = Intrinsic::getDeclaration(M,
 									   Intrinsic::an_decode,
 									   int64Ty);
+	Check = Intrinsic::getDeclaration(M,
+		   						      Intrinsic::an_check,
+									  int64Ty);
 	Assert = Intrinsic::getDeclaration(M,
 									   Intrinsic::an_assert,
 									   int64Ty);
+	Blocker  = Intrinsic::getDeclaration(M,
+	                                     Intrinsic::x86_movswift,
+	                                     int64Ty);
+
+	FunctionType *exitTy = FunctionType::get(voidTy, int32Ty, false);
+	Exit = M->getOrInsertFunction("exit", exitTy);
+
+
+
 	Builder = new IRBuilder<>(ctx);
 
 	CH = new CallHandler(this);
@@ -113,6 +125,20 @@ Value *ProfiledCoder::createDecode(Value *V, Instruction *I) {
 	Value *result = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
 	result = Builder->CreateCall2(Decode, result, A);
 	result = pointerTy ? Builder->CreateIntToPtr(result, V->getType()) : result;
+	return result;
+}
+
+Value *ProfiledCoder::createCheck(Value *V, Instruction *I) {
+	bool pointerTy = isPointerType(V);
+	if (!isInt64Type(V) && !pointerTy)
+		return nullptr;
+
+	if (pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+		return nullptr;
+
+	Builder->SetInsertPoint(I);
+	Value *result = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+	result = Builder->CreateCall2(Check, result, A);
 	return result;
 }
 
@@ -418,4 +444,124 @@ bool ProfiledCoder::handleTrunc(Instruction *I) {
 		return true;
 	}
 	return false;
+}
+
+Instruction *ProfiledCoder::createExitAtEnd(BasicBlock *BB) {
+	Builder->SetInsertPoint(BB);
+
+	ConstantInt *Two = ConstantInt::getSigned(int32Ty, 2);
+	Builder->CreateCall(Exit, Two);
+	return Builder->CreateUnreachable();
+}
+
+Instruction *ProfiledCoder::createCmpZeroAfter(Instruction *I) {
+	assert(isInt64Type(I));
+	BasicBlock::iterator BI(I);
+	Builder->SetInsertPoint(std::next(BI));
+
+	ConstantInt *Zero = ConstantInt::getSigned(int64Ty, 0);
+    Value *result = Builder->CreateICmpEQ(I, Zero);
+    return dyn_cast<Instruction>(result);
+}
+
+BasicBlock *ProfiledCoder::createTrapBlockOnFalse(Instruction *I) {
+	assert(I->getOpcode() == Instruction::ICmp);
+	BasicBlock *BB = I->getParent();
+	BasicBlock::iterator BI(I);
+	BasicBlock *splitBB = BB->splitBasicBlock(std::next(BI)),
+    	       *trapBB  = BasicBlock::Create(BB->getContext(),
+    	                                     "",
+    	                                     BB->getParent());
+	// Terminating instruction will be a jump to 'splitBB':
+    Instruction *term = BB->getTerminator();
+    Builder->SetInsertPoint(term);
+    Builder->CreateCondBr(I, splitBB, trapBB);
+    // The original terminator (inserted by the 'splitBasicBlock'
+    // method) is no longer needed):
+    term->eraseFromParent();
+    return trapBB;
+}
+
+static bool isIntrinsic(Instruction *I, Intrinsic::ID id) {
+	CallInst *ci = dyn_cast<CallInst>(I);
+	Function *callee = ci ? ci->getCalledFunction() : nullptr;
+
+	if (callee && callee->isIntrinsic()) {
+		if (callee->getIntrinsicID() == id)
+			return true;
+	}
+	return false;
+
+}
+
+Instruction *ProfiledCoder::expandEncode(Instruction *I) {
+	assert(isIntrinsic(I, Intrinsic::an_encode));
+
+    Builder->SetInsertPoint(I);
+    CallInst *ci = dyn_cast<CallInst>(I);
+    Value *result = Builder->CreateMul(ci->getArgOperand(0), ci->getArgOperand(1));
+    I->replaceAllUsesWith(result);
+    I->eraseFromParent();
+    return dyn_cast<Instruction>(result);
+}
+
+Instruction *ProfiledCoder::expandDecode(Instruction *I) {
+	assert(isIntrinsic(I, Intrinsic::an_decode));
+	BasicBlock *BB = I->getParent();
+
+    Builder->SetInsertPoint(I);
+    CallInst *ci = dyn_cast<CallInst>(I);
+    Value *x = ci->getArgOperand(0);
+    Value *result = Builder->CreateSDiv(x, ci->getArgOperand(1));
+
+    if (PP->hasProfile(ProfileParser::CheckAfterDecode)) {
+    	Value *mul = Builder->CreateMul(result, this->A);
+
+    	if (PP->hasProfile(ProfileParser::PinChecks))
+    		x = Builder->CreateCall(Blocker, x);
+
+        Value *rem = Builder->CreateSub(x, mul);
+    	Instruction *cmp = createCmpZeroAfter(dyn_cast<Instruction>(rem));
+    	BasicBlock *trap = createTrapBlockOnFalse(cmp);
+    	createExitAtEnd(trap);
+    }
+
+    I->replaceAllUsesWith(result);
+    I->eraseFromParent();
+    return dyn_cast<Instruction>(result);
+}
+
+Instruction *ProfiledCoder::expandCheck(Instruction *I) {
+	assert(isIntrinsic(I, Intrinsic::an_check));
+
+    Builder->SetInsertPoint(I);
+    CallInst *ci = dyn_cast<CallInst>(I);
+    Value *x = ci->getArgOperand(0);
+
+    if (PP->hasProfile(ProfileParser::PinChecks))
+    	x = Builder->CreateCall(Blocker, x);
+
+    Value *result = Builder->CreateSRem(x, this->A);
+    I->replaceAllUsesWith(result);
+    I->eraseFromParent();
+    return dyn_cast<Instruction>(result);
+}
+
+Instruction *ProfiledCoder::expandAssert(Instruction *I) {
+	assert(isIntrinsic(I, Intrinsic::an_assert));
+
+	Builder->SetInsertPoint(I);
+	CallInst *ci = dyn_cast<CallInst>(I);
+	Value *x = ci->getArgOperand(0);
+
+	if (PP->hasProfile(ProfileParser::PinChecks))
+		x = Builder->CreateCall(Blocker, x);
+
+	Value *rem = Builder->CreateSRem(x, this->A);
+    Instruction *cmp = createCmpZeroAfter(dyn_cast<Instruction>(rem));
+    BasicBlock *trap = createTrapBlockOnFalse(cmp);
+    Instruction *result = createExitAtEnd(trap);
+
+    I->eraseFromParent();
+    return result;
 }

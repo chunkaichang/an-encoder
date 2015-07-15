@@ -18,10 +18,3 @@ add_custom_target(anlib.bc ALL
                            ${CMAKE_CURRENT_SOURCE_DIR}/anlib.c
                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/anlib.c
                    WORKING_DIRECTORY ${ENCODE_BIN_DIR})
-
-add_custom_target(idivrem.bc ALL
-                   COMMAND ${CLANG} ${CLANG_OPTS} -c -emit-llvm -o idivrem.bc
-                           ${PP_DEFS}
-                           ${CMAKE_CURRENT_SOURCE_DIR}/idivrem.c
-                   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/idivrem.c
-                   WORKING_DIRECTORY ${ENCODE_BIN_DIR})
