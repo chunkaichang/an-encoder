@@ -384,11 +384,11 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	assert(GEP);
 
 	if (PP->hasProfile(ProfileParser::PointerEncoding)) {
-		Value *ptr = GEP->getPointerOperand();
-     	 if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-     		 insertCheckBefore(ptr, I, ProfileParser::GEP);
-     		 I->setOperand(0, createDecode(ptr, I));
-     	 }
+	  Value *ptr = GEP->getPointerOperand();
+     	  if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+            insertCheckBefore(ptr, I, ProfileParser::GEP);
+     	    I->setOperand(0, createDecode(ptr, I));
+     	  }
 	}
 
     for (unsigned i = 1; i < I->getNumOperands(); i++) {
@@ -455,7 +455,7 @@ Instruction *ProfiledCoder::createExitAtEnd(BasicBlock *BB) {
 }
 
 Value *ProfiledCoder::createCmpZero(Value *v, BasicBlock::iterator &I) {
-	assert(isInt64Type(I));
+	assert(isInt64Type(v));
 	Builder->SetInsertPoint(I);
 
 	ConstantInt *Zero = ConstantInt::getSigned(int64Ty, 0);
@@ -463,7 +463,6 @@ Value *ProfiledCoder::createCmpZero(Value *v, BasicBlock::iterator &I) {
 }
 
 BasicBlock *ProfiledCoder::createTrapBlockOnFalse(Value *v, BasicBlock::iterator &I) {
-	assert(I->getOpcode() == Instruction::ICmp);
 	BasicBlock *BB = I->getParent();
 	BasicBlock *splitBB = BB->splitBasicBlock(I),
     	       *trapBB  = BasicBlock::Create(BB->getContext(),
