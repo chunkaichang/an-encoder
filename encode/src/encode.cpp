@@ -40,7 +40,7 @@ Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createGEPHandler(Coder*);
 Pass *createCallHandler(ProfiledCoder*);
 Pass *createOperationsExpander(ProfiledCoder*);
-Pass *createInterfaceHandler(Coder*);
+Pass *createInterfaceHandler(ProfiledCoder*);
 
 // Passes for insertion of checks:
 Pass *createBBCheckInserter(Coder*);
@@ -222,7 +222,7 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     //codePM.add(createModuleChecker(&C, false));
 
-    codePM.add(createInterfaceHandler(&C));
+    codePM.add(createInterfaceHandler(&PC));
     //codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 

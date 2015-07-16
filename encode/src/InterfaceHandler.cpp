@@ -7,20 +7,20 @@
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Constants.h"
 
-#include "Coder.h"
+#include "ProfiledCoder.h"
 #include "UsesVault.h"
 
 using namespace llvm;
 
 namespace {
   struct InterfaceHandler: public FunctionPass {
-    InterfaceHandler(Coder *c) : FunctionPass(ID), C(c) {}
+    InterfaceHandler(ProfiledCoder *pc) : FunctionPass(ID), PC(pc) {}
 
     bool runOnFunction(Function &F) override;
 
     static char ID;
   private:
-    Coder *C;
+    ProfiledCoder *PC;
   };
 }
 
@@ -31,28 +31,27 @@ bool InterfaceHandler::runOnFunction(Function &F) {
     return false;
 
   for (Function::arg_iterator a = F.arg_begin(), e = F.arg_end(); a != e; ++a) {
-    if (a->getType()->isIntegerTy() || a->getType()->isPointerTy()) {
       UsesVault UV(a->uses());
       Value *arg = a;
       Instruction *insertPt = F.getEntryBlock().begin();
-      Value *enc = C->createEncRegionEntry(arg, insertPt);
+      Value *enc = PC->createEncode(arg, insertPt);
       UV.replaceWith(enc);
-    }
   }
 
-  if (F.getReturnType()->isIntegerTy() || F.getReturnType()->isPointerTy()) {
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i) {
       BasicBlock &BB = *i;
       TerminatorInst *ti = BB.getTerminator();
       if (ReturnInst *ri = dyn_cast<ReturnInst>(ti)) {
-        Value *enc = C->createEncRegionExit(ri->getOperand(0), F.getReturnType(), ri);
-        ri->setOperand(0, enc);
+        if (ri->getNumOperands()) {
+          Value *enc = PC->createDecode(ri->getOperand(0), ri);
+          enc = PC->createTrunc(enc, F.getReturnType(), ri);
+          ri->setOperand(0, enc);
+        }
       }
-    }
   }
   return true;
 }
 
-Pass *createInterfaceHandler(Coder *c) {
-  return new InterfaceHandler(c);
+Pass *createInterfaceHandler(ProfiledCoder *pc) {
+  return new InterfaceHandler(pc);
 }
