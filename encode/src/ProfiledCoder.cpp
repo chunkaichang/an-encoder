@@ -295,36 +295,54 @@ bool ProfiledCoder::handleAlloca(Instruction *I) {
 bool ProfiledCoder::handleLoad(Instruction *I) {
 	assert(I->getOpcode() == Instruction::Load);
 	bool modified = false;
+  Value *ptr = I->getOperand(0);
 
-	if (PP->hasProfile(ProfileParser::PointerEncoding)) {
-		Value *ptr = I->getOperand(0);
-		if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-			insertCheckBefore(ptr, I, ProfileParser::Memory);
-			I->setOperand(0, createDecode(ptr, I));
-			modified |= true;
-		}
+	if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+	    !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+	  insertCheckBefore(ptr, I, ProfileParser::Memory);
+	  ptr = createDecode(ptr, I);
+		I->setOperand(0, ptr);
+		modified |= true;
 	}
 
-    modified |= insertCheckAfter(I, I, ProfileParser::Memory);
-    return modified;
+  if (PP->hasProfile(ProfileParser::DuplicateLoad)) {
+    UsesVault UV(I->uses());
+    BasicBlock::iterator BI(I);
+    Builder->SetInsertPoint(std::next(BI));
+    Value *dup = Builder->CreateLoad(ptr);
+    Value *cmp = Builder->CreateICmpNE(I, dup);
+    cmp = Builder->CreateCast(Instruction::ZExt, cmp, int64Ty);
+    bool pointer = I->getType()->isPointerTy();
+    Value *result = pointer ? Builder->CreatePtrToInt(I, int64Ty)
+                            : I;
+    // invalidate the result from the load:
+    result = Builder->CreateAdd(result, cmp);
+    if (pointer) result = Builder->CreateIntToPtr(result, I->getType());
+
+    UV.replaceWith(result);
+    modified |= true;
+  }
+
+  modified |= insertCheckAfter(I, I, ProfileParser::Memory);
+  return modified;
 }
 
 bool ProfiledCoder::handleStore(Instruction *I) {
 	assert(I->getOpcode() == Instruction::Store);
 	bool modified = false;
+	Value *ptr = I->getOperand(1);
 
-    modified |= insertCheckBefore(I->getOperand(0), I, ProfileParser::Memory);
+  modified |= insertCheckBefore(I->getOperand(0), I, ProfileParser::Memory);
 
-    if (PP->hasProfile(ProfileParser::PointerEncoding)) {
-    	Value *ptr = I->getOperand(1);
-    	if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-    		insertCheckBefore(ptr, I, ProfileParser::Memory);
-    		I->setOperand(1, createDecode(ptr, I));
-    		modified |= true;
-    	}
-    }
+  if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+      !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+    insertCheckBefore(ptr, I, ProfileParser::Memory);
+    ptr = createDecode(ptr, I);
+    I->setOperand(1, ptr);
+    modified |= true;
+  }
 
-    return modified;
+  return modified;
 }
 
 bool ProfiledCoder::handleMemory(Instruction *I) {

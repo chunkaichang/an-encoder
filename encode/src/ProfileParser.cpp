@@ -9,14 +9,18 @@ ProfileParser::StringToProfileMap ProfileParser::string2profile = {
 		{"PointerEncoding", PointerEncoding},
 		/*{"GEPExpansion", GEPExpansion},*/
 		{"CheckAfterDecode", CheckAfterDecode},
-		{"PinChecks", PinChecks}
+		{"PinChecks", PinChecks},
+		{"DuplicateLoad", DuplicateLoad},
+		{"CheckAfterStore", CheckAfterStore}
 };
 
 ProfileParser::ProfileToStringMap ProfileParser::profile2string = {
 		{PointerEncoding, "PointerEncoding"},
 		/*{GEPExpansion, "GEPExpansion"},*/
 		{CheckAfterDecode, "CheckAfterDecode"},
-		{PinChecks, "PinChecks"}
+		{PinChecks, "PinChecks"},
+		{DuplicateLoad, "DuplicateLoad"},
+		{CheckAfterStore, "CheckAfterStore"}
 };
 
 ProfileParser::StringToOperationMap ProfileParser::string2operation = {

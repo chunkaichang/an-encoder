@@ -12,7 +12,9 @@ public:
 		PointerEncoding,
 		/*GEPExpansion,*/
 		CheckAfterDecode,
-		PinChecks
+		PinChecks,
+		DuplicateLoad,
+		CheckAfterStore
 	};
 	typedef std::map<std::string, Profile> StringToProfileMap;
 	static StringToProfileMap string2profile;
