@@ -309,7 +309,7 @@ bool ProfiledCoder::handleLoad(Instruction *I) {
     UsesVault UV(I->uses());
     BasicBlock::iterator BI(I);
     Builder->SetInsertPoint(std::next(BI));
-    Value *dup = Builder->CreateLoad(ptr);
+    Value *dup = Builder->CreateLoad(ptr, true);
     Value *cmp = Builder->CreateICmpNE(I, dup);
     cmp = Builder->CreateCast(Instruction::ZExt, cmp, int64Ty);
     bool pointer = I->getType()->isPointerTy();
@@ -341,6 +341,18 @@ bool ProfiledCoder::handleStore(Instruction *I) {
     I->setOperand(1, ptr);
     modified |= true;
   }
+
+  if (PP->hasProfile(ProfileParser::CheckAfterStore)) {
+      BasicBlock::iterator BI(I);
+      Builder->SetInsertPoint(std::next(BI));
+      Value *dup = Builder->CreateLoad(ptr, true);
+      Value *cmp = Builder->CreateICmpNE(I->getOperand(0), dup);
+      cmp = Builder->CreateCast(Instruction::ZExt, cmp, int64Ty);
+      Builder->CreateCall2(Assert, cmp, A);
+      modified |= true;
+    }
+
+
 
   return modified;
 }
