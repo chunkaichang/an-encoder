@@ -5,14 +5,9 @@ add_executable(encode encode.cpp
                       ConstantsEncoder.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
-                      EncodeDecodeRemover.cpp
-                      AccumulateRemover.cpp
                       CallHandler.cpp
                       Linkage.cpp
-                      SExtTrunc.cpp
-                      ModuleChecker.cpp
                       InterfaceHandler.cpp
-                      BoolExtHandler.cpp
                       CheckInserter.cpp
                       AccuPromoter.cpp
                       Coder.cpp

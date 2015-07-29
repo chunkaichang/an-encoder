@@ -29,16 +29,10 @@
 
 using namespace llvm;
 
-// Pass checking the input module's validity:
-Pass *createModuleChecker(Coder*, bool);
-
 // Passes required for correct encoding:
 Pass *createGlobalsEncoder(Coder*);
 Pass *createConstantsEncoder(Coder*);
-Pass *createBoolExtHandler(Coder*);
 Pass *createOperationsEncoder(ProfiledCoder*);
-Pass *createGEPHandler(Coder*);
-Pass *createCallHandler(ProfiledCoder*);
 Pass *createOperationsExpander(ProfiledCoder*);
 Pass *createInterfaceHandler(ProfiledCoder*);
 
@@ -50,9 +44,6 @@ Pass *createFunCheckInserter(Coder*);
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
 
 // (Simple) optimization passes:
-Pass *createAccumulateRemover();
-Pass *createEncodeDecodeRemover();
-Pass *createSExtTruncPass();
 Pass *createAccuPromoter(Coder *);
 
 // Command line arguments:
@@ -177,10 +168,6 @@ static int processModule(char **argv, LLVMContext &Context) {
   // as its file name:
   libraryPath += "anlib.bc";
 
-  // Remove explicit calls to 'accumulate_enc':
-  // (The 'OperationsEncoder' now decides when the accumulator should be updated,
-  // based on CMake options.)
-  linkagePM.add(createAccumulateRemover());
   // By applying this linkage to library functions (rather than 'ExternalLinkage',
   // which is the default) we achieve that after linking no further copies of the
   // original library functions remain in the module 'mod': (Functions are inlined
@@ -208,22 +195,11 @@ static int processModule(char **argv, LLVMContext &Context) {
                                                   globalCodeValue));
     }
 
-    //codePM.add(createModuleChecker(&C, true));
-
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
-    //codePM.add(createGEPHandler(&C));
-    // LLVM inserts 'ZExt' and 'SExt' instructions when boolean arguments
-    // (i.e. of type 'i1') appear in bitwise operations. The "BoolExtHandler"
-    // pass encodes values that have originated from boolean values by this
-    // kind of extension:
-    //codePM.add(createBoolExtHandler(&C));
     codePM.add(createOperationsEncoder(&PC));
 
-    //codePM.add(createModuleChecker(&C, false));
-
     codePM.add(createInterfaceHandler(&PC));
-    //codePM.add(createGEPHandler(&C));
     codePM.run(*mod);
 
     linkagePM.run(*library);
@@ -232,25 +208,11 @@ static int processModule(char **argv, LLVMContext &Context) {
       return 1;
     }
 
-    // 'CallHandler' must run only after linking the library; otherwise it
-    // would decode arguments to library functions (e.g. 'add_enc',
-    // 'accumulate_enc' etc.):
-    //postLinkPM.add(createCallHandler(&C));
     // Calls to external functions may take constants as arguments. After
     // the 'CallHandler' has run, what used to be a constant previously may
     // no longer be constant - at least not until we have run the
     // 'ConstantPropagationPass':
     postLinkPM.add(createConstantPropagationPass());
-
-    // 2015/03/09, NOTE: A simple measurement has demonstrated that the
-    // 'EncodeDecodeRemover' has only a negligible effect on performance:
-    if (!NoOpts) {
-      //postLinkPM.add(createSExtTruncPass());
-      // 2015./03/12, TODO: Check that this is working properly: (Currently
-      // it seems be non-effective since the functions which implement
-      // encoded operations are not inlined early enough.)
-      //postLinkPM.add(createEncodeDecodeRemover());
-    }
 
     // We run the 'CheckInserters' here for two reasons:
     //  1. Since they will insert new calls to the 'an_assert' intrinsic,
@@ -268,15 +230,15 @@ static int processModule(char **argv, LLVMContext &Context) {
     // Optimization to be run immediately after encoding/decoding operations
     // have been inserted (i.e. after intrinsics for "AN coding" have been
     // expanded:
-    //postLinkPM.add(createSExtTruncPass());
     if (!NoOpts)
     {
       if (!NoInlining) postLinkPM.add(llvm::createFunctionInliningPass());
       postLinkPM.add(llvm::createDeadCodeEliminationPass());
+      postLinkPM.add(createConstantPropagationPass());
     }
-    postLinkPM.add(createConstantPropagationPass());
+
     if (!NoVerifying) postLinkPM.add(createVerifierPass());
-//    if (!NoOpts && !NoInlining) {
+    if (!NoOpts && !NoInlining)
     {
       //mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
       mod->getFunction("___accumulate0_enc")->addFnAttr(Attribute::AlwaysInline);
