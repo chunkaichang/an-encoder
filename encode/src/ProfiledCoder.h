@@ -34,6 +34,7 @@ public:
 	Value *createDecode(Value *V, Instruction *I);
 	Value *createCheck(Value *V, Instruction *I);
 	Value *createAssert(Value *V, Instruction *I);
+	Value *createExitOnFalse(Value *V, Instruction *I);
 
 private:
 	Constant *getEncBinopFunction(StringRef Name);
@@ -72,6 +73,7 @@ public:
 	bool handleTrunc(Instruction *I);
 
 private:
+	void createLoadCmpAssert(Value *ptr, Value *orig, const BasicBlock::iterator &I);
 	Instruction *createExitAtEnd(BasicBlock *BB);
 	Value *createCmpZero(Value *v, BasicBlock::iterator &I);
 	BasicBlock *createTrapBlockOnFalse(Value *v, BasicBlock::iterator &I);
@@ -81,6 +83,7 @@ public:
 	Value *expandDecode(BasicBlock::iterator &I);
 	Value *expandCheck(BasicBlock::iterator &I);
 	Instruction *expandAssert(BasicBlock::iterator &I);
+	Instruction *expandExitOnFalse(BasicBlock::iterator &I);
 
 private:
 	Module *M;
@@ -88,7 +91,7 @@ private:
 	ConstantInt *A;
 	IntegerType *int64Ty, *int32Ty;
 	Type *voidTy;
-	Function *Encode, *Decode, *Check, *Assert, *Blocker;
+	Function *Encode, *Decode, *Check, *Assert, *Blocker, *ExitOnFalse;
 	Constant *Exit;
 
 	ProfileParser *PP;

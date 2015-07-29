@@ -96,6 +96,11 @@ bool OperationsExpander::runOnFunction(Function &F) {
 				m |= true;
 				break;
 			}
+			case Intrinsic::an_exit_on_false: {
+			  PC->expandExitOnFalse(i);
+			  m |= true;
+			  break;
+			}
 			}
 			modified |= m;
 		}

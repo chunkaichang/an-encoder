@@ -33,6 +33,9 @@ ProfiledCoder::ProfiledCoder (Module *m, ProfileParser *pp, unsigned a)
 	Assert = Intrinsic::getDeclaration(M,
 									   Intrinsic::an_assert,
 									   int64Ty);
+	ExitOnFalse = Intrinsic::getDeclaration(M,
+	                                        Intrinsic::an_exit_on_false,
+	                                        int64Ty);
 	Blocker  = Intrinsic::getDeclaration(M,
 	                                     Intrinsic::x86_movswift,
 	                                     int64Ty);
@@ -154,6 +157,17 @@ Value *ProfiledCoder::createAssert(Value *V, Instruction *I) {
 	Value *result = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
 	result = Builder->CreateCall2(Assert, result, A);
 	return result;
+}
+
+Value *ProfiledCoder::createExitOnFalse(Value *V, Instruction *I) {
+  bool pointerTy = isPointerType(V);
+  if (!isInt64Type(V) && !pointerTy)
+    return nullptr;
+
+  Builder->SetInsertPoint(I);
+  Value *result = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  result = Builder->CreateCall(ExitOnFalse, result);
+  return result;
 }
 
 // Returns the value corresponding to the declaration of a function
@@ -292,6 +306,14 @@ bool ProfiledCoder::handleAlloca(Instruction *I) {
 	return true;
 }
 
+void ProfiledCoder::createLoadCmpAssert(Value *ptr, Value *orig, const BasicBlock::iterator &I) {
+  Builder->SetInsertPoint(I);
+  Value *dup = Builder->CreateLoad(ptr, true);
+  Value *cmp = Builder->CreateICmpEQ(orig, dup);
+  Value *ext = Builder->CreateCast(Instruction::SExt, cmp, int64Ty);
+  this->createExitOnFalse(ext, I);
+}
+
 bool ProfiledCoder::handleLoad(Instruction *I) {
 	assert(I->getOpcode() == Instruction::Load);
 	bool modified = false;
@@ -306,20 +328,8 @@ bool ProfiledCoder::handleLoad(Instruction *I) {
 	}
 
   if (PP->hasProfile(ProfileParser::DuplicateLoad)) {
-    UsesVault UV(I->uses());
     BasicBlock::iterator BI(I);
-    Builder->SetInsertPoint(std::next(BI));
-    Value *dup = Builder->CreateLoad(ptr, true);
-    Value *cmp = Builder->CreateICmpNE(I, dup);
-    cmp = Builder->CreateCast(Instruction::ZExt, cmp, int64Ty);
-    bool pointer = I->getType()->isPointerTy();
-    Value *result = pointer ? Builder->CreatePtrToInt(I, int64Ty)
-                            : I;
-    // invalidate the result from the load:
-    result = Builder->CreateAdd(result, cmp);
-    if (pointer) result = Builder->CreateIntToPtr(result, I->getType());
-
-    UV.replaceWith(result);
+    createLoadCmpAssert(ptr, I, std::next(BI));
     modified |= true;
   }
 
@@ -343,16 +353,10 @@ bool ProfiledCoder::handleStore(Instruction *I) {
   }
 
   if (PP->hasProfile(ProfileParser::CheckAfterStore)) {
-      BasicBlock::iterator BI(I);
-      Builder->SetInsertPoint(std::next(BI));
-      Value *dup = Builder->CreateLoad(ptr, true);
-      Value *cmp = Builder->CreateICmpNE(I->getOperand(0), dup);
-      cmp = Builder->CreateCast(Instruction::ZExt, cmp, int64Ty);
-      Builder->CreateCall2(Assert, cmp, A);
-      modified |= true;
-    }
-
-
+    BasicBlock::iterator BI(I);
+    createLoadCmpAssert(ptr, I->getOperand(0), std::next(BI));
+    modified |= true;
+  }
 
   return modified;
 }
@@ -590,4 +594,20 @@ Instruction *ProfiledCoder::expandAssert(BasicBlock::iterator &I) {
 
     I->eraseFromParent();
     return result;
+}
+
+Instruction *ProfiledCoder::expandExitOnFalse(BasicBlock::iterator &I) {
+  assert(isIntrinsic(I, Intrinsic::an_exit_on_false));
+
+  Builder->SetInsertPoint(I);
+  CallInst *ci = dyn_cast<CallInst>(I);
+  Value *x = ci->getArgOperand(0);
+
+  ConstantInt *Zero = ConstantInt::getSigned(int64Ty, 0);
+  Value *cmp = Builder->CreateICmpNE(x, Zero);
+  BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
+  Instruction *result = createExitAtEnd(trap);
+
+  I->eraseFromParent();
+  return result;
 }
