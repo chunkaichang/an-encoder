@@ -5,9 +5,9 @@
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Value.h"
 
-#include "Coder.h"
 #include "UsesVault.h"
 #include "CallHandler.h"
+#include "GEPExpander.h"
 #include "ProfileParser.h"
 #include "ProfiledCoder.h"
 
@@ -48,9 +48,11 @@ ProfiledCoder::ProfiledCoder (Module *m, ProfileParser *pp, unsigned a)
 	Builder = new IRBuilder<>(ctx);
 
 	CH = new CallHandler(this);
+	GE = new ExpandGetElementPtr(this);
 }
 
 ProfiledCoder::~ProfiledCoder () {
+  delete GE;
 	delete CH;
 	delete Builder;
 }
@@ -100,12 +102,12 @@ Value *ProfiledCoder::createTrunc(Value *V, Type *DestTy, Instruction *I) {
   return Builder->CreateCast(Instruction::Trunc, V, DestTy);
 }
 
-Value *ProfiledCoder::createEncode(Value *V, Instruction *I) {
+Value *ProfiledCoder::createEncode(Value *V, Instruction *I, bool force) {
 	bool pointerTy = isPointerType(V);
-	if (!isInt64Type(V) && !pointerTy)
+	if (!force && !isInt64Type(V) && !pointerTy)
 		return V;
 
-	if (pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (!force && pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
 		return V;
 
 	Builder->SetInsertPoint(I);
@@ -116,12 +118,12 @@ Value *ProfiledCoder::createEncode(Value *V, Instruction *I) {
 	return result;
 }
 
-Value *ProfiledCoder::createDecode(Value *V, Instruction *I) {
+Value *ProfiledCoder::createDecode(Value *V, Instruction *I, bool force) {
 	bool pointerTy = isPointerType(V);
-	if (!isInt64Type(V) && !pointerTy)
+	if (!force && !isInt64Type(V) && !pointerTy)
 		return V;
 
-	if (pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (!force && pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
 		return V;
 
 	Builder->SetInsertPoint(I);
@@ -416,38 +418,70 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	assert(I->getOpcode() == Instruction::GetElementPtr);
 	GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(I);
 	assert(GEP);
+	Value *ptr = GEP->getPointerOperand();
+	Value *result;
 
-	if (PP->hasProfile(ProfileParser::PointerEncoding)) {
-	  Value *ptr = GEP->getPointerOperand();
-     	  if (!dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-            insertCheckBefore(ptr, I, ProfileParser::GEP);
-     	    I->setOperand(0, createDecode(ptr, I));
-     	  }
-	}
+	if (PP->hasProfile(ProfileParser::GEPExpansion)) {
+	  if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+	      !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+	    insertCheckBefore(ptr, I, ProfileParser::GEP);
+	  } else {
+	    // If pointers are not encoded, we must encode them before
+	    // expanding the GEP instruction:
+	    I->setOperand(0, createEncode(ptr, I, true));
+	  }
+
+	  // Insert checks on the non-pointer arguments of the GEP instruction:
+	  for (unsigned i = 1; i < I->getNumOperands(); i++) {
+      Value *Op = I->getOperand(i);
+      assert(Op->getType()->isIntegerTy());
+      insertCheckBefore(Op, I, ProfileParser::GEP);
+    }
+
+	  DataLayout DL(M);
+	  Type *PtrType = DL.getIntPtrType(M->getContext());
+	  Instruction *res = GE->ExpandGEP(GEP, &DL, PtrType);
+
+	  // If pointers are NOT encoded, we must decode
+	  // the result of the 'expanded GEP' instruction:
+	  result = res;
+	  if (!PP->hasProfile(ProfileParser::PointerEncoding)) {
+	    UsesVault UV(res->uses());
+	    BasicBlock::iterator BI(res);
+	    result = createDecode(res, std::next(BI), true);
+	    UV.replaceWith(result);
+	  }
+	} else {
+    if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+        !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
+      insertCheckBefore(ptr, I, ProfileParser::GEP);
+      I->setOperand(0, createDecode(ptr, I));
+    }
 
     for (unsigned i = 1; i < I->getNumOperands(); i++) {
-    	Value *Op = I->getOperand(i);
-       	assert(Op->getType()->isIntegerTy());
-       	insertCheckBefore(Op, I, ProfileParser::GEP);
+      Value *Op = I->getOperand(i);
+      assert(Op->getType()->isIntegerTy());
+      insertCheckBefore(Op, I, ProfileParser::GEP);
 
-       	Value *NewOp = createDecode(Op, I);
-       	NewOp = createTrunc(NewOp, getInt32Type(), I);
-       	I->setOperand(i, NewOp);
-     }
+      Value *NewOp = createDecode(Op, I);
+      NewOp = createTrunc(NewOp, getInt32Type(), I);
+      I->setOperand(i, NewOp);
+    }
 
     // If pointers are encoded, we must encode
     // the result of a 'GEP' instruction:
-    Value *res = I;
+    result = I;
     if (PP->hasProfile(ProfileParser::PointerEncoding)) {
-       UsesVault UV(I->uses());
-       BasicBlock::iterator BI(I);
-       res = createEncode(I, std::next(BI));
-       UV.replaceWith(res);
+      UsesVault UV(I->uses());
+      BasicBlock::iterator BI(I);
+      result = createEncode(I, std::next(BI));
+      UV.replaceWith(result);
     }
+	}
 
-    BasicBlock::iterator BI(dyn_cast<Instruction>(res));
-    insertCheckAfter(res, BI, ProfileParser::GEP);
-    return true;
+  BasicBlock::iterator BI(dyn_cast<Instruction>(result));
+  insertCheckAfter(result, BI, ProfileParser::GEP);
+	return true;
 }
 
 bool ProfiledCoder::handleCall(Instruction *I) {

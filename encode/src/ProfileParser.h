@@ -10,7 +10,7 @@ class ProfileParser {
 public:
 	enum Profile {
 		PointerEncoding,
-		/*GEPExpansion,*/
+		GEPExpansion,
 		CheckAfterDecode,
 		PinChecks,
 		DuplicateLoad,

@@ -18,6 +18,7 @@ using namespace llvm;
 
 
 class CallHandler;
+class ExpandGetElementPtr;
 
 class ProfiledCoder {
 public:
@@ -30,8 +31,8 @@ public:
 	Value *createTrunc(Value *V, Type *DestTy, Instruction *I);
 
 public:
-	Value *createEncode(Value *V, Instruction *I);
-	Value *createDecode(Value *V, Instruction *I);
+	Value *createEncode(Value *V, Instruction *I, bool force=false);
+	Value *createDecode(Value *V, Instruction *I, bool force=false);
 	Value *createCheck(Value *V, Instruction *I);
 	Value *createAssert(Value *V, Instruction *I);
 	Value *createExitOnFalse(Value *V, Instruction *I);
@@ -99,6 +100,7 @@ private:
 	IRBuilder<> *Builder;
 
 	CallHandler *CH;
+	ExpandGetElementPtr *GE;
 };
 
 #endif /* __PROFILED_CODER_H__ */

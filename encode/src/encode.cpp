@@ -197,6 +197,7 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createConstantsEncoder(&C));
     codePM.add(createGlobalsEncoder(&C));
+
     codePM.add(createOperationsEncoder(&PC));
 
     codePM.add(createInterfaceHandler(&PC));

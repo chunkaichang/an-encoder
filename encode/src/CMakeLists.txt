@@ -6,6 +6,7 @@ add_executable(encode encode.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
                       CallHandler.cpp
+                      GEPExpander.cpp
                       Linkage.cpp
                       InterfaceHandler.cpp
                       CheckInserter.cpp

@@ -7,7 +7,7 @@
 
 ProfileParser::StringToProfileMap ProfileParser::string2profile = {
 		{"PointerEncoding", PointerEncoding},
-		/*{"GEPExpansion", GEPExpansion},*/
+		{"GEPExpansion", GEPExpansion},
 		{"CheckAfterDecode", CheckAfterDecode},
 		{"PinChecks", PinChecks},
 		{"DuplicateLoad", DuplicateLoad},
@@ -16,7 +16,7 @@ ProfileParser::StringToProfileMap ProfileParser::string2profile = {
 
 ProfileParser::ProfileToStringMap ProfileParser::profile2string = {
 		{PointerEncoding, "PointerEncoding"},
-		/*{GEPExpansion, "GEPExpansion"},*/
+		{GEPExpansion, "GEPExpansion"},
 		{CheckAfterDecode, "CheckAfterDecode"},
 		{PinChecks, "PinChecks"},
 		{DuplicateLoad, "DuplicateLoad"},
