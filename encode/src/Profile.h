@@ -16,9 +16,6 @@ public:
 		DuplicateLoad,
 		CheckAfterStore
 	};
-	typedef std::map<std::string, Profile> StringToProfileMap;
-	static StringToProfileMap string2profile;
-
 	typedef std::map<Profile, std::string> ProfileToStringMap;
 	static ProfileToStringMap profile2string;
 
@@ -31,9 +28,6 @@ public:
 		Memory,
 		Call
 	};
-	typedef std::map<std::string, Operation> StringToOperationMap;
-	static StringToOperationMap string2operation;
-
 	typedef std::map<Operation, std::string> OperationToStringMap;
 	static OperationToStringMap operation2string;
 
@@ -42,9 +36,6 @@ public:
 		Before,
 		After
 	};
-	typedef std::map<std::string, Position> StringToPositionMap;
-	static StringToPositionMap string2position;
-
 	typedef std::map<Position, std::string> PositionToStringMap;
 	static PositionToStringMap position2string;
 

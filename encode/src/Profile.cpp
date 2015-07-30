@@ -4,15 +4,6 @@
 #include "Profile.h"
 
 
-EncodingProfile::StringToProfileMap EncodingProfile::string2profile = {
-		{"PointerEncoding", PointerEncoding},
-		{"GEPExpansion", GEPExpansion},
-		{"CheckAfterDecode", CheckAfterDecode},
-		{"PinChecks", PinChecks},
-		{"DuplicateLoad", DuplicateLoad},
-		{"CheckAfterStore", CheckAfterStore}
-};
-
 EncodingProfile::ProfileToStringMap EncodingProfile::profile2string = {
 		{PointerEncoding, "PointerEncoding"},
 		{GEPExpansion, "GEPExpansion"},
@@ -22,25 +13,12 @@ EncodingProfile::ProfileToStringMap EncodingProfile::profile2string = {
 		{CheckAfterStore, "CheckAfterStore"}
 };
 
-EncodingProfile::StringToOperationMap EncodingProfile::string2operation = {
-		{"Arithmetic", Arithmetic},
-		{"Bitwise", Bitwise},
-		{"Comparison", Comparison},
-		{"GEP", GEP},
-		{"Memory", Memory}
-};
-
 EncodingProfile::OperationToStringMap EncodingProfile::operation2string = {
 		{Arithmetic, "Arithmetic"},
 		{Bitwise, "Bitwise"},
 		{Comparison, "Comparison"},
 		{GEP, "GEP"},
 		{Memory, "Memory"}
-};
-
-EncodingProfile::StringToPositionMap EncodingProfile::string2position = {
-		{"Before", Before},
-		{"After", After}
 };
 
 EncodingProfile::PositionToStringMap EncodingProfile::position2string = {
