@@ -45,7 +45,8 @@ ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)
 	FunctionType *exitTy = FunctionType::get(voidTy, int32Ty, false);
 	Exit = M->getOrInsertFunction("exit", exitTy);
 
-
+	FunctionType *accuTy = FunctionType::get(voidTy, int64Ty, false);
+	Accumulate =  M->getOrInsertFunction("accumulate_enc", accuTy);
 
 	Builder = new IRBuilder<>(ctx);
 
@@ -176,6 +177,20 @@ Value *ProfiledCoder::createExitOnFalse(Value *V, Instruction *I) {
   return result;
 }
 
+Value *ProfiledCoder::createAccumulate(Value *V, Instruction *I) {
+  bool pointerTy = isPointerType(V);
+  if (!isInt64Type(V) && !pointerTy)
+    return nullptr;
+
+  if (pointerTy && !PP->hasProfile(EncodingProfile::PointerEncoding))
+    return nullptr;
+
+  Builder->SetInsertPoint(I);
+  Value *result = pointerTy ? Builder->CreatePtrToInt(V, int64Ty) : V;
+  result = Builder->CreateCall(Accumulate, result);
+  return result;
+}
+
 // Returns the value corresponding to the declaration of a function
 // that implements an encoded binary operator:
 Constant *ProfiledCoder::getEncBinopFunction(StringRef Name) {
@@ -203,7 +218,11 @@ bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, E
 	if (dyn_cast<ConstantInt>(v)) return false;
 
 	if (PP->hasOperationWithPosition(op, EncodingProfile::Before)) {
-		createAssert(v, &(*I));
+	  if (PP->hasProfile(EncodingProfile::AccumulateChecks)) {
+	    createAccumulate(v, &(*I));
+	  } else {
+	    createAssert(v, &(*I));
+	  }
 		return true;
 	}
 	return false;
@@ -214,7 +233,11 @@ bool ProfiledCoder::insertCheckAfter(Value *v, const BasicBlock::iterator &I, En
 	if (dyn_cast<ConstantInt>(v)) return false;
 
 	if (PP->hasOperationWithPosition(op, EncodingProfile::After)) {
-		createAssert(v, std::next(I));
+	  if (PP->hasProfile(EncodingProfile::AccumulateChecks)) {
+	    createAccumulate(v, std::next(I));
+	  } else {
+	    createAssert(v, std::next(I));
+	  }
 		return true;
 	}
 	return false;
@@ -661,3 +684,43 @@ bool ProfiledCoder::preEncoding(Module *M) {
 bool ProfiledCoder::postEncoding(Module *M) {
   return false;
 }
+
+bool ProfiledCoder::preExpansion(Module *M) {
+  bool modified = false;
+  for (auto F = M->begin(); F != M->end(); F++) {
+    modified |= insertFunctionCheck(*F);
+  }
+  return modified;
+}
+
+bool ProfiledCoder::postExpansion(Module *M) {
+  return false;
+}
+
+bool ProfiledCoder::insertFunctionCheck(Function &F) {
+  if (!PP->hasProfile(EncodingProfile::AccumulateChecks))
+    return false;
+  // Do not insert checks in functions from the 'anlib' library:
+  if (F.getName().endswith_lower("_enc"))
+    return false;
+
+  bool modified = false;
+  Module *M = F.getParent();
+
+  for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i) {
+    BasicBlock &BB = *i;
+    TerminatorInst *ti = BB.getTerminator();
+    assert(ti && "Basic block not well-formed");
+    if (ReturnInst *ri = dyn_cast<ReturnInst>(ti)) {
+      GlobalVariable *accu_addr = M->getNamedGlobal("accu_enc");
+      if (!accu_addr)
+        continue;
+      Builder->SetInsertPoint(ri);
+      Value *accu = Builder->CreateLoad(accu_addr);
+      createAssert(accu, ri);
+      modified |= true;
+    }
+  }
+  return modified;
+}
+

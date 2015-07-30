@@ -13,6 +13,7 @@ public:
     GEPEXPANSION,
     CHECKAFTERDECODE,
     PINCHECKS,
+    ACCUMULATECHECKS,
     DUPLICATELOAD,
     CHECKAFTERSTORE,
     // from 'enum EncodingProfile::Operation':

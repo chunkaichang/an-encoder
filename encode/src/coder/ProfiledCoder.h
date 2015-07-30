@@ -36,6 +36,8 @@ public:
 	Value *createCheck(Value *V, Instruction *I);
 	Value *createAssert(Value *V, Instruction *I);
 	Value *createExitOnFalse(Value *V, Instruction *I);
+private:
+	Value *createAccumulate(Value *V, Instruction *I);
 
 private:
 	Constant *getEncBinopFunction(StringRef Name);
@@ -55,10 +57,13 @@ public:
 private:
 	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
 	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
+	bool insertFunctionCheck(Function &F);
 
 public:
 	bool preEncoding(Module *M);
 	bool postEncoding(Module *M);
+	bool preExpansion(Module *M);
+	bool postExpansion(Module *M);
 
 private:
 	bool handleBinop(Instruction *I, EncodingProfile::Operation op, std::string name);
@@ -97,7 +102,7 @@ private:
 	IntegerType *int64Ty, *int32Ty;
 	Type *voidTy;
 	Function *Encode, *Decode, *Check, *Assert, *Blocker, *ExitOnFalse;
-	Constant *Exit;
+	Constant *Exit, *Accumulate;
 
 	EncodingProfile *PP;
 

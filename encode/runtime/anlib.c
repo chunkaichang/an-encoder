@@ -12,10 +12,7 @@ typedef uint64_t ptr_enc_t;
 static uint64_t A;
 // We do 'signed remainder' to check validity of coded values.
 // Hence the accumulator should probably be signed too.
-// (Note that in 'accumulate_enc' we take care to ensure that
-// the accumulator never actually takes on negative values.)
-static int64_t accu0_enc = 0;
-static int64_t accu1_enc = 0;
+static int64_t accu_enc = 0;
 
 #ifdef LOG_ACCU
   #define LOG_ACCU_PRINTF(...) fprintf(stderr, __VA_ARGS__)
@@ -23,27 +20,24 @@ static int64_t accu1_enc = 0;
   #define LOG_ACCU_PRINTF(...)
 #endif 
 
-void accumulate_enc(int64_t x_enc) {}
+void ___accumulate_enc(int64_t x_enc, int64_t *accu)
+{
+  int64_t old_accu = *accu;
+  LOG_ACCU_PRINTF("x_enc=0x%016lx, old_accu=0x%016lx, ", x_enc, old_accu);
 
-#define ___accumulate_enc(x_enc, accu) \
-{ \
-  int64_t old_accu = accu; \
-  LOG_ACCU_PRINTF("x_enc=0x%016lx, old_accu=0x%016lx, ", x_enc, old_accu); \
-  \
-  if(__builtin_saddl_overflow(old_accu, x_enc, &accu)) { \
-    LOG_ACCU_PRINTF("OF, new_accu=0x%016lx", accu); \
-    __builtin_an_assert_i64(old_accu, A); \
-    accu = 0; \
-  } \
-  LOG_ACCU_PRINTF("\n"); \
+  if(__builtin_saddl_overflow(old_accu, x_enc, accu)) {
+    LOG_ACCU_PRINTF("OF, new_accu=0x%016lx", *accu);
+    __builtin_an_assert_i64(old_accu, A);
+    *accu = 0;
+  }
+  LOG_ACCU_PRINTF("\n");
 }
 
-void ___accumulate0_enc(int64_t x_enc) {
-  ___accumulate_enc(x_enc, accu0_enc);
+void accumulate_enc(int64_t x_enc)
+{
+  ___accumulate_enc(x_enc, &accu_enc);
 }
-void ___accumulate1_enc(int64_t x_enc) {
-  ___accumulate_enc(x_enc, accu1_enc);
-}
+
 int64_t add_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;

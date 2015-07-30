@@ -14,10 +14,12 @@
 using namespace llvm;
 
 namespace {
-  struct OperationsExpander : public FunctionPass {
-    OperationsExpander(ProfiledCoder *pc) : FunctionPass(ID), PC(pc) {}
+  struct OperationsExpander : public ModulePass {
+    OperationsExpander(ProfiledCoder *pc) : ModulePass(ID), PC(pc) {}
 
-    bool runOnFunction(Function &F) override;
+    bool runOnModule(Module &M) override;
+
+    bool handleFunction(Function &F);
 
     static char ID;
 
@@ -28,6 +30,20 @@ namespace {
 
 char OperationsExpander::ID = 0;
 
+bool OperationsExpander::runOnModule(Module &M) {
+  bool modified = false;
+
+  PC->preExpansion(&M);
+
+  for (auto F = M.begin(); F != M.end(); F++) {
+      modified |= handleFunction(*F);
+  }
+
+  PC->postExpansion(&M);
+
+  return modified;
+}
+
 static void populateWorkList(std::vector<BasicBlock::iterator> &worklist, Function &F) {
 	for (auto BI = F.begin(), BE = F.end(); BI != BE; BI++) {
 		for (auto I = BI->begin(), E = BI->end(); I != E; I++) {
@@ -36,7 +52,7 @@ static void populateWorkList(std::vector<BasicBlock::iterator> &worklist, Functi
 	}
 }
 
-bool OperationsExpander::runOnFunction(Function &F) {
+bool OperationsExpander::handleFunction(Function &F) {
 	LLVMContext &ctx = F.getContext();
 	Module *M = F.getParent();
 

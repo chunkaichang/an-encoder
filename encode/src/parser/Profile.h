@@ -13,6 +13,7 @@ public:
 		GEPExpansion,
 		CheckAfterDecode,
 		PinChecks,
+		AccumulateChecks,
 		DuplicateLoad,
 		CheckAfterStore
 	};

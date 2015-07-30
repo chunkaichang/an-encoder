@@ -39,10 +39,6 @@ Pass *createConstantsEncoder(ProfiledCoder*);
 Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createOperationsExpander(ProfiledCoder*);
 
-// Passes for insertion of checks:
-Pass *createBBCheckInserter(Coder*);
-Pass *createFunCheckInserter(Coder*);
-
 // Utility passes:
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
 
@@ -144,7 +140,7 @@ static int processModule(char **argv, LLVMContext &Context) {
     Err.print(argv[0], errs());
     return 1;
   }
-  Coder C(mod, globalCodeValue);
+  //Coder C(mod, globalCodeValue);
 
   std::string name(ProfileFilename);
   std::ifstream ifs(name.c_str());
@@ -247,15 +243,12 @@ static int processModule(char **argv, LLVMContext &Context) {
     if (!NoVerifying) postLinkPM.add(createVerifierPass());
     if (!NoOpts && !NoInlining)
     {
-      //mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
-      mod->getFunction("___accumulate0_enc")->addFnAttr(Attribute::AlwaysInline);
-      mod->getFunction("___accumulate1_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
       postLinkPM.add(llvm::createFunctionInliningPass());
       // Replace the global accumulator with a local variable,
       // one per function:
-      postLinkPM.add(createAccuPromoter(&C));
-      // Then encourage the keeping of local variables in
-      // registers (rather than on ths tack):
+      //postLinkPM.add(createAccuPromoter(&C));
     }
     postLinkPM.run(*mod);
 

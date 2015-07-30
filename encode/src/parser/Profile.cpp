@@ -9,6 +9,7 @@ EncodingProfile::ProfileToStringMap EncodingProfile::profile2string = {
 		{GEPExpansion, "GEPExpansion"},
 		{CheckAfterDecode, "CheckAfterDecode"},
 		{PinChecks, "PinChecks"},
+		{AccumulateChecks, "AccumulateChecks"},
 		{DuplicateLoad, "DuplicateLoad"},
 		{CheckAfterStore, "CheckAfterStore"}
 };
