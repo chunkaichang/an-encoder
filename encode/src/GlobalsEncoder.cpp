@@ -4,7 +4,7 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Constants.h"
 
-#include "ProfiledCoder.h"
+#include "coder/ProfiledCoder.h"
 
 using namespace llvm;
 

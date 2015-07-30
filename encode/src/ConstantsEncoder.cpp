@@ -11,7 +11,7 @@
 
 #include "llvm/Support/raw_ostream.h"
 
-#include "ProfiledCoder.h"
+#include "coder/ProfiledCoder.h"
 
 using namespace llvm;
 

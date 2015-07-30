@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
+add_subdirectory(coder)
 add_subdirectory(parser)
 
 add_executable(encode encode.cpp
@@ -7,15 +8,11 @@ add_executable(encode encode.cpp
                       ConstantsEncoder.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
-                      CallHandler.cpp
-                      GEPExpander.cpp
                       Linkage.cpp
                       InterfaceHandler.cpp
                       CheckInserter.cpp
                       AccuPromoter.cpp
-                      Coder.cpp
-                      ProfiledCoder.cpp
-                      UsesVault.cpp)
+                      Coder.cpp)
 add_dependencies(encode anlib.bc)
 
 
@@ -34,7 +31,8 @@ llvm_map_components_to_libnames(llvm_libs support
 
 # Link against LLVM libraries
 target_link_libraries(encode ${llvm_libs}
-                             parser)
+                             parser
+                             coder)
 
 if ("$LLVM_ENABLE_RTTI" MATCHES "ON")
   set(RTTI -frtti)

@@ -24,7 +24,7 @@
 #include <fstream>
 
 #include "Coder.h"
-#include "ProfiledCoder.h"
+#include "coder/ProfiledCoder.h"
 
 #include "parser/Profile.h"
 #include "parser/Parser.h"

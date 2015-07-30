@@ -10,7 +10,7 @@
 #include "GEPExpander.h"
 #include "ProfiledCoder.h"
 
-#include "parser/Profile.h"
+#include "../parser/Profile.h"
 
 
 ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)

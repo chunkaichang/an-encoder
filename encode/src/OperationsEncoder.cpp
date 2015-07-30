@@ -7,9 +7,8 @@
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/IRBuilder.h"
 
-#include "Coder.h"
-#include "ProfiledCoder.h"
-#include "UsesVault.h"
+#include "coder/ProfiledCoder.h"
+
 
 using namespace llvm;
 

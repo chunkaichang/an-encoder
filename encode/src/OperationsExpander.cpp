@@ -9,11 +9,7 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Metadata.h"
 
-#include "llvm/Support/raw_ostream.h"
-
-#include <iostream>
-
-#include "ProfiledCoder.h"
+#include "coder/ProfiledCoder.h"
 
 using namespace llvm;
 
