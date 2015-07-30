@@ -1,19 +1,17 @@
-Arithmetic
-  Before
-end
+PointerEncoding;
+GEPExpansion;
 
-Bitwise
-  Before
-end
+Arithmetic:
+  Before;
 
-Comparison
-  Before
-end
+Bitwise:
+  Before;
 
-Memory
-  Before
-end
+Comparison:
+  Before;
 
-GEP
-  Before
-end
+Memory:
+  Before;
+
+GEP:
+  After;

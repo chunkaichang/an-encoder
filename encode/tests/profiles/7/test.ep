@@ -1,10 +1,9 @@
-PinChecks
+PinChecks;
 
-Memory
-  Before
-end
+Memory:
+  Before;
 
-GEP
-  Before
+GEP:
+  Before,
   After
-end
+;
