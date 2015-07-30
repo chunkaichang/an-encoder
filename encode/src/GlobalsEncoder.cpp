@@ -4,13 +4,13 @@
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Constants.h"
 
-#include "Coder.h"
+#include "ProfiledCoder.h"
 
 using namespace llvm;
 
 namespace {
   struct GlobalsEncoder : public ModulePass {
-    GlobalsEncoder(Coder *c) : ModulePass(ID), C(c) {}
+    GlobalsEncoder(ProfiledCoder *pc) : ModulePass(ID), PC(pc) {}
 
     bool runOnModule(Module &M) override;
 
@@ -18,7 +18,7 @@ namespace {
   private:
     Constant *buildEncodedConstant(Constant *);
 
-    Coder *C;
+    ProfiledCoder *PC;
   };
 }
 
@@ -30,12 +30,12 @@ Constant *GlobalsEncoder::buildEncodedConstant(Constant *init) {
 
   if (ty->isIntegerTy()) {
     if (const ConstantInt *ci = dyn_cast<ConstantInt>(init)) {
-      uint64_t res = ci->getValue().getLimitedValue() * C->getA();
+      uint64_t res = ci->getValue().getLimitedValue() * PC->getA();
       // Programs for encoding are expected to operate on 64bit integers only,
       // so we also only handle 64bit integers here: (The main reason for not
       // having an assertion here is that strings, i.e. arrays with element
       // type 'i8', must not be encoded; yet strings are very common.)
-      if (ci->getType() != C->getInt64Type())
+      if (ci->getType() != PC->getInt64Type())
         return result;
 
       result = ConstantInt::get(ci->getType(), res);
@@ -72,6 +72,6 @@ bool GlobalsEncoder::runOnModule(Module &M) {
   return modified;
 }
 
-Pass *createGlobalsEncoder(Coder *c) {
-  return new GlobalsEncoder(c);
+Pass *createGlobalsEncoder(ProfiledCoder *pc) {
+  return new GlobalsEncoder(pc);
 }

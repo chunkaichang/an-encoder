@@ -11,21 +11,19 @@
 
 #include "llvm/Support/raw_ostream.h"
 
-#include <iostream>
-
-#include "Coder.h"
+#include "ProfiledCoder.h"
 
 using namespace llvm;
 
 namespace {
   struct ConstantsEncoder : public BasicBlockPass {
-    ConstantsEncoder(Coder *c) : BasicBlockPass(ID), C(c) {}
+    ConstantsEncoder(ProfiledCoder *pc) : BasicBlockPass(ID), PC(pc) {}
 
     bool runOnBasicBlock(BasicBlock &BB) override;
 
     static char ID;
   private:
-    Coder *C;
+    ProfiledCoder *PC;
   };
 }
 
@@ -51,8 +49,8 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
     	  continue;
 
       int64_t value = CI->getSExtValue();
-      int64_t res = value * C->getA();
-      ConstantInt *CodedCI = ConstantInt::getSigned(dyn_cast<IntegerType>(C->getInt64Type()),
+      int64_t res = value * PC->getA();
+      ConstantInt *CodedCI = ConstantInt::getSigned(dyn_cast<IntegerType>(PC->getInt64Type()),
                                                     res);
       I->setOperand(i, CodedCI);
 
@@ -63,6 +61,6 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
   return modified;
 }
 
-Pass *createConstantsEncoder(Coder *c) {
-  return new ConstantsEncoder(c);
+Pass *createConstantsEncoder(ProfiledCoder *pc) {
+  return new ConstantsEncoder(pc);
 }

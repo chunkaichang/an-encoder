@@ -33,8 +33,8 @@
 using namespace llvm;
 
 // Passes required for correct encoding:
-Pass *createGlobalsEncoder(Coder*);
-Pass *createConstantsEncoder(Coder*);
+Pass *createGlobalsEncoder(ProfiledCoder*);
+Pass *createConstantsEncoder(ProfiledCoder*);
 Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createOperationsExpander(ProfiledCoder*);
 Pass *createInterfaceHandler(ProfiledCoder*);
@@ -203,8 +203,8 @@ static int processModule(char **argv, LLVMContext &Context) {
                                                   globalCodeValue));
     }
 
-    codePM.add(createConstantsEncoder(&C));
-    codePM.add(createGlobalsEncoder(&C));
+    codePM.add(createConstantsEncoder(&PC));
+    codePM.add(createGlobalsEncoder(&PC));
 
     codePM.add(createOperationsEncoder(&PC));
 
