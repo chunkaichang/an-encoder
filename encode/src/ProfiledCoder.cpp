@@ -8,8 +8,9 @@
 #include "UsesVault.h"
 #include "CallHandler.h"
 #include "GEPExpander.h"
-#include "Profile.h"
 #include "ProfiledCoder.h"
+
+#include "parser/Profile.h"
 
 
 ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)

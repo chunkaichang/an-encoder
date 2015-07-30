@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+add_subdirectory(parser)
+
 add_executable(encode encode.cpp
                       GlobalsEncoder.cpp
                       ConstantsEncoder.cpp
@@ -13,11 +15,9 @@ add_executable(encode encode.cpp
                       AccuPromoter.cpp
                       Coder.cpp
                       ProfiledCoder.cpp
-                      UsesVault.cpp
-                      Profile.cpp
-                      Parser.cpp
-                      ProfileLexer.cpp)
+                      UsesVault.cpp)
 add_dependencies(encode anlib.bc)
+
 
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
@@ -33,7 +33,8 @@ llvm_map_components_to_libnames(llvm_libs support
                                           objcarcopts)
 
 # Link against LLVM libraries
-target_link_libraries(encode ${llvm_libs})
+target_link_libraries(encode ${llvm_libs}
+                             parser)
 
 if ("$LLVM_ENABLE_RTTI" MATCHES "ON")
   set(RTTI -frtti)

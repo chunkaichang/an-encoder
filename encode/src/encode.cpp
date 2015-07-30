@@ -25,9 +25,10 @@
 
 #include "Coder.h"
 #include "ProfiledCoder.h"
-#include "Profile.h"
-#include "Parser.h"
-#include "ProfileLexer.h"
+
+#include "parser/Profile.h"
+#include "parser/Parser.h"
+#include "parser/ProfileLexer.h"
 
 
 using namespace llvm;

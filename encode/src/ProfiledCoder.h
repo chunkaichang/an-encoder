@@ -11,7 +11,7 @@
 #include "llvm/IR/Metadata.h"
 
 #include "Coder.h"
-#include "Profile.h"
+#include "parser/Profile.h"
 
 
 using namespace llvm;
