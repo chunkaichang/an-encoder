@@ -9,7 +9,6 @@ add_executable(encode encode.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
                       Linkage.cpp
-                      InterfaceHandler.cpp
                       CheckInserter.cpp
                       AccuPromoter.cpp
                       Coder.cpp)

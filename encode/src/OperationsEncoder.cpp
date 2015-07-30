@@ -13,11 +13,13 @@
 using namespace llvm;
 
 namespace {
-  struct OperationsEncoder : public BasicBlockPass {
+  struct OperationsEncoder : public ModulePass {
     OperationsEncoder(ProfiledCoder *pc)
-    : BasicBlockPass(ID), PC(pc) {}
+    : ModulePass(ID), PC(pc) {}
 
-    bool runOnBasicBlock(BasicBlock &BB) override;
+    bool runOnModule(Module &M) override;
+
+    bool handleBasicBlock(BasicBlock &BB);
 
     static char ID;
 
@@ -28,7 +30,23 @@ private:
 
 char OperationsEncoder::ID = 0;
 
-bool OperationsEncoder::runOnBasicBlock(BasicBlock &BB) {
+bool OperationsEncoder::runOnModule(Module &M) {
+  bool modified = false;
+
+  PC->preEncoding(&M);
+
+  for (auto F = M.begin(); F != M.end(); F++) {
+    for (auto BB = F->begin(); BB != F->end(); BB++) {
+      modified |= handleBasicBlock(*BB);
+    }
+  }
+
+  PC->postEncoding(&M);
+
+  return modified;
+}
+
+bool OperationsEncoder::handleBasicBlock(BasicBlock &BB) {
   bool modified = false;
   LLVMContext &ctx = BB.getContext();
   Module *M = BB.getParent()->getParent();

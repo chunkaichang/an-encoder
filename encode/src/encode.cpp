@@ -38,7 +38,6 @@ Pass *createGlobalsEncoder(ProfiledCoder*);
 Pass *createConstantsEncoder(ProfiledCoder*);
 Pass *createOperationsEncoder(ProfiledCoder*);
 Pass *createOperationsExpander(ProfiledCoder*);
-Pass *createInterfaceHandler(ProfiledCoder*);
 
 // Passes for insertion of checks:
 Pass *createBBCheckInserter(Coder*);
@@ -206,10 +205,8 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     codePM.add(createConstantsEncoder(&PC));
     codePM.add(createGlobalsEncoder(&PC));
-
     codePM.add(createOperationsEncoder(&PC));
 
-    codePM.add(createInterfaceHandler(&PC));
     codePM.run(*mod);
 
     linkagePM.run(*library);

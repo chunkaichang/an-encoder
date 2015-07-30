@@ -18,6 +18,7 @@ using namespace llvm;
 
 class CallHandler;
 class ExpandGetElementPtr;
+class InterfaceHandler;
 
 class ProfiledCoder {
 public:
@@ -54,6 +55,10 @@ public:
 private:
 	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
 	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
+
+public:
+	bool preEncoding(Module *M);
+	bool postEncoding(Module *M);
 
 private:
 	bool handleBinop(Instruction *I, EncodingProfile::Operation op, std::string name);
@@ -100,6 +105,7 @@ private:
 
 	CallHandler *CH;
 	ExpandGetElementPtr *GE;
+	InterfaceHandler *IH;
 };
 
 #endif /* __PROFILED_CODER_H__ */

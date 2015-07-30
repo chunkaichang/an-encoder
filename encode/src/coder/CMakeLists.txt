@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 add_library(coder ProfiledCoder.cpp
                   CallHandler.cpp
                   GEPExpander.cpp
+                  InterfaceHandler.cpp
                   UsesVault.cpp)
 
 # Link against LLVM libraries

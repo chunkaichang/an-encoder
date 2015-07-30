@@ -1,32 +1,17 @@
 
-#include "llvm/Pass.h"
-#include "llvm/IR/Module.h"
-#include "llvm/IR/Function.h"
-#include "llvm/IR/BasicBlock.h"
-#include "llvm/IR/Instructions.h"
-#include "llvm/IR/Intrinsics.h"
-#include "llvm/IR/Constants.h"
+#include "InterfaceHandler.h"
 
-#include "coder/ProfiledCoder.h"
-#include "coder/UsesVault.h"
+#include "UsesVault.h"
+#include "ProfiledCoder.h"
 
-using namespace llvm;
-
-namespace {
-  struct InterfaceHandler: public FunctionPass {
-    InterfaceHandler(ProfiledCoder *pc) : FunctionPass(ID), PC(pc) {}
-
-    bool runOnFunction(Function &F) override;
-
-    static char ID;
-  private:
-    ProfiledCoder *PC;
-  };
-}
 
 char InterfaceHandler::ID = 0;
 
 bool InterfaceHandler::runOnFunction(Function &F) {
+  return handleFunction(F);
+}
+
+bool InterfaceHandler::handleFunction(Function &F) {
   if (!F.getName().startswith_lower("___enc_"))
     return false;
 

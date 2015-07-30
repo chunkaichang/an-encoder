@@ -5,10 +5,11 @@
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Value.h"
 
-#include "UsesVault.h"
+#include "ProfiledCoder.h"
 #include "CallHandler.h"
 #include "GEPExpander.h"
-#include "ProfiledCoder.h"
+#include "InterfaceHandler.h"
+#include "UsesVault.h"
 
 #include "../parser/Profile.h"
 
@@ -50,9 +51,11 @@ ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)
 
 	CH = new CallHandler(this);
 	GE = new ExpandGetElementPtr(this);
+	IH = new InterfaceHandler(this);
 }
 
 ProfiledCoder::~ProfiledCoder () {
+  delete IH;
   delete GE;
 	delete CH;
 	delete Builder;
@@ -645,4 +648,16 @@ Instruction *ProfiledCoder::expandExitOnFalse(BasicBlock::iterator &I) {
 
   I->eraseFromParent();
   return result;
+}
+
+bool ProfiledCoder::preEncoding(Module *M) {
+  bool modified = false;
+  for (auto F = M->begin(); F != M->end(); F++) {
+    modified |= IH->handleFunction(*F);
+  }
+  return modified;
+}
+
+bool ProfiledCoder::postEncoding(Module *M) {
+  return false;
 }
