@@ -12,7 +12,7 @@
 #include "ProfiledCoder.h"
 
 
-ProfiledCoder::ProfiledCoder (Module *m, ProfileParser *pp, unsigned a)
+ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)
 : M(m), PP(pp) {
 	LLVMContext &ctx = M->getContext();
 
@@ -107,7 +107,7 @@ Value *ProfiledCoder::createEncode(Value *V, Instruction *I, bool force) {
 	if (!force && !isInt64Type(V) && !pointerTy)
 		return V;
 
-	if (!force && pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (!force && pointerTy && !PP->hasProfile(EncodingProfile::PointerEncoding))
 		return V;
 
 	Builder->SetInsertPoint(I);
@@ -123,7 +123,7 @@ Value *ProfiledCoder::createDecode(Value *V, Instruction *I, bool force) {
 	if (!force && !isInt64Type(V) && !pointerTy)
 		return V;
 
-	if (!force && pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (!force && pointerTy && !PP->hasProfile(EncodingProfile::PointerEncoding))
 		return V;
 
 	Builder->SetInsertPoint(I);
@@ -138,7 +138,7 @@ Value *ProfiledCoder::createCheck(Value *V, Instruction *I) {
 	if (!isInt64Type(V) && !pointerTy)
 		return nullptr;
 
-	if (pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (pointerTy && !PP->hasProfile(EncodingProfile::PointerEncoding))
 		return nullptr;
 
 	Builder->SetInsertPoint(I);
@@ -152,7 +152,7 @@ Value *ProfiledCoder::createAssert(Value *V, Instruction *I) {
 	if (!isInt64Type(V) && !pointerTy)
 		return nullptr;
 
-	if (pointerTy && !PP->hasProfile(ProfileParser::PointerEncoding))
+	if (pointerTy && !PP->hasProfile(EncodingProfile::PointerEncoding))
 		return nullptr;
 
 	Builder->SetInsertPoint(I);
@@ -194,22 +194,22 @@ Value *ProfiledCoder::createEncBinop(StringRef Name, ArrayRef<Value*> Args, Inst
   return Builder->CreateCall(binop, Args);
 }
 
-bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, ProfileParser::Operation op) {
+bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op) {
 	// Do not check constants:
 	if (dyn_cast<ConstantInt>(v)) return false;
 
-	if (PP->hasOperationWithPosition(op, ProfileParser::Before)) {
+	if (PP->hasOperationWithPosition(op, EncodingProfile::Before)) {
 		createAssert(v, &(*I));
 		return true;
 	}
 	return false;
 }
 
-bool ProfiledCoder::insertCheckAfter(Value *v, const BasicBlock::iterator &I, ProfileParser::Operation op) {
+bool ProfiledCoder::insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op) {
 	// Do not check constants:
 	if (dyn_cast<ConstantInt>(v)) return false;
 
-	if (PP->hasOperationWithPosition(op, ProfileParser::After)) {
+	if (PP->hasOperationWithPosition(op, EncodingProfile::After)) {
 		createAssert(v, std::next(I));
 		return true;
 	}
@@ -224,7 +224,7 @@ bool ProfiledCoder::isPointerType(Value *v) const {
 	return v->getType()->isPointerTy();
 }
 
-bool ProfiledCoder::handleBinop(Instruction *I, ProfileParser::Operation op, std::string name) {
+bool ProfiledCoder::handleBinop(Instruction *I, EncodingProfile::Operation op, std::string name) {
 	if (!isInt64Type(I))
 		return false;
 
@@ -264,7 +264,7 @@ bool ProfiledCoder::handleArithmetic(Instruction *I) {
 	default: assert(0);
 	}
 
-	return handleBinop(I, ProfileParser::Arithmetic, name);
+	return handleBinop(I, EncodingProfile::Arithmetic, name);
 }
 
 bool ProfiledCoder::handleBitwise(Instruction *I) {
@@ -281,7 +281,7 @@ bool ProfiledCoder::handleBitwise(Instruction *I) {
 	default: assert(0);
 	}
 
-	return handleBinop(I, ProfileParser::Bitwise, name);
+	return handleBinop(I, EncodingProfile::Bitwise, name);
 }
 
 bool ProfiledCoder::handleComparison(Instruction *I) {
@@ -291,14 +291,14 @@ bool ProfiledCoder::handleComparison(Instruction *I) {
 	ICmpInst *cmp = dyn_cast<ICmpInst>(I);
     assert(cmp->isIntPredicate());
 
-    modified |= insertCheckBefore(I->getOperand(0), I, ProfileParser::Comparison);
-    modified |= insertCheckBefore(I->getOperand(1), I, ProfileParser::Comparison);
+    modified |= insertCheckBefore(I->getOperand(0), I, EncodingProfile::Comparison);
+    modified |= insertCheckBefore(I->getOperand(1), I, EncodingProfile::Comparison);
     return modified;
 }
 
 bool ProfiledCoder::handleAlloca(Instruction *I) {
 	assert(I->getOpcode() == Instruction::Alloca);
-	if (!PP->hasProfile(ProfileParser::PointerEncoding))
+	if (!PP->hasProfile(EncodingProfile::PointerEncoding))
 		return false;
 
 	UsesVault UV(I->uses());
@@ -321,21 +321,21 @@ bool ProfiledCoder::handleLoad(Instruction *I) {
 	bool modified = false;
   Value *ptr = I->getOperand(0);
 
-	if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+	if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
 	    !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-	  insertCheckBefore(ptr, I, ProfileParser::Memory);
+	  insertCheckBefore(ptr, I, EncodingProfile::Memory);
 	  ptr = createDecode(ptr, I);
 		I->setOperand(0, ptr);
 		modified |= true;
 	}
 
-  if (PP->hasProfile(ProfileParser::DuplicateLoad)) {
+  if (PP->hasProfile(EncodingProfile::DuplicateLoad)) {
     BasicBlock::iterator BI(I);
     createLoadCmpAssert(ptr, I, std::next(BI));
     modified |= true;
   }
 
-  modified |= insertCheckAfter(I, I, ProfileParser::Memory);
+  modified |= insertCheckAfter(I, I, EncodingProfile::Memory);
   return modified;
 }
 
@@ -344,17 +344,17 @@ bool ProfiledCoder::handleStore(Instruction *I) {
 	bool modified = false;
 	Value *ptr = I->getOperand(1);
 
-  modified |= insertCheckBefore(I->getOperand(0), I, ProfileParser::Memory);
+  modified |= insertCheckBefore(I->getOperand(0), I, EncodingProfile::Memory);
 
-  if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+  if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
       !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-    insertCheckBefore(ptr, I, ProfileParser::Memory);
+    insertCheckBefore(ptr, I, EncodingProfile::Memory);
     ptr = createDecode(ptr, I);
     I->setOperand(1, ptr);
     modified |= true;
   }
 
-  if (PP->hasProfile(ProfileParser::CheckAfterStore)) {
+  if (PP->hasProfile(EncodingProfile::CheckAfterStore)) {
     BasicBlock::iterator BI(I);
     createLoadCmpAssert(ptr, I->getOperand(0), std::next(BI));
     modified |= true;
@@ -379,7 +379,7 @@ bool ProfiledCoder::handleMemory(Instruction *I) {
 bool ProfiledCoder::handlePtrCast(Instruction *I) {
 	// If pointers are encoded, then casts between pointers and
 	// integers need no special treatment:
-	if (PP->hasProfile(ProfileParser::PointerEncoding))
+	if (PP->hasProfile(EncodingProfile::PointerEncoding))
 		return false;
 
 	unsigned opcode = I->getOpcode();
@@ -421,10 +421,10 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	Value *ptr = GEP->getPointerOperand();
 	Value *result;
 
-	if (PP->hasProfile(ProfileParser::GEPExpansion)) {
-	  if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+	if (PP->hasProfile(EncodingProfile::GEPExpansion)) {
+	  if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
 	      !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-	    insertCheckBefore(ptr, I, ProfileParser::GEP);
+	    insertCheckBefore(ptr, I, EncodingProfile::GEP);
 	  } else {
 	    // If pointers are not encoded, we must encode them before
 	    // expanding the GEP instruction:
@@ -435,7 +435,7 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	  for (unsigned i = 1; i < I->getNumOperands(); i++) {
       Value *Op = I->getOperand(i);
       assert(Op->getType()->isIntegerTy());
-      insertCheckBefore(Op, I, ProfileParser::GEP);
+      insertCheckBefore(Op, I, EncodingProfile::GEP);
     }
 
 	  DataLayout DL(M);
@@ -445,23 +445,23 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	  // If pointers are NOT encoded, we must decode
 	  // the result of the 'expanded GEP' instruction:
 	  result = res;
-	  if (!PP->hasProfile(ProfileParser::PointerEncoding)) {
+	  if (!PP->hasProfile(EncodingProfile::PointerEncoding)) {
 	    UsesVault UV(res->uses());
 	    BasicBlock::iterator BI(res);
 	    result = createDecode(res, std::next(BI), true);
 	    UV.replaceWith(result);
 	  }
 	} else {
-    if (PP->hasProfile(ProfileParser::PointerEncoding) &&
+    if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
         !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-      insertCheckBefore(ptr, I, ProfileParser::GEP);
+      insertCheckBefore(ptr, I, EncodingProfile::GEP);
       I->setOperand(0, createDecode(ptr, I));
     }
 
     for (unsigned i = 1; i < I->getNumOperands(); i++) {
       Value *Op = I->getOperand(i);
       assert(Op->getType()->isIntegerTy());
-      insertCheckBefore(Op, I, ProfileParser::GEP);
+      insertCheckBefore(Op, I, EncodingProfile::GEP);
 
       Value *NewOp = createDecode(Op, I);
       NewOp = createTrunc(NewOp, getInt32Type(), I);
@@ -471,7 +471,7 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
     // If pointers are encoded, we must encode
     // the result of a 'GEP' instruction:
     result = I;
-    if (PP->hasProfile(ProfileParser::PointerEncoding)) {
+    if (PP->hasProfile(EncodingProfile::PointerEncoding)) {
       UsesVault UV(I->uses());
       BasicBlock::iterator BI(I);
       result = createEncode(I, std::next(BI));
@@ -480,7 +480,7 @@ bool ProfiledCoder::handleGEP(Instruction *I) {
 	}
 
   BasicBlock::iterator BI(dyn_cast<Instruction>(result));
-  insertCheckAfter(result, BI, ProfileParser::GEP);
+  insertCheckAfter(result, BI, EncodingProfile::GEP);
 	return true;
 }
 
@@ -578,10 +578,10 @@ Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
     Value *x = ci->getArgOperand(0);
     Value *result = Builder->CreateSDiv(x, ci->getArgOperand(1));
 
-    if (PP->hasProfile(ProfileParser::CheckAfterDecode)) {
+    if (PP->hasProfile(EncodingProfile::CheckAfterDecode)) {
     	Value *mul = Builder->CreateMul(result, this->A);
 
-    	if (PP->hasProfile(ProfileParser::PinChecks))
+    	if (PP->hasProfile(EncodingProfile::PinChecks))
     		x = Builder->CreateCall(Blocker, x);
 
         Value *rem = Builder->CreateSub(x, mul);
@@ -602,7 +602,7 @@ Value *ProfiledCoder::expandCheck(BasicBlock::iterator &I) {
     CallInst *ci = dyn_cast<CallInst>(I);
     Value *x = ci->getArgOperand(0);
 
-    if (PP->hasProfile(ProfileParser::PinChecks))
+    if (PP->hasProfile(EncodingProfile::PinChecks))
     	x = Builder->CreateCall(Blocker, x);
 
     Value *result = Builder->CreateSRem(x, this->A);
@@ -618,7 +618,7 @@ Instruction *ProfiledCoder::expandAssert(BasicBlock::iterator &I) {
 	CallInst *ci = dyn_cast<CallInst>(I);
 	Value *x = ci->getArgOperand(0);
 
-	if (PP->hasProfile(ProfileParser::PinChecks))
+	if (PP->hasProfile(EncodingProfile::PinChecks))
 		x = Builder->CreateCall(Blocker, x);
 
 	Value *rem = Builder->CreateSRem(x, this->A);

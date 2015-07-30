@@ -12,9 +12,11 @@ add_executable(encode encode.cpp
                       CheckInserter.cpp
                       AccuPromoter.cpp
                       Coder.cpp
+                      ProfiledCoder.cpp
                       UsesVault.cpp
-                      ProfileParser.cpp
-                      ProfiledCoder.cpp)
+                      Profile.cpp
+                      Parser.cpp
+                      ProfileLexer.cpp)
 add_dependencies(encode anlib.bc)
 
 # Find the libraries that correspond to the LLVM components

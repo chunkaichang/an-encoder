@@ -25,7 +25,10 @@
 
 #include "Coder.h"
 #include "ProfiledCoder.h"
-#include "ProfileParser.h"
+#include "Profile.h"
+#include "Parser.h"
+#include "ProfileLexer.h"
+
 
 using namespace llvm;
 
@@ -148,9 +151,14 @@ static int processModule(char **argv, LLVMContext &Context) {
   if (!ifs.good())
 	  return 1;
 
-  ProfileParser PP;
-  PP.parseFile(ifs);
-  ifs.close();
+  ProfileLexer Lex(ifs);
+  Parser P(Lex);
+  EncodingProfile PP = P.parse();
+  if (P.error())
+    return 1;
+  std::cout << "Encoding Profile:\n";
+  PP.print();
+  std::cout << "-----------------\n";
   ProfiledCoder PC(mod, &PP, globalCodeValue);
 
   // Figure out where we are going to send the output.

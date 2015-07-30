@@ -11,7 +11,7 @@
 #include "llvm/IR/Metadata.h"
 
 #include "Coder.h"
-#include "ProfileParser.h"
+#include "Profile.h"
 
 
 using namespace llvm;
@@ -22,7 +22,7 @@ class ExpandGetElementPtr;
 
 class ProfiledCoder {
 public:
-	ProfiledCoder (Module *m, ProfileParser *pp, unsigned a=1);
+	ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a=1);
 	~ProfiledCoder ();
 
 public:
@@ -53,11 +53,11 @@ public:
 	bool isPointerType(Value *v) const;
 
 private:
-	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, ProfileParser::Operation op);
-	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, ProfileParser::Operation op);
+	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
+	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
 
 private:
-	bool handleBinop(Instruction *I, ProfileParser::Operation op, std::string name);
+	bool handleBinop(Instruction *I, EncodingProfile::Operation op, std::string name);
 	bool handleAlloca(Instruction *I);
 	bool handleLoad(Instruction *I);
 	bool handleStore(Instruction *I);
@@ -95,7 +95,7 @@ private:
 	Function *Encode, *Decode, *Check, *Assert, *Blocker, *ExitOnFalse;
 	Constant *Exit;
 
-	ProfileParser *PP;
+	EncodingProfile *PP;
 
 	IRBuilder<> *Builder;
 
