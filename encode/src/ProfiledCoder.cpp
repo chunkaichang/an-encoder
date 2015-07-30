@@ -8,7 +8,7 @@
 #include "UsesVault.h"
 #include "CallHandler.h"
 #include "GEPExpander.h"
-#include "ProfileParser.h"
+#include "Profile.h"
 #include "ProfiledCoder.h"
 
 
