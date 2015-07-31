@@ -9,22 +9,21 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Metadata.h"
 
-#include "Coder.h"
+#include "coder/ProfiledCoder.h"
 
-#include <iostream>
 #include <sstream>
 
 using namespace llvm;
 
 namespace {
   struct AccuPromoter : public FunctionPass {
-    AccuPromoter(Coder *c) : FunctionPass(ID), C(c) {}
+    AccuPromoter(ProfiledCoder *pc) : FunctionPass(ID), PC(pc) {}
 
     bool runOnFunction(Function &F) override;
 
     static char ID;
   private:
-    Coder *C;
+    ProfiledCoder *PC;
   };
 }
 
@@ -34,14 +33,10 @@ bool AccuPromoter::runOnFunction(Function &F) {
   IRBuilder<> builder(&F.getEntryBlock());
   builder.SetInsertPoint(F.getEntryBlock().begin());
     
-  for (unsigned i = 0; i < NUM_ACCUS; i++) {
-
-  Value *local_accu = builder.CreateAlloca(C->getInt64Type());
-  builder.CreateStore(ConstantInt::getSigned(C->getInt64Type(), 0), local_accu);
+  Value *local_accu = builder.CreateAlloca(PC->getInt64Type());
+  builder.CreateStore(ConstantInt::getSigned(PC->getInt64Type(), 0), local_accu);
   
-  std::string accu_name = (i % NUM_ACCUS) ? "accu1_enc" : "accu0_enc";
-  GlobalVariable *accu
-        = F.getParent()->getNamedGlobal(accu_name);
+  GlobalVariable *accu = F.getParent()->getNamedGlobal("accu_enc");
 
   for (auto bi = F.begin(), be = F.end(); be != bi; ++bi) {
     for (auto ii = bi->begin(), ie = bi->end(); ii != ie; ++ii) {
@@ -53,11 +48,9 @@ bool AccuPromoter::runOnFunction(Function &F) {
   for (auto bi = F.begin(), be = F.end(); be != bi; ++bi) {
     assert(!accu->isUsedInBasicBlock(&(*bi)));
   }
-
-  }
   return true;
 }
 
-Pass *createAccuPromoter(Coder *c) {
-  return new AccuPromoter(c);
+Pass *createAccuPromoter(ProfiledCoder *pc) {
+  return new AccuPromoter(pc);
 }

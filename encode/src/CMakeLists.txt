@@ -9,8 +9,7 @@ add_executable(encode encode.cpp
                       OperationsEncoder.cpp
                       OperationsExpander.cpp
                       Linkage.cpp
-                      AccuPromoter.cpp
-                      Coder.cpp)
+                      AccuPromoter.cpp)
 add_dependencies(encode anlib.bc)
 
 
@@ -38,37 +37,9 @@ else()
   set(RTTI -fno-rtti)
 endif()
 
-if (CHECK_BEFORE)
-  add_definitions(-DCHECK_BEFORE)
-endif ()
-if (CHECK_AFTER)
-  add_definitions(-DCHECK_AFTER)
-endif ()
-if (CHECK_BB)
-  add_definitions(-DCHECK_BB)
-endif ()
-if (CHECK_FUN)
-  add_definitions(-DCHECK_FUN)
-endif ()
-if (ACCU_ARGS)
-  add_definitions(-DACCU_ARGS)
-endif ()
-if (ACCU_RES)
-  add_definitions(-DACCU_RES)
-endif ()
-if (BLOCK_SREM)
-  add_definitions(-DBLOCK_SREM)
-endif ()
-if (MEM2REG)
-  add_definitions(-DMEM2REG)
-endif ()
-if (TOGGLE_CHECKS)
-  add_definitions(-DTOGGLE_CHECKS)
-endif ()
 if (LOG_ACCU)
   add_definitions(-DLOG_ACCU)
 endif ()
-add_definitions(-DNUM_ACCUS=${NUM_ACCUS})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
 

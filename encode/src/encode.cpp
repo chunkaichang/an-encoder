@@ -23,7 +23,6 @@
 #include <iostream>
 #include <fstream>
 
-#include "Coder.h"
 #include "coder/ProfiledCoder.h"
 
 #include "parser/Profile.h"
@@ -43,7 +42,7 @@ Pass *createOperationsExpander(ProfiledCoder*);
 Pass *createLinkagePass(GlobalValue::LinkageTypes);
 
 // (Simple) optimization passes:
-Pass *createAccuPromoter(Coder *);
+Pass *createAccuPromoter(ProfiledCoder *);
 
 // Command line arguments:
 static cl::opt<std::string>
@@ -140,7 +139,6 @@ static int processModule(char **argv, LLVMContext &Context) {
     Err.print(argv[0], errs());
     return 1;
   }
-  //Coder C(mod, globalCodeValue);
 
   std::string name(ProfileFilename);
   std::ifstream ifs(name.c_str());
@@ -248,7 +246,7 @@ static int processModule(char **argv, LLVMContext &Context) {
       postLinkPM.add(llvm::createFunctionInliningPass());
       // Replace the global accumulator with a local variable,
       // one per function:
-      //postLinkPM.add(createAccuPromoter(&C));
+      postLinkPM.add(createAccuPromoter(&PC));
     }
     postLinkPM.run(*mod);
 
