@@ -528,7 +528,7 @@ if __name__ == "__main__":
     fi_args = []
     for test in suite.get_tests_with_profile("cover"):
         checksum, cso = plain_run(test)
-        for key in ["plain", "encoded"]:
+        for key in ["encoded"]:
             fi_args.append((test, key, checksum, cso, int(args.processes1), summary,))
 
     alp = utilities.ArgListProcessor(int(args.processes0), fi_run, fi_args)
