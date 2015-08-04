@@ -27,6 +27,8 @@ macro(SET_BUILD_VARS TEST_NAME TARGET_NAME)
   set(ENC_MODULE_ENC_BC   "${TARGET_NAME}.enc.enc.bc")
 
   set(MAIN_TARGET "${TARGET_NAME}.plain")
+  set(MAIN_TARGET_S "${TARGET_NAME}.plain.s")
+  set(MAIN_TARGET_BC "${TARGET_NAME}.plain.bc")
   set(ENC_TARGET  "${TARGET_NAME}.encoded")
   set(ENC_TARGET_S  "${TARGET_NAME}.encoded.s")
   set(ENC_TARGET_BC  "${TARGET_NAME}.encoded.bc")
@@ -67,6 +69,20 @@ function(BUILD_TEST_CASE TEST_NAME TARGET_NAME)
                     DEPENDS ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
                             mycheck.bc
                             mycyc.bc)
+  add_custom_target(${MAIN_TARGET_BC} ALL
+                    COMMAND ${LINK}
+                            ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
+                            ../mylibs/mycheck.bc
+                            ../mylibs/mycyc.bc
+                            -o ${MAIN_TARGET_BC}
+                    DEPENDS ${MAIN_MODULE_BC} ${ENC_MODULE_BC}
+                            mycheck.bc
+                            mycyc.bc)
+  add_custom_target(${MAIN_TARGET_S} ALL
+                    COMMAND ${CLANG} -S ${CLANG_LINK_OPTS}
+                            ${MAIN_TARGET_BC}
+                            -o ${MAIN_TARGET_S}
+                    DEPENDS ${MAIN_TARGET_BC})
 
   # Build encoded binary:
   add_custom_command(OUTPUT ${MAIN_MODULE_ENC_BC}
