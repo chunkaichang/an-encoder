@@ -43,6 +43,7 @@ bool CallHandler::handleCallInst(BasicBlock::iterator &I) {
 		     F->getIntrinsicID() == Intrinsic::an_decode_value ||
 		     F->getIntrinsicID() == Intrinsic::an_check  ||
 		     F->getIntrinsicID() == Intrinsic::an_signal ||
+		     F->getIntrinsicID() == Intrinsic::an_assert_value ||
 		     F->getIntrinsicID() == Intrinsic::an_assert ||
 		     F->getIntrinsicID() == Intrinsic::an_placeholder)) {
 		return false;

@@ -108,6 +108,14 @@ bool OperationsExpander::handleFunction(Function &F) {
 				m |= true;
 				break;
 			}
+			case Intrinsic::an_assert_value: {
+			  Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
+			  Value *result = PC->createAssert(x, ci);
+        ci->replaceAllUsesWith(result);
+        ci->eraseFromParent();
+        m = true;
+        break;
+      }
 			case Intrinsic::an_exit_on_false: {
 			  PC->expandExitOnFalse(i);
 			  m |= true;
