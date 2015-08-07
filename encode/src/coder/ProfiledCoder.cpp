@@ -614,10 +614,12 @@ Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
   Value *result = Builder->CreateSDiv(x, ci->getArgOperand(1));
 
   if (PP->hasProfile(EncodingProfile::CheckAfterDecode)) {
-    Value *mul = Builder->CreateMul(result, this->A);
-    if (PP->hasProfile(EncodingProfile::PinChecks))
-      x = Builder->CreateCall(Blocker, x);
+    Value *dec = result;
+    if (PP->hasProfile(EncodingProfile::PinChecks)) {
+      dec = Builder->CreateCall(Blocker, dec);
+    }
 
+    Value *mul = Builder->CreateMul(dec, this->A);
     Value *rem = Builder->CreateSub(x, mul);
     Value *cmp = createCmpZero(rem, I);
     BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
