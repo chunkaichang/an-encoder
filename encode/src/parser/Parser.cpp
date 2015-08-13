@@ -28,6 +28,7 @@ std::set<ProfileLexer::Token> Parser::profileTokens = {
   ProfileLexer::CHECKAFTERDECODE,
   ProfileLexer::PINCHECKS,
   ProfileLexer::ACCUMULATECHECKS,
+  ProfileLexer::IGNOREACCUMULATEOVERFLOW,
   ProfileLexer::DUPLICATELOAD,
   ProfileLexer::CHECKAFTERSTORE
 };
@@ -117,6 +118,9 @@ EncodingProfile::Profile Parser::parseProfile() {
     break;
   case ProfileLexer::ACCUMULATECHECKS:
     prof = EncodingProfile::AccumulateChecks;
+    break;
+  case ProfileLexer::IGNOREACCUMULATEOVERFLOW:
+    prof = EncodingProfile::IgnoreAccumulateOverflow;
     break;
   case ProfileLexer::DUPLICATELOAD:
     prof = EncodingProfile::DuplicateLoad;

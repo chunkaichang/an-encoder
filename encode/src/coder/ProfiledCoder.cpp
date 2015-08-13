@@ -46,7 +46,11 @@ ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)
 	Exit = M->getOrInsertFunction("exit", exitTy);
 
 	FunctionType *accuTy = FunctionType::get(voidTy, int64Ty, false);
-	Accumulate =  M->getOrInsertFunction("accumulate_enc", accuTy);
+	if (PP->hasProfile(EncodingProfile::IgnoreAccumulateOverflow)) {
+	  Accumulate =  M->getOrInsertFunction("accumulate_ignore_oflow_enc", accuTy);
+	} else {
+	  Accumulate =  M->getOrInsertFunction("accumulate_enc", accuTy);
+	}
 
 	Builder = new IRBuilder<>(ctx);
 

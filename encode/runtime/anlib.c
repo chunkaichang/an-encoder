@@ -20,6 +20,17 @@ static int64_t accu_enc = 0;
   #define LOG_ACCU_PRINTF(...)
 #endif 
 
+void ___accumulate_ignore_oflow_enc(int64_t x_enc, int64_t *accu)
+{
+  LOG_ACCU_PRINTF("x_enc=0x%016lx, accu=0x%016lx\n", x_enc, *accu);
+  *accu += x_enc;
+}
+
+void accumulate_ignore_oflow_enc(int64_t x_enc)
+{
+  ___accumulate_ignore_oflow_enc(x_enc, &accu_enc);
+}
+
 void ___accumulate_enc(int64_t x_enc, int64_t *accu)
 {
   int64_t old_accu = *accu;

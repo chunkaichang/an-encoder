@@ -15,6 +15,7 @@ public:
 		CheckAfterDecode,
 		PinChecks,
 		AccumulateChecks,
+		IgnoreAccumulateOverflow,
 		DuplicateLoad,
 		CheckAfterStore
 	};

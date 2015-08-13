@@ -11,6 +11,7 @@ EncodingProfile::ProfileToStringMap EncodingProfile::profile2string = {
 		{CheckAfterDecode, "CheckAfterDecode"},
 		{PinChecks, "PinChecks"},
 		{AccumulateChecks, "AccumulateChecks"},
+		{IgnoreAccumulateOverflow, "IgnoreAccumulateOverflow"},
 		{DuplicateLoad, "DuplicateLoad"},
 		{CheckAfterStore, "CheckAfterStore"}
 };
