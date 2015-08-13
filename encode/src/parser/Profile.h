@@ -11,6 +11,7 @@ public:
 	enum Profile {
 		PointerEncoding,
 		GEPExpansion,
+		AccumulateBeforeDecode,
 		CheckAfterDecode,
 		PinChecks,
 		AccumulateChecks,

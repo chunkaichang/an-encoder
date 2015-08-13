@@ -7,6 +7,7 @@
 EncodingProfile::ProfileToStringMap EncodingProfile::profile2string = {
 		{PointerEncoding, "PointerEncoding"},
 		{GEPExpansion, "GEPExpansion"},
+		{AccumulateBeforeDecode, "AccumulateBeforeDecode"},
 		{CheckAfterDecode, "CheckAfterDecode"},
 		{PinChecks, "PinChecks"},
 		{AccumulateChecks, "AccumulateChecks"},

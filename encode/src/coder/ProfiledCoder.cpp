@@ -599,27 +599,30 @@ Value *ProfiledCoder::expandEncode(BasicBlock::iterator &I) {
 Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
 	assert(isIntrinsic(I, Intrinsic::an_decode));
 	BasicBlock *BB = I->getParent();
+	CallInst *ci = dyn_cast<CallInst>(I);
+	Value *x = ci->getArgOperand(0);
 
-    Builder->SetInsertPoint(I);
-    CallInst *ci = dyn_cast<CallInst>(I);
-    Value *x = ci->getArgOperand(0);
-    Value *result = Builder->CreateSDiv(x, ci->getArgOperand(1));
+	if (PP->hasProfile(EncodingProfile::AccumulateBeforeDecode)) {
+	  createAccumulate(x, I);
+	}
 
-    if (PP->hasProfile(EncodingProfile::CheckAfterDecode)) {
-    	Value *mul = Builder->CreateMul(result, this->A);
+  Builder->SetInsertPoint(I);
+  Value *result = Builder->CreateSDiv(x, ci->getArgOperand(1));
 
-    	if (PP->hasProfile(EncodingProfile::PinChecks))
-    		x = Builder->CreateCall(Blocker, x);
+  if (PP->hasProfile(EncodingProfile::CheckAfterDecode)) {
+    Value *mul = Builder->CreateMul(result, this->A);
+    if (PP->hasProfile(EncodingProfile::PinChecks))
+      x = Builder->CreateCall(Blocker, x);
 
-        Value *rem = Builder->CreateSub(x, mul);
-    	Value *cmp = createCmpZero(rem, I);
-    	BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
-    	createExitAtEnd(trap);
-    }
+    Value *rem = Builder->CreateSub(x, mul);
+    Value *cmp = createCmpZero(rem, I);
+    BasicBlock *trap = createTrapBlockOnFalse(cmp, I);
+    createExitAtEnd(trap);
+  }
 
-    I->replaceAllUsesWith(result);
-    I->eraseFromParent();
-    return result;
+  I->replaceAllUsesWith(result);
+  I->eraseFromParent();
+  return result;
 }
 
 Value *ProfiledCoder::expandCheck(BasicBlock::iterator &I) {
@@ -698,8 +701,10 @@ bool ProfiledCoder::postExpansion(Module *M) {
 }
 
 bool ProfiledCoder::insertFunctionCheck(Function &F) {
-  if (!PP->hasProfile(EncodingProfile::AccumulateChecks))
+  if (!PP->hasProfile(EncodingProfile::AccumulateChecks)
+      && !PP->hasProfile(EncodingProfile::AccumulateBeforeDecode)) {
     return false;
+  }
   // Do not insert checks in functions from the 'anlib' library:
   if (F.getName().endswith_lower("_enc"))
     return false;
