@@ -145,16 +145,6 @@ static int processModule(char **argv, LLVMContext &Context) {
   if (!ifs.good())
 	  return 1;
 
-  ProfileLexer Lex(ifs);
-  Parser P(Lex);
-  EncodingProfile PP = P.parse();
-  if (P.error())
-    return 1;
-  std::cout << "Encoding Profile:\n";
-  PP.print();
-  std::cout << "-----------------\n";
-  ProfiledCoder PC(mod, &PP, globalCodeValue);
-
   // Figure out where we are going to send the output.
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
   if (!Out) return 1;
@@ -176,7 +166,22 @@ static int processModule(char **argv, LLVMContext &Context) {
   // during linking.)
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
+  // An instance of 'ProfiledCoder' with an "empty" profile is required if the
+  // command line option "-expand-only" has been given:
+  EncodingProfile EP, emptyEP;
+  ProfiledCoder emptyPC(mod, &emptyEP, globalCodeValue);
+
   if (!ExpandOnly) {
+    ProfileLexer Lex(ifs);
+    Parser P(Lex);
+    EP = P.parse();
+    if (P.error())
+      return 1;
+    std::cout << "Encoding Profile:\n";
+    EP.print();
+    std::cout << "-----------------\n";
+    ProfiledCoder PC(mod, &EP, globalCodeValue);
+
     library = openFileAsModule(libraryPath, Err, Context);
     if (library == nullptr) {
       Err.print(argv[0], errs());
@@ -215,19 +220,19 @@ static int processModule(char **argv, LLVMContext &Context) {
     // 'ConstantPropagationPass':
     postLinkPM.add(createConstantPropagationPass());
 
-    // We run the 'CheckInserters' here for two reasons:
-    //  1. Since they will insert new calls to the 'an_assert' intrinsic,
-    //     they must be run before the 'OperationsExpander'.
-    //  2. Since they assert on the accumulator, they must be run before
-    //     optimizations, which may promote the accumulator from a global
-    //     variable into a register.
-    postLinkPM.add(createOperationsExpander(&PC));
+    // Since during object construction the 'ProfiledCoder' extracts function
+    // definitions from 'mod', it is necessary (and very reasonable) to construct
+    // a new instance of 'ProfiledCoder' after linking:
+    ProfiledCoder postLinkPC(mod, &EP, globalCodeValue);
+    postLinkPM.add(createOperationsExpander(&postLinkPC));
+
     // Due to previously inserted encode/decode instructions some values
     // that used to be constants may no longer appear to be constant. However,
     // after the decode/encode instructions have been expanded, one should be
     // able to infer that these values are indeed constant - but this requires
     // running the 'ConstantPropagationPass':
     postLinkPM.add(createConstantPropagationPass());
+
     // Optimization to be run immediately after encoding/decoding operations
     // have been inserted (i.e. after intrinsics for "AN coding" have been
     // expanded:
@@ -271,7 +276,8 @@ static int processModule(char **argv, LLVMContext &Context) {
       if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
     }
   } else {
-    PM.add(createOperationsExpander(&PC));
+    // Use the "empty" profile for command line option "-expand-only":
+    PM.add(createOperationsExpander(&emptyPC));
   }
 
   if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
