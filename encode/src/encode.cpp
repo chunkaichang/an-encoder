@@ -140,11 +140,6 @@ static int processModule(char **argv, LLVMContext &Context) {
     return 1;
   }
 
-  std::string name(ProfileFilename);
-  std::ifstream ifs(name.c_str());
-  if (!ifs.good())
-	  return 1;
-
   // Figure out where we are going to send the output.
   std::unique_ptr<tool_output_file> Out(GetOutputStream());
   if (!Out) return 1;
@@ -172,6 +167,10 @@ static int processModule(char **argv, LLVMContext &Context) {
   ProfiledCoder emptyPC(mod, &emptyEP, globalCodeValue);
 
   if (!ExpandOnly) {
+    std::string name(ProfileFilename);
+    std::ifstream ifs(name.c_str());
+    if (!ifs.good())
+      return 1;
     ProfileLexer Lex(ifs);
     Parser P(Lex);
     EP = P.parse();
