@@ -245,8 +245,16 @@ static int processModule(char **argv, LLVMContext &Context) {
     if (!NoVerifying) postLinkPM.add(createVerifierPass());
     if (!NoOpts && !NoInlining)
     {
-      mod->getFunction("accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
-      mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
+      std::vector<std::string> accuFns = {
+        "accumulate_enc",
+        "___accumuate_enc",
+        "accumulate_ignore_oflow_enc",
+        "___accumulate_ignore_oflow_enc"
+      };
+      for (auto fi = accuFns.begin(); fi != accuFns.end(); fi++) {
+        Function *F = mod->getFunction(*fi);
+        if (F) F->addFnAttr(Attribute::AlwaysInline);
+      }
       postLinkPM.add(llvm::createFunctionInliningPass());
       // Replace the global accumulator with a local variable,
       // one per function:
