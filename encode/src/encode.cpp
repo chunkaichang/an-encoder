@@ -247,6 +247,8 @@ static int processModule(char **argv, LLVMContext &Context) {
     {
       mod->getFunction("accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
       mod->getFunction("___accumulate_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("accumulate_ignore_oflow_enc")->addFnAttr(Attribute::AlwaysInline);
+      mod->getFunction("___accumulate_ignore_oflow_enc")->addFnAttr(Attribute::AlwaysInline);
       postLinkPM.add(llvm::createFunctionInliningPass());
       // Replace the global accumulator with a local variable,
       // one per function:
