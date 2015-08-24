@@ -70,7 +70,8 @@ def plot_test(name, data, outdir):
         bars[b], err_bars[b] = [], []
         for p in profiles:
             bars[b].append(norm_data[p][b])
-            err_bars[b].append(norm_err_data[p][b])
+            if b is not "CORRECT":
+              err_bars[b].append(norm_err_data[p][b])
 
     fig, ax = plt.subplots(1, 1, figsize=(5, 7))
     fig.set_facecolor("w")
@@ -86,7 +87,7 @@ def plot_test(name, data, outdir):
 
     for i in range(len(bins)):
         label = "SDC" if bins[i] is "UNEXPECTED" else bins[i]
-        ax.bar(lefts, bars[bins[i]], bottom=bottoms, label=label, width=width, alpha=0.5, color=colors[i])
+        ax.bar(lefts, bars[bins[i]], bottom=bottoms, label=label, width=width, alpha=0.5, color=colors[i], lw=0.0)
         for j in range(n_prof):
             bottoms[j] += bars[bins[i]][j]
 
@@ -96,7 +97,7 @@ def plot_test(name, data, outdir):
     bottoms = [0.0]*n_prof
 
     for i in range(1, len(bins)):
-        ax.bar(lefts, err_bars[bins[i]], bottom=bottoms, width=width, alpha=0.5, color=colors[i])
+        ax.bar(lefts, err_bars[bins[i]], bottom=bottoms, width=width, alpha=0.5, color=colors[i], lw=0.0)
         for j in range(n_prof):
             bottoms[j] +=err_bars[bins[i]][j]
 
