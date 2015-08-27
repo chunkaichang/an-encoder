@@ -14,7 +14,7 @@ colors = ["r", "g", "b", "m", "c"]
 profiles = ["COMPCHK", "ACCUCHK", "OMIACCU"]
 
 
-def collect_tests(kind, dirname):
+def collect_tests(kind, dirname, only_reg):
     tests = dict()
 
     for d in os.listdir(dirname):
@@ -33,18 +33,22 @@ def collect_tests(kind, dirname):
         log_file = open(log_name, "r")
         for line in log_file.readlines():
             for b in bins:
-                if b in line and "TXT" not in line:
+                if only_reg:
+                  if b in line and ("RREG" in line or "WREG" in line):
+                    tests[d][b] += 1
+                else:
+                  if b in line and "TXT" not in line:
                     tests[d][b] += 1
         log_file.close()
 
     return tests
 
 
-def collect_profiles(kind, profiles, dirnames):
+def collect_profiles(kind, profiles, dirnames, only_reg=False):
     results = dict()
 
     for p in profiles:
-        tests = collect_tests(kind, dirnames[p])
+        tests = collect_tests(kind, dirnames[p], only_reg)
         for name, data in tests.items():
             if name not in results.keys():
                 results[name] = dict()
@@ -151,7 +155,7 @@ if __name__ == "__main__":
         res = pickle.load(f)
         f.close()
     else:
-        res = collect_profiles("encoded", profiles, dirnames)
+        res = collect_profiles("encoded", profiles, dirnames, True)
         if args.pickle is not "":
             f = open(args.pickle, "w")
             pickle.dump(res, f)
