@@ -124,12 +124,12 @@ class CoverTestCase(TestCase):
             id  = line.split(':')[0].strip()
             val = line.split(':')[1].strip()
             if id == "function":
-                self.function = val
+                self.functions = val.split()
             elif id == "warmups":
                 self.warmups = int(val)
 
-    def get_function(self):
-        return self.function
+    def get_functions(self):
+        return self.functions
 
     def get_warmups(self):
         return self.warmups

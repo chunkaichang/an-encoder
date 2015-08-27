@@ -21,10 +21,10 @@ SEPARATOR = "----------------------------------------------------------------\n"
 
 
 class FiResult:
-    def __init__(self, test, key, func_ranges, checksum, cso):
+    def __init__(self, test, key, ip_ranges, checksum, cso):
         self.test = test
         self.key = key
-        self.func_ranges = func_ranges
+        self.ip_ranges = ip_ranges
         self.checksum = checksum  # reference checksum
         self.cso = cso  # path to reference "cso" file
         self.hist = utilities.ConcurrentDict()
@@ -75,32 +75,28 @@ class FiResult:
             return True
         # --- check if fault was injected inside function ---
         # instruction where fault was actually injected (triggered)
-        trig_instr = 0
+        trig_ip = 0
         lines = cStringIO.StringIO(stderr)
         while True:
             s1 = lines.readline()
             if s1 == "":
                 break
-            if len(s1) > 0 and s1[0] == '[' and len(s1.split('i =')) > 1:
+            if len(s1) > 0 and s1[0] == '[' and len(s1.split('IP =')) > 1:
                 """ Note that if PIN crashes in such a way that no output lines are generated that match the
                 condition in the previous if clause, then, after the while loop, 'trig_instr' will still be 0.
                 Since no function range should start at 0, 'valid_fault' will return False. This behaviour is
                 desired since a test that has crashed the PIN tool should be considered invalid. """
-                trigger = int(s1.split('i =')[1].split(',')[0])
+                trigger = int(s1.split('IP =')[1].split(',')[0], 16)
                 s2 = lines.readline()
                 assert (s2 != "")
                 if (re.match('.*enter', s2) is None and
                             re.match('.*leave', s2) is None):
-                    trig_instr = trigger
+                    trig_ip = trigger
                     break
 
-        for func_range in self.func_ranges:
-            if func_range[0] <= trig_instr <= func_range[1]:
+        for ip_range in self.ip_ranges:
+            if ip_range[0] <= trig_ip <= ip_range[1]:
                 return True
-            elif trig_instr < func_range[0]:
-                """ Note that this "elif" statement only makes sense if 'func_range' is sorted in ascending order,
-                which is indeed achieved by our implementation of '_get_function_ranges'. """
-                return False
         return False
 
     def diagnose(self, limitedp, cso_file):
@@ -226,8 +222,10 @@ class FaultInjector:
             if csl: suffix += " --csl %s" % csl
             return suffix
 
-        def get_function_cmd(self, function, cso=None, csl=None):
-            bfi_args = " -m %s" % function
+        def get_function_cmd(self, functions, cso=None, csl=None):
+            bfi_args = ""
+            for f in functions:
+              bfi_args += " -m %s" % f
             bfi_cmd = self.bfi + bfi_args + " -- " + \
                 self.binary + self._get_cs_suffix(cso, csl)
             return bfi_cmd
@@ -250,7 +248,8 @@ class FaultInjector:
         self.logfile = logfile
         self.processes = processes
         self.params = cmd_params
-        self.func_ranges = None
+        self.cnt_ranges = None
+        self.ip_ranges = None
 
     """ from Dmitry's "bfi_const.py":
         7 types of faults to inject:
@@ -320,8 +319,9 @@ class FaultInjector:
 
     def _get_function_ranges(self):
         # find the range of the "coverage_function":
-        self.log("Obtaining ranges of function %s ...\n" % self.test.get_function())
-        command = self.bfi_factory.get_function_cmd(self.test.get_function(), "/dev/null", "/dev/null")
+        functions = reduce(lambda a, b: a + " " + b, self.test.get_functions())
+        self.log("Obtaining ranges of functions %s ...\n" % functions)
+        command = self.bfi_factory.get_function_cmd(self.test.get_functions(), "/dev/null", "/dev/null")
 
         p = utilities.LimitedProcess(command)
         _, _, stderr = p.run(None, self.logfile)
@@ -337,8 +337,9 @@ class FaultInjector:
         self.log("... done writing <stderr> to %s ...\n" % rngs_name)
         self.flush()
 
-        func_ranges = []  # list of func ranges: pairs of enter/leave
-        func_enters = []
+        enter_cnt, ranges_cnt = [], []
+        enter_ip, ranges_ip = [], []
+
         lines = cStringIO.StringIO(stderr)
         counter = 0
         while True:
@@ -346,32 +347,41 @@ class FaultInjector:
             if s == "":
                 break
             if len(s) > 0 and s[0] == '[':
-                trigger = s.split('i =')[1].split(',')[0]
-                trigger = int(trigger)
+                inst_cnt = s.split('i =')[1].split(',')[0]
+                inst_cnt = int(inst_cnt)
+                inst_ip = s.split('IP =')[1].split(',')[0]
+                inst_ip = int(inst_ip, 16)
                 # get the following line
                 sf = lines.readline()
                 assert (sf != "")
                 if re.match(".*enter", sf):
-                    func_enters.append((trigger, counter))
-                    func_ranges.append(None)
+                    enter_cnt.append((inst_cnt, counter))
+                    ranges_cnt.append(None)
+                    enter_ip.append((inst_ip, counter))
+                    ranges_ip.append(None)
                     counter += 1
                     continue
                 if re.match(".*leave", sf):
-                    entry, index = func_enters.pop()
+                    entry_cnt, index_cnt = enter_cnt.pop()
+                    entry_ip, index_ip = enter_ip.pop()
+                    assert(index_cnt == index_ip)
                     # Make sure that the ranges are sorted by the entry into the range (in ascending order):
-                    func_ranges[index] = (entry, trigger)
+                    ranges_cnt[index_cnt] = (entry_cnt, inst_cnt)
+                    ranges_ip[index_ip] = (entry_ip, inst_ip)
                     continue
 
-        rngs_file.write("ranges of function %s:\n" % self.test.get_function())
-        for idx, func_range in enumerate(func_ranges):
-            rngs_file.write("[   %10d - %10d ]\n" % (func_range[0], func_range[1]))
+        rngs_file.write("ranges of function %s:\n" % functions)
+        assert(len(ranges_cnt) == len(ranges_ip))
+        for idx in range(len(ranges_cnt)):
+            rngs_file.write("IP(hex): [     %16x - %16x ]\n" % (ranges_ip[idx][0], ranges_ip[idx][1]))
+            rngs_file.write("         [     %16d - %16d ]\n" % (ranges_cnt[idx][0], ranges_cnt[idx][1]))
         rngs_file.write(SEPARATOR)
         rngs_file.close()
 
-        self.log("... done obtaining ranges of function %s\n" % self.test.get_function())
+        self.log("... done obtaining ranges of functions %s\n" % functions)
         self.log(SEPARATOR)
         self.flush()
-        return func_ranges
+        return ranges_cnt, ranges_ip 
 
     def run(self, key, mask_type, ref_checksum, ref_cso_file):
         """ 'mask_type' is one of { RANDOM_8BITS, RANDOM_32BITS, RANDOM_8BITS, RANDOM_1BITFLIP, RANDOM_2BITFLIPS } """
@@ -397,21 +407,42 @@ class FaultInjector:
                 raise NameError('MASKTYPE_NOT_DEFINED')
 
         self._warmup()
-        self.func_ranges = self._get_function_ranges()
+        self.cnt_ranges, self.ip_ranges = self._get_function_ranges()
 
         self.log("Performing fault injections ...\n")
         # do NOT inject CF -- consider them Control Flow errors, not Data Flow
         inject_faults = list(set(FaultInjector.faults) - set(['CF']))
 
-        result = FiResult(self.test, self.key, self.func_ranges, ref_checksum, ref_cso_file)
+        def min_ranges(ranges):
+          m = ranges[0][0]
+          for r in ranges:
+            m = r[0] if r[0] < m else m
+          return m
+        
+        def max_ranges(ranges):
+          m = ranges[0][1]
+          for r in ranges:
+            m = r[1] if r[1] > m else m
+          return m
+
+        def in_ranges(x, ranges):
+          for r in ranges:
+            if r[0] <= x and x <= r[1]:
+              return True
+          return False
+
+        result = FiResult(self.test, self.key, self.ip_ranges, ref_checksum, ref_cso_file)
         resq = Queue()
         resq.put(result)
         args = []
         for i in range(self.test.get_runs()):
             trigger, fault, mask = self.params.unpack()
             if trigger is None:
-                index = random.randint(0, len(self.func_ranges) - 1)
-                trigger = random.randint(self.func_ranges[index][0], self.func_ranges[index][1])
+                #index = random.randint(0, len(self.cnt_ranges) - 1)
+                #trigger = random.randint(self.cnt_ranges[index][0], self.cnt_ranges[index][1])
+                trigger = 0
+                while not in_ranges(trigger, self.cnt_ranges):
+                  trigger = random.randint(min_ranges(self.cnt_ranges), max_ranges(self.cnt_ranges)+1) 
             if fault is None:
                 fault = inject_faults[random.randint(0, len(inject_faults) - 1)]
             if mask is None:
