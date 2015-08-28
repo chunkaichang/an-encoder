@@ -139,6 +139,9 @@ if __name__ == "__main__":
     parser.add_argument("--unpickle",
                         default=r"",
                         help="path for reading in data dictionary")
+    parser.add_argument("-r", "--regs",
+                        action='store_true',
+                        help="only count experiments that injected '{W|R}REG' faults")
     parser.add_argument("-o", "--output",
                         default=r"",
                         help="output directory")
@@ -155,7 +158,7 @@ if __name__ == "__main__":
         res = pickle.load(f)
         f.close()
     else:
-        res = collect_profiles("encoded", profiles, dirnames, True)
+        res = collect_profiles("encoded", profiles, dirnames, args.regs)
         if args.pickle is not "":
             f = open(args.pickle, "w")
             pickle.dump(res, f)
