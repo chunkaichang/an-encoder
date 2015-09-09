@@ -4,7 +4,7 @@
 #define UPDC32(octet,crc) (crc_32_tab[((crc)^(octet)) & 0xff]^ ((crc) >> 8))
 
 extern long crc_32_tab[256];
-extern long mygetc(FILE *);
+extern long *input;
 
 long crc32file(FILE *fin, long *crc, long *charcnt)
 {
@@ -15,13 +15,12 @@ long crc32file(FILE *fin, long *crc, long *charcnt)
     oldcrc32 = ~0;
     *charcnt = 0;
 
-    c = mygetc(fin);
-    while (c != EOF)
+    while (*input != EOF)
     {
         ++*charcnt;
         tmp = oldcrc32;
-        oldcrc32 = UPDC32(c, tmp);
-        c = mygetc(fin);
+        oldcrc32 = UPDC32(*input, tmp);
+        ++input;
     }
 
     tmp = ~oldcrc32;

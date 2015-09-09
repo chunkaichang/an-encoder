@@ -114,6 +114,9 @@ long crc_32_tab[256] = {
 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 };
 
+long data[1368865];
+long *input = &data[0];
+
 long ___enc_computation(FILE *, long *, long *);
 
 long mygetc(FILE *fin) {
@@ -138,6 +141,14 @@ int main(int argc, char *argv[])
         perror(argv[1]);
         return -1;
     }
+
+    long c = getc(fin);
+    i = 0;
+    while (c != EOF) {
+      input[i++] = AN_ENCODE_VALUE(c);
+      c = getc(fin);
+    }
+    input[i] = AN_ENCODE_VALUE(EOF);
 
     const unsigned crc_tab_size = sizeof(crc_32_tab)/sizeof(long);
     for(i = 0; i < crc_tab_size; i++)
