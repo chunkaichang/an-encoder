@@ -122,8 +122,7 @@ static inline bool linkModules(Module *dst,
                              Error);
 }
 
-const std::string globalCodeName("A");
-const uint64_t    globalCodeValue = 58659;
+const uint64_t globalCodeValue = CODE_VALUE_A;
                                     // '((1 << 19) - 1) == 524287'
                                     //12; //1 << 4;
 
@@ -190,16 +189,6 @@ static int processModule(char **argv, LLVMContext &Context) {
     PassManager codePM, postLinkPM;
     if (!NoVerifying) codePM.add(createVerifierPass());
 
-    // Set the global variable "A" from the "anlib.c" source file (which has just been
-    // linked in) to the value used for encoding:
-    {
-      GlobalVariable *globalCode
-        = library->getGlobalVariable(globalCodeName,
-                                     true);
-      Type *globalCodeType = globalCode->getInitializer()->getType();
-      globalCode->setInitializer(ConstantInt::get(globalCodeType,
-                                                  globalCodeValue));
-    }
 
     codePM.add(createConstantsEncoder(&PC));
     codePM.add(createGlobalsEncoder(&PC));

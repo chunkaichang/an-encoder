@@ -40,6 +40,7 @@ endif()
 if (LOG_ACCU)
   add_definitions(-DLOG_ACCU)
 endif ()
+add_definitions(-DCODE_VALUE_A=${CODE_VALUE_A})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
 

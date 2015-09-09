@@ -8,8 +8,10 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES "DEBUG" OR
   set(CLANG_OPTS ${CLANG_OPTS} -g)
 endif()
 
+set(PP_DEFS -DCODE_VALUE_A=${CODE_VALUE_A})
+
 if (LOG_ACCU)
-  set(PP_DEFS -DLOG_ACCU)
+  set(PP_DEFS ${PP_DEFS} -DLOG_ACCU)
 endif ()
 
 add_custom_target(anlib.bc ALL

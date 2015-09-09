@@ -9,7 +9,8 @@
 
 typedef uint64_t ptr_enc_t;
 
-static uint64_t A;
+static const uint64_t A = CODE_VALUE_A;
+//56859;
 // We do 'signed remainder' to check validity of coded values.
 // Hence the accumulator should probably be signed too.
 static int64_t accu_enc = 0;
