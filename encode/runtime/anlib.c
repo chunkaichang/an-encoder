@@ -10,7 +10,6 @@
 typedef uint64_t ptr_enc_t;
 
 static const uint64_t A = CODE_VALUE_A;
-//56859;
 // We do 'signed remainder' to check validity of coded values.
 // Hence the accumulator should probably be signed too.
 static int64_t accu_enc = 0;
@@ -65,12 +64,14 @@ int64_t sub_enc(int64_t x_enc, int64_t y_enc)
 int64_t mul_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
+  int64_t x = __builtin_an_decode_i64(x_enc, A);
+  int64_t y = __builtin_an_decode_i64(y_enc, A);
 
-  int64_t tmp = 0;
-  tmp = __builtin_an_decode_i64(x_enc, A)
-        * __builtin_an_decode_i64(y_enc, A);
+  const int64_t p = 278;
+  const int64_t q = 211;
 
-  r_enc = __builtin_an_encode_i64(tmp, A);
+  r_enc = ((x_enc - x)/p) * ((y_enc - y)/q) + x*y;
+
   return r_enc;
 }
 int64_t udiv_enc(uint64_t x_enc, uint64_t y_enc)
