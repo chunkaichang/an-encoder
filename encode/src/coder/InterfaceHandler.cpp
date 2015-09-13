@@ -15,6 +15,8 @@ bool InterfaceHandler::handleFunction(Function &F) {
   if (!F.getName().startswith_lower("___enc_"))
     return false;
 
+  F.addFnAttr(Attribute::NoInline);
+
   for (Function::arg_iterator a = F.arg_begin(), e = F.arg_end(); a != e; ++a) {
       UsesVault UV(a->uses());
       Value *arg = a;
