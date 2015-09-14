@@ -45,7 +45,9 @@ bool ConstantsEncoder::runOnBasicBlock(BasicBlock &BB) {
       if (!CI)
         continue;
       IntegerType *type = dyn_cast<IntegerType>(Op->getType());
-      if (type->getBitWidth() != 64)
+      // HACKY: Constant arguments of the GEP instruction are 32-bit
+      // integers. Nonetheless, these constants must also be encoded.
+      if (type->getBitWidth() != 64 && I->getOpcode() != Instruction::GetElementPtr)
     	  continue;
 
       int64_t value = CI->getSExtValue();
