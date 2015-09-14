@@ -4,9 +4,8 @@
 #define UPDC32(octet,crc) (crc_32_tab[((crc)^(octet)) & 0xff]^ ((crc) >> 8))
 
 extern long crc_32_tab[256];
-extern long *input;
 
-long crc32file(FILE *fin, long *crc, long *charcnt)
+long crc32file(long *input, long *crc, long *charcnt)
 {
     register long oldcrc32;
     register long tmp;
@@ -31,9 +30,9 @@ long crc32file(FILE *fin, long *crc, long *charcnt)
     return 0;
 }
 
-long ___enc_computation(FILE *fin, long *crc, long *charcnt)
+long ___enc_computation(long *input, long *crc, long *charcnt)
 {
-    long r = crc32file(fin, crc, charcnt);
+    long r = crc32file(input, crc, charcnt);
 
     return r;
 }

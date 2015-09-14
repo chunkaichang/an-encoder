@@ -117,7 +117,7 @@ long crc_32_tab[256] = {
 long data[1368865];
 long *input = &data[0];
 
-long ___enc_computation(FILE *, long *, long *);
+long ___enc_computation(long *, long *, long *);
 
 long mygetc(FILE *fin) {
   return (long)getc(fin);
@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
     __cs_reset();
 
     t1 = __cyc_rdtsc();
-    errors |= ___enc_computation(fin, &crc, &charcnt);
+    errors |= ___enc_computation(input, &crc, &charcnt);
     t2 = __cyc_rdtsc();
     total += t2 - t1;
 
