@@ -607,7 +607,7 @@ Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
 	Value *x = ci->getArgOperand(0);
 
 	if (PP->hasProfile(EncodingProfile::CheckBeforeDecode)) {
-	    createCheck(x, I);
+	    createAssert(x, I);
 	}
 
 	if (PP->hasProfile(EncodingProfile::AccumulateBeforeDecode)) {
