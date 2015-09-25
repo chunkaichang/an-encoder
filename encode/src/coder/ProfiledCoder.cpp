@@ -217,11 +217,11 @@ Value *ProfiledCoder::createEncBinop(StringRef Name, ArrayRef<Value*> Args, Inst
   return Builder->CreateCall(binop, Args);
 }
 
-bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op) {
+bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force) {
 	// Do not check constants:
 	if (dyn_cast<ConstantInt>(v)) return false;
 
-	if (PP->hasOperationWithPosition(op, EncodingProfile::Before)) {
+	if (force || PP->hasOperationWithPosition(op, EncodingProfile::Before)) {
 	  if (PP->hasProfile(EncodingProfile::AccumulateChecks)) {
 	    createAccumulate(v, &(*I));
 	  } else {
@@ -232,11 +232,11 @@ bool ProfiledCoder::insertCheckBefore(Value *v, const BasicBlock::iterator &I, E
 	return false;
 }
 
-bool ProfiledCoder::insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op) {
+bool ProfiledCoder::insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force) {
 	// Do not check constants:
 	if (dyn_cast<ConstantInt>(v)) return false;
 
-	if (PP->hasOperationWithPosition(op, EncodingProfile::After)) {
+	if (force || PP->hasOperationWithPosition(op, EncodingProfile::After)) {
 	  if (PP->hasProfile(EncodingProfile::AccumulateChecks)) {
 	    createAccumulate(v, std::next(I));
 	  } else {
@@ -354,7 +354,7 @@ bool ProfiledCoder::handleLoad(Instruction *I) {
 
 	if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
 	    !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-	  insertCheckBefore(ptr, I, EncodingProfile::Memory);
+	  //insertCheckBefore(ptr, I, EncodingProfile::Memory);
 	  ptr = createDecode(ptr, I);
 		I->setOperand(0, ptr);
 		modified |= true;
@@ -366,7 +366,7 @@ bool ProfiledCoder::handleLoad(Instruction *I) {
     modified |= true;
   }
 
-  modified |= insertCheckAfter(I, I, EncodingProfile::Memory);
+  modified |= insertCheckAfter(I, I, EncodingProfile::Memory, true);
   return modified;
 }
 
@@ -375,11 +375,11 @@ bool ProfiledCoder::handleStore(Instruction *I) {
 	bool modified = false;
 	Value *ptr = I->getOperand(1);
 
-  modified |= insertCheckBefore(I->getOperand(0), I, EncodingProfile::Memory);
+  modified |= insertCheckBefore(I->getOperand(0), I, EncodingProfile::Memory, true);
 
   if (PP->hasProfile(EncodingProfile::PointerEncoding) &&
       !dyn_cast<GlobalValue>(ptr->stripPointerCasts())) {
-    insertCheckBefore(ptr, I, EncodingProfile::Memory);
+    //insertCheckBefore(ptr, I, EncodingProfile::Memory);
     ptr = createDecode(ptr, I);
     I->setOperand(1, ptr);
     modified |= true;
@@ -605,6 +605,10 @@ Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
 	BasicBlock *BB = I->getParent();
 	CallInst *ci = dyn_cast<CallInst>(I);
 	Value *x = ci->getArgOperand(0);
+
+	if (PP->hasProfile(EncodingProfile::CheckBeforeDecode)) {
+	    createCheck(x, I);
+	}
 
 	if (PP->hasProfile(EncodingProfile::AccumulateBeforeDecode)) {
 	  createAccumulate(x, I);

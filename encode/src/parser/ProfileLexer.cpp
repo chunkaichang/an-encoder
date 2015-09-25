@@ -13,6 +13,7 @@
 ProfileLexer::StringToTokenMap ProfileLexer::string2token = {
     {"PointerEncoding", POINTERENCODING},
     {"GEPExpansion", GEPEXPANSION},
+    {"CheckBeforeDecode", CHECKBEFOREDECODE},
     {"AccumulateBeforeDecode", ACCUMULATEBEFOREDECODE},
     {"CheckAfterDecode", CHECKAFTERDECODE},
     {"PinChecks", PINCHECKS},
@@ -32,6 +33,7 @@ ProfileLexer::StringToTokenMap ProfileLexer::string2token = {
 ProfileLexer::TokenToStringMap ProfileLexer::token2string = {
     {POINTERENCODING, "PointerEncoding"},
     {GEPEXPANSION, "GEPexpansion"},
+    {CHECKBEFOREDECODE, "CheckBeforeDecode"},
     {ACCUMULATEBEFOREDECODE, "AccumulateBeforeDecode"},
     {CHECKAFTERDECODE, "CheckAfterDecode"},
     {PINCHECKS, "PinChecks"},

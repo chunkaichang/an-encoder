@@ -55,8 +55,8 @@ public:
 	bool isPointerType(Value *v) const;
 
 private:
-	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
-	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op);
+	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force=false);
+	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force=false);
 	bool insertFunctionCheck(Function &F);
 
 public:

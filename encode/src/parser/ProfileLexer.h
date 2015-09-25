@@ -11,6 +11,7 @@ public:
     // from 'enum EncodingProfile::Profile':
     POINTERENCODING,
     GEPEXPANSION,
+    CHECKBEFOREDECODE,
     CHECKAFTERDECODE,
     ACCUMULATEBEFOREDECODE,
     PINCHECKS,
