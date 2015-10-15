@@ -1,17 +1,2 @@
-PointerEncoding;
-GEPExpansion;
+CheckBeforeDecode;
 
-Arithmetic:
-  Before;
-
-Bitwise:
-  Before;
-
-Comparison:
-  Before;
-
-Memory:
-  Before;
-
-GEP:
-  After;
