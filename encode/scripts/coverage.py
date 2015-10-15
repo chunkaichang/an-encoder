@@ -267,7 +267,7 @@ class FaultInjector:
          - CF:   change instruction pointer
          - TXT:  corrupt code segment
     """
-    faults = ['WVAL', 'RVAL', 'WADDR', 'RADDR', 'RREG', 'WREG', 'CF', 'TXT']
+    faults = ['RREG', 'WREG']
 
     def log(self, output):
         self.logfile.write(output)
