@@ -9,6 +9,8 @@ import subprocess
 dispres = ["CORRECT", "OSCRASH", "ANCRASH", "HANG", "UNEXPECTED", "NONDIAG"]
 results = ["INVALID", "CORRECT", "UNEXPECTED", "HANG", "OSCRASH", "ANCRASH", "NONDIAG"]
 
+regs_only = False
+no_txt = False
 
 def collect_coverage(dirname):
     global results
@@ -29,8 +31,15 @@ def collect_coverage(dirname):
             log_file = open(log_name, "r")
             for line in log_file.readlines():
                 for r in results:
-                    if r in line:
-                        res[r] += 1
+                    if r not in line:
+                      continue
+                    elif regs_only or no_txt:
+                        if regs_only and ("RREG" in line or "WREG" in line):
+                          res[r] += 1
+                        elif no_txt and ("TXT" not in line):
+                          res[r] += 1
+                    else:
+                      res[r] += 1
             log_file.close()
 
             sum = 0
@@ -87,8 +96,17 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output",
                         default=r"",
                         help="output path")
+    parser.add_argument("--regs",
+                        action='store_true',
+                        help="only count experiments that injected '{W|R}REG' faults")
+    parser.add_argument("--no_txt",
+                        action='store_true',
+                        help="disregard 'TXT' faults")
 
     args = parser.parse_args()
+
+    regs_only = args.regs
+    no_txt = args.no_txt
 
     test_res = collect_coverage(args.directory)
     write_histo(test_res, args.output)
