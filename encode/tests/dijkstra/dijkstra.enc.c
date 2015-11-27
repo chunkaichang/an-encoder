@@ -7,6 +7,11 @@ extern long AdjMatrix[NUM_NODES][NUM_NODES];
 extern NODE rgnNodes[NUM_NODES];
 
 
+#define LOG_ENQ(node, dist, prev) \
+  /* printf("en node: %ld dist: %ld pred: %ld -- \n", (node), (dist), (prev)) */
+#define LOG_DEQ(node, dist, prev) \
+  /* printf("de node: %ld dist: %ld pred: %ld -- \n", (node), (dist), (prev)) */
+
 /*
  * Custom types
  */
@@ -58,6 +63,8 @@ void enqueue (long iNode, long iDist, long iPrev)
         qLast->qNext = qNew;
     }
     g_qCount++;
+
+    LOG_ENQ(iNode, iDist, iPrev);
 }
 
 void dequeue (long *piNode, long *piDist, long *piPrev)
@@ -71,6 +78,8 @@ void dequeue (long *piNode, long *piDist, long *piPrev)
         free(qHead);
         qHead = qSecond;
         g_qCount--;
+
+        LOG_DEQ(*piNode, *piDist, *piPrev);
     }
 }
 
