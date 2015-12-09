@@ -36,17 +36,17 @@ bool CallHandler::handleCallInst(BasicBlock::iterator &I) {
 	// within the current module:
 	if (F->isDeclaration()) {
 		// Do not operate on the encoding/decoding intrinsics:
-		if (F->isIntrinsic() &&
-			(F->getIntrinsicID() == Intrinsic::an_encode ||
-			 F->getIntrinsicID() == Intrinsic::an_decode ||
-		     F->getIntrinsicID() == Intrinsic::an_encode_value ||
-		     F->getIntrinsicID() == Intrinsic::an_decode_value ||
-		     F->getIntrinsicID() == Intrinsic::an_check  ||
-		     F->getIntrinsicID() == Intrinsic::an_signal ||
-		     F->getIntrinsicID() == Intrinsic::an_assert_value ||
-		     F->getIntrinsicID() == Intrinsic::an_assert ||
-		     F->getIntrinsicID() == Intrinsic::an_placeholder ||
-		     F->getIntrinsicID() == Intrinsic::x86_movswift)) {
+		if (F->getName().equals("an_encode") ||
+		    F->getName().equals("an_decode") ||
+		     F->getName().equals("an_encode_value") ||
+		     F->getName().equals("an_decode_value") ||
+		     F->getName().equals("an_check")  ||
+		     F->getName().equals("an_signal") ||
+		     F->getName().equals("an_assert_value") ||
+		     F->getName().equals("an_assert") ||
+		     F->getName().equals("an_placeholder") ||
+		     F->getName().equals("an_move") /*
+		     s(F->isIntrinsic() && F->getIntrinsicID() == Intrinsic::x86_movswift)*/) {
 		return false;
 		}
 	    // Decode the arguments to external function calls:

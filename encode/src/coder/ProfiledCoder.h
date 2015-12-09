@@ -4,6 +4,7 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/BasicBlock.h"
+#include "llvm/IR/InlineAsm.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Constants.h"
@@ -94,6 +95,7 @@ public:
 	Value *expandCheck(BasicBlock::iterator &I);
 	Instruction *expandAssert(BasicBlock::iterator &I);
 	Instruction *expandExitOnFalse(BasicBlock::iterator &I);
+	Value *expandBlocker(BasicBlock::iterator &I);
 
 private:
 	Module *M;
@@ -101,7 +103,9 @@ private:
 	ConstantInt *A;
 	IntegerType *int64Ty, *int32Ty;
 	Type *voidTy;
-	Function *Encode, *Decode, *Check, *Assert, *Blocker, *ExitOnFalse;
+	Constant *Blocker;
+	InlineAsm *BlockerAsm;
+	Constant *Encode, *Decode, *Check, *Assert, *ExitOnFalse;
 	Constant *Exit, *Accumulate;
 
 	EncodingProfile *PP;

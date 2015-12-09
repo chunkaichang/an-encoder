@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include "../tests/mylibs/an_builtins.h"
+
 typedef uint64_t ptr_enc_t;
 
 static const uint64_t A = CODE_VALUE_A;
@@ -38,7 +40,7 @@ void ___accumulate_enc(int64_t x_enc, int64_t *accu)
 
   if(__builtin_saddl_overflow(old_accu, x_enc, accu)) {
     LOG_ACCU_PRINTF("OF, new_accu=0x%016lx", *accu);
-    __builtin_an_assert_i64(old_accu, A);
+    an_assert(old_accu, A);
     *accu = 0;
   }
   LOG_ACCU_PRINTF("\n");
@@ -64,8 +66,8 @@ int64_t sub_enc(int64_t x_enc, int64_t y_enc)
 int64_t mul_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
 
   const int64_t p = 278;
   const int64_t q = 211;
@@ -82,10 +84,10 @@ int64_t udiv_enc(uint64_t x_enc, uint64_t y_enc)
   uint64_t y = y_enc/A;
   uint64_t trunc_correction = x % y;
 
-  x_enc -= __builtin_an_encode_i64(trunc_correction, A);
+  x_enc -= an_encode(trunc_correction, A);
 
   __uint128_t tmp = 0;
-  tmp = __builtin_an_encode_i128((__uint128_t)x_enc * (__uint128_t) A, A) / (__uint128_t) y_enc;
+  tmp = an_encode((__uint128_t)x_enc * (__uint128_t) A, A) / (__uint128_t) y_enc;
 
   r_enc = (int64_t) tmp;
   return r_enc;
@@ -94,27 +96,27 @@ int64_t sdiv_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
 
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
   int64_t tmp = x / y;
 
-  r_enc = __builtin_an_encode_i64(tmp, A);
+  r_enc = an_encode(tmp, A);
   return r_enc;
 }
 int64_t umod_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  uint64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  r_enc = __builtin_an_encode_i64(x % y, A);
+  uint64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  r_enc = an_encode(x % y, A);
   return r_enc;
 }
 int64_t smod_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  r_enc = __builtin_an_encode_i64(x % y, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  r_enc = an_encode(x % y, A);
   return r_enc;
 }
 int64_t eq_enc(int64_t x_enc, int64_t y_enc)
@@ -163,13 +165,13 @@ int64_t geq_enc(int64_t x_enc, int64_t y_enc)
 ptr_enc_t deref_enc(ptr_enc_t p_enc)
 {
   ptr_enc_t r_enc = 0;
-  r_enc = __builtin_an_decode_i64(p_enc, A);
+  r_enc = an_decode(p_enc, A);
   return r_enc;
 }
 ptr_enc_t ref_enc(ptr_enc_t addr)
 {
   ptr_enc_t r_enc = 0;
-  r_enc = __builtin_an_encode_i64(addr, A);
+  r_enc = an_encode(addr, A);
   return r_enc;
 }
 ptr_enc_t ptradd_enc(ptr_enc_t p_enc, int64_t x_enc, int64_t size)
@@ -205,23 +207,23 @@ int64_t lor_enc(int64_t x_enc, int64_t y_enc)
 }
 int64_t and_enc(int64_t x_enc, int64_t y_enc)
 {
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  int64_t r_enc = __builtin_an_encode_i64(x & y, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  int64_t r_enc = an_encode(x & y, A);
   return r_enc;
 }
 int64_t or_enc(int64_t x_enc, int64_t y_enc)
 {
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  int64_t r_enc = __builtin_an_encode_i64(x | y, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  int64_t r_enc = an_encode(x | y, A);
   return r_enc;
 }
 int64_t xor_enc(int64_t x_enc, int64_t y_enc)
 {
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  int64_t r_enc = __builtin_an_encode_i64(x ^ y, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  int64_t r_enc = an_encode(x ^ y, A);
   return r_enc;
 }
 
@@ -229,32 +231,32 @@ int64_t onesc_enc(int64_t x_enc)
 {
   /* one's complement, i.e. ~x */
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  r_enc = __builtin_an_encode_i64(~x, A);
+  int64_t x = an_decode(x_enc, A);
+  r_enc = an_encode(~x, A);
   return r_enc;
 }
 int64_t shl_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  int64_t y = __builtin_an_decode_i64(y_enc, A);
-  r_enc = __builtin_an_encode_i64(x << y, A);
+  int64_t x = an_decode(x_enc, A);
+  int64_t y = an_decode(y_enc, A);
+  r_enc = an_encode(x << y, A);
   return r_enc;
 }
 int64_t shr_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  uint64_t y = __builtin_an_decode_i64(y_enc, A);
-  r_enc = __builtin_an_encode_i64(x >> y, A);
+  int64_t x = an_decode(x_enc, A);
+  uint64_t y = an_decode(y_enc, A);
+  r_enc = an_encode(x >> y, A);
   return r_enc;
 }
 int64_t ashr_enc(int64_t x_enc, int64_t y_enc)
 {
   int64_t r_enc = 0;
-  int64_t x = __builtin_an_decode_i64(x_enc, A);
-  uint64_t y = __builtin_an_decode_i64(y_enc, A);
+  int64_t x = an_decode(x_enc, A);
+  uint64_t y = an_decode(y_enc, A);
   int64_t asr = x >> y;
-  r_enc = __builtin_an_encode_i64(asr, A);
+  r_enc = an_encode(asr, A);
   return r_enc;
 }

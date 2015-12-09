@@ -3,6 +3,7 @@
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/BasicBlock.h"
+#include "llvm/IR/InlineAsm.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/Constants.h"
@@ -72,56 +73,52 @@ bool OperationsExpander::handleFunction(Function &F) {
 			// such instructions which call the "AN coding" intrinsics:
 			CallInst *ci = dyn_cast<CallInst>(i);
 			Function *callee = ci ? ci->getCalledFunction() : nullptr;
-			if (!callee || !callee->isIntrinsic())
+			if (!callee)
 				continue;
 
-			switch (callee->getIntrinsicID()) {
-			default: break;
-			case Intrinsic::an_encode: {
+			llvm::StringRef name = callee->getName();
+			if (name.equals("an_encode")) {
 				PC->expandEncode(i);
 				m |= true;
 				break;
-			}
-			case Intrinsic::an_decode: {
+			} else if (name.equals("an_decode")) {
 				PC->expandDecode(i);
 				m |= true;
 				break;
-			}
-			case Intrinsic::an_encode_value:
-			case Intrinsic::an_decode_value: {
+			} else if (name.equals("an_encode_value") || name.equals("an_decode_value")) {
 				Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
-				Value *result = (callee->getIntrinsicID() == Intrinsic::an_encode_value)
+				Value *result = name.equals("an_encode_value")
 								? PC->createEncode(x, ci)
 								: PC->createDecode(x, ci);
 				ci->replaceAllUsesWith(result);
 				ci->eraseFromParent();
 				m = true;
 				break;
-			}
-			case Intrinsic::an_check: {
+			} else if (name.equals("an_check")) {
 				PC->expandCheck(i);
 				m |= true;
 				break;
-			}
-			case Intrinsic::an_assert: {
+			} else if (name.equals("an_assert")) {
 				PC->expandAssert(i);
 				m |= true;
 				break;
-			}
-			case Intrinsic::an_assert_value: {
+			} else if (name.equals("an_assert_value")) {
 			  Value *x = PC->createSExt(ci->getArgOperand(0), PC->getInt64Type(), ci);
 			  Value *result = PC->createAssert(x, ci);
         ci->replaceAllUsesWith(result);
         ci->eraseFromParent();
         m = true;
         break;
-      }
-			case Intrinsic::an_exit_on_false: {
+      } else if (name.equals("an_exit_on_false")) {
 			  PC->expandExitOnFalse(i);
 			  m |= true;
 			  break;
-			}
-			}
+			} else if (name.equals("an_move")) {
+        PC->expandBlocker(i);
+        m |= true;
+        break;
+      }
+
 			modified |= m;
 		}
 	}

@@ -23,24 +23,29 @@ ProfiledCoder::ProfiledCoder (Module *m, EncodingProfile *pp, unsigned a)
 	voidTy  = Type::getVoidTy(ctx);
 	A = ConstantInt::getSigned(int64Ty, a);
 
-	Encode = Intrinsic::getDeclaration(M,
-									   Intrinsic::an_encode,
-									   int64Ty);
-	Decode = Intrinsic::getDeclaration(M,
-									   Intrinsic::an_decode,
-									   int64Ty);
-	Check = Intrinsic::getDeclaration(M,
-		   						      Intrinsic::an_check,
-									  int64Ty);
-	Assert = Intrinsic::getDeclaration(M,
-									   Intrinsic::an_assert,
-									   int64Ty);
-	ExitOnFalse = Intrinsic::getDeclaration(M,
-	                                        Intrinsic::an_exit_on_false,
-	                                        int64Ty);
-	Blocker  = Intrinsic::getDeclaration(M,
-	                                     Intrinsic::x86_movswift,
-	                                     int64Ty);
+	SmallVector<Type*, 2> oneArg, twoArgs;
+	oneArg.push_back(int64Ty);
+	twoArgs.push_back(int64Ty); twoArgs.push_back(int64Ty);
+
+	FunctionType *twoArgsInt64Ty = FunctionType::get(int64Ty, twoArgs, false);
+	FunctionType *twoArgsVoidTy  = FunctionType::get(voidTy, twoArgs, false);
+
+	Encode = M->getOrInsertFunction("an_encode", twoArgsInt64Ty);
+	Decode = M->getOrInsertFunction("an_decode", twoArgsInt64Ty);
+	Check  = M->getOrInsertFunction("an_check" , twoArgsInt64Ty);
+	Assert = M->getOrInsertFunction("an_assert", twoArgsVoidTy);
+
+	FunctionType *exitOnFalseTy = FunctionType::get(voidTy, oneArg, false);
+	ExitOnFalse = M->getOrInsertFunction("an_exit_on_false", exitOnFalseTy);
+
+	FunctionType *blockerTy = FunctionType::get(int64Ty, oneArg, false);
+	Blocker = M->getOrInsertFunction("an_move", blockerTy);
+	/*Intrinsic::getDeclaration(M,
+	                            Intrinsic::x86_movswift,
+	                            int64Ty);*/
+	BlockerAsm = InlineAsm::get(blockerTy, "movq $1, $0\n", "=r, r",
+	                            /* HasSideEffect */ true /* avoid being optimized away */,
+	                            /* IsAlignStack */ false);
 
 	FunctionType *exitTy = FunctionType::get(voidTy, int32Ty, false);
 	Exit = M->getOrInsertFunction("exit", exitTy);
@@ -590,10 +595,9 @@ static bool isIntrinsic(Instruction *I, Intrinsic::ID id) {
 }
 
 Value *ProfiledCoder::expandEncode(BasicBlock::iterator &I) {
-	assert(isIntrinsic(I, Intrinsic::an_encode));
-
-    Builder->SetInsertPoint(I);
+	  Builder->SetInsertPoint(I);
     CallInst *ci = dyn_cast<CallInst>(I);
+    assert(ci && ci->getCalledFunction()->getName().equals("an_encode"));
     Value *result = Builder->CreateMul(ci->getArgOperand(0), ci->getArgOperand(1));
     I->replaceAllUsesWith(result);
     I->eraseFromParent();
@@ -601,9 +605,9 @@ Value *ProfiledCoder::expandEncode(BasicBlock::iterator &I) {
 }
 
 Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
-	assert(isIntrinsic(I, Intrinsic::an_decode));
 	BasicBlock *BB = I->getParent();
 	CallInst *ci = dyn_cast<CallInst>(I);
+	assert(ci && ci->getCalledFunction()->getName().equals("an_decode"));
 	Value *x = ci->getArgOperand(0);
 
 	if (PP->hasProfile(EncodingProfile::CheckBeforeDecode)) {
@@ -636,10 +640,9 @@ Value *ProfiledCoder::expandDecode(BasicBlock::iterator &I) {
 }
 
 Value *ProfiledCoder::expandCheck(BasicBlock::iterator &I) {
-	assert(isIntrinsic(I, Intrinsic::an_check));
-
-    Builder->SetInsertPoint(I);
+	  Builder->SetInsertPoint(I);
     CallInst *ci = dyn_cast<CallInst>(I);
+    assert(ci && ci->getCalledFunction()->getName().equals("an_check"));
     Value *x = ci->getArgOperand(0);
 
     if (PP->hasProfile(EncodingProfile::PinChecks))
@@ -652,10 +655,9 @@ Value *ProfiledCoder::expandCheck(BasicBlock::iterator &I) {
 }
 
 Instruction *ProfiledCoder::expandAssert(BasicBlock::iterator &I) {
-	assert(isIntrinsic(I, Intrinsic::an_assert));
-
 	Builder->SetInsertPoint(I);
 	CallInst *ci = dyn_cast<CallInst>(I);
+	assert(ci && ci->getCalledFunction()->getName().equals("an_assert"));
 	Value *x = ci->getArgOperand(0);
 
 	if (PP->hasProfile(EncodingProfile::PinChecks))
@@ -671,10 +673,9 @@ Instruction *ProfiledCoder::expandAssert(BasicBlock::iterator &I) {
 }
 
 Instruction *ProfiledCoder::expandExitOnFalse(BasicBlock::iterator &I) {
-  assert(isIntrinsic(I, Intrinsic::an_exit_on_false));
-
-  Builder->SetInsertPoint(I);
+   Builder->SetInsertPoint(I);
   CallInst *ci = dyn_cast<CallInst>(I);
+  assert(ci && ci->getCalledFunction()->getName().equals("an_exit_on_false"));
   Value *x = ci->getArgOperand(0);
 
   ConstantInt *Zero = ConstantInt::getSigned(int64Ty, 0);
@@ -684,6 +685,17 @@ Instruction *ProfiledCoder::expandExitOnFalse(BasicBlock::iterator &I) {
 
   I->eraseFromParent();
   return result;
+}
+
+Value *ProfiledCoder::expandBlocker(BasicBlock::iterator &I) {
+    Builder->SetInsertPoint(I);
+    CallInst *ci = dyn_cast<CallInst>(I);
+    assert(ci && ci->getCalledFunction()->getName().equals("an_move"));
+
+    Value *result = Builder->CreateCall(BlockerAsm, ci->getArgOperand(0));
+    I->replaceAllUsesWith(result);
+    I->eraseFromParent();
+    return result;
 }
 
 bool ProfiledCoder::preEncoding(Module *M) {
