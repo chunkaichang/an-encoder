@@ -86,8 +86,9 @@ int64_t udiv_enc(uint64_t x_enc, uint64_t y_enc)
 
   x_enc -= an_encode(trunc_correction, A);
 
-  __uint128_t tmp = 0;
-  tmp = an_encode((__uint128_t)x_enc * (__uint128_t) A, A) / (__uint128_t) y_enc;
+  //__uint128_t tmp = 0;
+  //tmp = an_encode((__uint128_t)x_enc * (__uint128_t) A, A) / (__uint128_t) y_enc;
+  uint64_t tmp = an_encode(x_enc, A) / y_enc;
 
   r_enc = (int64_t) tmp;
   return r_enc;

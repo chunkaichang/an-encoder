@@ -295,8 +295,8 @@ bool ProfiledCoder::handleArithmetic(Instruction *I) {
 	case Instruction::SRem: name = "smod_enc"; break;
 	// FIXME: Handle division instructions properly. (Requires
 	// looking into the signed-ness issue.)
-	case Instruction::UDiv: assert(0); break;
-	case Instruction::SDiv: assert(0); break;
+	case Instruction::UDiv: "udiv_enc"; break;
+	case Instruction::SDiv: "sdiv_enc"; break;
 	default: assert(0);
 	}
 
