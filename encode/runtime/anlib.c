@@ -41,7 +41,7 @@ void ___accumulate_enc(int64_t x_enc, int64_t *accu)
   if(__builtin_saddl_overflow(old_accu, x_enc, accu)) {
     LOG_ACCU_PRINTF("OF, new_accu=0x%016lx", *accu);
     an_assert(old_accu, A);
-    *accu = 0;
+    *accu = x_enc;
   }
   LOG_ACCU_PRINTF("\n");
 }
