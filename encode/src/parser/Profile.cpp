@@ -22,6 +22,8 @@ EncodingProfile::OperationToStringMap EncodingProfile::operation2string = {
 		{Bitwise, "Bitwise"},
 		{Comparison, "Comparison"},
 		{GEP, "GEP"},
+		{Load, "Load"},
+		{Store, "Store"},
 		{Memory, "Memory"}
 };
 
@@ -53,6 +55,12 @@ void EncodingProfile::addOperationWithPosition(Operation op, Position pos) {
   if (!hasOperationWithPosition(op, pos)) {
     operations[op].insert(pos);
   }
+}
+
+bool EncodingProfile::checksDecode() {
+  return profiles.count(EncodingProfile::CheckBeforeDecode) ||
+      profiles.count(EncodingProfile::AccumulateBeforeDecode) ||
+      profiles.count(EncodingProfile::CheckAfterDecode);
 }
 
 void EncodingProfile::print() {

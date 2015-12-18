@@ -26,6 +26,8 @@ ProfileLexer::StringToTokenMap ProfileLexer::string2token = {
     {"Comparison", COMPARISON},
     {"GEP", GEP},
     {"Memory", MEMORY},
+    {"Load", LOAD},
+    {"Store", STORE},
     {"Before", BEFORE},
     {"After", AFTER}
 };
@@ -45,6 +47,8 @@ ProfileLexer::TokenToStringMap ProfileLexer::token2string = {
     {BITWISE, "Bitwise"},
     {COMPARISON, "Comparison"},
     {GEP, "GEP"},
+    {LOAD, "Load"},
+    {STORE, "Store"},
     {MEMORY, "Memory"},
     {BEFORE, "Before"},
     {AFTER, "After"}

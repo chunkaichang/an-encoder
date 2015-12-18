@@ -13,6 +13,8 @@
 
 #include "../parser/Profile.h"
 
+#include <set>
+
 
 using namespace llvm;
 
@@ -56,7 +58,9 @@ public:
 	bool isPointerType(Value *v) const;
 
 private:
+	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, std::set<EncodingProfile::Operation> ops, bool force=false);
 	bool insertCheckBefore(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force=false);
+	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, std::set<EncodingProfile::Operation> ops, bool force=false);
 	bool insertCheckAfter(Value *v, const BasicBlock::iterator &I, EncodingProfile::Operation op, bool force=false);
 	bool insertFunctionCheck(Function &F);
 

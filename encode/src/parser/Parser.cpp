@@ -39,6 +39,8 @@ std::set<ProfileLexer::Token> Parser::operationTokens = {
   ProfileLexer::BITWISE,
   ProfileLexer::COMPARISON,
   ProfileLexer::GEP,
+  ProfileLexer::LOAD,
+  ProfileLexer::STORE,
   ProfileLexer::MEMORY,
   ProfileLexer::CALL,
 };
@@ -155,6 +157,12 @@ EncodingProfile::Operation Parser::parseOperation() {
   case ProfileLexer::GEP:
     op = EncodingProfile::GEP;
     break;
+  case ProfileLexer::LOAD:
+      op = EncodingProfile::Load;
+      break;
+  case ProfileLexer::STORE:
+        op = EncodingProfile::Store;
+        break;
   case ProfileLexer::MEMORY:
     op = EncodingProfile::Memory;
     break;

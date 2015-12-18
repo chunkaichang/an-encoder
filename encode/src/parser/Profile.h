@@ -29,6 +29,8 @@ public:
 		Bitwise,
 		Comparison,
 		GEP,
+		Load,
+		Store,
 		Memory,
 		Call
 	};
@@ -49,6 +51,7 @@ public:
 	bool hasProfile(Profile);
 	bool hasOperation(Operation);
 	bool hasOperationWithPosition(Operation, Position);
+	bool checksDecode();
 
 	void addProfile(Profile p);
 	void addOperationWithPosition(Operation, Position);

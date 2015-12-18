@@ -25,6 +25,8 @@ public:
     COMPARISON,
     GEP,
     MEMORY,
+    LOAD,
+    STORE,
     CALL,
     // from 'enum EncodingProfile::Position':
     BEFORE,
