@@ -14,6 +14,8 @@ set(VERBOSE_VOTING  OFF CACHE BOOL "")
 
 set(LOG_ACCU OFF CACHE BOOL "")
 
+set(USE_CXX11_ABI "0" CACHE STRING "")
+
 add_subdirectory(src)
 add_subdirectory(runtime)
 add_subdirectory(tests)

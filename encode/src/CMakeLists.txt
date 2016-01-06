@@ -40,7 +40,7 @@ endif()
 if (LOG_ACCU)
   add_definitions(-DLOG_ACCU)
 endif ()
-add_definitions(-DCODE_VALUE_A=${CODE_VALUE_A})
+add_definitions(-DCODE_VALUE_A=${CODE_VALUE_A} -D_GLIBCXX_USE_CXX11_ABI=${USE_CXX11_ABI})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
 

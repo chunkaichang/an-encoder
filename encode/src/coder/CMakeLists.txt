@@ -15,4 +15,6 @@ else()
   set(RTTI -fno-rtti)
 endif()
 
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${USE_CXX11_ABI})
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11 ${RTTI}")
