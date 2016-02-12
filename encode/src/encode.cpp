@@ -126,6 +126,22 @@ const uint64_t globalCodeValue = CODE_VALUE_A;
                                     // '((1 << 19) - 1) == 524287'
                                     //12; //1 << 4;
 
+static void optimizeModule(PassManager &PM, Module *M) {
+    FunctionPassManager FPM(M);
+
+    PassManagerBuilder Builder;
+    Builder.OptLevel = 2;
+    Builder.SizeLevel = 0;
+    if (!NoInlining) Builder.Inliner = createAlwaysInlinerPass();
+    Builder.DisableUnrollLoops = false;
+
+    Builder.populateFunctionPassManager(FPM);
+    Builder.populateModulePassManager(PM);
+
+    for (auto I = M->begin(), E = M->end(); I != E; I++)
+      FPM.run(*I);
+}
+
 static int processModule(char **argv, LLVMContext &Context) {
   SMDiagnostic Err;
   std::unique_ptr<Module> M;
@@ -160,6 +176,14 @@ static int processModule(char **argv, LLVMContext &Context) {
   // during linking.)
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
+  PassManager prePM;
+  std::cerr << "Before:\n";
+  mod->dump();
+  if (!NoOpts) optimizeModule(prePM, mod);
+  prePM.run(*mod);
+  std::cerr << "After:\n";
+  mod->dump();
+
   // An instance of 'ProfiledCoder' with an "empty" profile is required if the
   // command line option "-expand-only" has been given:
   EncodingProfile EP, emptyEP;
@@ -188,7 +212,6 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     PassManager codePM, postLinkPM;
     if (!NoVerifying) codePM.add(createVerifierPass());
-
 
     codePM.add(createConstantsEncoder(&PC));
     codePM.add(createGlobalsEncoder(&PC));
@@ -253,24 +276,8 @@ static int processModule(char **argv, LLVMContext &Context) {
 
     // Add optimization passes (roughly the equivalent of "-O2",
     // code was inspired by 'opt.cpp'):
-    if (!NoOpts)
-    {
-      FunctionPassManager FPM(mod);
-
-      PassManagerBuilder Builder;
-      Builder.OptLevel = 2;
-      Builder.SizeLevel = 0;
-      if (!NoInlining) Builder.Inliner = createAlwaysInlinerPass();
-      Builder.DisableUnrollLoops = false;
-
-      Builder.populateFunctionPassManager(FPM);
-      Builder.populateModulePassManager(PM);
-
-      for (auto I = mod->begin(), E = mod->end(); I != E; I++)
-        FPM.run(*I);
-
-      if (!NoInlining) PM.add(llvm::createFunctionInliningPass());
-    }
+    if (!NoOpts) optimizeModule(PM, mod);
+    if (!NoOpts && !NoInlining) PM.add(llvm::createFunctionInliningPass());
   } else {
     // Use the "empty" profile for command line option "-expand-only":
     PM.add(createOperationsExpander(&emptyPC));

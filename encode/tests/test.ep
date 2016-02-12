@@ -1,4 +1,2 @@
-Load: After, Before;
-PinChecks;
-PointerEncoding;
-AccumulateBeforeDecode;
+Store: Before;
+CheckAfterDecode;
