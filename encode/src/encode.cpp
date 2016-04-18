@@ -177,12 +177,8 @@ static int processModule(char **argv, LLVMContext &Context) {
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
   PassManager prePM;
-  std::cerr << "Before:\n";
-  mod->dump();
   if (!NoOpts) optimizeModule(prePM, mod);
   prePM.run(*mod);
-  std::cerr << "After:\n";
-  mod->dump();
 
   // An instance of 'ProfiledCoder' with an "empty" profile is required if the
   // command line option "-expand-only" has been given:
