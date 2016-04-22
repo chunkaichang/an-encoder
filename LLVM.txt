@@ -1,0 +1,7 @@
+
+This version of the AN encoder builds against and works with LLVM release 3.5.
+
+LLVM release 3.5 refers to the branch 'origin/release_35' in the LLVM repository.
+Note that there is a correpsonding branch 'origin/release_35' in the Clang repository.
+
+To get LLVM release 3.5 itself to build, the patch 'LLVM.patch' from this directory is required. 
