@@ -61,6 +61,9 @@ static cl::opt<bool>
 NoOpts("no-opts", cl::init(false), cl::desc("Disable all optimizations"));
 
 static cl::opt<bool>
+NoPreOpts("no-pre-opts", cl::init(false), cl::desc("Disable pre-optimizations"));
+
+static cl::opt<bool>
 NoInlining("no-inlining", cl::init(false), cl::desc("Disable inlining"));
 
 static cl::opt<bool>
@@ -177,7 +180,7 @@ static int processModule(char **argv, LLVMContext &Context) {
   linkagePM.add(createLinkagePass(GlobalValue::LinkOnceODRLinkage));
 
   PassManager prePM;
-  if (!NoOpts) optimizeModule(prePM, mod);
+  if (!NoOpts && !NoPreOpts) optimizeModule(prePM, mod);
   prePM.run(*mod);
 
   // An instance of 'ProfiledCoder' with an "empty" profile is required if the
