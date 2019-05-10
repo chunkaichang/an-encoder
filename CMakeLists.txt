@@ -6,7 +6,8 @@ message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 
 add_definitions(${LLVM_DEFINITIONS})
-include_directories(${LLVM_INCLUDE_DIRS})
+include_directories(${LLVM_INCLUDE_DIRS} ${LLVM_MORE_INCLUDE_DIRS})
+message("LLVM include: ${LLVM_INCLUDE_DIRS} ${LLVM_MORE_INCLUDE_DIRS}")
 
 set(CLANG   ${LLVM_INSTALL_PREFIX}/bin/clang)
 set(CMAKE_C_COMPILER   ${CLANG})

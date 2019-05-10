@@ -1,3 +1,0 @@
-<stdout> from running /home/nrink/Projects/pin-2.14-71313-gcc.4.4.7-linux/pin.sh -t /home/nrink/Projects/bfi/obj-intel64/bfi.so -trigger 165548 -cmd RVAL -seed 1 -mask 201 -- /home/nrink/Projects/build/encode/encode/tests/quicksort/quicksort.cover.encoded --cso ./2015-05-05_14:00:51/quicksort/cover/cs/encoded.64.cso --csl ./2015-05-05_14:00:51/quicksort/cover/cs/encoded.64.csl:
-E: Pin doesn't support FAR RET (IP 0x0004010de) with transfer to different code segment (from 0x0033 to 0x0060)
-----------------------------------------------------------------
