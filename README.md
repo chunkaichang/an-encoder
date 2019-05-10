@@ -3,11 +3,11 @@ An LLVM-based AN encoder (originally developed by [Norman Rink](https://github.c
 Encoding an application with AN code requires the following steps:
 1. Encode and decode the input and output of the application
 2. Generate LLVM bitcode for the application
-3. Encode instructions in bitcode
+3. Applies AN code to instructions in bitcode
 4. Generate binary 
 
 Step 1 requires the user to annotate the source code with encoding/decoding macros.
-Step 2 and 4 can be done using `clang`.
+Step 2 and 4 is done using `clang`.
 Step 3 is fullfiled with a series of LLVM passess wrapped in a single binary called `encode`.
 
 
@@ -45,7 +45,36 @@ These commands should build the `encode` binary in the `encoder-build/bin` direc
 2. Annotate the source code to encode/decode input and ouput, respectively.
 3. Add a `CMakeLists.txt` for the application in the created directory.
 4. Open `encode/tests/CMakeLists.txt` and add the created directory with `add_subdirectory`.
-5. Rebuild
+5. Modify the encoding profile (see [below](#encoding-profile)).
+6. Rebuild
+
+## Encoding profile
+
+An encoding profile is used to configure the AN encoder.
+It consists of a list of directives delimitted by semicolons. 
+There are two types of directives: *profile directives* and *operation-position directives*.
+
+Here is the default encoding profile at `encode/tests/test.ep`:
+
+```
+Store: Before;
+CheckAfterDecode;
+```
+The first line is an operation-position directive,
+which specifies error checking should be performed before each store.
+
+The second line is a profile directives,
+which specifies error checking should happen after each decode operation.
+
+Decode operations are inserted in the following scenarios:
+- Library function calls
+- Store operations (since address needs decoding)
+- Specific operations (e.g., bitwise and)
+ 
+### Profile directives
+
+### Operation-position directives
+
 
 ## Detailed steps
 
@@ -55,13 +84,8 @@ This binary takes in an LLVM bitcode, applies AN-code, and outputs transformed b
 The basic usage is:
 
 ```
-    ./encode -expand-only -p <encoding_profile> -o <output_bitcode> <input_bitcode>
+    ./encode -p <encoding_profile> -o <output_bitcode> <input_bitcode>
 ```
 
-The format of <encoding_profile> is discussed next.
-
-
-### Encoding profile
-
-
 Run `./encode --help` for other flags. 
+
